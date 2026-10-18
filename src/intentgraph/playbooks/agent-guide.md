@@ -48,7 +48,12 @@ Patch ids are `patch:<slug>`. Re-applying the same patch id with the same conten
 3. Resolve obligations by patching the model (realize a requirement, define an operation's inputs/outputs/failures, record a deferral Decision, answer a Question) or by recording an Assessment/Obligation record. Only the user can resolve a `blocked` item; ask a product-level question.
 4. `intentgraph review export --scope <id> --record`: writes the packet (Markdown + JSON) and records a ReviewArtifact at the current design digest. Show the user the packet in product language; you may add an explanation, which is a judgment.
 5. When `ready`, and only after the user has said so in their own words, run `intentgraph approval record --file approval.json` with `recorded_by`, the exact `source_statement` and a `source_ref`. The approval binds to the design digest; later evidence does not invalidate it, a design change inside the scope does.
-6. After implementation, `intentgraph conformance --scope <id> --json` checks mappings and evidence. An `agent_assertion` never satisfies an evidence rule.
+6. After implementation, record mappings (CodeSymbol/CodeArtifact/TestCase records plus a Mapping) and submit evidence:
+   - `intentgraph evidence capture --file spec.json`: the tool runs a declared argv (no shell) and records exit code and output as `independent_capture`.
+   - `intentgraph evidence submit --file report.json`: a report you ran yourself. With `collection_mode: validated_report` and a `junit-xml` or `intentgraph-test-report/0.1` artifact the tool parses it and refuses a mismatched claim; otherwise it is `agent_submitted_report`.
+   - Always declare `inputs.paths` (the files the result depends on). Evidence binds to a WorkspaceSnapshot of those paths and to the model content it supports; either changing makes it stale.
+7. `intentgraph reconcile --scope <id> --json` before you report completion: broken locators, stale or unbound evidence, missing artifacts, failed tests, unmapped source changes, invalidated approvals, and freshness-aware conformance. Resolve each finding by the operation it names (fix code, correct a mapping, resubmit evidence, or propose a deliberate change); do not clear findings by editing records to match the code.
+8. `intentgraph workspace snapshot --repository <root>` records a baseline so later unmapped changes can be detected. CI runs `intentgraph ci` independently.
 
 A waiver is an Obligation node with the computed obligation id, `state: waived` and `waiver: {authorized_by: "user", reason, source_statement}`. Never write one without the user's authorization. Policies change only through `set_policy` patch operations with a reason.
 
@@ -60,7 +65,7 @@ A waiver is an Obligation node with the computed obligation id, `state: waived` 
 4. `intentgraph diff --git <last known ref> --json` to see what the model gained since you last looked.
 5. Continue from the obligation; when done, patch its `state` to `satisfied` and add Mapping/Evidence records that say how.
 
-## Current capability (milestone 3)
+## Current capability (milestone 4)
 
-Available: init, status, vocabulary, view, search, show, impact, diff, patch validate/apply, check, rebuild, readiness, conformance, review export, approval record, policy list/show, migrate.
-Not yet available: evidence ingestion with workspace snapshots and freshness, drift reconciliation, CI entry point, bundled executable. Evidence you record now is `agent_submitted_report` at best; say so in `limitations`.
+Available: init, status, vocabulary, view, search, show, impact, diff, patch validate/apply, check, rebuild, readiness, conformance, review export, approval record, policy list/show, migrate, evidence submit/capture, workspace snapshot, reconcile, ci.
+Not yet available: bundled executable, native symbol extraction (symbol claims are labelled by their `extractor`), diagrams in review packets.

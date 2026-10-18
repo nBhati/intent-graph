@@ -1,0 +1,531 @@
+{
+  "patch_id": "patch:close-m4-evidence",
+  "base_revision": 14,
+  "base_digest": "sha256:2a17ccdd105cbbd7e356677b487e8146ac8c23f4af48a0971b0c86bb35d8856b",
+  "reason": "Map milestone 4 code and tests to the model; mark the implementation obligation satisfied.",
+  "operations": [
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-workspace-capture",
+        "kind": "CodeSymbol",
+        "label": "capture",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/repository/workspace.py",
+          "language": "python",
+          "symbol": "capture",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/repository/workspace.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-workspace-changed-since",
+        "kind": "CodeSymbol",
+        "label": "changed_since",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/repository/workspace.py",
+          "language": "python",
+          "symbol": "changed_since",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/repository/workspace.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-freshness",
+        "kind": "CodeSymbol",
+        "label": "evaluate_freshness",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/obligations/freshness.py",
+          "language": "python",
+          "symbol": "evaluate_freshness",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/obligations/freshness.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-reconcile",
+        "kind": "CodeSymbol",
+        "label": "reconcile",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/obligations/reconcile.py",
+          "language": "python",
+          "symbol": "reconcile",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/obligations/reconcile.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-report-validation",
+        "kind": "CodeSymbol",
+        "label": "validate_report",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/obligations/reports.py",
+          "language": "python",
+          "symbol": "validate_report",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/obligations/reports.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-evidence-submit",
+        "kind": "CodeSymbol",
+        "label": "evidence_submit",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/services.py",
+          "language": "python",
+          "symbol": "evidence_submit",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/services.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-evidence-capture",
+        "kind": "CodeSymbol",
+        "label": "evidence_capture",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/services.py",
+          "language": "python",
+          "symbol": "evidence_capture",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/services.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m4-ci",
+        "kind": "CodeSymbol",
+        "label": "ci",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/services.py",
+          "language": "python",
+          "symbol": "ci",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/services.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m4-validated-report",
+        "kind": "TestCase",
+        "label": "test_submit_validated_report_binds_inputs_and_model",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_evidence.py",
+          "test_id": "test_submit_validated_report_binds_inputs_and_model",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_evidence.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m4-capture",
+        "kind": "TestCase",
+        "label": "test_capture_runs_argv_without_shell_and_records_outcome",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_evidence.py",
+          "test_id": "test_capture_runs_argv_without_shell_and_records_outcome",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_evidence.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m4-source-change-fresh-process",
+        "kind": "TestCase",
+        "label": "test_source_change_without_model_change_is_detected_in_fresh_process",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_evidence.py",
+          "test_id": "test_source_change_without_model_change_is_detected_in_fresh_process",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_evidence.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m4-artifact-downgrade",
+        "kind": "TestCase",
+        "label": "test_removed_artifact_downgrades_evidence_grade",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_evidence.py",
+          "test_id": "test_removed_artifact_downgrades_evidence_grade",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_evidence.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m4-unmapped",
+        "kind": "TestCase",
+        "label": "test_unmapped_change_detected_via_git_baseline",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_evidence.py",
+          "test_id": "test_unmapped_change_detected_via_git_baseline",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_evidence.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m4-ci",
+        "kind": "TestCase",
+        "label": "test_ci_reports_blockers_only_for_broken_or_authorized_scopes",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_evidence.py",
+          "test_id": "test_ci_reports_blockers_only_for_broken_or_authorized_scopes",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_evidence.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:workspace-snapshots",
+        "kind": "Mapping",
+        "label": "repository.workspace realizes workspace snapshot identity",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:workspace-snapshot-identity",
+            "operation:workspace-snapshot"
+          ],
+          "implementation_refs": [
+            "symbol:m4-workspace-capture",
+            "symbol:m4-workspace-changed-since",
+            "test:m4-validated-report"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": [
+            "Directories are hashed as whole trees; no per-file attribution inside a declared directory."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m4-evidence"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:evidence-ingestion",
+        "kind": "Mapping",
+        "label": "evidence_submit/evidence_capture realize collection-mode preservation and input binding",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:evidence-binds-inputs",
+            "req:collection-mode-preserved",
+            "operation:evidence-submit",
+            "operation:evidence-capture"
+          ],
+          "implementation_refs": [
+            "symbol:m4-evidence-submit",
+            "symbol:m4-evidence-capture",
+            "symbol:m4-report-validation",
+            "test:m4-validated-report",
+            "test:m4-capture"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": [
+            "Only JUnit XML and the small JSON format are validated; other formats are opaque."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m4-evidence"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:freshness-reconcile",
+        "kind": "Mapping",
+        "label": "freshness and reconcile realize safe conclusions, artifact downgrade and unmapped-change coverage",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:missing-artifact-downgrades",
+            "req:reconcile-safe-conclusions",
+            "req:unmapped-change-coverage",
+            "operation:reconcile"
+          ],
+          "implementation_refs": [
+            "symbol:m4-freshness",
+            "symbol:m4-reconcile",
+            "test:m4-source-change-fresh-process",
+            "test:m4-artifact-downgrade",
+            "test:m4-unmapped"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": [
+            "Unmapped-change detection needs Git; without it the tool reports detection unavailable."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m4-evidence"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:ci-entry",
+        "kind": "Mapping",
+        "label": "services.ci realizes the independent trigger",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:ci-entry-point",
+            "operation:ci"
+          ],
+          "implementation_refs": [
+            "symbol:m4-ci",
+            "test:m4-ci"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": [
+            "The GitHub Actions workflow is an example; other CI systems call `intentgraph ci --json` the same way."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m4-evidence"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m4-evidence-reconciliation",
+      "changes": {
+        "state": "satisfied"
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "obligation:m4-evidence-reconciliation",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "add_annotation",
+      "id": "obligation:m4-evidence-reconciliation",
+      "annotation": {
+        "role": "explanation",
+        "text": "Implemented and mapped; evidence is captured by the tool itself (evidence:m4-pytest-capture, independent_capture) rather than agent-reported.",
+        "refs": [
+          "mapping:evidence-ingestion",
+          "mapping:freshness-reconcile"
+        ]
+      }
+    }
+  ]
+}

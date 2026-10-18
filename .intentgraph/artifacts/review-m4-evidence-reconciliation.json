@@ -1,0 +1,502 @@
+{
+  "coverage": {
+    "closure_count": 27,
+    "ids": [
+      "component:obligations",
+      "component:reports",
+      "component:repository",
+      "constraint:no-hidden-state-between-calls",
+      "constraint:records-are-data",
+      "decision:agent-runs-language-tools",
+      "decision:freshness-in-engine",
+      "decision:policy-rules-declarative",
+      "decision:scope-closure-rule",
+      "decision:single-snapshot-v0",
+      "decision:snapshot-as-node",
+      "operation:ci",
+      "operation:evidence-capture",
+      "operation:evidence-submit",
+      "operation:reconcile",
+      "operation:workspace-snapshot",
+      "question:default-mandatory-rules",
+      "question:readiness-default-obligations",
+      "question:runner-capture-trust",
+      "question:single-snapshot-scale",
+      "req:ci-entry-point",
+      "req:collection-mode-preserved",
+      "req:evidence-binds-inputs",
+      "req:missing-artifact-downgrades",
+      "req:reconcile-safe-conclusions",
+      "req:unmapped-change-coverage",
+      "req:workspace-snapshot-identity"
+    ],
+    "intent_count": 27
+  },
+  "design_digest": "sha256:c2b809dc4e3446cfa574537f15f4d9faab851cf91b10ca7a80fe2ecd1e387c47",
+  "exclusions_and_deferrals": [],
+  "explanation": {
+    "author": null,
+    "note": "Optional agent-written explanation. Structural coverage above is checkable; prose faithfulness still needs human review.",
+    "text": ""
+  },
+  "model_revision": 12,
+  "policy": "policy:default-readiness@0.1",
+  "readiness_status": "needs_work",
+  "scope": "scope:m4-evidence-reconciliation",
+  "scope_label": "Milestone 4: evidence, mappings and drift reconciliation",
+  "sections": [
+    {
+      "blurb": "Goals and the requirements in scope.",
+      "entries": [
+        {
+          "description": "",
+          "id": "req:ci-entry-point",
+          "kind": "Requirement",
+          "label": "A CI entry point evaluates checks, readiness and reconciliation without depending on the agent remembering",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Exit code 2 on blockers; JSON carries the detail.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:collection-mode-preserved",
+          "kind": "Requirement",
+          "label": "Evidence ingestion preserves and verifies the collection mode",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "A validated report is parsed by the tool; an independent capture is executed by the tool; a submitted report is recorded as such.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:evidence-binds-inputs",
+          "kind": "Requirement",
+          "label": "Evidence binds to the workspace snapshot of its declared inputs and to the model content it supports",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Source or model changes after submission make the evidence stale, never silently current.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:missing-artifact-downgrades",
+          "kind": "Requirement",
+          "label": "A missing or altered evidence artifact must not preserve a grade that requires inspecting it",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Reconciliation reports the artifact and the effective collection mode drops to agent_assertion.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:reconcile-safe-conclusions",
+          "kind": "Requirement",
+          "label": "Reconciliation reports only safe conclusions with the follow-up each requires",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Broken locator, source digest changed, model scope changed, artifact missing, test failed, unmapped source change, policy changed.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:unmapped-change-coverage",
+          "kind": "Requirement",
+          "label": "Source changes not referenced by any mapping, symbol, test or evidence input are reported as coverage gaps",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Requires Git; without it the tool says detection is unavailable rather than reporting nothing.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:workspace-snapshot-identity",
+          "kind": "Requirement",
+          "label": "A workspace snapshot records repository identity, HEAD, dirty and untracked state, and content hashes for the declared scope",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "A Git commit alone is insufficient when files are modified or untracked. Multiple roots have separate snapshot records.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        }
+      ],
+      "title": "What are we trying to achieve?"
+    },
+    {
+      "blurb": "Scenarios and experience elements.",
+      "entries": [],
+      "title": "What will the user experience?"
+    },
+    {
+      "blurb": "Structure, contracts and behavior.",
+      "entries": [
+        {
+          "description": "",
+          "id": "component:obligations",
+          "kind": "Component",
+          "label": "obligations",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Policy applicability, evidence freshness, readiness evaluation",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:reports",
+          "kind": "Component",
+          "label": "reports",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Structured review packets and renderable exports",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:repository",
+          "kind": "Component",
+          "label": "repository",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Read/write, canonical serialization, revisions, locking, migrations",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:ci",
+          "kind": "Operation",
+          "label": "Run check, readiness and reconciliation for every active scope",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [],
+            "idempotent": true,
+            "inputs": {
+              "scopes": "optional list"
+            },
+            "mode": "sync",
+            "outputs": {
+              "blocking": "boolean",
+              "summary": "per scope"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:evidence-capture",
+          "kind": "Operation",
+          "label": "Run a declared command and capture its result as independent evidence",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "command_not_found",
+              "invalid_evidence",
+              "stale_base"
+            ],
+            "idempotent": false,
+            "inputs": {
+              "spec": "argv list, cwd root, supports, declared inputs"
+            },
+            "mode": "sync",
+            "outputs": {
+              "artifact_ref": "captured stdout/stderr",
+              "evidence_id": "id",
+              "result": "passed|failed"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:evidence-submit",
+          "kind": "Operation",
+          "label": "Ingest an evidence report with provenance",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "unknown_record",
+              "invalid_evidence",
+              "report_validation_failed",
+              "stale_base"
+            ],
+            "idempotent": false,
+            "inputs": {
+              "artifact": "optional file path",
+              "report": "evidence submission JSON"
+            },
+            "mode": "sync",
+            "outputs": {
+              "effective_collection_mode": "mode",
+              "evidence_id": "id",
+              "workspace_snapshot_ref": "id"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:reconcile",
+          "kind": "Operation",
+          "label": "Evaluate mappings, evidence freshness and workspace drift for a scope",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "unknown_scope"
+            ],
+            "idempotent": true,
+            "inputs": {
+              "scope": "optional Scope id"
+            },
+            "mode": "sync",
+            "outputs": {
+              "conformance": "policy result",
+              "evidence": "freshness per record",
+              "findings": "list with safe conclusion and follow-up"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:workspace-snapshot",
+          "kind": "Operation",
+          "label": "Capture a workspace snapshot for a root and declared paths",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "unknown_root",
+              "stale_base"
+            ],
+            "idempotent": false,
+            "inputs": {
+              "paths": "declared files",
+              "repository": "root name"
+            },
+            "mode": "sync",
+            "outputs": {
+              "files": "path -> digest",
+              "head": "commit or empty",
+              "snapshot_id": "id"
+            }
+          },
+          "reason": "explicit member"
+        }
+      ],
+      "title": "How will the main parts cooperate?"
+    },
+    {
+      "blurb": "Cross-cutting rules, dependencies on uncertain facts, and chosen alternatives (including deferrals).",
+      "entries": [
+        {
+          "description": "Optional caches are keyed by snapshot digest, vocabulary version and tool version; a cache miss affects performance only.",
+          "id": "constraint:no-hidden-state-between-calls",
+          "kind": "Constraint",
+          "label": "No memory from a previous CLI call is required for correctness",
+          "lifecycle": "accepted",
+          "properties": {
+            "constraint_kind": "invariant",
+            "scope": "global"
+          },
+          "reason": "global rule"
+        },
+        {
+          "description": "",
+          "id": "constraint:records-are-data",
+          "kind": "Constraint",
+          "label": "Records and tool output are data, never executed",
+          "lifecycle": "accepted",
+          "properties": {
+            "constraint_kind": "permission",
+            "scope": "global"
+          },
+          "reason": "global rule"
+        },
+        {
+          "description": "",
+          "id": "decision:agent-runs-language-tools",
+          "kind": "Decision",
+          "label": "The existing agent runs language-specific analyzers; the core stays small",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Native adapters for every language"
+            ],
+            "decided_by": "user",
+            "rationale": "Avoids building a large analyzer platform before proving value."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:freshness-in-engine",
+          "kind": "Decision",
+          "label": "Evidence freshness is computed once and shared by reconcile and the evidence_required rule",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Freshness only in reconcile"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Conformance must not count stale evidence; one implementation avoids two answers."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:policy-rules-declarative",
+          "kind": "Decision",
+          "label": "Policies are declarative rule records in the snapshot, evaluated by built-in rule types",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Python plug-in policies",
+              "Policy expressed in intent-expr"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Keeps policy as versioned data that cannot execute code; new rule types are tool changes, not policy edits."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:scope-closure-rule",
+          "kind": "Decision",
+          "label": "Scope closure = explicit members, their structural children, realized requirements, applicable constraints, global constraints, and concerning questions, decisions and assumptions",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Explicit members only",
+              "Full reachability"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Deterministic and explainable; every closure member records why it is included. Shared containers do not propagate realized requirements, so one component serving two features does not merge their scopes."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:single-snapshot-v0",
+          "kind": "Decision",
+          "label": "One canonical snapshot with transactions inside it; no daemon",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Sharded files",
+              "Event-sourced log",
+              "Always-running process"
+            ],
+            "decided_by": "user",
+            "rationale": "Atomic writes and straightforward recovery before sharding; graph state and transaction accounting cannot diverge."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:snapshot-as-node",
+          "kind": "Decision",
+          "label": "Workspace snapshots are WorkspaceSnapshot nodes in the observation layer holding digests for declared paths only",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Side files under artifacts/",
+              "Hash every tracked file"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Keeps evidence inputs inspectable and versioned with the model without hashing the whole repository."
+          },
+          "reason": "decision concerning member"
+        }
+      ],
+      "title": "Which rules, assumptions and decisions matter?"
+    },
+    {
+      "blurb": "Unresolved intent.",
+      "entries": [
+        {
+          "description": "",
+          "id": "question:default-mandatory-rules",
+          "kind": "Question",
+          "label": "Which readiness rules are mandatory by default?",
+          "lifecycle": "accepted",
+          "properties": {
+            "answer": "v0 default policy: structural checks pass; blocking questions resolved; accepted requirements realized or deliberately deferred; operations define inputs, outputs and failures; concurrency-sensitive processes reviewed; no refuted assumptions; review packet current. Projects override by setting their own policy.",
+            "blocking": false,
+            "status": "answered"
+          },
+          "reason": "question concerning member"
+        },
+        {
+          "description": "",
+          "id": "question:readiness-default-obligations",
+          "kind": "Question",
+          "label": "Which readiness obligations are mandatory by default versus project-specific?",
+          "lifecycle": "proposed",
+          "properties": {
+            "answer": "See question:default-mandatory-rules; answered for v0 by the default policy.",
+            "blocking": false,
+            "status": "answered"
+          },
+          "reason": "question concerning member"
+        },
+        {
+          "description": "",
+          "id": "question:runner-capture-trust",
+          "kind": "Question",
+          "label": "How much trust does an independent capture earn when the command is user-supplied?",
+          "lifecycle": "accepted",
+          "properties": {
+            "answer": "v0: independent_capture means the tool ran the argv and recorded exit code and output; the command's meaning is still the submitter's claim, recorded in declared inputs and limitations.",
+            "blocking": false,
+            "status": "answered"
+          },
+          "reason": "question concerning member"
+        },
+        {
+          "description": "",
+          "id": "question:single-snapshot-scale",
+          "kind": "Question",
+          "label": "Does a single snapshot remain practical at the first target project size?",
+          "lifecycle": "accepted",
+          "properties": {
+            "blocking": false,
+            "status": "open"
+          },
+          "reason": "question concerning member"
+        }
+      ],
+      "title": "What is still open?"
+    }
+  ]
+}

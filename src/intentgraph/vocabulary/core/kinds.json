@@ -1,5 +1,5 @@
 {
-  "version": "core/0.2",
+  "version": "core/0.3",
   "description": "Core node kinds. Property specs use a small JSON-Schema-like subset: type (string|integer|number|boolean|array|object|ref|ref_list), enum, required, items, description. 'ref' and 'ref_list' values must name existing records; reference integrity is checked by graph validation.",
   "kinds": [
     {"name": "Goal", "family": "Purpose", "layers": ["intent"],
@@ -155,6 +155,21 @@
        "member_refs": {"type": "ref_list", "required": true},
        "status": {"type": "string", "enum": ["draft", "active", "closed"], "required": true},
        "policy_ref": {"type": "string"}}},
+    {"name": "WorkspaceSnapshot", "family": "Implementation", "layers": ["observation"],
+     "description": "Identity of a repository root at capture time: HEAD, dirty and untracked state, and content digests for the declared paths only.",
+     "properties": {
+       "repository": {"type": "string", "required": true},
+       "root_path": {"type": "string"},
+       "head": {"type": "string"},
+       "git_available": {"type": "boolean"},
+       "dirty": {"type": "boolean"},
+       "tracked_dirty": {"type": "array", "items": {"type": "string"}},
+       "untracked": {"type": "array", "items": {"type": "string"}},
+       "files": {"type": "object"},
+       "missing_paths": {"type": "array", "items": {"type": "string"}},
+       "lockfiles": {"type": "object"},
+       "captured_at": {"type": "string"},
+       "tool_version": {"type": "string"}}},
     {"name": "Mapping", "family": "Reconciliation", "layers": ["reconciliation"],
      "description": "A claim connecting model elements to implementation elements, with assessment and gaps.",
      "properties": {
@@ -169,6 +184,7 @@
      "properties": {
        "obligation_kind": {"type": "string", "required": true},
        "rule": {"type": "string"},
+       "gate": {"type": "string", "enum": ["readiness", "conformance", "any"]},
        "blocking": {"type": "boolean", "required": true},
        "state": {"type": "string", "enum": ["pending", "satisfied", "failed", "blocked", "waived"], "required": true},
        "scope_refs": {"type": "ref_list"},
@@ -220,6 +236,10 @@
        "tool": {"type": "string"},
        "test_refs": {"type": "ref_list"},
        "artifact_ref": {"type": "string"},
+       "artifact_digest": {"type": "string"},
+       "report_format": {"type": "string"},
+       "declared_inputs": {"type": "object"},
+       "model_revision": {"type": "integer"},
        "submitted_by": {"type": "string"},
        "limitations": {"type": "array", "items": {"type": "string"}}}},
     {"name": "Approval", "family": "Evidence", "layers": ["reconciliation"],

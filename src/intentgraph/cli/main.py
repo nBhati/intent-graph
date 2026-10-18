@@ -99,6 +99,25 @@ def build_parser() -> argparse.ArgumentParser:
     s = pos.add_parser("show", parents=[common])
     s.add_argument("id")
 
+    ev = sub.add_parser("evidence", help="evidence ingestion")
+    evs = ev.add_subparsers(dest="evidence_command", required=True)
+    s = evs.add_parser("submit", parents=[common], help="ingest a submitted or validated report")
+    s.add_argument("--file", type=Path, required=True)
+    s = evs.add_parser("capture", parents=[common], help="run a declared command and record the result as independent evidence")
+    s.add_argument("--file", type=Path, required=True)
+
+    wsp = sub.add_parser("workspace", help="workspace snapshots")
+    wss = wsp.add_subparsers(dest="workspace_command", required=True)
+    s = wss.add_parser("snapshot", parents=[common])
+    s.add_argument("--repository", default=".")
+    s.add_argument("--paths", nargs="*", default=None)
+
+    s = sub.add_parser("reconcile", parents=[common], help="evaluate mappings, evidence freshness and workspace drift")
+    s.add_argument("--scope", default=None)
+
+    s = sub.add_parser("ci", parents=[common], help="independent trigger: checks, readiness and reconciliation for every active scope")
+    s.add_argument("--scope", nargs="*", default=None)
+
     s = sub.add_parser("migrate", parents=[common], help="preview (default) or apply explicit model migrations")
     s.add_argument("--apply", action="store_true")
 
@@ -139,6 +158,22 @@ def run(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     if cmd == "approval":
         repo = services.Repository.find(start)
         return EXIT_OK, services.approval_record(repo, _read_json_file(args.file))
+    if cmd == "evidence":
+        repo = services.Repository.find(start)
+        fn = services.evidence_submit if args.evidence_command == "submit" else services.evidence_capture
+        data = fn(repo, _read_json_file(args.file))
+        return (EXIT_BLOCKED if data["result"] == "failed" else EXIT_OK), data
+    if cmd == "workspace":
+        repo = services.Repository.find(start)
+        return EXIT_OK, services.workspace_snapshot(repo, args.repository, args.paths)
+    if cmd == "reconcile":
+        repo = services.Repository.find(start)
+        data = services.reconcile(repo, args.scope)
+        return (EXIT_BLOCKED if data["blocking"] else EXIT_OK), data
+    if cmd == "ci":
+        repo = services.Repository.find(start)
+        data = services.ci(repo, args.scope)
+        return (EXIT_BLOCKED if data["blocking"] else EXIT_OK), data
     if cmd == "migrate":
         repo = services.Repository.find(start)
         data = services.migrate(repo, apply=args.apply)
@@ -277,6 +312,33 @@ def _human(command: str, data: dict[str, Any]) -> str:
             lines.append(f"  {st['id']}: {st['description']}")
         if data["backup"]:
             lines.append(f"backup: {data['backup']}")
+    elif command == "evidence":
+        lines.append(f"{data['evidence_id']}: {data['result']} ({data.get('collection_mode', 'independent_capture')}); snapshot {data['workspace_snapshot_ref']}; revision {data['revision']}")
+        if data.get("missing_paths"):
+            lines.append(f"  declared paths missing: {data['missing_paths']}")
+    elif command == "workspace":
+        pr = data["properties"]
+        lines.append(f"{data['snapshot_id']}: head {pr['head'][:12] or 'no-git'}, {len(pr['files'])} declared file(s), dirty={pr['dirty']} ({len(pr['tracked_dirty'])} tracked, {len(pr['untracked'])} untracked)")
+    elif command == "reconcile":
+        sm = data["summary"]
+        lines.append(f"reconcile {data['scope'] or '(whole model)'} at revision {data['revision']}: {'BLOCKING' if data['blocking'] else 'no blockers'}; {sm['blockers']} blocker(s), {sm['warnings']} warning(s), {sm['info']} info; evidence fresh {sm['evidence_fresh']}, stale {sm['evidence_stale']}")
+        for f in data["findings"]:
+            lines.append(f"  [{f['severity']}] {f['code']}: {f['message']}")
+            lines.append(f"      safe conclusion: {f['safe_conclusion']}  follow-up: {f['follow_up']}")
+        for r, w in data["workspace"].items():
+            lines.append(f"  root {r}: " + (f"{len(w['paths'])} changed path(s) since {w.get('baseline_snapshot')}, {len(w.get('unmapped_paths', []))} unmapped" if w.get("available") else f"change detection unavailable ({w.get('reason')})"))
+        if data["conformance"]:
+            lines.append(f"  conformance: {data['conformance']['status']}")
+            for o in data["conformance"]["obligations"]:
+                lines.append(f"    [{o['state']}] {o['id']}: {o['request']}")
+        lines.append(data["coverage_note"])
+    elif command == "ci":
+        lines.append(f"ci at revision {data['revision']}: {'BLOCKING' if data['blocking'] else 'ok'}; structural errors {data['structural_errors']}")
+        for sc in data["scopes"]:
+            if "error" in sc:
+                lines.append(f"  {sc['scope']}: error {sc['error']['message']}")
+            else:
+                lines.append(f"  {sc['scope']}: readiness {sc['readiness']}, approval {sc['approval']}, conformance {sc['conformance']}, evidence fresh/stale {sc['evidence']['fresh']}/{sc['evidence']['stale']}, reconcile blockers {sc['reconcile_blockers'] or 'none'}{'  <- BLOCKING' if sc['blocking'] else ''}")
     elif command == "policy":
         return json.dumps(data, indent=2, sort_keys=True)
     elif command == "patch":
@@ -287,6 +349,8 @@ def _human(command: str, data: dict[str, Any]) -> str:
             lines.append(f"{data['patch_id']}: {'valid' if data['valid'] else 'INVALID'}; +{len(eff['added_ids'])} added, ~{len(eff['updated_ids'])} updated, -{len(eff['removed_ids'])} removed")
     else:
         return json.dumps(data, indent=2, sort_keys=True)
+    if command in ("reconcile", "ci"):
+        return "\n".join(lines)
     for d in data.get("diagnostics", []) + data.get("diagnostics_after", []) + data.get("findings", []):
         lines.append(f"  [{d['severity']}] {d['code']}: {d['message']}")
     return "\n".join(lines)

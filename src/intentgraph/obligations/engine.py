@@ -56,7 +56,9 @@ class ReadinessResult(BaseModel):
 
 
 class RuleContext:
-    def __init__(self, index: GraphIndex, vocabulary: Vocabulary, scope: NodeRecord, closure: dict[str, ClosureMember], diagnostics: list[Diagnostic], digest: str):
+    def __init__(self, index: GraphIndex, vocabulary: Vocabulary, scope: NodeRecord, closure: dict[str, ClosureMember], diagnostics: list[Diagnostic], digest: str, freshness: dict[str, Any] | None = None, gate: str = "readiness"):
+        self.freshness = freshness  # evidence id -> Freshness (None when the workspace was not inspected)
+        self.gate = gate
         self.index = index
         self.vocabulary = vocabulary
         self.scope = scope
@@ -190,12 +192,25 @@ def r_evidence(ctx: RuleContext, rule: PolicyRule) -> list[ObligationItem]:
         if node.lifecycle == "superseded" or not _matches(node, p):
             continue
         evidence = _evidence_for(ctx, nid)
-        ok = [ev for ev in evidence if ev.properties.get("result") == want_result and COLLECTION_MODES.index(ev.properties.get("collection_mode", "agent_assertion")) >= min_rank and (not methods or ev.properties.get("method") in methods)]
+
+        def mode_of(ev):
+            fr = (ctx.freshness or {}).get(ev.id)
+            return fr.effective_collection_mode if fr is not None else ev.properties.get("collection_mode", "agent_assertion")
+
+        def fresh(ev):
+            fr = (ctx.freshness or {}).get(ev.id)
+            return True if fr is None else fr.fresh
+
+        ok = [ev for ev in evidence if ev.properties.get("result") == want_result and COLLECTION_MODES.index(mode_of(ev)) >= min_rank and (not methods or ev.properties.get("method") in methods) and fresh(ev)]
         if ok:
             continue
-        weak = [ev for ev in evidence if ev.properties.get("result") == want_result]
-        if weak:
-            req = f"Evidence for '{node.label}' exists only at collection mode {', '.join(sorted({w.properties.get('collection_mode', '?') for w in weak}))}, below the required {min_mode}; submit a report-level or captured result."
+        stale = [ev for ev in evidence if ev.properties.get("result") == want_result and COLLECTION_MODES.index(mode_of(ev)) >= min_rank and not fresh(ev)]
+        weak = [ev for ev in evidence if ev.properties.get("result") == want_result and ev not in stale]
+        if stale:
+            reasons = "; ".join(r for ev in stale for r in (ctx.freshness or {})[ev.id].reasons[:2])
+            req = f"Evidence for '{node.label}' is stale ({', '.join(e.id for e in stale)}): {reasons}. Re-run and resubmit."
+        elif weak:
+            req = f"Evidence for '{node.label}' exists only at collection mode {', '.join(sorted({mode_of(w) for w in weak}))}, below the required {min_mode}; submit a report-level or captured result."
         elif evidence:
             req = f"Evidence for '{node.label}' does not report result '{want_result}' ({', '.join(f'{e.id}={e.properties.get('result')}' for e in evidence)})."
         else:
@@ -257,6 +272,9 @@ def _model_obligations(ctx: RuleContext) -> list[ObligationItem]:
         state = node.properties.get("state")
         if state not in ("pending", "failed", "blocked"):
             continue
+        gate = node.properties.get("gate", "any")
+        if gate not in ("any", ctx.gate):
+            continue  # belongs to the other gate (e.g. an implementation obligation does not block pre-build readiness)
         scope_refs = set(node.properties.get("scope_refs", []))
         other_scopes = {r for r in scope_refs if r in ctx.index.nodes and ctx.index.nodes[r].kind == "Scope" and r != ctx.scope.id}
         if other_scopes and ctx.scope.id not in scope_refs:
@@ -303,14 +321,14 @@ def find_policy(snapshot_policies: list[dict[str, Any]], policy_id: str | None, 
     return candidates[0]
 
 
-def evaluate(index: GraphIndex, vocabulary: Vocabulary, diagnostics: list[Diagnostic], scope_id: str, *, policy_id: str | None = None, kind: str = "readiness") -> ReadinessResult:
+def evaluate(index: GraphIndex, vocabulary: Vocabulary, diagnostics: list[Diagnostic], scope_id: str, *, policy_id: str | None = None, kind: str = "readiness", freshness: dict[str, Any] | None = None) -> ReadinessResult:
     scope = index.nodes.get(scope_id)
     if scope is None or scope.kind != "Scope":
         raise InvalidInput(f"{scope_id!r} is not a Scope record", code="unknown_scope", details={"id": scope_id})
     policy = find_policy(index.snapshot.policies, policy_id or (scope.properties.get("policy_ref") if kind == "readiness" else None), kind)
     closure = scope_closure(index, vocabulary, scope)
     digest = design_digest(index, set(closure), policy.ref)
-    ctx = RuleContext(index, vocabulary, scope, closure, diagnostics, digest)
+    ctx = RuleContext(index, vocabulary, scope, closure, diagnostics, digest, freshness=freshness, gate=policy.kind)
 
     items: list[ObligationItem] = []
     for rule in policy.rules:
@@ -332,5 +350,6 @@ def evaluate(index: GraphIndex, vocabulary: Vocabulary, diagnostics: list[Diagno
         closure={"explicit": list(scope.properties.get("member_refs", [])), "count": len(closure),
                  "members": [{"id": m.id, "kind": m.kind, "reason": m.reason, "via": m.via} for m in sorted(closure.values(), key=lambda m: m.id)]},
         obligations=blocking, warnings=warnings, waived=waived, approval=approval, findings=findings,
-        note="Readiness is the satisfaction of this policy with recorded content; it is not proof of correctness and not authority to change intended behavior.",
+        note=("Readiness is the satisfaction of this policy with recorded content; it is not proof of correctness and not authority to change intended behavior."
+              + ("" if freshness is not None or policy.kind != "conformance" else " Evidence freshness was not evaluated in this call; use `reconcile` for freshness-aware conformance.")),
     )

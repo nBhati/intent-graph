@@ -33,6 +33,12 @@ def _bump_vocab_0_1_to_0_2(snapshot: Snapshot) -> Snapshot:
     return out
 
 
+def _bump_vocab_0_2_to_0_3(snapshot: Snapshot) -> Snapshot:
+    out = snapshot.model_copy(deep=True)
+    out.vocabulary_version = "core/0.3"
+    return out
+
+
 MIGRATIONS: list[Migration] = [
     Migration(
         id="vocabulary-core-0.1-to-0.2",
@@ -41,6 +47,14 @@ MIGRATIONS: list[Migration] = [
         field="vocabulary_version",
         description="Additive: adds the Scope kind, Decision.decision_kind, Obligation.rule, Approval.policy_ref/model_revision, and Approval as a 'concerns' source. No record rewrites.",
         step=_bump_vocab_0_1_to_0_2,
+    ),
+    Migration(
+        id="vocabulary-core-0.2-to-0.3",
+        from_version="core/0.2",
+        to_version="core/0.3",
+        field="vocabulary_version",
+        description="Additive: adds the WorkspaceSnapshot kind, Obligation.gate, and Evidence artifact_digest/report_format/declared_inputs/model_revision. No record rewrites.",
+        step=_bump_vocab_0_2_to_0_3,
     ),
 ]
 

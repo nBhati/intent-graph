@@ -1,4 +1,4 @@
-# Data contract (format 0.1, vocabulary core/0.2)
+# Data contract (format 0.1, vocabulary core/0.3)
 
 Established in milestone 0. Changes to any of these are explicit, versioned changes.
 
@@ -69,7 +69,7 @@ Rules: base revision and digest must match the current snapshot, else `stale_bas
 
 ## Scopes, policies, readiness
 
-A `Scope` node (reconciliation layer) has `member_refs`, `status` (`draft`/`active`/`closed`) and `policy_ref`. Closure: explicit members; structural children via `contains`, `declares`, `exposes`; targets of `realizes`; scenarios refining in-scope requirements; constraints targeting closure members plus global constraints and their `assumption_refs`; questions, decisions and assumptions that `concerns` closure members. Every member carries a `reason`.
+A `Scope` node (reconciliation layer) has `member_refs`, `status` (`draft`/`active`/`closed`) and `policy_ref`. Closure: explicit members; structural children via `contains`, `declares`, `exposes`; targets of `realizes` from specific design elements (Operation, Action, Process, Screen, Control, Interaction, Transition, Decision, Scenario, Interface) but not from shared containers (Component, System), which would drag every feature they serve into every scope naming them; scenarios refining in-scope requirements; constraints targeting closure members plus global constraints and their `assumption_refs`; questions, decisions and assumptions that `concerns` closure members. Every member carries a `reason`.
 
 A policy is `{id, version, kind: readiness|conformance, description, rules: [{id, rule, blocking, params}]}` stored in `policies`. Rule types: `structural_checks_pass`, `blocking_questions_resolved`, `requirements_realized`, `operations_defined`, `concurrency_sensitive_reviewed`, `assumptions_not_refuted`, `assumptions_acknowledged`, `proposed_records_accepted`, `review_packet_current`, `evidence_required` (`kinds`, `where`, `result`, `min_collection_mode`, `methods`), `mappings_present` (`kinds`, `where`). Defaults `policy:default-readiness@0.1` and `policy:default-conformance@0.1` are installed at init.
 
@@ -85,6 +85,24 @@ Waiver: an Obligation node with the computed id, `state: waived`, `waiver: {auth
 
 `migrate [--apply]`: previews (default) or applies the registered vocabulary migrations from the snapshot's version to the tool's. Apply writes `artifacts/backup-model-rev<N>-<vocab>.json` first, records a `patch:migrate-<id>` transaction, and updates `project.json`. A model on an older vocabulary still loads; it reports `vocabulary_version_mismatch` until migrated.
 
+## Workspace snapshots, evidence, reconciliation
+
+`project.json` `roots` maps a root name to a path relative to the workspace (`{".": ".", "app": "apps/mobile"}`; a list is accepted). CodeArtifact, CodeSymbol, TestCase and evidence inputs name a root by its key. Declared paths may not escape their root.
+
+A `WorkspaceSnapshot` node (observation layer) records `repository`, `head` (Git commit or empty), `git_available`, `dirty`, `tracked_dirty`, `untracked`, `files` (declared path to content digest; directories hash their file tree), `missing_paths`, `lockfiles`, `captured_at`. `workspace snapshot --repository R [--paths ...]` records one as a baseline.
+
+`evidence submit --file F` takes `{id: "evidence:<slug>", label, method, result: passed|failed|inconclusive, collection_mode: agent_assertion|agent_submitted_report|validated_report, supports: [ids], test_refs, tool, limitations, inputs: {repository, paths}, artifact: {path, format: junit-xml|intentgraph-test-report/0.1|opaque}}`. `validated_report` requires a supported artifact format; the tool parses it and rejects a claim the report contradicts (`report_validation_failed`). Artifacts are copied under `artifacts/evidence/<slug>/` with `artifact_digest`. The Evidence record gains `workspace_snapshot_ref`, `declared_inputs`, `model_scope_digest` (digest of the supported records' design content), `model_revision`, and `supports` edges to supported Requirement/Mapping/Obligation/Constraint/Scenario/Assumption records.
+
+`evidence capture --file F` takes `{id, method, supports, repository, command: [argv], inputs: {paths}, timeout, limitations}`; the tool runs the argv (no shell) in the root, stores `capture.json` (exit code, stdout, stderr, duration) as the artifact and records `independent_capture` with result from the exit code (timeout gives `inconclusive`).
+
+Freshness (shared by `reconcile` and the `evidence_required` rule): evidence is stale when any declared input digest changed, the model scope digest changed, a lockfile changed, or (with no declared inputs) the root's HEAD moved or the tree is dirty. No bound snapshot means stale. A missing or altered artifact sets `effective_collection_mode` to `agent_assertion`. Stale evidence does not satisfy `evidence_required`; `conformance` without `reconcile` says freshness was not evaluated.
+
+`reconcile [--scope S]` findings each carry `code`, `severity` (blocker|warning|info), `related_ids`, `message`, `safe_conclusion`, `follow_up`. Codes: `broken_locator`, `unknown_root`, `unresolved_symbol`, `test_failed`, `evidence_artifact_missing`, `source_changed`, `model_scope_changed`, `evidence_unbound`, `lockfile_changed`, `unmapped_change`, `approval_invalidated`. `workspace` reports per-root changed paths since the latest snapshot baseline split into mapped and unmapped (Git required; otherwise `available: false` with a reason). With a scope, a freshness-aware `conformance` result is included; exit code 2 when any blocker or conformance is not ready.
+
+`ci [--scope ...]`: structural check, readiness, reconcile and conformance for every active scope. Blocking when structural errors exist, a reconcile blocker exists, or an authorized scope (approval current) is not conformant. Unapproved work in progress is reported, not failed.
+
+Obligation `gate` (`readiness` | `conformance` | `any`, default any): a manual obligation counts only against the matching gate, so an implementation obligation does not block pre-build readiness.
+
 ## CLI response envelope
 
 ```json
@@ -96,7 +114,7 @@ Exit codes: 0 ok, 2 completed with blockers (check/validate found errors, lens o
 
 Diagnostics are `{code, severity: error|warning, message, record_ids}`. Stable codes so far: `duplicate_id`, `duplicate_patch_id`, `vocabulary_version_mismatch`, `unknown_kind`, `unknown_relation`, `invalid_layer`, `invalid_property`, `invalid_expression`, `unsupported_expression_language`, `missing_endpoint`, `illegal_endpoint_kind`, `dangling_reference`, `containment_cycle`, `acyclic_relation_cycle`, `accepted_edge_to_superseded`, `id_exists`, `unknown_record`, `removed_accepted_record`, `invalid_policy`, `duplicate_policy`, `invalid_waiver`.
 
-Error codes: `invalid_input`, `workspace_not_found`, `incompatible_workspace`, `stale_base`, `validation_failed`, `patch_id_conflict`, `invalid_patch`, `invalid_lens_request`, `unknown_record`, `unknown_kind`, `corrupt_snapshot`, `lock_timeout`, `not_supported`, `git_unavailable`, `git_failed`, `invalid_impact_request`, `unknown_scope`, `unknown_policy`, `scope_not_ready`, `invalid_approval`, `no_migration_path`, `internal_error`.
+Error codes: `invalid_input`, `workspace_not_found`, `incompatible_workspace`, `stale_base`, `validation_failed`, `patch_id_conflict`, `invalid_patch`, `invalid_lens_request`, `unknown_record`, `unknown_kind`, `corrupt_snapshot`, `lock_timeout`, `not_supported`, `git_unavailable`, `git_failed`, `invalid_impact_request`, `unknown_scope`, `unknown_policy`, `scope_not_ready`, `invalid_approval`, `no_migration_path`, `invalid_evidence`, `report_validation_failed`, `command_not_found`, `unknown_root`, `invalid_path`, `internal_error`.
 
 ## Workspace layout
 

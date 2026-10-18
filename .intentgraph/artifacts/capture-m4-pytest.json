@@ -1,0 +1,61 @@
+{
+  "id": "evidence:m4-pytest-capture",
+  "label": "Package test suite captured by the tool",
+  "method": "unit_and_subprocess_tests",
+  "tool": "pytest",
+  "repository": ".",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--ignore=tests/test_self_model.py"
+  ],
+  "supports": [
+    "req:acyclic-only-where-declared",
+    "req:assertion-cannot-satisfy-executable-evidence",
+    "req:atomic-replace",
+    "req:canonical-digest",
+    "req:ci-entry-point",
+    "req:collection-mode-preserved",
+    "req:design-change-invalidates-readiness",
+    "req:design-digest-stable-under-approval",
+    "req:evidence-binds-inputs",
+    "req:exit-code-convention",
+    "req:fresh-process-reconstruction",
+    "req:graph-diff",
+    "req:idempotent-patch-ids",
+    "req:impact-slice",
+    "req:lens-never-drops-mandatory",
+    "req:missing-artifact-downgrades",
+    "req:mixed-precision",
+    "req:no-code-execution-from-data",
+    "req:no-self-approval",
+    "req:no-universal-verified-flag",
+    "req:observation-never-overwrites-intent",
+    "req:readiness-does-not-modify",
+    "req:readiness-evaluates-policy",
+    "req:reconcile-safe-conclusions",
+    "req:review-packet-deterministic",
+    "req:stable-ids",
+    "req:stale-base-rejected",
+    "req:unknown-kinds-not-silently-known",
+    "req:unmapped-change-coverage",
+    "req:waiver-requires-user",
+    "req:workspace-snapshot-identity"
+  ],
+  "inputs": {
+    "paths": [
+      "src",
+      "tests",
+      "pyproject.toml"
+    ]
+  },
+  "timeout": 900,
+  "limitations": [
+    "tests/test_self_model.py is excluded because it asserts the presence of this very evidence record; CI runs the full suite separately.",
+    "Supports every accepted requirement collectively; per-requirement attribution is via the TestCase records in the mappings."
+  ]
+}

@@ -2,7 +2,7 @@
 
 A local, agent-operated system that maintains an annotated model of software intent, design, implementation mappings, and evidence. It closes the loop from human intent to implementation and back through explicit refinement, computable checks, and scoped review.
 
-The full vision and architecture is in [docs/vision-and-architecture.md](docs/vision-and-architecture.md). This repository is its implementation, built in the milestone order that document prescribes (section 21). Current state: **milestone 3 complete** (see [docs/milestones.md](docs/milestones.md)).
+The full vision and architecture is in [docs/vision-and-architecture.md](docs/vision-and-architecture.md). This repository is its implementation, built in the milestone order that document prescribes (section 21). Current state: **milestone 4 complete** (see [docs/milestones.md](docs/milestones.md)).
 
 ## What exists today
 
@@ -18,10 +18,13 @@ The full vision and architecture is in [docs/vision-and-architecture.md](docs/vi
 - Scopes with a deterministic closure, versioned declarative policies (readiness and conformance), and an obligation engine that returns actionable obligations with deterministic ids. It never modifies the model or its policy.
 - Design digests that bind approvals to the intent content of a scope: recording an approval or adding evidence leaves the digest unchanged; a design change inside the scope invalidates the approval and names it.
 - Review-packet export (Markdown and JSON) selected deterministically from the scope, recorded as a ReviewArtifact; source-backed approval records; user-authorized waivers; explicit, previewable, backed-up migrations.
+- Evidence ingestion that preserves and verifies the collection mode: submitted reports, validated reports the tool parses (JUnit XML, a small JSON format), and independent captures the tool runs itself. Every evidence record binds to a workspace snapshot of its declared inputs (Git HEAD, dirty and untracked state, content digests) and to the model content it supports.
+- Freshness rules shared by reconciliation and conformance: changed inputs, changed model content, changed lockfiles, missing artifacts. Stale evidence never satisfies a policy; a missing artifact drops the evidence to an assertion.
+- `reconcile`: broken locators, failed tests, stale or unbound evidence, unmapped source changes against a snapshot baseline, invalidated approvals, each with its safe conclusion and follow-up. `ci`: the independent trigger for all of the above.
 - A CLI with stable JSON responses and the exit-code convention from section 12 (0 ok, 2 blockers, 3 invalid input or stale base, 4 execution failure).
 - An agent guide and an idempotent pointer installed into the workspace's existing `CLAUDE.md`/`AGENTS.md`.
 
-Not yet built: evidence ingestion with workspace snapshots and freshness rules, drift reconciliation, a CI entry point, and the bundled executable. Evidence is recorded with its collection mode and the policies distinguish an agent assertion from a report.
+Not yet built: the bundled executable and installer experience (milestone 5), native symbol extraction (symbol claims carry their extractor), and review diagrams.
 
 ## Install (development)
 
@@ -51,6 +54,11 @@ intentgraph review export --scope scope:cancel --record
 intentgraph approval record --file approval.json --json
 intentgraph conformance --scope scope:cancel --json
 intentgraph migrate --apply
+intentgraph evidence capture --file capture.json --json     # tool runs the argv, records independent_capture
+intentgraph evidence submit --file report.json --json       # submitted or validated report
+intentgraph workspace snapshot --repository app
+intentgraph reconcile --scope scope:cancel --json
+intentgraph ci --json
 intentgraph check --json
 intentgraph rebuild --json
 ```
@@ -83,12 +91,14 @@ A complete worked example lives in `tests/fixtures/coaching-patch.json` (the int
 src/intentgraph/
   model/        record envelope, canonical serialization, intent-expr validation, snapshot diff
   vocabulary/   core kinds/relations (JSON) and the registry with extension loading
-  repository/   workspace layout, manifest, lock, atomic store, Git baselines, migrations
+  repository/   workspace layout, manifest, lock, atomic store, Git baselines, migrations,
+                workspace snapshots
   graph/        NetworkX MultiDiGraph construction and reverse-reference index
   checks/       structural validation -> diagnostics
   patches/      patch model, validation, application, idempotency
   lenses/       basic lens, impact slice, search
-  obligations/  policies, scope closure and design digest, readiness/conformance engine
+  obligations/  policies, scope closure and design digest, readiness/conformance engine,
+                evidence freshness, reconciliation findings, report validation
   reports/      review packet (Markdown + JSON)
   services.py   application services shared by CLI (and a later MCP server)
   cli/          argparse front end, JSON envelope, exit codes

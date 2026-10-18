@@ -1,0 +1,26 @@
+name: intentgraph
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests-and-model:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -e ".[dev]"
+      - name: Package tests (independent evidence about the tool itself)
+        run: pytest -q
+      - name: Model structural check
+        run: intentgraph check --json
+      - name: Independent trigger (architecture section 16.4)
+        # Reports blockers without depending on the agent remembering to reconcile:
+        # structural errors, broken locators, failed or stale evidence on authorized scopes,
+        # invalidated approvals. Work in progress on unapproved scopes is reported, not failed.
+        run: intentgraph ci --json

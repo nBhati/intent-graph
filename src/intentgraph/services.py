@@ -26,6 +26,10 @@ from .obligations.engine import find_policy
 from .obligations.policy import parse_policy
 from .reports import build_review_packet, render_markdown
 from .repository import migrations
+from .repository import workspace as ws
+from .obligations.freshness import evaluate_freshness, model_scope_digest
+from .obligations.reconcile import reconcile as _reconcile
+from .obligations.reports import validate_report
 from .model import Snapshot
 from .patches import Patch, apply_patch, validate_patch
 from .playbooks import POINTER_BEGIN, POINTER_END, agent_guide_text, pointer_text
@@ -440,6 +444,223 @@ def migrate(repo: Repository, *, apply: bool) -> dict[str, Any]:
         atomic_write_text(repo.paths.project, json.dumps(data, indent=2, sort_keys=True) + "\n")
     out.update({"applied": True, "backup": str(backup), "revision": migrated.revision, "content_digest": migrated.content_digest})
     return out
+
+
+# ---------------------------------------------------------------------------
+# evidence, workspace snapshots, reconciliation, CI
+# ---------------------------------------------------------------------------
+
+SUPPORTS_EDGE_TARGETS = {"Requirement", "Mapping", "Obligation", "Constraint", "Scenario", "Assumption"}
+
+
+def _slugify(record_id: str) -> str:
+    return record_id.split(":", 1)[1].replace("/", "-")
+
+
+def workspace_snapshot(repo: Repository, repository: str = ".", paths: list[str] | None = None, *, record: bool = True) -> dict[str, Any]:
+    """Capture a WorkspaceSnapshot for a root (and declared paths). Recorded as a node unless ``record`` is false."""
+    ctx = Context(repo)
+    props = ws.capture(repo.paths, ctx.manifest, repository, paths or [], captured_at=utc_now())
+    snap_id = f"workspace:{_slugify('x:' + repository if repository != '.' else 'x:root')}-{props['captured_at'].replace(':', '').replace('-', '')}-r{ctx.snapshot.revision}"
+    out: dict[str, Any] = {"snapshot_id": snap_id, "properties": props, "recorded": None}
+    if record:
+        ops = [{"op": "add_node", "record": {"id": snap_id, "kind": "WorkspaceSnapshot", "label": f"{repository} @ {props['head'][:12] or 'no-git'}{' (dirty)' if props['dirty'] else ''}", "layer": "observation", "lifecycle": "accepted",
+                                             "properties": props, "provenance": {"author_role": "tool", "method": "workspace-capture", "source_refs": [f"root:{repository}"]}, "annotations": []}}]
+        out["recorded"] = _internal_patch(repo, f"patch:workspace-snapshot/{_slugify(snap_id)}", f"Capture workspace snapshot for root {repository!r}", ops)
+    return out
+
+
+def _evidence_common(ctx: Context, index, data: dict[str, Any]) -> tuple[str, list[str], list[str]]:
+    ev_id = data.get("id")
+    if not isinstance(ev_id, str) or not ev_id.startswith("evidence:"):
+        raise InvalidInput("evidence needs an 'id' like 'evidence:<slug>'", code="invalid_evidence")
+    if ev_id in index.nodes:
+        raise InvalidInput(f"{ev_id!r} already exists; use a new id (evidence is append-only; supersede the old record if needed)", code="invalid_evidence")
+    supports = data.get("supports") or []
+    if not isinstance(supports, list) or not supports:
+        raise InvalidInput("evidence needs a non-empty 'supports' list of record ids", code="invalid_evidence")
+    missing = [i for i in supports if i not in index.nodes]
+    if missing:
+        raise InvalidInput(f"supports references unknown ids: {missing}", code="unknown_record", details={"missing": missing})
+    test_refs = data.get("test_refs") or []
+    missing = [i for i in test_refs if i not in index.nodes]
+    if missing:
+        raise InvalidInput(f"test_refs references unknown ids: {missing}", code="unknown_record", details={"missing": missing})
+    return ev_id, supports, test_refs
+
+
+def _evidence_ops(ctx: Context, index, ev_id: str, label: str, props: dict[str, Any], snap_props: dict[str, Any], snap_id: str, supports: list[str], method: str) -> list[dict[str, Any]]:
+    props = {**props, "workspace_snapshot_ref": snap_id}
+    ops = [{"op": "add_node", "record": {"id": snap_id, "kind": "WorkspaceSnapshot", "label": f"{snap_props['repository']} @ {snap_props['head'][:12] or 'no-git'}{' (dirty)' if snap_props['dirty'] else ''}", "layer": "observation", "lifecycle": "accepted",
+                                         "properties": snap_props, "provenance": {"author_role": "tool", "method": "workspace-capture", "source_refs": [ev_id]}, "annotations": []}},
+           {"op": "add_node", "record": {"id": ev_id, "kind": "Evidence", "label": label, "layer": "reconciliation", "lifecycle": "accepted", "properties": props,
+                                         "provenance": {"author_role": "tool" if method == "independent_capture" else "agent", "method": method, "source_refs": [snap_id]}, "annotations": []}}]
+    for i, target in enumerate(supports):
+        if index.nodes[target].kind in SUPPORTS_EDGE_TARGETS:
+            ops.append({"op": "add_edge", "record": {"id": f"edge:{_slugify(ev_id)}-supports-{i}", "kind": "supports", "source": ev_id, "target": target, "layer": "reconciliation", "lifecycle": "accepted",
+                                                     "provenance": {"author_role": "tool", "method": "evidence-ingest", "source_refs": []}, "annotations": []}})
+    return ops
+
+
+def _store_artifact(repo: Repository, ev_id: str, source: Path) -> tuple[str, str]:
+    if not source.is_file():
+        raise InvalidInput(f"artifact {source} does not exist", code="invalid_evidence")
+    dest_dir = repo.paths.artifacts / "evidence" / _slugify(ev_id)
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    dest = dest_dir / source.name
+    atomic_write_text(dest, source.read_text(encoding="utf-8", errors="replace"))
+    return dest.relative_to(repo.paths.root).as_posix(), ws.file_digest(dest)
+
+
+def evidence_submit(repo: Repository, data: dict[str, Any]) -> dict[str, Any]:
+    """Ingest a submitted or validated report. Binds the evidence to a workspace
+    snapshot of its declared inputs and to the model content it supports."""
+    ctx = Context(repo)
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    ev_id, supports, test_refs = _evidence_common(ctx, index, data)
+    mode = data.get("collection_mode", "agent_submitted_report")
+    if mode not in ("agent_assertion", "agent_submitted_report", "validated_report"):
+        raise InvalidInput("collection_mode must be agent_assertion, agent_submitted_report or validated_report (use `evidence capture` for independent_capture)", code="invalid_evidence")
+    result = data.get("result")
+    if result not in ("passed", "failed", "inconclusive"):
+        raise InvalidInput("result must be passed, failed or inconclusive", code="invalid_evidence")
+    inputs = data.get("inputs") or {}
+    repository = inputs.get("repository", ".")
+    paths = list(inputs.get("paths") or [])
+    artifact = data.get("artifact") or {}
+    limitations = list(data.get("limitations") or [])
+    props: dict[str, Any] = {"method": data.get("method", "unspecified"), "result": result, "collection_mode": mode, "supports": supports, "test_refs": test_refs,
+                             "tool": data.get("tool", ""), "submitted_by": data.get("submitted_by", "coding-agent"), "declared_inputs": {"repository": repository, "paths": paths},
+                             "model_revision": ctx.snapshot.revision, "model_scope_digest": model_scope_digest(index, supports)}
+    if artifact.get("path"):
+        fmt = artifact.get("format", "opaque")
+        src_path = Path(artifact["path"])
+        if not src_path.is_absolute():
+            src_path = Path.cwd() / src_path
+        if mode == "validated_report":
+            props["report_summary"] = validate_report(src_path, fmt, result)  # raises on mismatch
+        rel, digest = _store_artifact(repo, ev_id, src_path)
+        props.update({"artifact_ref": rel, "artifact_digest": digest, "report_format": fmt})
+    elif mode == "validated_report":
+        raise InvalidInput("validated_report requires an artifact with a supported format", code="report_validation_failed")
+    if "report_summary" in props:
+        summary = props.pop("report_summary")
+        limitations.append(f"validated {summary['format']}: {summary['tests']} test(s), {summary['failures']} failure(s)")
+    if not paths:
+        limitations.append("no declared input paths; freshness is bound to the whole root (conservative)")
+    props["limitations"] = limitations
+    snap_props = ws.capture(repo.paths, ctx.manifest, repository, paths, captured_at=utc_now())
+    snap_id = f"workspace:{_slugify(ev_id)}"
+    ops = _evidence_ops(ctx, index, ev_id, data.get("label", ev_id), props, snap_props, snap_id, supports, mode)
+    applied = _internal_patch(repo, f"patch:evidence-submit/{_slugify(ev_id)}/r{ctx.snapshot.revision}", f"Ingest evidence {ev_id}", ops)
+    return {"evidence_id": ev_id, "workspace_snapshot_ref": snap_id, "collection_mode": mode, "result": result, "declared_inputs": props["declared_inputs"],
+            "missing_paths": snap_props["missing_paths"], "artifact_ref": props.get("artifact_ref"), "revision": applied["revision"]}
+
+
+def evidence_capture(repo: Repository, spec: dict[str, Any]) -> dict[str, Any]:
+    """Run a declared argv (no shell) and record the outcome as ``independent_capture``."""
+    import shutil
+    import subprocess
+    import time
+
+    ctx = Context(repo)
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    ev_id, supports, test_refs = _evidence_common(ctx, index, spec)
+    command = spec.get("command")
+    if not isinstance(command, list) or not command or not all(isinstance(c, str) for c in command):
+        raise InvalidInput("command must be a non-empty argv list (no shell)", code="invalid_evidence")
+    repository = spec.get("repository", ".")
+    root = ws.resolve_root(repo.paths, ctx.manifest, repository)
+    exe = shutil.which(command[0]) or (str((root / command[0]).resolve()) if (root / command[0]).is_file() else None)
+    if exe is None:
+        raise InvalidInput(f"command {command[0]!r} not found", code="command_not_found")
+    paths = list((spec.get("inputs") or {}).get("paths") or [])
+    snap_props = ws.capture(repo.paths, ctx.manifest, repository, paths, captured_at=utc_now())
+    started = time.monotonic()
+    try:
+        proc = subprocess.run([exe, *command[1:]], cwd=root, capture_output=True, text=True, timeout=float(spec.get("timeout", 600)))
+        exit_code, stdout, stderr, timed_out = proc.returncode, proc.stdout, proc.stderr, False
+    except subprocess.TimeoutExpired as exc:
+        exit_code, stdout, stderr, timed_out = -1, (exc.stdout or b"").decode(errors="replace") if isinstance(exc.stdout, bytes) else (exc.stdout or ""), "timeout", True
+    duration = round(time.monotonic() - started, 3)
+    result = "inconclusive" if timed_out else ("passed" if exit_code == 0 else "failed")
+    capture = {"command": [exe, *command[1:]], "cwd": str(root), "exit_code": exit_code, "timed_out": timed_out, "duration_seconds": duration,
+               "stdout": stdout[-200_000:], "stderr": stderr[-200_000:], "captured_at": snap_props["captured_at"]}
+    dest_dir = repo.paths.artifacts / "evidence" / _slugify(ev_id)
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    dest = dest_dir / "capture.json"
+    atomic_write_text(dest, json.dumps(capture, indent=2, sort_keys=True) + "\n")
+    rel = dest.relative_to(repo.paths.root).as_posix()
+    limitations = list(spec.get("limitations") or []) + ["independent_capture: the tool ran the declared command and recorded exit code and output; what the command checks remains the submitter's claim"]
+    if not paths:
+        limitations.append("no declared input paths; freshness is bound to the whole root (conservative)")
+    props = {"method": spec.get("method", "command"), "result": result, "collection_mode": "independent_capture", "supports": supports, "test_refs": test_refs,
+             "tool": spec.get("tool", command[0]), "submitted_by": "intentgraph", "declared_inputs": {"repository": repository, "paths": paths, "command": command},
+             "model_revision": ctx.snapshot.revision, "model_scope_digest": model_scope_digest(index, supports), "artifact_ref": rel, "artifact_digest": ws.file_digest(dest),
+             "report_format": "intentgraph-capture/0.1", "limitations": limitations}
+    snap_id = f"workspace:{_slugify(ev_id)}"
+    ops = _evidence_ops(ctx, index, ev_id, spec.get("label", ev_id), props, snap_props, snap_id, supports, "independent_capture")
+    applied = _internal_patch(repo, f"patch:evidence-capture/{_slugify(ev_id)}/r{ctx.snapshot.revision}", f"Capture evidence {ev_id}", ops)
+    return {"evidence_id": ev_id, "result": result, "exit_code": exit_code, "duration_seconds": duration, "artifact_ref": rel, "workspace_snapshot_ref": snap_id, "revision": applied["revision"]}
+
+
+def reconcile(repo: Repository, scope_id: str | None = None) -> dict[str, Any]:
+    ctx = Context(repo)
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    freshness = evaluate_freshness(index, repo)
+    scope_ids = None
+    conformance = None
+    approvals: list[dict[str, Any]] = []
+    if scope_id is not None:
+        scope = index.nodes.get(scope_id)
+        if scope is None or scope.kind != "Scope":
+            raise InvalidInput(f"{scope_id!r} is not a Scope record", code="unknown_scope")
+        scope_ids = set(scope_closure(index, ctx.vocabulary, scope))
+        diags = ctx.diagnostics()
+        conformance = evaluate(index, ctx.vocabulary, diags, scope_id, kind="conformance", freshness=freshness).model_dump(mode="json")
+        ready = evaluate(index, ctx.vocabulary, diags, scope_id)
+        if ready.approval.get("status") == "invalidated":
+            approvals.append({"scope": scope_id, **ready.approval})
+    report = _reconcile(index, repo, freshness, scope_ids=scope_ids)
+    for a in approvals:
+        report["findings"].append({"code": "approval_invalidated", "severity": "blocker", "related_ids": [a["approval_id"], a["scope"]],
+                                   "message": f"approval {a['approval_id']} no longer matches the design of {a['scope']} ({a['reason']}); changed: {a.get('changed_in_scope_ids')}",
+                                   "safe_conclusion": "The authorized design changed.", "follow_up": "Re-run readiness, re-export the review packet and obtain a new authorization, or revert the change."})
+        report["summary"]["blockers"] += 1
+    blocking = report["summary"]["blockers"] > 0 or (conformance is not None and conformance["status"] != "ready")
+    return {"scope": scope_id, "revision": ctx.snapshot.revision, "content_digest": ctx.snapshot.content_digest, "blocking": blocking, "conformance": conformance, **report}
+
+
+def ci(repo: Repository, scopes: list[str] | None = None) -> dict[str, Any]:
+    """Independent trigger (section 16.4): checks, readiness, and reconciliation for every active scope."""
+    ctx = Context(repo)
+    diags = ctx.diagnostics()
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    freshness = evaluate_freshness(index, repo)
+    targets = scopes or [n.id for n in sorted(ctx.snapshot.nodes, key=lambda n: n.id) if n.kind == "Scope" and n.properties.get("status") == "active"]
+    results = []
+    blocking = has_blocking(diags)
+    for sid in targets:
+        entry: dict[str, Any] = {"scope": sid}
+        try:
+            r = evaluate(index, ctx.vocabulary, diags, sid)
+            entry["readiness"] = r.status
+            entry["approval"] = r.approval.get("status")
+            entry["blocking_obligations"] = [o.id for o in r.obligations]
+            rec = reconcile(repo, sid)
+            entry["reconcile_blockers"] = [f["code"] + ":" + ",".join(f["related_ids"]) for f in rec["findings"] if f["severity"] == "blocker"]
+            entry["evidence"] = {"fresh": rec["summary"]["evidence_fresh"], "stale": rec["summary"]["evidence_stale"]}
+            entry["conformance"] = rec["conformance"]["status"] if rec["conformance"] else None
+            # Blockers: broken state, invalidated approvals, and non-conformance of an authorized scope. Unapproved work in progress is reported, not failed.
+            scope_blocking = bool(entry["reconcile_blockers"]) or (entry["approval"] == "current" and entry["conformance"] != "ready")
+            entry["blocking"] = scope_blocking
+            blocking = blocking or scope_blocking
+        except InvalidInput as exc:
+            entry["error"] = exc.to_dict()
+            blocking = True
+        results.append(entry)
+    unmapped = _reconcile(index, repo, freshness)["workspace"]
+    return {"revision": ctx.snapshot.revision, "structural_errors": sum(1 for d in diags if d.severity == "error"), "scopes": results, "workspace": unmapped, "blocking": blocking}
 
 
 def tool_info() -> dict[str, Any]:

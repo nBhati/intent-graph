@@ -8,6 +8,6 @@ independently so migrations can be explicit.
 
 TOOL_VERSION = "0.0.1"
 FORMAT_VERSION = "0.1"
-CORE_VOCABULARY_VERSION = "core/0.2"
+CORE_VOCABULARY_VERSION = "core/0.3"
 
 __all__ = ["TOOL_VERSION", "FORMAT_VERSION", "CORE_VOCABULARY_VERSION"]

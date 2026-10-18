@@ -2,7 +2,11 @@
 
 Closure rule (decision:scope-closure-rule in the self-model): explicit
 members; their structural children (contains, declares, exposes); the
-requirements, goals and scenarios they realize; scenarios refining in-scope
+requirements, goals and scenarios realized by *specific* design elements
+(operations, actions, processes, screens, controls, interactions,
+transitions, decisions, scenarios) but not by shared containers
+(components, systems), which would drag every feature they serve into every
+scope that names them; scenarios refining in-scope
 requirements; constraints targeting any closure member; global constraints;
 assumptions referenced by in-scope constraints; and the questions, decisions
 and assumptions that concern closure members. Every member records why.
@@ -24,6 +28,8 @@ from ..model import NodeRecord, digest_of
 from ..vocabulary import Vocabulary
 
 STRUCTURAL_OUT = ("contains", "declares", "exposes")
+# Kinds whose `realizes` edges pull their targets into the closure. Shared containers are excluded.
+REALIZING_KINDS = {"Operation", "Action", "Process", "Screen", "Control", "Interaction", "Transition", "Decision", "Scenario", "Interface"}
 LEAF_KINDS = {"Question", "Decision", "Assumption", "Constraint", "Scenario"}
 
 
@@ -54,8 +60,9 @@ def scope_closure(index: GraphIndex, vocabulary: Vocabulary, scope: NodeRecord) 
         nid = queue.popleft()
         for e in index.out_edges(nid, set(STRUCTURAL_OUT)):
             add(e.target, f"structural child via {e.kind}", nid, True)
-        for e in index.out_edges(nid, {"realizes"}):
-            add(e.target, "realized by member", nid, True)
+        if index.nodes[nid].kind in REALIZING_KINDS:
+            for e in index.out_edges(nid, {"realizes"}):
+                add(e.target, "realized by member", nid, True)
         for e in index.in_edges(nid, {"refines"}):
             src = index.nodes.get(e.source)
             if src is not None and src.kind == "Scenario":

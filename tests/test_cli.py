@@ -27,6 +27,13 @@ def test_full_cli_round_trip(tmp_path: Path):
 
     status = run("status", cwd=ws, expect=0)["data"]
     assert status["revision"] == 0
+    # The fixture's symbols name repository root "app"; configure it (a list form is also accepted).
+    manifest = json.loads((ws / ".intentgraph" / "project.json").read_text())
+    manifest["roots"] = {".": ".", "app": "."}
+    (ws / ".intentgraph" / "project.json").write_text(json.dumps(manifest))
+    for rel in ("lib/coaching/playback_controller.dart", "backend/coaching/coordinator.py", "test/coaching/cancel_test.dart"):
+        (ws / rel).parent.mkdir(parents=True, exist_ok=True)
+        (ws / rel).write_text("stub\n")
 
     patch = json.loads((FIXTURES / "coaching-patch.json").read_text())
     patch["base_revision"] = status["revision"]
@@ -111,11 +118,24 @@ def test_full_cli_round_trip(tmp_path: Path):
     assert out["status"] == "ready" and out["policy_kind"] == "conformance"
     assert {p["id"] for p in run("policy", "list", cwd=ws, expect=0)["data"]["policies"]} == {"policy:default-readiness", "policy:default-conformance"}
     assert run("migrate", cwd=ws, expect=0)["data"]["steps"] == []
+    out = run("workspace", "snapshot", "--repository", ".", "--paths", "CLAUDE.md", cwd=ws, expect=0)["data"]
+    assert "CLAUDE.md" in out["properties"]["files"] and out["recorded"]["revision"] == 5
+    (ws / "lib" / "x" / "thing.txt").write_text("t")
+    efile = tmp_path / "ev.json"
+    efile.write_text(json.dumps({"id": "evidence:cli", "method": "unit_test", "result": "passed", "collection_mode": "agent_submitted_report", "supports": ["req:cancel-response"], "inputs": {"repository": ".", "paths": ["lib/x/thing.txt"]}}))
+    assert run("evidence", "submit", "--file", str(efile), cwd=ws, expect=0)["data"]["evidence_id"] == "evidence:cli"
+    out = run("reconcile", "--scope", "scope:cancel", cwd=ws, expect=0)["data"]
+    assert out["conformance"]["status"] == "ready" and not out["blocking"]
+    (ws / "lib" / "x" / "thing.txt").write_text("changed")
+    out = run("reconcile", "--scope", "scope:cancel", cwd=ws, expect=2)["data"]
+    assert out["conformance"]["status"] == "needs_work" and any(f["code"] == "source_changed" for f in out["findings"])
+    out = run("ci", cwd=ws, expect=2)["data"]
+    assert out["blocking"] and out["scopes"][0]["evidence"]["stale"] >= 1
 
     out = run("check", cwd=ws, expect=0)["data"]
     assert not out["blocking"]
     out = run("rebuild", cwd=ws, expect=0)["data"]
-    assert out["graph"] == {"nodes": 34, "edges": 22} and out["unresolved_references"] == []
+    assert out["graph"] == {"nodes": 37, "edges": 23} and out["unresolved_references"] == []
 
 
 def test_no_workspace_is_invalid_input(tmp_path: Path):

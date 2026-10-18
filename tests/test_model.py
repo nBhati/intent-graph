@@ -29,8 +29,8 @@ def test_envelope_forbids_extra_fields():
 
 
 def test_digest_independent_of_record_order_and_key_order():
-    a = Snapshot(vocabulary_version="core/0.2", project_id="project:x", revision=0, nodes=[_node("g:a"), _node("g:b")])
-    b = Snapshot(vocabulary_version="core/0.2", project_id="project:x", revision=0, nodes=[_node("g:b"), _node("g:a")])
+    a = Snapshot(vocabulary_version="core/0.3", project_id="project:x", revision=0, nodes=[_node("g:a"), _node("g:b")])
+    b = Snapshot(vocabulary_version="core/0.3", project_id="project:x", revision=0, nodes=[_node("g:b"), _node("g:a")])
     assert compute_digest(a) == compute_digest(b)
     # Digest excludes the stored digest field itself.
     a.content_digest = "sha256:garbage"
@@ -44,8 +44,8 @@ def test_digest_independent_of_record_order_and_key_order():
 
 
 def test_digest_changes_with_content():
-    a = Snapshot(vocabulary_version="core/0.2", project_id="project:x", revision=0, nodes=[_node("g:a")])
-    b = Snapshot(vocabulary_version="core/0.2", project_id="project:x", revision=0, nodes=[_node("g:a", label="other")])
+    a = Snapshot(vocabulary_version="core/0.3", project_id="project:x", revision=0, nodes=[_node("g:a")])
+    b = Snapshot(vocabulary_version="core/0.3", project_id="project:x", revision=0, nodes=[_node("g:a", label="other")])
     assert compute_digest(a) != compute_digest(b)
 
 

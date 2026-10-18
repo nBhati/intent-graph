@@ -1,0 +1,6100 @@
+{
+  "content_digest": "sha256:5005cc0d40f9b7dfa73acd2001cc80273a7b182aa549f01a9c0ef7c4703f392a",
+  "edges": [
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:acyclic-only-where-declared-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:acyclic-only-where-declared",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:approval-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:approval-record",
+      "target": "req:design-digest-stable-under-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:assertion-cannot-satisfy-executable-evidence-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:assertion-cannot-satisfy-executable-evidence",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:assumption-concerns-snapshot-decision",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "assumption:single-snapshot-sufficient-v0",
+      "target": "decision:single-snapshot-v0"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:atomic-replace-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:atomic-replace",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:canonical-digest-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:canonical-digest",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:capture-realizes-mode",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#18"
+        ]
+      },
+      "source": "operation:evidence-capture",
+      "target": "req:collection-mode-preserved"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:checks-depends-graph",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:checks",
+      "target": "component:graph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:checks-depends-vocabulary",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:checks",
+      "target": "component:vocabulary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:checks-realizes-acyclic-only-where-declared",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:checks",
+      "target": "req:acyclic-only-where-declared"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:ci-entry-point-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      },
+      "source": "req:ci-entry-point",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:ci-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      },
+      "source": "operation:ci",
+      "target": "req:ci-entry-point"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-depends-services",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:cli",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-realizes-ci",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:cli",
+      "target": "req:ci-entry-point"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-realizes-exit-code-convention",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:cli",
+      "target": "req:exit-code-convention"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:collection-mode-preserved-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#7.5"
+        ]
+      },
+      "source": "req:collection-mode-preserved",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:constraint-data-targets-model",
+      "kind": "constrains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#23"
+        ]
+      },
+      "source": "constraint:records-are-data",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:constraint-no-state-targets-services",
+      "kind": "constrains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.4"
+        ]
+      },
+      "source": "constraint:no-hidden-state-between-calls",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-cli-concerns-cli",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:cli-first",
+      "target": "component:cli"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-closure-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "decision:scope-closure-rule",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-declarative-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      },
+      "source": "decision:policy-rules-declarative",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-freshness-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      },
+      "source": "decision:freshness-in-engine",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-graph-concerns-loop",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:annotated-graph-central",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-selfuse-concerns-system",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      },
+      "source": "decision:self-use-development",
+      "target": "system:intentgraph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-snapshot-concerns-repo",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:single-snapshot-v0",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-snapshot-node-concerns-repo",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "decision:snapshot-as-node",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-stack-concerns-model",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:python-networkx-pydantic",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-tools-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:agent-runs-language-tools",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:design-change-invalidates-readiness-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:design-change-invalidates-readiness",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:design-digest-stable-under-approval-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:design-digest-stable-under-approval",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:diff-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      },
+      "source": "req:graph-diff",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:evidence-binds-inputs-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "req:evidence-binds-inputs",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:exit-code-convention-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:exit-code-convention",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:finding-challenges-status",
+      "kind": "challenges",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      },
+      "source": "finding:gates-unsupported",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:fresh-process-reconstruction-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:fresh-process-reconstruction",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:graph-depends-model",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:graph",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:idempotent-patch-ids-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:idempotent-patch-ids",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:impact-decision-concerns-vocab",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.5"
+        ]
+      },
+      "source": "decision:impact-direction-per-relation",
+      "target": "component:vocabulary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:impact-question-concerns-req",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#6"
+        ]
+      },
+      "source": "question:impact-refines-upward",
+      "target": "req:impact-slice"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:impact-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#10"
+        ]
+      },
+      "source": "req:impact-slice",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:impl-obligation-concerns-lenses",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      },
+      "source": "obligation:impl-impact-and-diff",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:lens-never-drops-mandatory-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:lens-never-drops-mandatory",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:lenses-depends-graph",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:lenses",
+      "target": "component:graph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:lenses-realizes-impact",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:lenses",
+      "target": "req:impact-slice"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:lenses-realizes-lens-never-drops-mandatory",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:lenses",
+      "target": "req:lens-never-drops-mandatory"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:loop-invokes-approval",
+      "kind": "invokes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "mode": "sync"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      },
+      "source": "process:readiness-loop",
+      "target": "operation:approval-record"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:loop-invokes-readiness",
+      "kind": "invokes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "mode": "sync"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      },
+      "source": "process:readiness-loop",
+      "target": "operation:readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:loop-invokes-review",
+      "kind": "invokes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "mode": "sync"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      },
+      "source": "process:readiness-loop",
+      "target": "operation:review-export"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-atomic-replace",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:atomic-replace"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-canonical-digest",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:canonical-digest"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-fresh-process-reconstruction",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-idempotent-patch-ids",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:idempotent-patch-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-stale-base-rejected",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:stale-base-rejected"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m2-concerns-lenses",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      },
+      "source": "obligation:m2-self-model-and-lenses",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m2-evidence-supports-diff",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m2-test-suite",
+      "target": "req:graph-diff"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m2-evidence-supports-impact",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m2-test-suite",
+      "target": "req:impact-slice"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m2-evidence-supports-obligation",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m2-test-suite",
+      "target": "obligation:impl-impact-and-diff"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      },
+      "source": "obligation:m3-readiness",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-readiness-approval-r8-concerns-scope",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "approval-record",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "approval:m3-readiness/r8",
+      "target": "scope:m3-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-readiness-review-depicts-scope",
+      "kind": "depicts",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "review:m3-readiness",
+      "target": "scope:m3-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-scope-concerns-obligation",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      },
+      "source": "obligation:m3-readiness",
+      "target": "scope:m3-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.7"
+        ]
+      },
+      "source": "obligation:m4-evidence-reconciliation",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-concerns-system",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      },
+      "source": "obligation:m5-installable",
+      "target": "system:intentgraph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:missing-artifact-downgrades-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.1"
+        ]
+      },
+      "source": "req:missing-artifact-downgrades",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:mixed-precision-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:mixed-precision",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:model-realizes-canonical-digest",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:model",
+      "target": "req:canonical-digest"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:model-realizes-diff",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:model",
+      "target": "req:graph-diff"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:model-realizes-no-code-execution-from-data",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:model",
+      "target": "req:no-code-execution-from-data"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:model-realizes-stable-ids",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:model",
+      "target": "req:stable-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:no-code-execution-from-data-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:no-code-execution-from-data",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:no-self-approval-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:no-self-approval",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:no-universal-verified-flag-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:no-universal-verified-flag",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-depends-checks",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-assertion",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:assertion-cannot-satisfy-executable-evidence"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-binds",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:evidence-binds-inputs"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-digest",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:design-digest-stable-under-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-downgrade",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:missing-artifact-downgrades"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-invalidate",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:design-change-invalidates-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-mode",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:collection-mode-preserved"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-no-modify",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:readiness-does-not-modify"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-readiness",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:readiness-evaluates-policy"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-safe",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:reconcile-safe-conclusions"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-waiver",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:waiver-requires-user"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:observation-never-overwrites-intent-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:observation-never-overwrites-intent",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:patches-depends-checks",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:patches",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:patches-realizes-idempotent-patch-ids",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:patches",
+      "target": "req:idempotent-patch-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:patches-realizes-stale-base-rejected",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:patches",
+      "target": "req:stale-base-rejected"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:question-readiness-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:readiness-default-obligations",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:question-rules-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:default-mandatory-rules",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:question-scale-concerns-repo",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:single-snapshot-scale",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:question-trust-concerns-capture",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:runner-capture-trust",
+      "target": "operation:evidence-capture"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:readiness-does-not-modify-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:readiness-does-not-modify",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:readiness-evaluates-policy-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:readiness-evaluates-policy",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:readiness-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:readiness",
+      "target": "req:readiness-evaluates-policy"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reconcile-realizes-safe",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16"
+        ]
+      },
+      "source": "operation:reconcile",
+      "target": "req:reconcile-safe-conclusions"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reconcile-safe-conclusions-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      },
+      "source": "req:reconcile-safe-conclusions",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reports-depends-lenses",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:reports",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reports-realizes-packet",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:reports",
+      "target": "req:review-packet-deterministic"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-depends-model",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-depends-vocabulary",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "component:vocabulary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-atomic-replace",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:atomic-replace"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-fresh-process-reconstruction",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-snapshot",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:workspace-snapshot-identity"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-unmapped",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:unmapped-change-coverage"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:review-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:review-export",
+      "target": "req:review-packet-deterministic"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:review-packet-deterministic-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:review-packet-deterministic",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-checks",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-lenses",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-patches",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:patches"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-repository",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:snapshot-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "operation:workspace-snapshot",
+      "target": "req:workspace-snapshot-identity"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:stable-ids-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:stable-ids",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:stale-base-rejected-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:stale-base-rejected",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:submit-realizes-mode",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:evidence-submit",
+      "target": "req:collection-mode-preserved"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-checks",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-cli",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:cli"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-graph",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:graph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-lenses",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-model",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-obligations",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-patches",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:patches"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-playbooks",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:playbooks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-reports",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:reports"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-repository",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-services",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-vocabulary",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:vocabulary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:unknown-kinds-not-silently-known-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:unknown-kinds-not-silently-known",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:unmapped-change-coverage-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      },
+      "source": "req:unmapped-change-coverage",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:vocabulary-realizes-unknown-kinds-not-silently-known",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:vocabulary",
+      "target": "req:unknown-kinds-not-silently-known"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:waiver-requires-user-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:waiver-requires-user",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:workspace-snapshot-identity-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "req:workspace-snapshot-identity",
+      "target": "goal:intent-to-implementation-loop"
+    }
+  ],
+  "format_version": "0.1",
+  "nodes": [
+    {
+      "annotations": [],
+      "description": "",
+      "id": "approval:m3-readiness/r8",
+      "kind": "Approval",
+      "label": "build authorization for Milestone 3: readiness, review packets and approvals",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "approval_kind": "build_authorization",
+        "design_digest": "sha256:e3e866981d7c9f0de5ef31448e53c91cb931c498f852c4ae9f15f4e2ed6c6138",
+        "model_revision": 8,
+        "policy_ref": "policy:default-readiness@0.1",
+        "recorded_by": "agent",
+        "scope_ref": "scope:m3-readiness",
+        "source_ref": "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-3",
+        "source_statement": "continue with milestone 3"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "approval-record",
+        "notes": "agent-recorded from conversation; traceability, not authenticated identity",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "assumption:single-snapshot-sufficient-v0",
+      "kind": "Assumption",
+      "label": "One canonical JSON snapshot is sufficient for v0 project sizes",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "impact": "Sharding needs a defined transaction model before introduction.",
+        "status": "unverified"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:checks",
+      "kind": "Component",
+      "label": "checks",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Structural validation and computable findings",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:cli",
+      "kind": "Component",
+      "label": "cli",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Stable machine interface and human-readable output",
+        "role": "other",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:graph",
+      "kind": "Component",
+      "label": "graph",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "NetworkX construction and reverse-reference indexes",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:lenses",
+      "kind": "Component",
+      "label": "lenses",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Filtering, dependency slicing, abstraction, context assembly",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:model",
+      "kind": "Component",
+      "label": "model",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Record types, ids, enums, expression shapes, snapshot model",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:obligations",
+      "kind": "Component",
+      "label": "obligations",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Policy applicability, evidence freshness, readiness evaluation",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:patches",
+      "kind": "Component",
+      "label": "patches",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Transaction validation, optimistic concurrency, atomic application",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:playbooks",
+      "kind": "Component",
+      "label": "playbooks",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Agent instructions, examples, external-tool recipes",
+        "role": "other",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:reports",
+      "kind": "Component",
+      "label": "reports",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Structured review packets and renderable exports",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:repository",
+      "kind": "Component",
+      "label": "repository",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Read/write, canonical serialization, revisions, locking, migrations",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:services",
+      "kind": "Component",
+      "label": "services",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Application services shared by every interface; one invocation loads everything fresh",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:vocabulary",
+      "kind": "Component",
+      "label": "vocabulary",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Kind schemas, relation endpoint rules, extension resolution",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Optional caches are keyed by snapshot digest, vocabulary version and tool version; a cache miss affects performance only.",
+      "id": "constraint:no-hidden-state-between-calls",
+      "kind": "Constraint",
+      "label": "No memory from a previous CLI call is required for correctness",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "constraint_kind": "invariant",
+        "scope": "global"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "constraint:records-are-data",
+      "kind": "Constraint",
+      "label": "Records and tool output are data, never executed",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "constraint_kind": "permission",
+        "scope": "global"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#23"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:agent-runs-language-tools",
+      "kind": "Decision",
+      "label": "The existing agent runs language-specific analyzers; the core stays small",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Native adapters for every language"
+        ],
+        "decided_by": "user",
+        "rationale": "Avoids building a large analyzer platform before proving value."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:annotated-graph-central",
+      "kind": "Decision",
+      "label": "Annotated graph is the central model",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Flat documents",
+          "Relational tables"
+        ],
+        "decided_by": "user",
+        "rationale": "Supports decomposition, cross-links, queries and mixed precision."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:cli-first",
+      "kind": "Decision",
+      "label": "CLI first; MCP optional and later",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "MCP server first"
+        ],
+        "decided_by": "user",
+        "rationale": "Existing coding agents can invoke terminal commands; both interfaces must share application services."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:freshness-in-engine",
+      "kind": "Decision",
+      "label": "Evidence freshness is computed once and shared by reconcile and the evidence_required rule",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Freshness only in reconcile"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Conformance must not count stale evidence; one implementation avoids two answers."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [],
+          "role": "assumption",
+          "text": "Agent-made design decision pending user review; recorded as proposed."
+        }
+      ],
+      "description": "",
+      "id": "decision:impact-direction-per-relation",
+      "kind": "Decision",
+      "label": "Each relation declares its impact direction in the vocabulary",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {
+        "alternatives": [
+          "Hard-code a traversal table in the lens module",
+          "Treat every edge as bidirectional impact"
+        ],
+        "decided_by": "agent",
+        "rationale": "Keeps impact semantics in the versioned registry (data), not in Python branches; extensions can declare their own."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.5"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:policy-rules-declarative",
+      "kind": "Decision",
+      "label": "Policies are declarative rule records in the snapshot, evaluated by built-in rule types",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Python plug-in policies",
+          "Policy expressed in intent-expr"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Keeps policy as versioned data that cannot execute code; new rule types are tool changes, not policy edits."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:python-networkx-pydantic",
+      "kind": "Decision",
+      "label": "Python package; Pydantic records; NetworkX in memory as an index only",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Graph database",
+          "Pickled NetworkX objects"
+        ],
+        "decided_by": "user",
+        "rationale": "Simple local implementation; typed records stay independent of the graph library so storage details do not define semantics."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:scope-closure-rule",
+      "kind": "Decision",
+      "label": "Scope closure = explicit members, their structural children, realized requirements, applicable constraints, global constraints, and concerning questions, decisions and assumptions",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Explicit members only",
+          "Full reachability"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Deterministic and explainable; every closure member records why it is included."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:self-use-development",
+      "kind": "Decision",
+      "label": "Seed, progressive self-use, then external A/B evaluation",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Full build before any use",
+          "Evaluate before end-to-end loop exists"
+        ],
+        "decided_by": "user",
+        "rationale": "A capability cannot be mandatory for building its first implementation; record limitations rather than fabricate checks."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:single-snapshot-v0",
+      "kind": "Decision",
+      "label": "One canonical snapshot with transactions inside it; no daemon",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Sharded files",
+          "Event-sourced log",
+          "Always-running process"
+        ],
+        "decided_by": "user",
+        "rationale": "Atomic writes and straightforward recovery before sharding; graph state and transaction accounting cannot diverge."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:snapshot-as-node",
+      "kind": "Decision",
+      "label": "Workspace snapshots are WorkspaceSnapshot nodes in the observation layer holding digests for declared paths only",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Side files under artifacts/",
+          "Hash every tracked file"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Keeps evidence inputs inspectable and versioned with the model without hashing the whole repository."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "evidence:m1-test-suite",
+      "kind": "Evidence",
+      "label": "Milestone 1 guarantees covered by tests/ (43 tests passing)",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "collection_mode": "agent_submitted_report",
+        "limitations": [
+          "Agent-reported run, not independently captured by the tool.",
+          "Windows lock path not exercised."
+        ],
+        "method": "unit_and_subprocess_tests",
+        "result": "passed",
+        "submitted_by": "coding-agent",
+        "supports": [
+          "req:canonical-digest",
+          "req:atomic-replace",
+          "req:stale-base-rejected",
+          "req:idempotent-patch-ids",
+          "req:fresh-process-reconstruction",
+          "req:acyclic-only-where-declared",
+          "req:lens-never-drops-mandatory",
+          "req:exit-code-convention",
+          "req:no-code-execution-from-data"
+        ],
+        "tool": "pytest"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "test-run-report",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "evidence:m2-test-suite",
+      "kind": "Evidence",
+      "label": "Milestone 2 test run: 53 passed",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "collection_mode": "agent_submitted_report",
+        "limitations": [
+          "Agent-reported run; not independently captured by the tool (evidence ingestion arrives in milestone 4)."
+        ],
+        "method": "unit_and_subprocess_tests",
+        "result": "passed",
+        "submitted_by": "coding-agent",
+        "supports": [
+          "req:impact-slice",
+          "req:graph-diff",
+          "obligation:impl-impact-and-diff"
+        ],
+        "test_refs": [
+          "test:impact-changed-interface",
+          "test:diff-git-ref"
+        ],
+        "tool": "pytest"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "test-run-report",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m2-impact-diff"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "evidence:m3-test-suite",
+      "kind": "Evidence",
+      "label": "Milestone 3 test run: 68 passed",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "collection_mode": "agent_submitted_report",
+        "limitations": [
+          "Agent-reported run; not independently captured by the tool (milestone 4)."
+        ],
+        "method": "unit_and_subprocess_tests",
+        "result": "passed",
+        "submitted_by": "coding-agent",
+        "supports": [
+          "req:readiness-evaluates-policy",
+          "req:readiness-does-not-modify",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:design-digest-stable-under-approval",
+          "req:design-change-invalidates-readiness",
+          "req:waiver-requires-user",
+          "req:review-packet-deterministic",
+          "obligation:m3-readiness"
+        ],
+        "test_refs": [
+          "test:readiness-digest-stability",
+          "test:readiness-assertion",
+          "test:readiness-waiver",
+          "test:migration-apply"
+        ],
+        "tool": "pytest"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "test-run-report",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "finding:gates-unsupported",
+      "kind": "Finding",
+      "label": "status reports gates as unsupported until milestone 3",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "detail": "Resolved in milestone 3: status evaluates every active scope under its readiness policy.",
+        "finding_kind": "capability_gap",
+        "related_refs": [
+          "component:obligations",
+          "obligation:m3-readiness"
+        ],
+        "severity": "info",
+        "state": "resolved"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "No owned LLM, no chat service, no daemon, no graph database, no account for the base workflow.",
+      "id": "goal:agent-operated-local-tool",
+      "kind": "Goal",
+      "label": "Operate as a lightweight local package used by an existing coding assistant",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "user",
+        "method": "authored-document",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [
+            "doc:vision-and-architecture#1.1"
+          ],
+          "role": "original_intent",
+          "text": "The purpose is to preserve the connection between what a person wants and what software actually does as both evolve."
+        },
+        {
+          "refs": [
+            "doc:vision-and-architecture#1.3"
+          ],
+          "role": "assumption",
+          "text": "Token savings, reduced defects and faster development are hypotheses to evaluate, not established claims."
+        }
+      ],
+      "description": "Make intent, interpretation, design choices and implementation evidence explicit and connected, as both evolve.",
+      "id": "goal:intent-to-implementation-loop",
+      "kind": "Goal",
+      "label": "Preserve the connection between what a person wants and what software does",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "user",
+        "method": "authored-document",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:diff-command",
+      "kind": "Mapping",
+      "label": "model.diff and repository.gitio realize graph diffs",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "evidence_refs": [
+          "evidence:m2-test-suite"
+        ],
+        "implementation_refs": [
+          "symbol:model-diff",
+          "symbol:model-changes-since",
+          "symbol:repository-gitio",
+          "test:diff-git-ref"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:graph-diff"
+        ],
+        "remaining_gaps": [
+          "Field-level diff names changed fields; it does not render textual hunks."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m2-impact-diff"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:impact-command",
+      "kind": "Mapping",
+      "label": "lenses.impact realizes the impact slice",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "evidence_refs": [
+          "evidence:m2-test-suite"
+        ],
+        "implementation_refs": [
+          "symbol:lenses-impact",
+          "test:impact-changed-interface"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:impact-slice"
+        ],
+        "remaining_gaps": [
+          "Impact directions for extension relations default to none unless declared."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m2-impact-diff"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:readiness-engine",
+      "kind": "Mapping",
+      "label": "obligations package realizes readiness",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "evidence_refs": [
+          "evidence:m3-test-suite"
+        ],
+        "implementation_refs": [
+          "symbol:obligations-engine",
+          "symbol:obligations-scope",
+          "symbol:obligations-policy",
+          "test:readiness-digest-stability",
+          "test:readiness-assertion",
+          "test:readiness-waiver"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:readiness-evaluates-policy",
+          "req:readiness-does-not-modify",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:design-digest-stable-under-approval",
+          "req:design-change-invalidates-readiness",
+          "req:waiver-requires-user",
+          "req:review-packet-deterministic",
+          "operation:readiness",
+          "process:readiness-loop"
+        ],
+        "remaining_gaps": [
+          "Evidence freshness against workspace snapshots is not evaluated until milestone 4."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:review-and-approval",
+      "kind": "Mapping",
+      "label": "reports.review and services.approval_record realize review export and approval",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "evidence_refs": [
+          "evidence:m3-test-suite"
+        ],
+        "implementation_refs": [
+          "symbol:reports-review",
+          "symbol:services-approval"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "operation:review-export",
+          "operation:approval-record",
+          "req:review-packet-deterministic"
+        ],
+        "remaining_gaps": [
+          "Diagrams are not generated; the packet is Markdown plus JSON."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [
+            "mapping:impact-command",
+            "mapping:diff-command"
+          ],
+          "role": "explanation",
+          "text": "Satisfied by mapping:impact-command and mapping:diff-command with evidence:m2-test-suite. Readiness was reviewed manually; the obligation engine does not exist yet."
+        }
+      ],
+      "description": "",
+      "id": "obligation:impl-impact-and-diff",
+      "kind": "Obligation",
+      "label": "Implement impact and diff commands with tests, then map them to code",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "implementation",
+        "request": "Add `intentgraph impact` and `intentgraph diff`; cover with executable tests; record CodeSymbol mappings and an Evidence record from the test run.",
+        "required_evidence": "pytest run report",
+        "scope_refs": [
+          "req:impact-slice",
+          "req:graph-diff"
+        ],
+        "state": "satisfied"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m2-self-model-and-lenses",
+      "kind": "Obligation",
+      "label": "Milestone 2: self-model, search, dependency slices, graph diffs, truncation reporting",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "Satisfied: self-model, playbook, search, impact slice, diffs, truncation/boundary reporting; resumability proven by tests/test_self_model.py.",
+        "required_evidence": "independent executable tests plus manual review",
+        "state": "satisfied"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [
+            "mapping:readiness-engine"
+          ],
+          "role": "explanation",
+          "text": "Implemented with tests (evidence:m3-test-suite). Per section 21.6 the first release of readiness relied on the independent test suite and manual review; it then passed its own loop retrospectively."
+        }
+      ],
+      "description": "",
+      "id": "obligation:m3-readiness",
+      "kind": "Obligation",
+      "label": "Milestone 3: scopes, versioned readiness policies, obligations engine, review packets, approvals",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "Implement the internal check/refine/check loop before user confirmation; approval must not invalidate its own design digest.",
+        "required_evidence": "independent executable tests plus manual review",
+        "scope_refs": [
+          "scope:m3-readiness"
+        ],
+        "state": "satisfied"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m4-evidence-reconciliation",
+      "kind": "Obligation",
+      "label": "Milestone 4: evidence ingestion, workspace snapshots, freshness rules, reconciliation command, CI entry point",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "Implement evidence submit/capture, workspace snapshots, freshness, reconcile and ci with tests; then run the loop on this scope and introduce drift to prove detection from a fresh process.",
+        "required_evidence": "independent executable tests plus manual review",
+        "scope_refs": [
+          "scope:m4-evidence-reconciliation"
+        ],
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.7"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m5-installable",
+      "kind": "Obligation",
+      "label": "Milestone 5: bundled executable, explicit migrations, recovery, worked examples",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "On a clean machine without Python, initialize, patch, restart, query, evaluate readiness, import evidence, reconcile.",
+        "required_evidence": "independent executable tests plus manual review",
+        "scope_refs": [
+          "scope:m5-installable"
+        ],
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m6-ab-evaluation",
+      "kind": "Obligation",
+      "label": "Milestone 6: external A/B evaluation on bounded real tasks",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": false,
+        "obligation_kind": "milestone_capability",
+        "request": "Measure requirement misses, regressions, reviewer corrections, drift-finding usefulness, time, cost, maintenance effort.",
+        "required_evidence": "independent executable tests plus manual review",
+        "scope_refs": [
+          "scope:m6-ab-evaluation"
+        ],
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.9"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:approval-record",
+      "kind": "Operation",
+      "label": "Record a source-backed user approval for a ready scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "scope_not_ready",
+          "unknown_scope",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "recorded_by": "user|agent",
+          "scope": "Scope id",
+          "statement": "exact user statement"
+        },
+        "mode": "sync",
+        "outputs": {
+          "approval_id": "id",
+          "design_digest": "sha256"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:ci",
+      "kind": "Operation",
+      "label": "Run check, readiness and reconciliation for every active scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [],
+        "idempotent": true,
+        "inputs": {
+          "scopes": "optional list"
+        },
+        "mode": "sync",
+        "outputs": {
+          "blocking": "boolean",
+          "summary": "per scope"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:evidence-capture",
+      "kind": "Operation",
+      "label": "Run a declared command and capture its result as independent evidence",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "command_not_found",
+          "invalid_evidence",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "spec": "argv list, cwd root, supports, declared inputs"
+        },
+        "mode": "sync",
+        "outputs": {
+          "artifact_ref": "captured stdout/stderr",
+          "evidence_id": "id",
+          "result": "passed|failed"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#18"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:evidence-submit",
+      "kind": "Operation",
+      "label": "Ingest an evidence report with provenance",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_record",
+          "invalid_evidence",
+          "report_validation_failed",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "artifact": "optional file path",
+          "report": "evidence submission JSON"
+        },
+        "mode": "sync",
+        "outputs": {
+          "effective_collection_mode": "mode",
+          "evidence_id": "id",
+          "workspace_snapshot_ref": "id"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:readiness",
+      "kind": "Operation",
+      "label": "Evaluate readiness of a scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_scope",
+          "unknown_policy",
+          "invalid_policy"
+        ],
+        "idempotent": true,
+        "inputs": {
+          "policy": "optional policy id",
+          "scope": "Scope id"
+        },
+        "mode": "sync",
+        "outputs": {
+          "design_digest": "sha256",
+          "obligations": "list",
+          "status": "ready|needs_work|blocked"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:reconcile",
+      "kind": "Operation",
+      "label": "Evaluate mappings, evidence freshness and workspace drift for a scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_scope"
+        ],
+        "idempotent": true,
+        "inputs": {
+          "scope": "optional Scope id"
+        },
+        "mode": "sync",
+        "outputs": {
+          "conformance": "policy result",
+          "evidence": "freshness per record",
+          "findings": "list with safe conclusion and follow-up"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:review-export",
+      "kind": "Operation",
+      "label": "Export a review packet for a scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_scope"
+        ],
+        "idempotent": true,
+        "inputs": {
+          "record": "boolean",
+          "scope": "Scope id"
+        },
+        "mode": "sync",
+        "outputs": {
+          "packet": "markdown + json",
+          "scope_digest": "sha256"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:workspace-snapshot",
+      "kind": "Operation",
+      "label": "Capture a workspace snapshot for a root and declared paths",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_root",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "paths": "declared files",
+          "repository": "root name"
+        },
+        "mode": "sync",
+        "outputs": {
+          "files": "path -> digest",
+          "head": "commit or empty",
+          "snapshot_id": "id"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "process:readiness-loop",
+      "kind": "Process",
+      "label": "Internal check/refine/check loop before user confirmation",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "concurrency_sensitive": false,
+        "steps": [
+          "readiness",
+          "resolve obligations by patch or assessment",
+          "readiness",
+          "review export",
+          "readiness (packet current)",
+          "approval record"
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:default-mandatory-rules",
+      "kind": "Question",
+      "label": "Which readiness rules are mandatory by default?",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "answer": "v0 default policy: structural checks pass; blocking questions resolved; accepted requirements realized or deliberately deferred; operations define inputs, outputs and failures; concurrency-sensitive processes reviewed; no refuted assumptions; review packet current. Projects override by setting their own policy.",
+        "blocking": false,
+        "status": "answered"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:impact-refines-upward",
+      "kind": "Question",
+      "label": "Should a refinement change propagate impact upward to its parent intent?",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {
+        "answer": "Deferred: v0 propagates parent -> refinement only; upward coverage effects belong to readiness policy (milestone 3).",
+        "blocking": false,
+        "status": "deferred"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:readiness-default-obligations",
+      "kind": "Question",
+      "label": "Which readiness obligations are mandatory by default versus project-specific?",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {
+        "answer": "See question:default-mandatory-rules; answered for v0 by the default policy.",
+        "blocking": false,
+        "status": "answered"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:runner-capture-trust",
+      "kind": "Question",
+      "label": "How much trust does an independent capture earn when the command is user-supplied?",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "answer": "v0: independent_capture means the tool ran the argv and recorded exit code and output; the command's meaning is still the submitter's claim, recorded in declared inputs and limitations.",
+        "blocking": false,
+        "status": "answered"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:single-snapshot-scale",
+      "kind": "Question",
+      "label": "Does a single snapshot remain practical at the first target project size?",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {
+        "blocking": false,
+        "status": "open"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Calls, transitions and dependencies may legally cycle.",
+      "id": "req:acyclic-only-where-declared",
+      "kind": "Requirement",
+      "label": "Only relations with explicit acyclicity semantics are checked for cycles",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:assertion-cannot-satisfy-executable-evidence",
+      "kind": "Requirement",
+      "label": "An agent assertion cannot satisfy a rule that requires executable evidence",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Evidence collection modes are ordered: agent_assertion < agent_submitted_report < validated_report < independent_capture.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:atomic-replace",
+      "kind": "Requirement",
+      "label": "Snapshot writes are atomic and interrupted writes leave a readable snapshot",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Sorted records and keys, UTF-8, non-finite numbers rejected, fixed newline handling, digest field excluded.",
+      "id": "req:canonical-digest",
+      "kind": "Requirement",
+      "label": "A single routine computes the content digest over the canonical payload",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:ci-entry-point",
+      "kind": "Requirement",
+      "label": "A CI entry point evaluates checks, readiness and reconciliation without depending on the agent remembering",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Exit code 2 on blockers; JSON carries the detail.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:collection-mode-preserved",
+      "kind": "Requirement",
+      "label": "Evidence ingestion preserves and verifies the collection mode",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "A validated report is parsed by the tool; an independent capture is executed by the tool; a submitted report is recorded as such.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#7.5"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:design-change-invalidates-readiness",
+      "kind": "Requirement",
+      "label": "A semantic change inside the approved scope invalidates the prior approval and names the affected approval",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Unrelated additions outside the closure leave the approval current.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:design-digest-stable-under-approval",
+      "kind": "Requirement",
+      "label": "Recording an approval or adding evidence does not change the approved design digest",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "The design digest covers intent-layer records in the scope closure and the policy version; reconciliation records are excluded.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:evidence-binds-inputs",
+      "kind": "Requirement",
+      "label": "Evidence binds to the workspace snapshot of its declared inputs and to the model content it supports",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Source or model changes after submission make the evidence stale, never silently current.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "0 ok, 2 blockers, 3 invalid input or stale revision, 4 unavailable dependency or internal failure; JSON carries the precise status.",
+      "id": "req:exit-code-convention",
+      "kind": "Requirement",
+      "label": "Execution failure is distinguished from a completed check that found problems",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Caches are disposable and affect performance only.",
+      "id": "req:fresh-process-reconstruction",
+      "kind": "Requirement",
+      "label": "A fresh process reconstructs the complete working graph from persisted files",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.3"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [
+            "doc:vision-and-architecture#21.5"
+          ],
+          "role": "original_intent",
+          "text": "Milestone 2 build list: graph diffs, and explicit truncation/boundary reporting."
+        }
+      ],
+      "description": "",
+      "id": "req:graph-diff",
+      "kind": "Requirement",
+      "label": "Differences between two model revisions are reported at record level",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Transaction summaries give ids since a revision; a second snapshot (file or Git ref) gives field-level changes.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:idempotent-patch-ids",
+      "kind": "Requirement",
+      "label": "Repeated patch ids with identical content replay safely; different content is an error",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12.1"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [
+            "doc:vision-and-architecture#10"
+          ],
+          "role": "original_intent",
+          "text": "Impact analysis reports recorded reachability and plausible affected elements. It must not claim exhaustive impact when dependencies or mappings are incomplete."
+        }
+      ],
+      "description": "Starting from changed ids, traverse relations in their declared impact direction plus property references, and return candidates with the path that reached them.",
+      "id": "req:impact-slice",
+      "kind": "Requirement",
+      "label": "A dependency slice reports which recorded elements a change may affect",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Reports recorded reachability only and says so; never claims exhaustive impact.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#10"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:lens-never-drops-mandatory",
+      "kind": "Requirement",
+      "label": "A lens never silently discards a mandatory constraint; it reports overflow or truncation",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#10"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:missing-artifact-downgrades",
+      "kind": "Requirement",
+      "label": "A missing or altered evidence artifact must not preserve a grade that requires inspecting it",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Reconciliation reports the artifact and the effective collection mode drops to agent_assertion.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "A goal may be a paragraph; a rule may gain a formal expression; links say how one interprets or supports another.",
+      "id": "req:mixed-precision",
+      "kind": "Requirement",
+      "label": "Representations of different precision coexist with explicit links",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:no-code-execution-from-data",
+      "kind": "Requirement",
+      "label": "Graph text and expressions are data; no eval, source or shell is accepted as an expression",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#7.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:no-self-approval",
+      "kind": "Requirement",
+      "label": "An agent must not invent user approval to clear a blocker; readiness must not modify its own policy",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Avoid a universal verified property; evidence is scoped, with method and freshness.",
+      "id": "req:no-universal-verified-flag",
+      "kind": "Requirement",
+      "label": "Acceptance, formalization and verification are separate dimensions",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Conflicting intended and observed behavior both remain represented until resolved.",
+      "id": "req:observation-never-overwrites-intent",
+      "kind": "Requirement",
+      "label": "An observation must not silently overwrite a requirement",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#4.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:readiness-does-not-modify",
+      "kind": "Requirement",
+      "label": "A readiness check never modifies the model or its own policy",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Policy changes are explicit patch operations with a recorded reason.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Inputs: a Scope record (explicit members, closure rule, policy ref) and the current snapshot. Output: status, design digest, obligations, warnings, approval state.",
+      "id": "req:readiness-evaluates-policy",
+      "kind": "Requirement",
+      "label": "Readiness evaluates a versioned policy against a scope and returns actionable obligations",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Each obligation names the rule, the related ids, the request and the acceptable resolutions. Status is ready, needs_work or blocked.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:reconcile-safe-conclusions",
+      "kind": "Requirement",
+      "label": "Reconciliation reports only safe conclusions with the follow-up each requires",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Broken locator, source digest changed, model scope changed, artifact missing, test failed, unmapped source change, policy changed.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:review-packet-deterministic",
+      "kind": "Requirement",
+      "label": "The review packet is selected deterministically from the scope and carries its scope digest and coverage",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Prose faithfulness still needs human review; the packet proves which records it covers, not that the explanation is right.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#14"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:stable-ids",
+      "kind": "Requirement",
+      "label": "Record identity is stable and never derived from labels or paths",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:stale-base-rejected",
+      "kind": "Requirement",
+      "label": "A patch with a stale base is rejected with the changed ids, never silently rebased",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "A compatibility mode may preserve them, but readiness cannot assume their semantics were validated.",
+      "id": "req:unknown-kinds-not-silently-known",
+      "kind": "Requirement",
+      "label": "Unknown kinds are never silently interpreted as known ones",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:unmapped-change-coverage",
+      "kind": "Requirement",
+      "label": "Source changes not referenced by any mapping, symbol, test or evidence input are reported as coverage gaps",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Requires Git; without it the tool says detection is unavailable rather than reporting nothing.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:waiver-requires-user",
+      "kind": "Requirement",
+      "label": "A waiver is honoured only when it records a user authorization and a reason",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "An agent must not invent user approval to clear a blocker.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:workspace-snapshot-identity",
+      "kind": "Requirement",
+      "label": "A workspace snapshot records repository identity, HEAD, dirty and untracked state, and content hashes for the declared scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "A Git commit alone is insufficient when files are modified or untracked. Multiple roots have separate snapshot records.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "review:m3-readiness",
+      "kind": "ReviewArtifact",
+      "label": "Review packet for Milestone 3: readiness, review packets and approvals",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_kind": "summary",
+        "artifact_path": ".intentgraph/artifacts/review-m3-readiness.md",
+        "scope_digest": "sha256:e3e866981d7c9f0de5ef31448e53c91cb931c498f852c4ae9f15f4e2ed6c6138"
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": [
+          "scope:m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m3-readiness",
+      "kind": "Scope",
+      "label": "Milestone 3: readiness, review packets and approvals",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "component:obligations",
+          "component:reports",
+          "operation:readiness",
+          "operation:review-export",
+          "operation:approval-record",
+          "process:readiness-loop",
+          "req:readiness-evaluates-policy",
+          "req:readiness-does-not-modify",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:design-digest-stable-under-approval",
+          "req:design-change-invalidates-readiness",
+          "req:waiver-requires-user",
+          "req:review-packet-deterministic"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "active"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m4-evidence-reconciliation",
+      "kind": "Scope",
+      "label": "Milestone 4: evidence, mappings and drift reconciliation",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "component:obligations",
+          "component:repository",
+          "component:reports",
+          "operation:evidence-submit",
+          "operation:evidence-capture",
+          "operation:workspace-snapshot",
+          "operation:reconcile",
+          "operation:ci",
+          "req:workspace-snapshot-identity",
+          "req:evidence-binds-inputs",
+          "req:collection-mode-preserved",
+          "req:missing-artifact-downgrades",
+          "req:reconcile-safe-conclusions",
+          "req:unmapped-change-coverage",
+          "req:ci-entry-point"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "active"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.7"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m5-installable",
+      "kind": "Scope",
+      "label": "Milestone 5: installable first version",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "system:intentgraph"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "draft"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m6-ab-evaluation",
+      "kind": "Scope",
+      "label": "Milestone 6: external A/B evaluation",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "system:intentgraph"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "draft"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.9"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "state:readiness-blocked",
+      "kind": "State",
+      "label": "blocked",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "state:readiness-needs-work",
+      "kind": "State",
+      "label": "needs_work",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "initial": true
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "state:readiness-ready",
+      "kind": "State",
+      "label": "ready",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "initial": false
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:lenses-impact",
+      "kind": "CodeSymbol",
+      "label": "compute_impact",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/lenses/impact.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "compute_impact",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/lenses/impact.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:model-changes-since",
+      "kind": "CodeSymbol",
+      "label": "changes_since",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/model/diff.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "changes_since",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/model/diff.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:model-diff",
+      "kind": "CodeSymbol",
+      "label": "diff_snapshots",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/model/diff.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "diff_snapshots",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/model/diff.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:obligations-engine",
+      "kind": "CodeSymbol",
+      "label": "evaluate",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/engine.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "evaluate",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/engine.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:obligations-policy",
+      "kind": "CodeSymbol",
+      "label": "Policy",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/policy.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "Policy",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/policy.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:obligations-scope",
+      "kind": "CodeSymbol",
+      "label": "design_digest",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/scope.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "design_digest",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/scope.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:reports-review",
+      "kind": "CodeSymbol",
+      "label": "build_review_packet",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/reports/review.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "build_review_packet",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/reports/review.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:repository-gitio",
+      "kind": "CodeSymbol",
+      "label": "snapshot_at_ref",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/repository/gitio.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "snapshot_at_ref",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/repository/gitio.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:repository-migrations",
+      "kind": "CodeSymbol",
+      "label": "run",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/repository/migrations.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "run",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/repository/migrations.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:services-approval",
+      "kind": "CodeSymbol",
+      "label": "approval_record",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/services.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "approval_record",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/services.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "system:intentgraph",
+      "kind": "System",
+      "label": "Intent Graph package",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:diff-git-ref",
+      "kind": "TestCase",
+      "label": "test_diff_against_git_ref",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_diff.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_diff_against_git_ref"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_diff.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:impact-changed-interface",
+      "kind": "TestCase",
+      "label": "test_changed_interface_reaches_dependents_and_exposer",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_impact.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_changed_interface_reaches_dependents_and_exposer"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_impact.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:migration-apply",
+      "kind": "TestCase",
+      "label": "test_migration_preview_then_apply_with_backup",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_migrations.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_migration_preview_then_apply_with_backup"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_migrations.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:readiness-assertion",
+      "kind": "TestCase",
+      "label": "test_agent_assertion_cannot_satisfy_executable_evidence",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_readiness.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_agent_assertion_cannot_satisfy_executable_evidence"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_readiness.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:readiness-digest-stability",
+      "kind": "TestCase",
+      "label": "test_review_packet_then_approval_digest_stability_and_invalidation",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_readiness.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_review_packet_then_approval_digest_stability_and_invalidation"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_readiness.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:readiness-waiver",
+      "kind": "TestCase",
+      "label": "test_waiver_requires_user_authorization",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_readiness.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_waiver_requires_user_authorization"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_readiness.py"
+        ]
+      }
+    }
+  ],
+  "policies": [
+    {
+      "description": "Default post-build conformance policy (v0): must-requirements have mappings and passing evidence at least at report level.",
+      "id": "policy:default-conformance",
+      "kind": "conformance",
+      "rules": [
+        {
+          "blocking": true,
+          "description": "",
+          "id": "structural",
+          "params": {},
+          "rule": "structural_checks_pass"
+        },
+        {
+          "blocking": true,
+          "description": "",
+          "id": "mapped",
+          "params": {
+            "kinds": [
+              "Requirement"
+            ],
+            "where": {
+              "priority": [
+                "must",
+                "should"
+              ]
+            }
+          },
+          "rule": "mappings_present"
+        },
+        {
+          "blocking": true,
+          "description": "An agent assertion is not executable evidence.",
+          "id": "tested",
+          "params": {
+            "kinds": [
+              "Requirement"
+            ],
+            "min_collection_mode": "agent_submitted_report",
+            "result": "passed",
+            "where": {
+              "priority": [
+                "must"
+              ]
+            }
+          },
+          "rule": "evidence_required"
+        }
+      ],
+      "version": "0.1"
+    },
+    {
+      "description": "Default pre-build readiness policy (v0). Projects may replace it with set_policy; the change is recorded.",
+      "id": "policy:default-readiness",
+      "kind": "readiness",
+      "rules": [
+        {
+          "blocking": true,
+          "description": "Mandatory structural checks pass.",
+          "id": "structural",
+          "params": {},
+          "rule": "structural_checks_pass"
+        },
+        {
+          "blocking": true,
+          "description": "Blocking intent questions are resolved.",
+          "id": "questions",
+          "params": {},
+          "rule": "blocking_questions_resolved"
+        },
+        {
+          "blocking": true,
+          "description": "Every in-scope accepted requirement has a proposed realization or a documented deliberate deferral.",
+          "id": "realized",
+          "params": {},
+          "rule": "requirements_realized"
+        },
+        {
+          "blocking": true,
+          "description": "Required interface input, output and failure behavior is defined.",
+          "id": "operations",
+          "params": {},
+          "rule": "operations_defined"
+        },
+        {
+          "blocking": true,
+          "description": "A concurrency-sensitive process has its review obligation addressed.",
+          "id": "concurrency",
+          "params": {},
+          "rule": "concurrency_sensitive_reviewed"
+        },
+        {
+          "blocking": true,
+          "description": "No in-scope assumption is refuted.",
+          "id": "refuted",
+          "params": {},
+          "rule": "assumptions_not_refuted"
+        },
+        {
+          "blocking": false,
+          "description": "Unverified assumptions are listed for the reviewer.",
+          "id": "assumptions",
+          "params": {},
+          "rule": "assumptions_acknowledged"
+        },
+        {
+          "blocking": false,
+          "description": "Proposed records in scope are listed for acceptance.",
+          "id": "proposed",
+          "params": {},
+          "rule": "proposed_records_accepted"
+        },
+        {
+          "blocking": true,
+          "description": "The intent review packet covers the current design digest.",
+          "id": "packet",
+          "params": {},
+          "rule": "review_packet_current"
+        }
+      ],
+      "version": "0.1"
+    }
+  ],
+  "project_id": "project:intentgraph",
+  "revision": 10,
+  "transactions": [
+    {
+      "added_ids": [
+        "assumption:single-snapshot-sufficient-v0",
+        "component:checks",
+        "component:cli",
+        "component:graph",
+        "component:lenses",
+        "component:model",
+        "component:obligations",
+        "component:patches",
+        "component:playbooks",
+        "component:reports",
+        "component:repository",
+        "component:services",
+        "component:vocabulary",
+        "constraint:no-hidden-state-between-calls",
+        "constraint:records-are-data",
+        "decision:agent-runs-language-tools",
+        "decision:annotated-graph-central",
+        "decision:cli-first",
+        "decision:python-networkx-pydantic",
+        "decision:self-use-development",
+        "decision:single-snapshot-v0",
+        "edge:acyclic-only-where-declared-refines-loop",
+        "edge:assumption-concerns-snapshot-decision",
+        "edge:atomic-replace-refines-local",
+        "edge:canonical-digest-refines-local",
+        "edge:checks-depends-graph",
+        "edge:checks-depends-vocabulary",
+        "edge:checks-realizes-acyclic-only-where-declared",
+        "edge:cli-depends-services",
+        "edge:cli-realizes-exit-code-convention",
+        "edge:constraint-data-targets-model",
+        "edge:constraint-no-state-targets-services",
+        "edge:decision-cli-concerns-cli",
+        "edge:decision-graph-concerns-loop",
+        "edge:decision-selfuse-concerns-system",
+        "edge:decision-snapshot-concerns-repo",
+        "edge:decision-stack-concerns-model",
+        "edge:decision-tools-concerns-obligations",
+        "edge:exit-code-convention-refines-local",
+        "edge:finding-challenges-status",
+        "edge:fresh-process-reconstruction-refines-local",
+        "edge:graph-depends-model",
+        "edge:idempotent-patch-ids-refines-local",
+        "edge:lens-never-drops-mandatory-refines-loop",
+        "edge:lenses-depends-graph",
+        "edge:lenses-realizes-lens-never-drops-mandatory",
+        "edge:m1-evidence-supports-atomic-replace",
+        "edge:m1-evidence-supports-canonical-digest",
+        "edge:m1-evidence-supports-fresh-process-reconstruction",
+        "edge:m1-evidence-supports-idempotent-patch-ids",
+        "edge:m1-evidence-supports-stale-base-rejected",
+        "edge:m2-concerns-lenses",
+        "edge:m3-concerns-obligations",
+        "edge:m4-concerns-obligations",
+        "edge:m5-concerns-system",
+        "edge:mixed-precision-refines-loop",
+        "edge:model-realizes-canonical-digest",
+        "edge:model-realizes-no-code-execution-from-data",
+        "edge:model-realizes-stable-ids",
+        "edge:no-code-execution-from-data-refines-local",
+        "edge:no-self-approval-refines-loop",
+        "edge:no-universal-verified-flag-refines-loop",
+        "edge:obligations-depends-checks",
+        "edge:observation-never-overwrites-intent-refines-loop",
+        "edge:patches-depends-checks",
+        "edge:patches-realizes-idempotent-patch-ids",
+        "edge:patches-realizes-stale-base-rejected",
+        "edge:question-readiness-concerns-obligations",
+        "edge:question-scale-concerns-repo",
+        "edge:reports-depends-lenses",
+        "edge:repository-depends-model",
+        "edge:repository-depends-vocabulary",
+        "edge:repository-realizes-atomic-replace",
+        "edge:repository-realizes-fresh-process-reconstruction",
+        "edge:services-depends-checks",
+        "edge:services-depends-lenses",
+        "edge:services-depends-patches",
+        "edge:services-depends-repository",
+        "edge:stable-ids-refines-loop",
+        "edge:stale-base-rejected-refines-local",
+        "edge:system-contains-checks",
+        "edge:system-contains-cli",
+        "edge:system-contains-graph",
+        "edge:system-contains-lenses",
+        "edge:system-contains-model",
+        "edge:system-contains-obligations",
+        "edge:system-contains-patches",
+        "edge:system-contains-playbooks",
+        "edge:system-contains-reports",
+        "edge:system-contains-repository",
+        "edge:system-contains-services",
+        "edge:system-contains-vocabulary",
+        "edge:unknown-kinds-not-silently-known-refines-loop",
+        "edge:vocabulary-realizes-unknown-kinds-not-silently-known",
+        "evidence:m1-test-suite",
+        "finding:gates-unsupported",
+        "goal:agent-operated-local-tool",
+        "goal:intent-to-implementation-loop",
+        "obligation:m2-self-model-and-lenses",
+        "obligation:m3-readiness",
+        "obligation:m4-evidence-reconciliation",
+        "obligation:m5-installable",
+        "obligation:m6-ab-evaluation",
+        "question:readiness-default-obligations",
+        "question:single-snapshot-scale",
+        "req:acyclic-only-where-declared",
+        "req:atomic-replace",
+        "req:canonical-digest",
+        "req:exit-code-convention",
+        "req:fresh-process-reconstruction",
+        "req:idempotent-patch-ids",
+        "req:lens-never-drops-mandatory",
+        "req:mixed-precision",
+        "req:no-code-execution-from-data",
+        "req:no-self-approval",
+        "req:no-universal-verified-flag",
+        "req:observation-never-overwrites-intent",
+        "req:stable-ids",
+        "req:stale-base-rejected",
+        "req:unknown-kinds-not-silently-known",
+        "system:intentgraph"
+      ],
+      "applied_at": "2026-10-18T08:01:09Z",
+      "base_revision": 0,
+      "operations_digest": "sha256:6a5421a4631ddc9c099bb1e932b9ada4a44437ff5bc0c066f7f82fea8ce06986",
+      "patch_id": "patch:self-model-01",
+      "reason": "Milestone 2 start: record Intent Graph's own goals, decisions, requirements, components and milestone obligations from the architecture document.",
+      "removed_ids": [],
+      "result_revision": 1,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "decision:impact-direction-per-relation",
+        "edge:diff-refines-loop",
+        "edge:impact-decision-concerns-vocab",
+        "edge:impact-question-concerns-req",
+        "edge:impact-refines-loop",
+        "edge:impl-obligation-concerns-lenses",
+        "edge:lenses-realizes-impact",
+        "edge:model-realizes-diff",
+        "obligation:impl-impact-and-diff",
+        "question:impact-refines-upward",
+        "req:graph-diff",
+        "req:impact-slice"
+      ],
+      "applied_at": "2026-10-18T08:13:04Z",
+      "base_revision": 1,
+      "operations_digest": "sha256:679c15c03a294f145fd3d3cab9ac2321bc1511c53590cd639a50efb904802c55",
+      "patch_id": "patch:plan-m2-impact-diff",
+      "reason": "Plan the milestone 2 improvement (impact slice and graph diff) before implementing it.",
+      "removed_ids": [],
+      "result_revision": 2,
+      "updated_ids": [
+        "obligation:m2-self-model-and-lenses"
+      ]
+    },
+    {
+      "added_ids": [
+        "edge:m2-evidence-supports-diff",
+        "edge:m2-evidence-supports-impact",
+        "edge:m2-evidence-supports-obligation",
+        "evidence:m2-test-suite",
+        "mapping:diff-command",
+        "mapping:impact-command",
+        "symbol:lenses-impact",
+        "symbol:model-changes-since",
+        "symbol:model-diff",
+        "symbol:repository-gitio",
+        "test:diff-git-ref",
+        "test:impact-changed-interface"
+      ],
+      "applied_at": "2026-10-18T08:17:26Z",
+      "base_revision": 2,
+      "operations_digest": "sha256:2731adaff6f82ec3faad953fc71a329f6515dbb8d41013faa7fd0e1d5ec69cc6",
+      "patch_id": "patch:close-m2-impact-diff",
+      "reason": "Close the milestone 2 improvement: map impact/diff to code, record test evidence, satisfy the obligations.",
+      "removed_ids": [],
+      "result_revision": 3,
+      "updated_ids": [
+        "edge:diff-refines-loop",
+        "edge:impact-refines-loop",
+        "edge:lenses-realizes-impact",
+        "edge:model-realizes-diff",
+        "obligation:impl-impact-and-diff",
+        "obligation:m2-self-model-and-lenses",
+        "req:graph-diff",
+        "req:impact-slice"
+      ]
+    },
+    {
+      "added_ids": [],
+      "applied_at": "2026-10-18T08:31:01Z",
+      "base_revision": 3,
+      "operations_digest": "sha256:09580ceecc8e00055f03ff7b32390e7f088847f0247cf624c263c911a008d134",
+      "patch_id": "patch:migrate-vocabulary-core-0.1-to-0.2",
+      "reason": "migration vocabulary-core-0.1-to-0.2: Additive: adds the Scope kind, Decision.decision_kind, Obligation.rule, Approval.policy_ref/model_revision, and Approval as a 'concerns' source. No record rewrites.",
+      "removed_ids": [],
+      "result_revision": 4,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "policy:default-conformance",
+        "policy:default-readiness"
+      ],
+      "applied_at": "2026-10-18T08:31:16Z",
+      "base_revision": 4,
+      "operations_digest": "sha256:567b7a5505bdb45e527050faabeb15ce4dcf87f0de7d664ad16b3c63d4cb6a02",
+      "patch_id": "patch:install-default-policies",
+      "reason": "Install the default readiness and conformance policies (v0.1) into the self-model.",
+      "removed_ids": [],
+      "result_revision": 5,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "decision:policy-rules-declarative",
+        "decision:scope-closure-rule",
+        "edge:approval-op-realizes",
+        "edge:assertion-cannot-satisfy-executable-evidence-refines-loop",
+        "edge:decision-closure-concerns-obligations",
+        "edge:decision-declarative-concerns-obligations",
+        "edge:design-change-invalidates-readiness-refines-loop",
+        "edge:design-digest-stable-under-approval-refines-loop",
+        "edge:loop-invokes-approval",
+        "edge:loop-invokes-readiness",
+        "edge:loop-invokes-review",
+        "edge:m3-scope-concerns-obligation",
+        "edge:obligations-realizes-assertion",
+        "edge:obligations-realizes-digest",
+        "edge:obligations-realizes-invalidate",
+        "edge:obligations-realizes-no-modify",
+        "edge:obligations-realizes-readiness",
+        "edge:obligations-realizes-waiver",
+        "edge:question-rules-concerns-obligations",
+        "edge:readiness-does-not-modify-refines-loop",
+        "edge:readiness-evaluates-policy-refines-loop",
+        "edge:readiness-op-realizes",
+        "edge:reports-realizes-packet",
+        "edge:review-op-realizes",
+        "edge:review-packet-deterministic-refines-loop",
+        "edge:waiver-requires-user-refines-loop",
+        "operation:approval-record",
+        "operation:readiness",
+        "operation:review-export",
+        "process:readiness-loop",
+        "question:default-mandatory-rules",
+        "req:assertion-cannot-satisfy-executable-evidence",
+        "req:design-change-invalidates-readiness",
+        "req:design-digest-stable-under-approval",
+        "req:readiness-does-not-modify",
+        "req:readiness-evaluates-policy",
+        "req:review-packet-deterministic",
+        "req:waiver-requires-user",
+        "scope:m3-readiness",
+        "state:readiness-blocked",
+        "state:readiness-needs-work",
+        "state:readiness-ready"
+      ],
+      "applied_at": "2026-10-18T08:31:17Z",
+      "base_revision": 5,
+      "operations_digest": "sha256:b68de73b32ce04f836e7617981f27d93f7ef94c76492ace323afed4c237d45d0",
+      "patch_id": "patch:plan-m3-readiness",
+      "reason": "Define readiness (inputs, states, errors, policy behaviour, completion criteria) in the self-model before implementing it.",
+      "removed_ids": [],
+      "result_revision": 6,
+      "updated_ids": [
+        "obligation:m3-readiness",
+        "question:readiness-default-obligations"
+      ]
+    },
+    {
+      "added_ids": [
+        "evidence:m3-test-suite",
+        "mapping:readiness-engine",
+        "mapping:review-and-approval",
+        "scope:m4-evidence-reconciliation",
+        "scope:m5-installable",
+        "scope:m6-ab-evaluation",
+        "symbol:obligations-engine",
+        "symbol:obligations-policy",
+        "symbol:obligations-scope",
+        "symbol:reports-review",
+        "symbol:repository-migrations",
+        "symbol:services-approval",
+        "test:migration-apply",
+        "test:readiness-assertion",
+        "test:readiness-digest-stability",
+        "test:readiness-waiver"
+      ],
+      "applied_at": "2026-10-18T08:35:12Z",
+      "base_revision": 6,
+      "operations_digest": "sha256:07053e05d48a2b2e7a67641c2b0f4215b2e7debb6c395aa193f33d74e315490d",
+      "patch_id": "patch:close-m3-readiness",
+      "reason": "Accept the milestone 3 design, give future milestones their own scopes, map readiness code and tests, record evidence.",
+      "removed_ids": [],
+      "result_revision": 7,
+      "updated_ids": [
+        "decision:policy-rules-declarative",
+        "decision:scope-closure-rule",
+        "edge:approval-op-realizes",
+        "edge:assertion-cannot-satisfy-executable-evidence-refines-loop",
+        "edge:decision-closure-concerns-obligations",
+        "edge:decision-declarative-concerns-obligations",
+        "edge:design-change-invalidates-readiness-refines-loop",
+        "edge:design-digest-stable-under-approval-refines-loop",
+        "edge:loop-invokes-approval",
+        "edge:loop-invokes-readiness",
+        "edge:loop-invokes-review",
+        "edge:m3-scope-concerns-obligation",
+        "edge:obligations-realizes-assertion",
+        "edge:obligations-realizes-digest",
+        "edge:obligations-realizes-invalidate",
+        "edge:obligations-realizes-no-modify",
+        "edge:obligations-realizes-readiness",
+        "edge:obligations-realizes-waiver",
+        "edge:question-rules-concerns-obligations",
+        "edge:readiness-does-not-modify-refines-loop",
+        "edge:readiness-evaluates-policy-refines-loop",
+        "edge:readiness-op-realizes",
+        "edge:reports-realizes-packet",
+        "edge:review-op-realizes",
+        "edge:review-packet-deterministic-refines-loop",
+        "edge:waiver-requires-user-refines-loop",
+        "finding:gates-unsupported",
+        "obligation:m3-readiness",
+        "obligation:m4-evidence-reconciliation",
+        "obligation:m5-installable",
+        "obligation:m6-ab-evaluation",
+        "operation:approval-record",
+        "operation:readiness",
+        "operation:review-export",
+        "process:readiness-loop",
+        "question:default-mandatory-rules",
+        "req:assertion-cannot-satisfy-executable-evidence",
+        "req:design-change-invalidates-readiness",
+        "req:design-digest-stable-under-approval",
+        "req:readiness-does-not-modify",
+        "req:readiness-evaluates-policy",
+        "req:review-packet-deterministic",
+        "req:waiver-requires-user",
+        "state:readiness-blocked",
+        "state:readiness-needs-work",
+        "state:readiness-ready"
+      ]
+    },
+    {
+      "added_ids": [
+        "edge:m3-readiness-review-depicts-scope",
+        "review:m3-readiness"
+      ],
+      "applied_at": "2026-10-18T08:35:13Z",
+      "base_revision": 7,
+      "operations_digest": "sha256:d45ef61dfd2ec7ca736bceeafbbd72a02f67f40cfdede6b6a676e0930c837fc6",
+      "patch_id": "patch:review-export/m3-readiness/e3e866981d7c9f0d",
+      "reason": "Record review packet for scope:m3-readiness at design digest sha256:e3e866981d7c9f0de5ef31448e53c91cb931c498f852c4ae9f15f4e2ed6c6138",
+      "removed_ids": [],
+      "result_revision": 8,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "approval:m3-readiness/r8",
+        "edge:m3-readiness-approval-r8-concerns-scope"
+      ],
+      "applied_at": "2026-10-18T08:35:14Z",
+      "base_revision": 8,
+      "operations_digest": "sha256:49b1b727b73ff3edaa65e61cfec333b1d142930533b0138ce5f95831f0414923",
+      "patch_id": "patch:approval/m3-readiness/r8",
+      "reason": "Record build_authorization for scope:m3-readiness",
+      "removed_ids": [],
+      "result_revision": 9,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "decision:freshness-in-engine",
+        "decision:snapshot-as-node",
+        "edge:capture-realizes-mode",
+        "edge:ci-entry-point-refines-loop",
+        "edge:ci-op-realizes",
+        "edge:cli-realizes-ci",
+        "edge:collection-mode-preserved-refines-loop",
+        "edge:decision-freshness-concerns-obligations",
+        "edge:decision-snapshot-node-concerns-repo",
+        "edge:evidence-binds-inputs-refines-loop",
+        "edge:missing-artifact-downgrades-refines-loop",
+        "edge:obligations-realizes-binds",
+        "edge:obligations-realizes-downgrade",
+        "edge:obligations-realizes-mode",
+        "edge:obligations-realizes-safe",
+        "edge:question-trust-concerns-capture",
+        "edge:reconcile-realizes-safe",
+        "edge:reconcile-safe-conclusions-refines-loop",
+        "edge:repository-realizes-snapshot",
+        "edge:repository-realizes-unmapped",
+        "edge:snapshot-op-realizes",
+        "edge:submit-realizes-mode",
+        "edge:unmapped-change-coverage-refines-loop",
+        "edge:workspace-snapshot-identity-refines-loop",
+        "operation:ci",
+        "operation:evidence-capture",
+        "operation:evidence-submit",
+        "operation:reconcile",
+        "operation:workspace-snapshot",
+        "question:runner-capture-trust",
+        "req:ci-entry-point",
+        "req:collection-mode-preserved",
+        "req:evidence-binds-inputs",
+        "req:missing-artifact-downgrades",
+        "req:reconcile-safe-conclusions",
+        "req:unmapped-change-coverage",
+        "req:workspace-snapshot-identity"
+      ],
+      "applied_at": "2026-10-18T08:47:55Z",
+      "base_revision": 9,
+      "operations_digest": "sha256:656d477c8a7b603d8f8f69242534939de94d15a1d26e7c4aa5b47803392cd6bd",
+      "patch_id": "patch:plan-m4-evidence",
+      "reason": "Define evidence ingestion, workspace snapshots, freshness, reconciliation and the CI entry point before implementing them.",
+      "removed_ids": [],
+      "result_revision": 10,
+      "updated_ids": [
+        "obligation:m4-evidence-reconciliation",
+        "scope:m4-evidence-reconciliation"
+      ]
+    }
+  ],
+  "vocabulary_version": "core/0.2"
+}

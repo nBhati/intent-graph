@@ -1,5 +1,5 @@
 {
-  "content_digest": "sha256:8743849f39232fafb7c71a33328d3180850fa3e1fe57af249b03b6e181bb957c",
+  "content_digest": "sha256:9437657815e860ebf9d2b7845a27c98224b8c2601652a43e90fb50f5d659d9f5",
   "edges": [
     {
       "annotations": [],
@@ -124,6 +124,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:capture-realizes-mode",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#18"
+        ]
+      },
+      "source": "operation:evidence-capture",
+      "target": "req:collection-mode-preserved"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:checks-depends-graph",
       "kind": "depends_on",
       "label": "",
@@ -188,6 +208,46 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:ci-entry-point-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      },
+      "source": "req:ci-entry-point",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:ci-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      },
+      "source": "operation:ci",
+      "target": "req:ci-entry-point"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:cli-depends-services",
       "kind": "depends_on",
       "label": "",
@@ -210,6 +270,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:cli-realizes-ci",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:cli",
+      "target": "req:ci-entry-point"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:cli-realizes-exit-code-convention",
       "kind": "realizes",
       "label": "",
@@ -226,6 +306,26 @@
       },
       "source": "component:cli",
       "target": "req:exit-code-convention"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:collection-mode-preserved-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#7.5"
+        ]
+      },
+      "source": "req:collection-mode-preserved",
+      "target": "goal:intent-to-implementation-loop"
     },
     {
       "annotations": [],
@@ -330,6 +430,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:decision-freshness-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      },
+      "source": "decision:freshness-in-engine",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:decision-graph-concerns-loop",
       "kind": "concerns",
       "label": "",
@@ -385,6 +505,26 @@
         ]
       },
       "source": "decision:single-snapshot-v0",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-snapshot-node-concerns-repo",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "decision:snapshot-as-node",
       "target": "component:repository"
     },
     {
@@ -485,6 +625,26 @@
         ]
       },
       "source": "req:graph-diff",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:evidence-binds-inputs-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "req:evidence-binds-inputs",
       "target": "goal:intent-to-implementation-loop"
     },
     {
@@ -1090,6 +1250,600 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:m4-evidence-reconciliation-approval-r13-concerns-scope",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "approval-record",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "approval:m4-evidence-reconciliation/r13",
+      "target": "scope:m4-evidence-reconciliation"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-evidence-reconciliation-review-depicts-scope",
+      "kind": "depicts",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "review:m4-evidence-reconciliation",
+      "target": "scope:m4-evidence-reconciliation"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-0",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:acyclic-only-where-declared"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-1",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:assertion-cannot-satisfy-executable-evidence"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-10",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-11",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:graph-diff"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-12",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:idempotent-patch-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-13",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:impact-slice"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-14",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:lens-never-drops-mandatory"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-15",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:missing-artifact-downgrades"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-16",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:mixed-precision"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-17",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:no-code-execution-from-data"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-18",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:no-self-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-19",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:no-universal-verified-flag"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-2",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:atomic-replace"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-20",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:observation-never-overwrites-intent"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-21",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:readiness-does-not-modify"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-22",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:readiness-evaluates-policy"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-23",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:reconcile-safe-conclusions"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-24",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:review-packet-deterministic"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-25",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:stable-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-26",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:stale-base-rejected"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-27",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:unknown-kinds-not-silently-known"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-28",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:unmapped-change-coverage"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-29",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:waiver-requires-user"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-3",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:canonical-digest"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-30",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:workspace-snapshot-identity"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-4",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:ci-entry-point"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-5",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:collection-mode-preserved"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-6",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:design-change-invalidates-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-7",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:design-digest-stable-under-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-8",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:evidence-binds-inputs"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-pytest-capture-supports-9",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m4-pytest-capture",
+      "target": "req:exit-code-convention"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:m5-concerns-system",
       "kind": "concerns",
       "label": "",
@@ -1106,6 +1860,26 @@
       },
       "source": "obligation:m5-installable",
       "target": "system:intentgraph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:missing-artifact-downgrades-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.1"
+        ]
+      },
+      "source": "req:missing-artifact-downgrades",
+      "target": "goal:intent-to-implementation-loop"
     },
     {
       "annotations": [],
@@ -1312,6 +2086,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:obligations-realizes-binds",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:evidence-binds-inputs"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:obligations-realizes-digest",
       "kind": "realizes",
       "label": "",
@@ -1332,6 +2126,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:obligations-realizes-downgrade",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:missing-artifact-downgrades"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:obligations-realizes-invalidate",
       "kind": "realizes",
       "label": "",
@@ -1348,6 +2162,26 @@
       },
       "source": "component:obligations",
       "target": "req:design-change-invalidates-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-mode",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:collection-mode-preserved"
     },
     {
       "annotations": [],
@@ -1388,6 +2222,26 @@
       },
       "source": "component:obligations",
       "target": "req:readiness-evaluates-policy"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-safe",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:reconcile-safe-conclusions"
     },
     {
       "annotations": [],
@@ -1554,6 +2408,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:question-trust-concerns-capture",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:runner-capture-trust",
+      "target": "operation:evidence-capture"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:readiness-does-not-modify-refines-loop",
       "kind": "refines",
       "label": "",
@@ -1610,6 +2484,46 @@
       },
       "source": "operation:readiness",
       "target": "req:readiness-evaluates-policy"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reconcile-realizes-safe",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16"
+        ]
+      },
+      "source": "operation:reconcile",
+      "target": "req:reconcile-safe-conclusions"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reconcile-safe-conclusions-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      },
+      "source": "req:reconcile-safe-conclusions",
+      "target": "goal:intent-to-implementation-loop"
     },
     {
       "annotations": [],
@@ -1736,6 +2650,46 @@
       },
       "source": "component:repository",
       "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-snapshot",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:workspace-snapshot-identity"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-unmapped",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:unmapped-change-coverage"
     },
     {
       "annotations": [],
@@ -1868,6 +2822,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:snapshot-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "operation:workspace-snapshot",
+      "target": "req:workspace-snapshot-identity"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:stable-ids-refines-loop",
       "kind": "refines",
       "label": "",
@@ -1904,6 +2878,26 @@
       },
       "source": "req:stale-base-rejected",
       "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:submit-realizes-mode",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:evidence-submit",
+      "target": "req:collection-mode-preserved"
     },
     {
       "annotations": [],
@@ -2168,6 +3162,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:unmapped-change-coverage-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      },
+      "source": "req:unmapped-change-coverage",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:vocabulary-realizes-unknown-kinds-not-silently-known",
       "kind": "realizes",
       "label": "",
@@ -2204,6 +3218,26 @@
       },
       "source": "req:waiver-requires-user",
       "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:workspace-snapshot-identity-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
+        ]
+      },
+      "source": "req:workspace-snapshot-identity",
+      "target": "goal:intent-to-implementation-loop"
     }
   ],
   "format_version": "0.1",
@@ -2232,6 +3266,33 @@
         "notes": "agent-recorded from conversation; traceability, not authenticated identity",
         "source_refs": [
           "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "approval:m4-evidence-reconciliation/r13",
+      "kind": "Approval",
+      "label": "build authorization for Milestone 4: evidence, mappings and drift reconciliation",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "approval_kind": "build_authorization",
+        "design_digest": "sha256:c2b809dc4e3446cfa574537f15f4d9faab851cf91b10ca7a80fe2ecd1e387c47",
+        "model_revision": 13,
+        "policy_ref": "policy:default-readiness@0.1",
+        "recorded_by": "agent",
+        "scope_ref": "scope:m4-evidence-reconciliation",
+        "source_ref": "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-4",
+        "source_statement": "continue with milestone 4"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "approval-record",
+        "notes": "agent-recorded from conversation; traceability, not authenticated identity",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-4"
         ]
       }
     },
@@ -2636,6 +3697,31 @@
       }
     },
     {
+      "annotations": [],
+      "description": "",
+      "id": "decision:freshness-in-engine",
+      "kind": "Decision",
+      "label": "Evidence freshness is computed once and shared by reconcile and the evidence_required rule",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Freshness only in reconcile"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Conformance must not count stale evidence; one implementation avoids two answers."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      }
+    },
+    {
       "annotations": [
         {
           "refs": [],
@@ -2718,7 +3804,15 @@
       }
     },
     {
-      "annotations": [],
+      "annotations": [
+        {
+          "refs": [
+            "approval:m3-readiness/r8"
+          ],
+          "role": "rationale",
+          "text": "Revised in milestone 4: `realizes` targets join the closure only from specific design elements (operations, actions, processes, screens, controls, interactions, transitions, decisions, scenarios, interfaces), not from shared components or systems. Reconcile showed that a shared component dragged milestone 4 requirements into the milestone 3 scope and invalidated its approval."
+        }
+      ],
       "description": "",
       "id": "decision:scope-closure-rule",
       "kind": "Decision",
@@ -2732,7 +3826,7 @@
         ],
         "decided_by": "agent",
         "decision_kind": "choice",
-        "rationale": "Deterministic and explainable; every closure member records why it is included."
+        "rationale": "Deterministic and explainable; every closure member records why it is included. Shared containers do not propagate realized requirements, so one component serving two features does not merge their scopes."
       },
       "provenance": {
         "author_role": "agent",
@@ -2791,6 +3885,32 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:snapshot-as-node",
+      "kind": "Decision",
+      "label": "Workspace snapshots are WorkspaceSnapshot nodes in the observation layer holding digests for declared paths only",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Side files under artifacts/",
+          "Hash every tracked file"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Keeps evidence inputs inspectable and versioned with the model without hashing the whole repository."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
         ]
       }
     },
@@ -2915,6 +4035,92 @@
     {
       "annotations": [],
       "description": "",
+      "id": "evidence:m4-pytest-capture",
+      "kind": "Evidence",
+      "label": "Package test suite captured by the tool",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_digest": "sha256:f380e5cd5a0afe29c50ed4233c95ca680deb7ec2d22b64db2933b70348e520c4",
+        "artifact_ref": ".intentgraph/artifacts/evidence/m4-pytest-capture/capture.json",
+        "collection_mode": "independent_capture",
+        "declared_inputs": {
+          "command": [
+            ".venv/bin/python",
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            "--ignore=tests/test_self_model.py"
+          ],
+          "paths": [
+            "src",
+            "tests",
+            "pyproject.toml"
+          ],
+          "repository": "."
+        },
+        "limitations": [
+          "tests/test_self_model.py is excluded because it asserts the presence of this very evidence record; CI runs the full suite separately.",
+          "Supports every accepted requirement collectively; per-requirement attribution is via the TestCase records in the mappings.",
+          "independent_capture: the tool ran the declared command and recorded exit code and output; what the command checks remains the submitter's claim"
+        ],
+        "method": "unit_and_subprocess_tests",
+        "model_revision": 18,
+        "model_scope_digest": "sha256:2fd780bfb4ab94cf3e79d2f4690dec5a9e6988e7e735ca157f9ed87414ed13fe",
+        "report_format": "intentgraph-capture/0.1",
+        "result": "passed",
+        "submitted_by": "intentgraph",
+        "supports": [
+          "req:acyclic-only-where-declared",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:atomic-replace",
+          "req:canonical-digest",
+          "req:ci-entry-point",
+          "req:collection-mode-preserved",
+          "req:design-change-invalidates-readiness",
+          "req:design-digest-stable-under-approval",
+          "req:evidence-binds-inputs",
+          "req:exit-code-convention",
+          "req:fresh-process-reconstruction",
+          "req:graph-diff",
+          "req:idempotent-patch-ids",
+          "req:impact-slice",
+          "req:lens-never-drops-mandatory",
+          "req:missing-artifact-downgrades",
+          "req:mixed-precision",
+          "req:no-code-execution-from-data",
+          "req:no-self-approval",
+          "req:no-universal-verified-flag",
+          "req:observation-never-overwrites-intent",
+          "req:readiness-does-not-modify",
+          "req:readiness-evaluates-policy",
+          "req:reconcile-safe-conclusions",
+          "req:review-packet-deterministic",
+          "req:stable-ids",
+          "req:stale-base-rejected",
+          "req:unknown-kinds-not-silently-known",
+          "req:unmapped-change-coverage",
+          "req:waiver-requires-user",
+          "req:workspace-snapshot-identity"
+        ],
+        "test_refs": [],
+        "tool": "pytest",
+        "workspace_snapshot_ref": "workspace:m4-pytest-capture"
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "independent_capture",
+        "notes": "",
+        "source_refs": [
+          "workspace:m4-pytest-capture"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "finding:gates-unsupported",
       "kind": "Finding",
       "label": "status reports gates as unsupported until milestone 3",
@@ -2993,6 +4199,37 @@
     {
       "annotations": [],
       "description": "",
+      "id": "mapping:ci-entry",
+      "kind": "Mapping",
+      "label": "services.ci realizes the independent trigger",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "symbol:m4-ci",
+          "test:m4-ci"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:ci-entry-point",
+          "operation:ci"
+        ],
+        "remaining_gaps": [
+          "The GitHub Actions workflow is an example; other CI systems call `intentgraph ci --json` the same way."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m4-evidence"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "mapping:diff-command",
       "kind": "Mapping",
       "label": "model.diff and repository.gitio realize graph diffs",
@@ -3022,6 +4259,78 @@
         "notes": "",
         "source_refs": [
           "patch:close-m2-impact-diff"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:evidence-ingestion",
+      "kind": "Mapping",
+      "label": "evidence_submit/evidence_capture realize collection-mode preservation and input binding",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "symbol:m4-evidence-submit",
+          "symbol:m4-evidence-capture",
+          "symbol:m4-report-validation",
+          "test:m4-validated-report",
+          "test:m4-capture"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:evidence-binds-inputs",
+          "req:collection-mode-preserved",
+          "operation:evidence-submit",
+          "operation:evidence-capture"
+        ],
+        "remaining_gaps": [
+          "Only JUnit XML and the small JSON format are validated; other formats are opaque."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m4-evidence"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:freshness-reconcile",
+      "kind": "Mapping",
+      "label": "freshness and reconcile realize safe conclusions, artifact downgrade and unmapped-change coverage",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "symbol:m4-freshness",
+          "symbol:m4-reconcile",
+          "test:m4-source-change-fresh-process",
+          "test:m4-artifact-downgrade",
+          "test:m4-unmapped"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:missing-artifact-downgrades",
+          "req:reconcile-safe-conclusions",
+          "req:unmapped-change-coverage",
+          "operation:reconcile"
+        ],
+        "remaining_gaps": [
+          "Unmapped-change detection needs Git; without it the tool reports detection unavailable."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m4-evidence"
         ]
       }
     },
@@ -3139,6 +4448,38 @@
       }
     },
     {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:workspace-snapshots",
+      "kind": "Mapping",
+      "label": "repository.workspace realizes workspace snapshot identity",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "symbol:m4-workspace-capture",
+          "symbol:m4-workspace-changed-since",
+          "test:m4-validated-report"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:workspace-snapshot-identity",
+          "operation:workspace-snapshot"
+        ],
+        "remaining_gaps": [
+          "Directories are hashed as whole trees; no per-file attribution inside a declared directory."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m4-evidence"
+        ]
+      }
+    },
+    {
       "annotations": [
         {
           "refs": [
@@ -3244,25 +4585,35 @@
       }
     },
     {
-      "annotations": [],
+      "annotations": [
+        {
+          "refs": [
+            "mapping:evidence-ingestion",
+            "mapping:freshness-reconcile"
+          ],
+          "role": "explanation",
+          "text": "Implemented and mapped; evidence is captured by the tool itself (evidence:m4-pytest-capture, independent_capture) rather than agent-reported."
+        }
+      ],
       "description": "",
       "id": "obligation:m4-evidence-reconciliation",
       "kind": "Obligation",
       "label": "Milestone 4: evidence ingestion, workspace snapshots, freshness rules, reconciliation command, CI entry point",
       "layer": "reconciliation",
-      "lifecycle": "proposed",
+      "lifecycle": "accepted",
       "properties": {
         "acceptable_resolution": [
           "implementation_with_tests"
         ],
         "blocking": true,
+        "gate": "conformance",
         "obligation_kind": "milestone_capability",
-        "request": "Modify code without touching the model and confirm stale or unresolved evidence appears after a fresh process starts.",
+        "request": "Implement evidence submit/capture, workspace snapshots, freshness, reconcile and ci with tests; then run the loop on this scope and introduce drift to prove detection from a fresh process.",
         "required_evidence": "independent executable tests plus manual review",
         "scope_refs": [
           "scope:m4-evidence-reconciliation"
         ],
-        "state": "pending"
+        "state": "satisfied"
       },
       "provenance": {
         "author_role": "agent",
@@ -3286,6 +4637,7 @@
           "implementation_with_tests"
         ],
         "blocking": true,
+        "gate": "conformance",
         "obligation_kind": "milestone_capability",
         "request": "On a clean machine without Python, initialize, patch, restart, query, evaluate readiness, import evidence, reconcile.",
         "required_evidence": "independent executable tests plus manual review",
@@ -3316,6 +4668,7 @@
           "implementation_with_tests"
         ],
         "blocking": false,
+        "gate": "conformance",
         "obligation_kind": "milestone_capability",
         "request": "Measure requirement misses, regressions, reviewer corrections, drift-finding usefulness, time, cost, maintenance effort.",
         "required_evidence": "independent executable tests plus manual review",
@@ -3371,6 +4724,105 @@
     {
       "annotations": [],
       "description": "",
+      "id": "operation:ci",
+      "kind": "Operation",
+      "label": "Run check, readiness and reconciliation for every active scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [],
+        "idempotent": true,
+        "inputs": {
+          "scopes": "optional list"
+        },
+        "mode": "sync",
+        "outputs": {
+          "blocking": "boolean",
+          "summary": "per scope"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:evidence-capture",
+      "kind": "Operation",
+      "label": "Run a declared command and capture its result as independent evidence",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "command_not_found",
+          "invalid_evidence",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "spec": "argv list, cwd root, supports, declared inputs"
+        },
+        "mode": "sync",
+        "outputs": {
+          "artifact_ref": "captured stdout/stderr",
+          "evidence_id": "id",
+          "result": "passed|failed"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#18"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:evidence-submit",
+      "kind": "Operation",
+      "label": "Ingest an evidence report with provenance",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_record",
+          "invalid_evidence",
+          "report_validation_failed",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "artifact": "optional file path",
+          "report": "evidence submission JSON"
+        },
+        "mode": "sync",
+        "outputs": {
+          "effective_collection_mode": "mode",
+          "evidence_id": "id",
+          "workspace_snapshot_ref": "id"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "operation:readiness",
       "kind": "Operation",
       "label": "Evaluate readiness of a scope",
@@ -3406,6 +4858,38 @@
     {
       "annotations": [],
       "description": "",
+      "id": "operation:reconcile",
+      "kind": "Operation",
+      "label": "Evaluate mappings, evidence freshness and workspace drift for a scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_scope"
+        ],
+        "idempotent": true,
+        "inputs": {
+          "scope": "optional Scope id"
+        },
+        "mode": "sync",
+        "outputs": {
+          "conformance": "policy result",
+          "evidence": "freshness per record",
+          "findings": "list with safe conclusion and follow-up"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "operation:review-export",
       "kind": "Operation",
       "label": "Export a review packet for a scope",
@@ -3432,6 +4916,40 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:workspace-snapshot",
+      "kind": "Operation",
+      "label": "Capture a workspace snapshot for a root and declared paths",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_root",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "paths": "declared files",
+          "repository": "root name"
+        },
+        "mode": "sync",
+        "outputs": {
+          "files": "path -> digest",
+          "head": "commit or empty",
+          "snapshot_id": "id"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
         ]
       }
     },
@@ -3492,7 +5010,7 @@
       "kind": "Question",
       "label": "Should a refinement change propagate impact upward to its parent intent?",
       "layer": "intent",
-      "lifecycle": "proposed",
+      "lifecycle": "accepted",
       "properties": {
         "answer": "Deferred: v0 propagates parent -> refinement only; upward coverage effects belong to readiness policy (milestone 3).",
         "blocking": false,
@@ -3532,11 +5050,33 @@
     {
       "annotations": [],
       "description": "",
+      "id": "question:runner-capture-trust",
+      "kind": "Question",
+      "label": "How much trust does an independent capture earn when the command is user-supplied?",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "answer": "v0: independent_capture means the tool ran the argv and recorded exit code and output; the command's meaning is still the submitter's claim, recorded in declared inputs and limitations.",
+        "blocking": false,
+        "status": "answered"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "question:single-snapshot-scale",
       "kind": "Question",
       "label": "Does a single snapshot remain practical at the first target project size?",
       "layer": "intent",
-      "lifecycle": "proposed",
+      "lifecycle": "accepted",
       "properties": {
         "blocking": false,
         "status": "open"
@@ -3638,6 +5178,50 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:ci-entry-point",
+      "kind": "Requirement",
+      "label": "A CI entry point evaluates checks, readiness and reconciliation without depending on the agent remembering",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Exit code 2 on blockers; JSON carries the detail.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:collection-mode-preserved",
+      "kind": "Requirement",
+      "label": "Evidence ingestion preserves and verifies the collection mode",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "A validated report is parsed by the tool; an independent capture is executed by the tool; a submitted report is recorded as such.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#7.5"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:design-change-invalidates-readiness",
       "kind": "Requirement",
       "label": "A semantic change inside the approved scope invalidates the prior approval and names the affected approval",
@@ -3676,6 +5260,28 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#13.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:evidence-binds-inputs",
+      "kind": "Requirement",
+      "label": "Evidence binds to the workspace snapshot of its declared inputs and to the model content it supports",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Source or model changes after submission make the evidence stale, never silently current.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
         ]
       }
     },
@@ -3820,6 +5426,28 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#10"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:missing-artifact-downgrades",
+      "kind": "Requirement",
+      "label": "A missing or altered evidence artifact must not preserve a grade that requires inspecting it",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Reconciliation reports the artifact and the effective collection mode drops to agent_assertion.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.1"
         ]
       }
     },
@@ -3975,6 +5603,28 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:reconcile-safe-conclusions",
+      "kind": "Requirement",
+      "label": "Reconciliation reports only safe conclusions with the follow-up each requires",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Broken locator, source digest changed, model scope changed, artifact missing, test failed, unmapped source change, policy changed.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:review-packet-deterministic",
       "kind": "Requirement",
       "label": "The review packet is selected deterministically from the scope and carries its scope digest and coverage",
@@ -4060,6 +5710,28 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:unmapped-change-coverage",
+      "kind": "Requirement",
+      "label": "Source changes not referenced by any mapping, symbol, test or evidence input are reported as coverage gaps",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Requires Git; without it the tool says detection is unavailable rather than reporting nothing.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:waiver-requires-user",
       "kind": "Requirement",
       "label": "A waiver is honoured only when it records a user authorization and a reason",
@@ -4076,6 +5748,28 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:workspace-snapshot-identity",
+      "kind": "Requirement",
+      "label": "A workspace snapshot records repository identity, HEAD, dirty and untracked state, and content hashes for the declared scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "A Git commit alone is insufficient when files are modified or untracked. Multiple roots have separate snapshot records.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#16.1"
         ]
       }
     },
@@ -4104,6 +5798,37 @@
     {
       "annotations": [],
       "description": "",
+      "id": "review:m4-evidence-reconciliation",
+      "kind": "ReviewArtifact",
+      "label": "Review packet for Milestone 4: evidence, mappings and drift reconciliation",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_kind": "summary",
+        "artifact_path": ".intentgraph/artifacts/review-m4-evidence-reconciliation.md",
+        "scope_digest": "sha256:c2b809dc4e3446cfa574537f15f4d9faab851cf91b10ca7a80fe2ecd1e387c47"
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": [
+          "scope:m4-evidence-reconciliation"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [
+            "approval:m3-readiness/r8",
+            "decision:scope-closure-rule"
+          ],
+          "role": "explanation",
+          "text": "Closed after delivery. The tool's closure-rule revision (a semantic change, section 9.5) altered this scope's design digest and reconcile reported approval:m3-readiness/r8 as invalidated; the authorized design itself did not change. Its requirements continue under scope:package-guarantees for conformance."
+        }
+      ],
+      "description": "",
       "id": "scope:m3-readiness",
       "kind": "Scope",
       "label": "Milestone 3: readiness, review packets and approvals",
@@ -4126,7 +5851,7 @@
           "req:review-packet-deterministic"
         ],
         "policy_ref": "policy:default-readiness",
-        "status": "active"
+        "status": "closed"
       },
       "provenance": {
         "author_role": "agent",
@@ -4148,10 +5873,23 @@
       "properties": {
         "member_refs": [
           "component:obligations",
-          "component:repository"
+          "component:repository",
+          "component:reports",
+          "operation:evidence-submit",
+          "operation:evidence-capture",
+          "operation:workspace-snapshot",
+          "operation:reconcile",
+          "operation:ci",
+          "req:workspace-snapshot-identity",
+          "req:evidence-binds-inputs",
+          "req:collection-mode-preserved",
+          "req:missing-artifact-downgrades",
+          "req:reconcile-safe-conclusions",
+          "req:unmapped-change-coverage",
+          "req:ci-entry-point"
         ],
         "policy_ref": "policy:default-readiness",
-        "status": "draft"
+        "status": "active"
       },
       "provenance": {
         "author_role": "agent",
@@ -4207,6 +5945,66 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#21.9"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [],
+          "role": "explanation",
+          "text": "Not a build scope: it exists so `ci` keeps checking mappings and evidence freshness for delivered requirements across milestones. It is never approved, so unapproved readiness findings here are reported, not failed."
+        }
+      ],
+      "description": "",
+      "id": "scope:package-guarantees",
+      "kind": "Scope",
+      "label": "Standing conformance scope: every accepted package requirement",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "req:acyclic-only-where-declared",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:atomic-replace",
+          "req:canonical-digest",
+          "req:ci-entry-point",
+          "req:collection-mode-preserved",
+          "req:design-change-invalidates-readiness",
+          "req:design-digest-stable-under-approval",
+          "req:evidence-binds-inputs",
+          "req:exit-code-convention",
+          "req:fresh-process-reconstruction",
+          "req:graph-diff",
+          "req:idempotent-patch-ids",
+          "req:impact-slice",
+          "req:lens-never-drops-mandatory",
+          "req:missing-artifact-downgrades",
+          "req:mixed-precision",
+          "req:no-code-execution-from-data",
+          "req:no-self-approval",
+          "req:no-universal-verified-flag",
+          "req:observation-never-overwrites-intent",
+          "req:readiness-does-not-modify",
+          "req:readiness-evaluates-policy",
+          "req:reconcile-safe-conclusions",
+          "req:review-packet-deterministic",
+          "req:stable-ids",
+          "req:stale-base-rejected",
+          "req:unknown-kinds-not-silently-known",
+          "req:unmapped-change-coverage",
+          "req:waiver-requires-user",
+          "req:workspace-snapshot-identity"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "active"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#22"
         ]
       }
     },
@@ -4292,6 +6090,214 @@
         "notes": "",
         "source_refs": [
           "file:src/intentgraph/lenses/impact.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-ci",
+      "kind": "CodeSymbol",
+      "label": "ci",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/services.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "ci"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/services.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-evidence-capture",
+      "kind": "CodeSymbol",
+      "label": "evidence_capture",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/services.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "evidence_capture"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/services.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-evidence-submit",
+      "kind": "CodeSymbol",
+      "label": "evidence_submit",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/services.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "evidence_submit"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/services.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-freshness",
+      "kind": "CodeSymbol",
+      "label": "evaluate_freshness",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/freshness.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "evaluate_freshness"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/freshness.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-reconcile",
+      "kind": "CodeSymbol",
+      "label": "reconcile",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/reconcile.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "reconcile"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/reconcile.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-report-validation",
+      "kind": "CodeSymbol",
+      "label": "validate_report",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/reports.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "validate_report"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/reports.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-workspace-capture",
+      "kind": "CodeSymbol",
+      "label": "capture",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/repository/workspace.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "capture"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/repository/workspace.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m4-workspace-changed-since",
+      "kind": "CodeSymbol",
+      "label": "changed_since",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/repository/workspace.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "changed_since"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/repository/workspace.py"
         ]
       }
     },
@@ -4605,6 +6611,144 @@
     {
       "annotations": [],
       "description": "",
+      "id": "test:m4-artifact-downgrade",
+      "kind": "TestCase",
+      "label": "test_removed_artifact_downgrades_evidence_grade",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_evidence.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_removed_artifact_downgrades_evidence_grade"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_evidence.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m4-capture",
+      "kind": "TestCase",
+      "label": "test_capture_runs_argv_without_shell_and_records_outcome",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_evidence.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_capture_runs_argv_without_shell_and_records_outcome"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_evidence.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m4-ci",
+      "kind": "TestCase",
+      "label": "test_ci_reports_blockers_only_for_broken_or_authorized_scopes",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_evidence.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_ci_reports_blockers_only_for_broken_or_authorized_scopes"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_evidence.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m4-source-change-fresh-process",
+      "kind": "TestCase",
+      "label": "test_source_change_without_model_change_is_detected_in_fresh_process",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_evidence.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_source_change_without_model_change_is_detected_in_fresh_process"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_evidence.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m4-unmapped",
+      "kind": "TestCase",
+      "label": "test_unmapped_change_detected_via_git_baseline",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_evidence.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_unmapped_change_detected_via_git_baseline"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_evidence.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m4-validated-report",
+      "kind": "TestCase",
+      "label": "test_submit_validated_report_binds_inputs_and_model",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_evidence.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_submit_validated_report_binds_inputs_and_model"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_evidence.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "test:migration-apply",
       "kind": "TestCase",
       "label": "test_migration_preview_then_apply_with_backup",
@@ -4691,6 +6835,128 @@
         "notes": "",
         "source_refs": [
           "file:tests/test_readiness.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "workspace:m4-pytest-capture",
+      "kind": "WorkspaceSnapshot",
+      "label": ". @ 846f5d7b6067 (dirty)",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "captured_at": "2026-10-18T09:05:12Z",
+        "dirty": true,
+        "files": {
+          "pyproject.toml": "sha256:95a22e99b4c298430b3ea2f32703ec6a4d686af30ea5caafc247ed8c7418ae59",
+          "src": "sha256:2d1ca926ab16e13f4e53561fe24c628fe3623d1cea435486cba741e99ed47932",
+          "tests": "sha256:87246c99baf38ee74c9b6230354eb13d9fb6fd9d8421022ff0cb9d7f25c52d0a"
+        },
+        "git_available": true,
+        "head": "846f5d7b606789920d7d629c94169a4dbef39c34",
+        "lockfiles": {},
+        "missing_paths": [],
+        "repository": ".",
+        "root_path": ".",
+        "tool_version": "0.0.1",
+        "tracked_dirty": [
+          "README.md",
+          "docs/data-contract.md",
+          "docs/milestones.md",
+          "src/intentgraph/__init__.py",
+          "src/intentgraph/cli/main.py",
+          "src/intentgraph/obligations/engine.py",
+          "src/intentgraph/obligations/scope.py",
+          "src/intentgraph/playbooks/agent-guide.md",
+          "src/intentgraph/repository/manifest.py",
+          "src/intentgraph/repository/migrations.py",
+          "src/intentgraph/services.py",
+          "src/intentgraph/vocabulary/core/kinds.json",
+          "src/intentgraph/vocabulary/core/relations.json",
+          "tests/test_cli.py",
+          "tests/test_migrations.py",
+          "tests/test_model.py",
+          "tests/test_self_model.py",
+          "tests/test_validation.py"
+        ],
+        "untracked": [
+          ".github/workflows/intentgraph.yml",
+          "src/intentgraph/obligations/freshness.py",
+          "src/intentgraph/obligations/reconcile.py",
+          "src/intentgraph/obligations/reports.py",
+          "src/intentgraph/repository/workspace.py",
+          "tests/test_evidence.py"
+        ]
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "workspace-capture",
+        "notes": "",
+        "source_refs": [
+          "evidence:m4-pytest-capture"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "workspace:root-20261018T090539Z-r19",
+      "kind": "WorkspaceSnapshot",
+      "label": ". @ 846f5d7b6067 (dirty)",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "captured_at": "2026-10-18T09:05:39Z",
+        "dirty": true,
+        "files": {
+          "pyproject.toml": "sha256:95a22e99b4c298430b3ea2f32703ec6a4d686af30ea5caafc247ed8c7418ae59",
+          "src": "sha256:2d1ca926ab16e13f4e53561fe24c628fe3623d1cea435486cba741e99ed47932",
+          "tests": "sha256:87246c99baf38ee74c9b6230354eb13d9fb6fd9d8421022ff0cb9d7f25c52d0a"
+        },
+        "git_available": true,
+        "head": "846f5d7b606789920d7d629c94169a4dbef39c34",
+        "lockfiles": {},
+        "missing_paths": [],
+        "repository": ".",
+        "root_path": ".",
+        "tool_version": "0.0.1",
+        "tracked_dirty": [
+          "README.md",
+          "docs/data-contract.md",
+          "docs/milestones.md",
+          "src/intentgraph/__init__.py",
+          "src/intentgraph/cli/main.py",
+          "src/intentgraph/obligations/engine.py",
+          "src/intentgraph/obligations/scope.py",
+          "src/intentgraph/playbooks/agent-guide.md",
+          "src/intentgraph/repository/manifest.py",
+          "src/intentgraph/repository/migrations.py",
+          "src/intentgraph/services.py",
+          "src/intentgraph/vocabulary/core/kinds.json",
+          "src/intentgraph/vocabulary/core/relations.json",
+          "tests/test_cli.py",
+          "tests/test_migrations.py",
+          "tests/test_model.py",
+          "tests/test_self_model.py",
+          "tests/test_validation.py"
+        ],
+        "untracked": [
+          ".github/workflows/intentgraph.yml",
+          "src/intentgraph/obligations/freshness.py",
+          "src/intentgraph/obligations/reconcile.py",
+          "src/intentgraph/obligations/reports.py",
+          "src/intentgraph/repository/workspace.py",
+          "tests/test_evidence.py"
+        ]
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "workspace-capture",
+        "notes": "",
+        "source_refs": [
+          "root:."
         ]
       }
     }
@@ -4819,7 +7085,7 @@
     }
   ],
   "project_id": "project:intentgraph",
-  "revision": 9,
+  "revision": 20,
   "transactions": [
     {
       "added_ids": [
@@ -5197,7 +7463,313 @@
       "removed_ids": [],
       "result_revision": 9,
       "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "decision:freshness-in-engine",
+        "decision:snapshot-as-node",
+        "edge:capture-realizes-mode",
+        "edge:ci-entry-point-refines-loop",
+        "edge:ci-op-realizes",
+        "edge:cli-realizes-ci",
+        "edge:collection-mode-preserved-refines-loop",
+        "edge:decision-freshness-concerns-obligations",
+        "edge:decision-snapshot-node-concerns-repo",
+        "edge:evidence-binds-inputs-refines-loop",
+        "edge:missing-artifact-downgrades-refines-loop",
+        "edge:obligations-realizes-binds",
+        "edge:obligations-realizes-downgrade",
+        "edge:obligations-realizes-mode",
+        "edge:obligations-realizes-safe",
+        "edge:question-trust-concerns-capture",
+        "edge:reconcile-realizes-safe",
+        "edge:reconcile-safe-conclusions-refines-loop",
+        "edge:repository-realizes-snapshot",
+        "edge:repository-realizes-unmapped",
+        "edge:snapshot-op-realizes",
+        "edge:submit-realizes-mode",
+        "edge:unmapped-change-coverage-refines-loop",
+        "edge:workspace-snapshot-identity-refines-loop",
+        "operation:ci",
+        "operation:evidence-capture",
+        "operation:evidence-submit",
+        "operation:reconcile",
+        "operation:workspace-snapshot",
+        "question:runner-capture-trust",
+        "req:ci-entry-point",
+        "req:collection-mode-preserved",
+        "req:evidence-binds-inputs",
+        "req:missing-artifact-downgrades",
+        "req:reconcile-safe-conclusions",
+        "req:unmapped-change-coverage",
+        "req:workspace-snapshot-identity"
+      ],
+      "applied_at": "2026-10-18T08:47:55Z",
+      "base_revision": 9,
+      "operations_digest": "sha256:656d477c8a7b603d8f8f69242534939de94d15a1d26e7c4aa5b47803392cd6bd",
+      "patch_id": "patch:plan-m4-evidence",
+      "reason": "Define evidence ingestion, workspace snapshots, freshness, reconciliation and the CI entry point before implementing them.",
+      "removed_ids": [],
+      "result_revision": 10,
+      "updated_ids": [
+        "obligation:m4-evidence-reconciliation",
+        "scope:m4-evidence-reconciliation"
+      ]
+    },
+    {
+      "added_ids": [],
+      "applied_at": "2026-10-18T08:52:09Z",
+      "base_revision": 10,
+      "operations_digest": "sha256:00c1485ec1ffbdd5c590f85dde484d5b51195eef8f3caab3073d0fe08822f528",
+      "patch_id": "patch:migrate-vocabulary-core-0.2-to-0.3",
+      "reason": "migration vocabulary-core-0.2-to-0.3: Additive: adds the WorkspaceSnapshot kind, Obligation.gate, and Evidence artifact_digest/report_format/declared_inputs/model_revision. No record rewrites.",
+      "removed_ids": [],
+      "result_revision": 11,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "scope:package-guarantees"
+      ],
+      "applied_at": "2026-10-18T09:01:04Z",
+      "base_revision": 11,
+      "operations_digest": "sha256:31b6e53fb524374ce496ed3ec24d358f6abe621b3788ab54c6a0316870525c78",
+      "patch_id": "patch:m4-closure-rule-and-gates",
+      "reason": "Record the closure-rule revision, gate semantics for milestone obligations, close the delivered milestone 3 scope, open a standing conformance scope.",
+      "removed_ids": [],
+      "result_revision": 12,
+      "updated_ids": [
+        "decision:scope-closure-rule",
+        "obligation:m4-evidence-reconciliation",
+        "obligation:m5-installable",
+        "obligation:m6-ab-evaluation",
+        "question:impact-refines-upward",
+        "question:single-snapshot-scale",
+        "scope:m3-readiness"
+      ]
+    },
+    {
+      "added_ids": [
+        "edge:m4-evidence-reconciliation-review-depicts-scope",
+        "review:m4-evidence-reconciliation"
+      ],
+      "applied_at": "2026-10-18T09:01:05Z",
+      "base_revision": 12,
+      "operations_digest": "sha256:42c1a49077c0bfc2778bd553c757e9234486e300940e1a21b993cb7cf87f35d2",
+      "patch_id": "patch:review-export/m4-evidence-reconciliation/c2b809dc4e3446cf",
+      "reason": "Record review packet for scope:m4-evidence-reconciliation at design digest sha256:c2b809dc4e3446cfa574537f15f4d9faab851cf91b10ca7a80fe2ecd1e387c47",
+      "removed_ids": [],
+      "result_revision": 13,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "approval:m4-evidence-reconciliation/r13",
+        "edge:m4-evidence-reconciliation-approval-r13-concerns-scope"
+      ],
+      "applied_at": "2026-10-18T09:01:06Z",
+      "base_revision": 13,
+      "operations_digest": "sha256:6ee1710564afe21b9160d38c8d19337a60bd81a3695abfa2f266e698e82227ec",
+      "patch_id": "patch:approval/m4-evidence-reconciliation/r13",
+      "reason": "Record build_authorization for scope:m4-evidence-reconciliation",
+      "removed_ids": [],
+      "result_revision": 14,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "mapping:ci-entry",
+        "mapping:evidence-ingestion",
+        "mapping:freshness-reconcile",
+        "mapping:workspace-snapshots",
+        "symbol:m4-ci",
+        "symbol:m4-evidence-capture",
+        "symbol:m4-evidence-submit",
+        "symbol:m4-freshness",
+        "symbol:m4-reconcile",
+        "symbol:m4-report-validation",
+        "symbol:m4-workspace-capture",
+        "symbol:m4-workspace-changed-since",
+        "test:m4-artifact-downgrade",
+        "test:m4-capture",
+        "test:m4-ci",
+        "test:m4-source-change-fresh-process",
+        "test:m4-unmapped",
+        "test:m4-validated-report"
+      ],
+      "applied_at": "2026-10-18T09:01:42Z",
+      "base_revision": 14,
+      "operations_digest": "sha256:cedfb996ee37538f24fca7675e52c62181fa0e725f2fed1141628fbcdde71d28",
+      "patch_id": "patch:close-m4-evidence",
+      "reason": "Map milestone 4 code and tests to the model; mark the implementation obligation satisfied.",
+      "removed_ids": [],
+      "result_revision": 15,
+      "updated_ids": [
+        "obligation:m4-evidence-reconciliation"
+      ]
+    },
+    {
+      "added_ids": [
+        "edge:m4-pytest-capture-supports-0",
+        "edge:m4-pytest-capture-supports-1",
+        "edge:m4-pytest-capture-supports-10",
+        "edge:m4-pytest-capture-supports-11",
+        "edge:m4-pytest-capture-supports-12",
+        "edge:m4-pytest-capture-supports-13",
+        "edge:m4-pytest-capture-supports-14",
+        "edge:m4-pytest-capture-supports-15",
+        "edge:m4-pytest-capture-supports-16",
+        "edge:m4-pytest-capture-supports-17",
+        "edge:m4-pytest-capture-supports-18",
+        "edge:m4-pytest-capture-supports-19",
+        "edge:m4-pytest-capture-supports-2",
+        "edge:m4-pytest-capture-supports-20",
+        "edge:m4-pytest-capture-supports-21",
+        "edge:m4-pytest-capture-supports-22",
+        "edge:m4-pytest-capture-supports-23",
+        "edge:m4-pytest-capture-supports-24",
+        "edge:m4-pytest-capture-supports-25",
+        "edge:m4-pytest-capture-supports-26",
+        "edge:m4-pytest-capture-supports-27",
+        "edge:m4-pytest-capture-supports-28",
+        "edge:m4-pytest-capture-supports-29",
+        "edge:m4-pytest-capture-supports-3",
+        "edge:m4-pytest-capture-supports-30",
+        "edge:m4-pytest-capture-supports-4",
+        "edge:m4-pytest-capture-supports-5",
+        "edge:m4-pytest-capture-supports-6",
+        "edge:m4-pytest-capture-supports-7",
+        "edge:m4-pytest-capture-supports-8",
+        "edge:m4-pytest-capture-supports-9",
+        "evidence:m4-pytest-capture",
+        "workspace:m4-pytest-capture"
+      ],
+      "applied_at": "2026-10-18T09:03:37Z",
+      "base_revision": 15,
+      "operations_digest": "sha256:6a9060c25dfa5287305f785e8e56d6b96cc9d1f8b3dab111c446d92055e76407",
+      "patch_id": "patch:evidence-capture/m4-pytest-capture",
+      "reason": "Capture evidence evidence:m4-pytest-capture",
+      "removed_ids": [],
+      "result_revision": 16,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "workspace:root-20261018T090338Z-r16"
+      ],
+      "applied_at": "2026-10-18T09:03:38Z",
+      "base_revision": 16,
+      "operations_digest": "sha256:ccb587125ba8d89dbcdbd32cf118e8f5cdfe0e686ddaa4f6749d7c7229b9ee59",
+      "patch_id": "patch:workspace-snapshot/root-20261018T090338Z-r16",
+      "reason": "Capture workspace snapshot for root '.'",
+      "removed_ids": [],
+      "result_revision": 17,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [],
+      "applied_at": "2026-10-18T09:04:20Z",
+      "base_revision": 17,
+      "operations_digest": "sha256:494829526d62feaac4b19dba9c48105b46a05cfc754a90fab667453e273ba925",
+      "patch_id": "patch:retract-flawed-capture",
+      "reason": "Retract the first tool capture and baseline: their directory digests included __pycache__ files (tool defect fixed in repository.workspace.tree_files), so they could never be fresh again.",
+      "removed_ids": [
+        "edge:m4-pytest-capture-supports-0",
+        "edge:m4-pytest-capture-supports-1",
+        "edge:m4-pytest-capture-supports-10",
+        "edge:m4-pytest-capture-supports-11",
+        "edge:m4-pytest-capture-supports-12",
+        "edge:m4-pytest-capture-supports-13",
+        "edge:m4-pytest-capture-supports-14",
+        "edge:m4-pytest-capture-supports-15",
+        "edge:m4-pytest-capture-supports-16",
+        "edge:m4-pytest-capture-supports-17",
+        "edge:m4-pytest-capture-supports-18",
+        "edge:m4-pytest-capture-supports-19",
+        "edge:m4-pytest-capture-supports-2",
+        "edge:m4-pytest-capture-supports-20",
+        "edge:m4-pytest-capture-supports-21",
+        "edge:m4-pytest-capture-supports-22",
+        "edge:m4-pytest-capture-supports-23",
+        "edge:m4-pytest-capture-supports-24",
+        "edge:m4-pytest-capture-supports-25",
+        "edge:m4-pytest-capture-supports-26",
+        "edge:m4-pytest-capture-supports-27",
+        "edge:m4-pytest-capture-supports-28",
+        "edge:m4-pytest-capture-supports-29",
+        "edge:m4-pytest-capture-supports-3",
+        "edge:m4-pytest-capture-supports-30",
+        "edge:m4-pytest-capture-supports-4",
+        "edge:m4-pytest-capture-supports-5",
+        "edge:m4-pytest-capture-supports-6",
+        "edge:m4-pytest-capture-supports-7",
+        "edge:m4-pytest-capture-supports-8",
+        "edge:m4-pytest-capture-supports-9",
+        "evidence:m4-pytest-capture",
+        "workspace:m4-pytest-capture",
+        "workspace:root-20261018T090338Z-r16"
+      ],
+      "result_revision": 18,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "edge:m4-pytest-capture-supports-0",
+        "edge:m4-pytest-capture-supports-1",
+        "edge:m4-pytest-capture-supports-10",
+        "edge:m4-pytest-capture-supports-11",
+        "edge:m4-pytest-capture-supports-12",
+        "edge:m4-pytest-capture-supports-13",
+        "edge:m4-pytest-capture-supports-14",
+        "edge:m4-pytest-capture-supports-15",
+        "edge:m4-pytest-capture-supports-16",
+        "edge:m4-pytest-capture-supports-17",
+        "edge:m4-pytest-capture-supports-18",
+        "edge:m4-pytest-capture-supports-19",
+        "edge:m4-pytest-capture-supports-2",
+        "edge:m4-pytest-capture-supports-20",
+        "edge:m4-pytest-capture-supports-21",
+        "edge:m4-pytest-capture-supports-22",
+        "edge:m4-pytest-capture-supports-23",
+        "edge:m4-pytest-capture-supports-24",
+        "edge:m4-pytest-capture-supports-25",
+        "edge:m4-pytest-capture-supports-26",
+        "edge:m4-pytest-capture-supports-27",
+        "edge:m4-pytest-capture-supports-28",
+        "edge:m4-pytest-capture-supports-29",
+        "edge:m4-pytest-capture-supports-3",
+        "edge:m4-pytest-capture-supports-30",
+        "edge:m4-pytest-capture-supports-4",
+        "edge:m4-pytest-capture-supports-5",
+        "edge:m4-pytest-capture-supports-6",
+        "edge:m4-pytest-capture-supports-7",
+        "edge:m4-pytest-capture-supports-8",
+        "edge:m4-pytest-capture-supports-9",
+        "evidence:m4-pytest-capture",
+        "workspace:m4-pytest-capture"
+      ],
+      "applied_at": "2026-10-18T09:05:39Z",
+      "base_revision": 18,
+      "operations_digest": "sha256:97e95a058aa5c2143605c0f6057f51aa9bf10da9a34f0a0ca3804b9375bb2651",
+      "patch_id": "patch:evidence-capture/m4-pytest-capture/r18",
+      "reason": "Capture evidence evidence:m4-pytest-capture",
+      "removed_ids": [],
+      "result_revision": 19,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "workspace:root-20261018T090539Z-r19"
+      ],
+      "applied_at": "2026-10-18T09:05:39Z",
+      "base_revision": 19,
+      "operations_digest": "sha256:f196320e0ba426f5aab2aa9af5ed7eae2092aaeba9e4c959f2616104c9dffd79",
+      "patch_id": "patch:workspace-snapshot/root-20261018T090539Z-r19",
+      "reason": "Capture workspace snapshot for root '.'",
+      "removed_ids": [],
+      "result_revision": 20,
+      "updated_ids": []
     }
   ],
-  "vocabulary_version": "core/0.2"
+  "vocabulary_version": "core/0.3"
 }

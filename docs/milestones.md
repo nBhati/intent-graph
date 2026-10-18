@@ -40,6 +40,20 @@ Self-use exit: `scope:m3-readiness` went through the loop on the real model: `ne
 
 Known limits: evidence freshness is not evaluated (no workspace snapshots yet); packets have no diagrams; waivers and approvals are agent-recorded traceability, not authenticated identity; the conformance policy cannot yet tell a stale test report from a current one.
 
-## Milestones 4 to 6
+## Milestone 4: evidence, mappings and drift reconciliation (done, 2026-10-18)
 
-Not started. See the architecture document, sections 21.7 to 21.9. Each has a draft scope and a pending obligation in the self-model.
+Defined first in the self-model (`patch:plan-m4-evidence`): seven requirements (workspace snapshot identity, evidence bound to inputs and model content, collection mode preserved and verified, missing artifacts downgrade the grade, safe reconciliation conclusions, unmapped-change coverage, CI entry point), five operations with contracts, two decisions, one answered question, and the activated `scope:m4-evidence-reconciliation`. The scope went through readiness, review packet and approval (from the user's words "continue with milestone 4") before the mapping and evidence records were added, which left the approval current.
+
+Built: vocabulary `core/0.3` (WorkspaceSnapshot kind, `Obligation.gate`, evidence binding fields) with its migration; named repository roots; workspace snapshots (Git HEAD, dirty and untracked state, declared-path digests, lockfile digests); `evidence submit` (submitted or validated reports; JUnit XML and a small JSON format are parsed and a contradicted claim is refused); `evidence capture` (the tool runs a declared argv without a shell and records `independent_capture`); freshness shared by `reconcile` and the `evidence_required` rule; `reconcile` findings with safe conclusions and follow-ups; unmapped-change detection against a snapshot baseline; `ci`; a GitHub Actions workflow.
+
+Verified by tests (82 passing): a source change without a model change makes evidence stale and is reported from a fresh process; renaming a mapped file breaks its locator; removing an evidence artifact downgrades the evidence to an assertion; a changed policy invalidates the approval; an unmapped file change is reported as a coverage gap while a mapped one is not; a validated report that contradicts its claim is rejected and nothing is written; a captured command's exit code decides the result; implementation obligations gated to conformance do not block readiness; CI blocks on broken state and non-conformant authorized scopes but only reports work in progress.
+
+Self-use exit: evidence for the package is now captured by the tool itself (`evidence:m4-pytest-capture`, `independent_capture`, declared inputs `src`, `tests`, `pyproject.toml`), a workspace baseline is recorded, and `reconcile --scope scope:m4-evidence-reconciliation` reports fresh evidence and a ready conformance result. Editing a source file and running `reconcile` in a fresh process reports `source_changed` and conformance `needs_work`; reverting the edit restores freshness.
+
+Two corrections the tool forced on its own development: reconcile showed that the milestone 3 approval had been invalidated because a shared component dragged milestone 4 requirements into the milestone 3 scope, so the closure rule was narrowed (recorded on `decision:scope-closure-rule`) and the delivered milestone 3 scope was closed with an explanation rather than re-approved by the agent; and the milestone obligations needed an explicit `gate` so implementation work does not block pre-build readiness.
+
+Known limits: directories declared as inputs are hashed as whole trees; symbol claims are only as good as their extractor; evidence captured by the tool proves the command ran, not what the command means; unmapped-change detection needs Git.
+
+## Milestones 5 and 6
+
+Not started. See the architecture document, sections 21.8 and 21.9. Each has a draft scope and a pending obligation in the self-model.

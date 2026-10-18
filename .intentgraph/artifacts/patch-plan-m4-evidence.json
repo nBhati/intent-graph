@@ -1,0 +1,901 @@
+{
+  "patch_id": "patch:plan-m4-evidence",
+  "base_revision": 9,
+  "base_digest": "sha256:8743849f39232fafb7c71a33328d3180850fa3e1fe57af249b03b6e181bb957c",
+  "reason": "Define evidence ingestion, workspace snapshots, freshness, reconciliation and the CI entry point before implementing them.",
+  "operations": [
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:workspace-snapshot-identity",
+        "kind": "Requirement",
+        "label": "A workspace snapshot records repository identity, HEAD, dirty and untracked state, and content hashes for the declared scope",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "A Git commit alone is insufficient when files are modified or untracked. Multiple roots have separate snapshot records."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:evidence-binds-inputs",
+        "kind": "Requirement",
+        "label": "Evidence binds to the workspace snapshot of its declared inputs and to the model content it supports",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Source or model changes after submission make the evidence stale, never silently current."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:collection-mode-preserved",
+        "kind": "Requirement",
+        "label": "Evidence ingestion preserves and verifies the collection mode",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "A validated report is parsed by the tool; an independent capture is executed by the tool; a submitted report is recorded as such."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#7.5"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:missing-artifact-downgrades",
+        "kind": "Requirement",
+        "label": "A missing or altered evidence artifact must not preserve a grade that requires inspecting it",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Reconciliation reports the artifact and the effective collection mode drops to agent_assertion."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#9.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:reconcile-safe-conclusions",
+        "kind": "Requirement",
+        "label": "Reconciliation reports only safe conclusions with the follow-up each requires",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Broken locator, source digest changed, model scope changed, artifact missing, test failed, unmapped source change, policy changed."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:unmapped-change-coverage",
+        "kind": "Requirement",
+        "label": "Source changes not referenced by any mapping, symbol, test or evidence input are reported as coverage gaps",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Requires Git; without it the tool says detection is unavailable rather than reporting nothing."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:ci-entry-point",
+        "kind": "Requirement",
+        "label": "A CI entry point evaluates checks, readiness and reconciliation without depending on the agent remembering",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Exit code 2 on blockers; JSON carries the detail."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.4"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:evidence-submit",
+        "kind": "Operation",
+        "label": "Ingest an evidence report with provenance",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "report": "evidence submission JSON",
+            "artifact": "optional file path"
+          },
+          "outputs": {
+            "evidence_id": "id",
+            "workspace_snapshot_ref": "id",
+            "effective_collection_mode": "mode"
+          },
+          "failures": [
+            "unknown_record",
+            "invalid_evidence",
+            "report_validation_failed",
+            "stale_base"
+          ],
+          "idempotent": false,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#12"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:evidence-capture",
+        "kind": "Operation",
+        "label": "Run a declared command and capture its result as independent evidence",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "spec": "argv list, cwd root, supports, declared inputs"
+          },
+          "outputs": {
+            "evidence_id": "id",
+            "result": "passed|failed",
+            "artifact_ref": "captured stdout/stderr"
+          },
+          "failures": [
+            "command_not_found",
+            "invalid_evidence",
+            "stale_base"
+          ],
+          "idempotent": false,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#18"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:workspace-snapshot",
+        "kind": "Operation",
+        "label": "Capture a workspace snapshot for a root and declared paths",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "repository": "root name",
+            "paths": "declared files"
+          },
+          "outputs": {
+            "snapshot_id": "id",
+            "head": "commit or empty",
+            "files": "path -> digest"
+          },
+          "failures": [
+            "unknown_root",
+            "stale_base"
+          ],
+          "idempotent": false,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:reconcile",
+        "kind": "Operation",
+        "label": "Evaluate mappings, evidence freshness and workspace drift for a scope",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "scope": "optional Scope id"
+          },
+          "outputs": {
+            "findings": "list with safe conclusion and follow-up",
+            "evidence": "freshness per record",
+            "conformance": "policy result"
+          },
+          "failures": [
+            "unknown_scope"
+          ],
+          "idempotent": true,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:ci",
+        "kind": "Operation",
+        "label": "Run check, readiness and reconciliation for every active scope",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "scopes": "optional list"
+          },
+          "outputs": {
+            "summary": "per scope",
+            "blocking": "boolean"
+          },
+          "failures": [],
+          "idempotent": true,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.4"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:snapshot-as-node",
+        "kind": "Decision",
+        "label": "Workspace snapshots are WorkspaceSnapshot nodes in the observation layer holding digests for declared paths only",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "agent",
+          "decision_kind": "choice",
+          "rationale": "Keeps evidence inputs inspectable and versioned with the model without hashing the whole repository.",
+          "alternatives": [
+            "Side files under artifacts/",
+            "Hash every tracked file"
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:freshness-in-engine",
+        "kind": "Decision",
+        "label": "Evidence freshness is computed once and shared by reconcile and the evidence_required rule",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "agent",
+          "decision_kind": "choice",
+          "rationale": "Conformance must not count stale evidence; one implementation avoids two answers.",
+          "alternatives": [
+            "Freshness only in reconcile"
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "question:runner-capture-trust",
+        "kind": "Question",
+        "label": "How much trust does an independent capture earn when the command is user-supplied?",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "status": "answered",
+          "blocking": false,
+          "answer": "v0: independent_capture means the tool ran the argv and recorded exit code and output; the command's meaning is still the submitter's claim, recorded in declared inputs and limitations."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#24"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "scope:m4-evidence-reconciliation",
+      "changes": {
+        "status": "active",
+        "member_refs": [
+          "component:obligations",
+          "component:repository",
+          "component:reports",
+          "operation:evidence-submit",
+          "operation:evidence-capture",
+          "operation:workspace-snapshot",
+          "operation:reconcile",
+          "operation:ci",
+          "req:workspace-snapshot-identity",
+          "req:evidence-binds-inputs",
+          "req:collection-mode-preserved",
+          "req:missing-artifact-downgrades",
+          "req:reconcile-safe-conclusions",
+          "req:unmapped-change-coverage",
+          "req:ci-entry-point"
+        ]
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:workspace-snapshot-identity-refines-loop",
+        "kind": "refines",
+        "source": "req:workspace-snapshot-identity",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:evidence-binds-inputs-refines-loop",
+        "kind": "refines",
+        "source": "req:evidence-binds-inputs",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:collection-mode-preserved-refines-loop",
+        "kind": "refines",
+        "source": "req:collection-mode-preserved",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#7.5"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:missing-artifact-downgrades-refines-loop",
+        "kind": "refines",
+        "source": "req:missing-artifact-downgrades",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#9.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:reconcile-safe-conclusions-refines-loop",
+        "kind": "refines",
+        "source": "req:reconcile-safe-conclusions",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:unmapped-change-coverage-refines-loop",
+        "kind": "refines",
+        "source": "req:unmapped-change-coverage",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:ci-entry-point-refines-loop",
+        "kind": "refines",
+        "source": "req:ci-entry-point",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.4"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:repository-realizes-snapshot",
+        "kind": "realizes",
+        "source": "component:repository",
+        "target": "req:workspace-snapshot-identity",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:obligations-realizes-binds",
+        "kind": "realizes",
+        "source": "component:obligations",
+        "target": "req:evidence-binds-inputs",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:obligations-realizes-mode",
+        "kind": "realizes",
+        "source": "component:obligations",
+        "target": "req:collection-mode-preserved",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:obligations-realizes-downgrade",
+        "kind": "realizes",
+        "source": "component:obligations",
+        "target": "req:missing-artifact-downgrades",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:obligations-realizes-safe",
+        "kind": "realizes",
+        "source": "component:obligations",
+        "target": "req:reconcile-safe-conclusions",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:repository-realizes-unmapped",
+        "kind": "realizes",
+        "source": "component:repository",
+        "target": "req:unmapped-change-coverage",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:cli-realizes-ci",
+        "kind": "realizes",
+        "source": "component:cli",
+        "target": "req:ci-entry-point",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:submit-realizes-mode",
+        "kind": "realizes",
+        "source": "operation:evidence-submit",
+        "target": "req:collection-mode-preserved",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#12"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:capture-realizes-mode",
+        "kind": "realizes",
+        "source": "operation:evidence-capture",
+        "target": "req:collection-mode-preserved",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#18"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:snapshot-op-realizes",
+        "kind": "realizes",
+        "source": "operation:workspace-snapshot",
+        "target": "req:workspace-snapshot-identity",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:reconcile-realizes-safe",
+        "kind": "realizes",
+        "source": "operation:reconcile",
+        "target": "req:reconcile-safe-conclusions",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:ci-op-realizes",
+        "kind": "realizes",
+        "source": "operation:ci",
+        "target": "req:ci-entry-point",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.4"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:decision-snapshot-node-concerns-repo",
+        "kind": "concerns",
+        "source": "decision:snapshot-as-node",
+        "target": "component:repository",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:decision-freshness-concerns-obligations",
+        "kind": "concerns",
+        "source": "decision:freshness-in-engine",
+        "target": "component:obligations",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#16.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:question-trust-concerns-capture",
+        "kind": "concerns",
+        "source": "question:runner-capture-trust",
+        "target": "operation:evidence-capture",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#24"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m4-evidence-reconciliation",
+      "changes": {
+        "request": "Implement evidence submit/capture, workspace snapshots, freshness, reconcile and ci with tests; then run the loop on this scope and introduce drift to prove detection from a fresh process."
+      }
+    }
+  ]
+}

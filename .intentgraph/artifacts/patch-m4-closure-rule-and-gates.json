@@ -1,0 +1,137 @@
+{
+  "patch_id": "patch:m4-closure-rule-and-gates",
+  "base_revision": 11,
+  "base_digest": "sha256:fc15067f473186cd76881b54b9971217cfb78d91994944afbec2c251c8506ddb",
+  "reason": "Record the closure-rule revision, gate semantics for milestone obligations, close the delivered milestone 3 scope, open a standing conformance scope.",
+  "operations": [
+    {
+      "op": "add_annotation",
+      "id": "decision:scope-closure-rule",
+      "annotation": {
+        "role": "rationale",
+        "text": "Revised in milestone 4: `realizes` targets join the closure only from specific design elements (operations, actions, processes, screens, controls, interactions, transitions, decisions, scenarios, interfaces), not from shared components or systems. Reconcile showed that a shared component dragged milestone 4 requirements into the milestone 3 scope and invalidated its approval.",
+        "refs": [
+          "approval:m3-readiness/r8"
+        ]
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "decision:scope-closure-rule",
+      "changes": {
+        "rationale": "Deterministic and explainable; every closure member records why it is included. Shared containers do not propagate realized requirements, so one component serving two features does not merge their scopes."
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m4-evidence-reconciliation",
+      "changes": {
+        "gate": "conformance"
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m5-installable",
+      "changes": {
+        "gate": "conformance"
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m6-ab-evaluation",
+      "changes": {
+        "gate": "conformance"
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "scope:m3-readiness",
+      "changes": {
+        "status": "closed"
+      }
+    },
+    {
+      "op": "add_annotation",
+      "id": "scope:m3-readiness",
+      "annotation": {
+        "role": "explanation",
+        "text": "Closed after delivery. The tool's closure-rule revision (a semantic change, section 9.5) altered this scope's design digest and reconcile reported approval:m3-readiness/r8 as invalidated; the authorized design itself did not change. Its requirements continue under scope:package-guarantees for conformance.",
+        "refs": [
+          "approval:m3-readiness/r8",
+          "decision:scope-closure-rule"
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "scope:package-guarantees",
+        "kind": "Scope",
+        "label": "Standing conformance scope: every accepted package requirement",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "member_refs": [
+            "req:acyclic-only-where-declared",
+            "req:assertion-cannot-satisfy-executable-evidence",
+            "req:atomic-replace",
+            "req:canonical-digest",
+            "req:ci-entry-point",
+            "req:collection-mode-preserved",
+            "req:design-change-invalidates-readiness",
+            "req:design-digest-stable-under-approval",
+            "req:evidence-binds-inputs",
+            "req:exit-code-convention",
+            "req:fresh-process-reconstruction",
+            "req:graph-diff",
+            "req:idempotent-patch-ids",
+            "req:impact-slice",
+            "req:lens-never-drops-mandatory",
+            "req:missing-artifact-downgrades",
+            "req:mixed-precision",
+            "req:no-code-execution-from-data",
+            "req:no-self-approval",
+            "req:no-universal-verified-flag",
+            "req:observation-never-overwrites-intent",
+            "req:readiness-does-not-modify",
+            "req:readiness-evaluates-policy",
+            "req:reconcile-safe-conclusions",
+            "req:review-packet-deterministic",
+            "req:stable-ids",
+            "req:stale-base-rejected",
+            "req:unknown-kinds-not-silently-known",
+            "req:unmapped-change-coverage",
+            "req:waiver-requires-user",
+            "req:workspace-snapshot-identity"
+          ],
+          "status": "active",
+          "policy_ref": "policy:default-readiness"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#22"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "explanation",
+            "text": "Not a build scope: it exists so `ci` keeps checking mappings and evidence freshness for delivered requirements across milestones. It is never approved, so unapproved readiness findings here are reported, not failed.",
+            "refs": []
+          }
+        ]
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "question:impact-refines-upward",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "question:single-snapshot-scale",
+      "lifecycle": "accepted"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "patch_id": "patch:retract-flawed-capture",
+  "base_revision": 17,
+  "base_digest": "sha256:77de05722bb95003d04dae4e4b2677c6604432f665a466b703f863a60b637745",
+  "reason": "Retract the first tool capture and baseline: their directory digests included __pycache__ files (tool defect fixed in repository.workspace.tree_files), so they could never be fresh again.",
+  "operations": [
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-0"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-1"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-10"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-11"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-12"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-13"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-14"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-15"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-16"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-17"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-18"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-19"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-2"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-20"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-21"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-22"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-23"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-24"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-25"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-26"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-27"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-28"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-29"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-3"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-30"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-4"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-5"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-6"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-7"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-8"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m4-pytest-capture-supports-9"
+    },
+    {
+      "op": "remove",
+      "id": "evidence:m4-pytest-capture"
+    },
+    {
+      "op": "remove",
+      "id": "workspace:m4-pytest-capture"
+    },
+    {
+      "op": "remove",
+      "id": "workspace:root-20261018T090338Z-r16"
+    }
+  ]
+}
