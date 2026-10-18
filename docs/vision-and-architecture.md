@@ -1,7 +1,7 @@
 # Intent Graph: Vision and Architecture
 
 **Working title:** Intent Graph  
-**Document version:** 0.2 — design proposal and implementation sequence  
+**Document version:** 0.3 — design proposal and implementation sequence (0.3: distribution revised to a Python package as the primary route; see sections 20 and 21.8)  
 **Date:** 18 October 2026  
 **Audience:** product builders, coding-agent users, and engineers implementing the tool
 
@@ -801,9 +801,27 @@ The same pattern applies to a web checkout, an authorization workflow, a data pi
 
 ## 20. Packaging and installation experience
 
-Target experience: obtain one executable, initialize inside an existing repository, and continue with the user's coding assistant. No account, graph database, hosted service, or daemon is required for the base workflow.
+Target experience: install one command-line tool, initialize inside an existing repository, and continue with the user's coding assistant. No account, graph database, hosted service, or daemon is required for the base workflow.
 
-Keep development as a Python package. Offer a bundled executable that includes its runtime and dependencies, with separate builds for supported operating systems and architectures. Exact bundler and release-signing choices remain implementation decisions. A standard Python distribution can serve users who already have a Python environment.
+| Layer | Recommendation |
+| --- | --- |
+| Distribution | Python package published to PyPI |
+| Installation | `uv tool install` as the recommended route; pipx as an alternative |
+| CLI | One `intentgraph` command |
+| Dependencies | NetworkX, Pydantic, etc. installed automatically |
+| Workspace | `intentgraph init` creates project data and agent instructions |
+| npm | Optional convenience wrapper later |
+
+`uv` installs command-line tools in isolated environments and can obtain a compatible Python runtime automatically, so users do not manage a virtual environment or install NetworkX themselves. The tool is not a runtime dependency of the application being modeled: a Flutter or TypeScript project uses the same independently installed CLI.
+
+```bash
+# Illustrative names; package availability is not established
+uv tool install intentgraph
+intentgraph init
+intentgraph status
+```
+
+Standalone executables bundling a runtime can come later if users need them. An npm-first distribution would add another packaging layer to the Python core.
 
 Initialization should be idempotent, preserve existing workspace instructions, and refuse to overwrite an existing incompatible project silently. Uninstalling the executable must not delete project models or evidence. Upgrades retain the ability to inspect old files and offer explicit migrations.
 
@@ -907,13 +925,13 @@ Start with explicit agent-maintained mappings and submitted test reports. Resolv
 
 **Exit:** one package feature completes intent capture, refinement, readiness, user authorization, implementation, evidence submission, and reconciliation. Introduced drift is visible after a fresh process starts.
 
-### 21.8 Milestone 5 — complete the installable first version
+### 21.8 Milestone 5 — publish and validate the installable Python CLI
 
-**Build:** a bundled executable for initially supported platforms, idempotent initialization, explicit schema migrations, recovery behavior, concise help, and complete worked examples. Stabilize machine-readable responses and document unsupported capabilities. Add modest review diagrams only where they materially help understanding.
+**Build:** a Python package suitable for PyPI with one `intentgraph` command, idempotent initialization, explicit schema migrations, recovery behavior, concise help, and complete worked examples. Stabilize machine-readable responses and document unsupported capabilities. Add modest review diagrams only where they materially help understanding.
 
-**Tools:** the selected release bundler and platform build environments. Keep formal solvers, language toolchains, and MCP optional.
+**Tools:** the standard Python build backend, `uv` (recommended installation route) and pipx (alternative). Keep formal solvers, language toolchains, and MCP optional. Standalone executables are deferred.
 
-**Verify:** on a clean machine without a separately installed Python runtime, initialize a fixture project, create and persist a graph, restart, query, patch, evaluate readiness, import evidence, and reconcile a change. Verify upgrades preserve project files and that uninstalling the executable does not remove them.
+**Verify:** in a clean, isolated tool environment (`uv tool install` from the built wheel, no source tree on the path), initialize a fixture project, create and persist a graph, restart, query, patch, evaluate readiness, import evidence, and reconcile a change. Verify that reinstalling or upgrading preserves project files, that migrations are explicit, and that uninstalling the tool does not remove them.
 
 **Self-use available:** the complete first loop can manage further product changes. Its limitations remain explicit, especially where evidence is agent-submitted or analysis is unsupported.
 

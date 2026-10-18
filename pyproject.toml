@@ -1,15 +1,31 @@
 [project]
 name = "intentgraph"
-version = "0.0.1"
+version = "0.1.0"
 description = "A local, agent-operated annotated graph of software intent, design, implementation mappings, and evidence."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "Narayan Singh Bhati", email = "narayansinghbhati@gmail.com" }]
+keywords = ["coding-agent", "intent", "requirements", "traceability", "evidence"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+]
 dependencies = [
     "pydantic>=2.7,<3",
     "networkx>=3.2,<4",
 ]
+
+[project.urls]
+Homepage = "https://github.com/narayansinghbhati/intent-graph"
 
 [project.scripts]
 intentgraph = "intentgraph.cli.main:main"

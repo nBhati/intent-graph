@@ -1,0 +1,3 @@
+{"scope_ref": "scope:m5-installable", "recorded_by": "agent", "approval_kind": "build_authorization",
+ "source_statement": "I'd make a Python package the primary installation route ... uv tool install as the recommended route; pipx as an alternative ... I'd change Milestone 5 to 'publish and validate the installable Python CLI': clean installation, initialization, upgrades, migrations, and uninstall that preserves project files. Standalone executables can come later if users need them.",
+ "source_ref": "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6"}

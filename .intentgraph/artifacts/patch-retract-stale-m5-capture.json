@@ -1,0 +1,188 @@
+{
+  "patch_id": "patch:retract-stale-m5-capture",
+  "base_revision": 30,
+  "base_digest": "sha256:517fc1b45750ebd273a2e158a2eccd619596a0211d4452348bac85a4821d1098",
+  "reason": "tests/test_self_model.py changed after the capture (declared input), so the capture is stale; retract it and the baseline and re-capture against the final tree.",
+  "operations": [
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-0"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-1"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-10"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-11"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-12"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-13"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-14"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-15"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-16"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-17"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-18"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-19"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-2"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-20"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-21"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-22"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-23"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-24"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-25"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-26"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-27"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-28"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-29"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-3"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-30"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-31"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-32"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-33"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-34"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-35"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-36"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-37"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-38"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-39"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-4"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-40"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-5"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-6"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-7"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-8"
+    },
+    {
+      "op": "remove",
+      "id": "edge:m5-pytest-capture-supports-9"
+    },
+    {
+      "op": "remove",
+      "id": "evidence:m5-pytest-capture"
+    },
+    {
+      "op": "remove",
+      "id": "workspace:m5-pytest-capture"
+    },
+    {
+      "op": "remove",
+      "id": "workspace:root-20261018T090539Z-r19"
+    },
+    {
+      "op": "remove",
+      "id": "workspace:root-20261018T092249Z-r29"
+    }
+  ]
+}

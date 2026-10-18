@@ -1,5 +1,5 @@
 {
-  "content_digest": "sha256:9437657815e860ebf9d2b7845a27c98224b8c2601652a43e90fb50f5d659d9f5",
+  "content_digest": "sha256:51c6c344b00b1169158f8c42321d6758c91dcbd9cbf20c5a393d25a9a1758d50",
   "edges": [
     {
       "annotations": [],
@@ -104,6 +104,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:bundled-executable-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "superseded",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "req:bundled-executable",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:canonical-digest-refines-local",
       "kind": "refines",
       "label": "",
@@ -120,6 +140,46 @@
       },
       "source": "req:canonical-digest",
       "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:capabilities-documented-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "req:capabilities-documented",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:capabilities-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "operation:capabilities",
+      "target": "req:capabilities-documented"
     },
     {
       "annotations": [],
@@ -248,6 +308,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:clean-install-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      },
+      "source": "req:clean-install-validated",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:cli-depends-services",
       "kind": "depends_on",
       "label": "",
@@ -266,6 +346,26 @@
       },
       "source": "component:cli",
       "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-realizes-bundle",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "superseded",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "component:cli",
+      "target": "req:bundled-executable"
     },
     {
       "annotations": [],
@@ -306,6 +406,46 @@
       },
       "source": "component:cli",
       "target": "req:exit-code-convention"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-realizes-pypi",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "component:cli",
+      "target": "req:pypi-package-primary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-realizes-stable",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "component:cli",
+      "target": "req:stable-machine-responses"
     },
     {
       "annotations": [],
@@ -430,6 +570,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:decision-deferred-concerns-bundle",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "decision:executables-deferred",
+      "target": "req:bundled-executable"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:decision-freshness-concerns-obligations",
       "kind": "concerns",
       "label": "",
@@ -466,6 +626,46 @@
       },
       "source": "decision:annotated-graph-central",
       "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-pyinstaller-concerns-cli",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.2"
+        ]
+      },
+      "source": "decision:pyinstaller-onefile",
+      "target": "component:cli"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-response-concerns-cli",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "decision:response-version-field",
+      "target": "component:cli"
     },
     {
       "annotations": [],
@@ -566,6 +766,26 @@
       },
       "source": "decision:agent-runs-language-tools",
       "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-uv-concerns-cli",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "decision:uv-tool-install",
+      "target": "component:cli"
     },
     {
       "annotations": [],
@@ -828,6 +1048,26 @@
       },
       "source": "obligation:impl-impact-and-diff",
       "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:init-idempotent-non-destructive-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "req:init-idempotent-non-destructive",
+      "target": "goal:agent-operated-local-tool"
     },
     {
       "annotations": [],
@@ -1864,6 +2104,798 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:m5-installable-approval-r22-concerns-scope",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "approval-record",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "approval:m5-installable/r22",
+      "target": "scope:m5-installable"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-installable-approval-r25-concerns-scope",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "approval-record",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "approval:m5-installable/r25",
+      "target": "scope:m5-installable"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-installable-review-depicts-scope",
+      "kind": "depicts",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "review:m5-installable",
+      "target": "scope:m5-installable"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-0",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:acyclic-only-where-declared"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-1",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:assertion-cannot-satisfy-executable-evidence"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-10",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:evidence-binds-inputs"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-11",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:exit-code-convention"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-12",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-13",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:graph-diff"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-14",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:idempotent-patch-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-15",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:impact-slice"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-16",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:init-idempotent-non-destructive"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-17",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:lens-never-drops-mandatory"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-18",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:missing-artifact-downgrades"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-19",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:mixed-precision"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-2",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:atomic-replace"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-20",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:no-code-execution-from-data"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-21",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:no-self-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-22",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:no-universal-verified-flag"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-23",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:observation-never-overwrites-intent"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-24",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:pypi-package-primary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-25",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:readiness-does-not-modify"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-26",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:readiness-evaluates-policy"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-27",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:reconcile-safe-conclusions"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-28",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:recovery-from-backup-or-git"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-29",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:review-diagram"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-3",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:canonical-digest"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-30",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:review-packet-deterministic"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-31",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:stable-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-32",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:stable-machine-responses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-33",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:stale-base-rejected"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-34",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:uninstall-preserves-project"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-35",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:unknown-kinds-not-silently-known"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-36",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:unmapped-change-coverage"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-37",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:upgrade-preserves-project"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-38",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:waiver-requires-user"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-39",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:worked-examples-executable"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-4",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:capabilities-documented"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-40",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:workspace-snapshot-identity"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-5",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:ci-entry-point"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-6",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:clean-install-validated"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-7",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:collection-mode-preserved"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-8",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:design-change-invalidates-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-pytest-capture-supports-9",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "evidence-ingest",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "evidence:m5-pytest-capture",
+      "target": "req:design-digest-stable-under-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:missing-artifact-downgrades-refines-loop",
       "kind": "refines",
       "label": "",
@@ -2348,6 +3380,66 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:playbooks-realizes-examples",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#11.1"
+        ]
+      },
+      "source": "component:playbooks",
+      "target": "req:worked-examples-executable"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:pypi-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "req:pypi-package-primary",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:question-clean-concerns-bundle",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "superseded",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      },
+      "source": "question:clean-machine-verification",
+      "target": "req:bundled-executable"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:question-readiness-concerns-obligations",
       "kind": "concerns",
       "label": "",
@@ -2528,6 +3620,46 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:recover-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.3"
+        ]
+      },
+      "source": "operation:recover",
+      "target": "req:recovery-from-backup-or-git"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:recovery-from-backup-or-git-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.3"
+        ]
+      },
+      "source": "req:recovery-from-backup-or-git",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:reports-depends-lenses",
       "kind": "depends_on",
       "label": "",
@@ -2546,6 +3678,26 @@
       },
       "source": "component:reports",
       "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reports-realizes-diagram",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#14"
+        ]
+      },
+      "source": "component:reports",
+      "target": "req:review-diagram"
     },
     {
       "annotations": [],
@@ -2634,6 +3786,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:repository-realizes-clean-install",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:clean-install-validated"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:repository-realizes-fresh-process-reconstruction",
       "kind": "realizes",
       "label": "",
@@ -2650,6 +3822,46 @@
       },
       "source": "component:repository",
       "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-init",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:init-idempotent-non-destructive"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-recovery",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.3"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:recovery-from-backup-or-git"
     },
     {
       "annotations": [],
@@ -2674,6 +3886,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:repository-realizes-uninstall",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:uninstall-preserves-project"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:repository-realizes-unmapped",
       "kind": "realizes",
       "label": "",
@@ -2690,6 +3922,46 @@
       },
       "source": "component:repository",
       "target": "req:unmapped-change-coverage"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-upgrade",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:upgrade-preserves-project"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:review-diagram-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#14"
+        ]
+      },
+      "source": "req:review-diagram",
+      "target": "goal:agent-operated-local-tool"
     },
     {
       "annotations": [],
@@ -2858,6 +4130,26 @@
       },
       "source": "req:stable-ids",
       "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:stable-machine-responses-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "req:stable-machine-responses",
+      "target": "goal:agent-operated-local-tool"
     },
     {
       "annotations": [],
@@ -3142,6 +4434,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:uninstall-preserves-project-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      },
+      "source": "req:uninstall-preserves-project",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:unknown-kinds-not-silently-known-refines-loop",
       "kind": "refines",
       "label": "",
@@ -3182,6 +4494,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:upgrade-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      },
+      "source": "req:upgrade-preserves-project",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:vocabulary-realizes-unknown-kinds-not-silently-known",
       "kind": "realizes",
       "label": "",
@@ -3218,6 +4550,26 @@
       },
       "source": "req:waiver-requires-user",
       "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:worked-examples-executable-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#11.1"
+        ]
+      },
+      "source": "req:worked-examples-executable",
+      "target": "goal:agent-operated-local-tool"
     },
     {
       "annotations": [],
@@ -3293,6 +4645,126 @@
         "notes": "agent-recorded from conversation; traceability, not authenticated identity",
         "source_refs": [
           "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "approval:m5-installable/r22",
+      "kind": "Approval",
+      "label": "build authorization for Milestone 5: installable first version",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "approval_kind": "build_authorization",
+        "design_digest": "sha256:793bb46d0fa8d3073b48d8ba55b822c2b0745e926573a007e7d62ef09908cdc4",
+        "model_revision": 22,
+        "policy_ref": "policy:default-readiness@0.1",
+        "recorded_by": "agent",
+        "scope_ref": "scope:m5-installable",
+        "source_ref": "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-5",
+        "source_statement": "continue with milestone 5"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "approval-record",
+        "notes": "agent-recorded from conversation; traceability, not authenticated identity",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-5"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "approval:m5-installable/r25",
+      "kind": "Approval",
+      "label": "build authorization for Milestone 5: publish and validate the installable Python CLI",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "approval_kind": "build_authorization",
+        "design_digest": "sha256:cdf8ee1ae8691a89c2e9b55d78d9a08cf6ef121a841be4628d4a7e3d43ad4c17",
+        "model_revision": 25,
+        "policy_ref": "policy:default-readiness@0.1",
+        "recorded_by": "agent",
+        "scope_ref": "scope:m5-installable",
+        "source_ref": "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+        "source_statement": "I'd make a Python package the primary installation route ... uv tool install as the recommended route; pipx as an alternative ... I'd change Milestone 5 to 'publish and validate the installable Python CLI': clean installation, initialization, upgrades, migrations, and uninstall that preserves project files. Standalone executables can come later if users need them."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "approval-record",
+        "notes": "agent-recorded from conversation; traceability, not authenticated identity",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "artifact:m5-pyproject",
+      "kind": "CodeArtifact",
+      "label": "pyproject.toml",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_kind": "config",
+        "path": "pyproject.toml",
+        "repository": "."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:pyproject.toml"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "artifact:m5-release-workflow",
+      "kind": "CodeArtifact",
+      "label": ".github/workflows/release.yml",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_kind": "config",
+        "path": ".github/workflows/release.yml",
+        "repository": "."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:.github/workflows/release.yml"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "artifact:m5-worked-examples",
+      "kind": "CodeArtifact",
+      "label": "docs/worked-examples.md",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_kind": "file",
+        "path": "docs/worked-examples.md",
+        "repository": "."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:docs/worked-examples.md"
         ]
       }
     },
@@ -3699,6 +5171,29 @@
     {
       "annotations": [],
       "description": "",
+      "id": "decision:executables-deferred",
+      "kind": "Decision",
+      "label": "Standalone executables are deferred until users need them",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "decided_by": "user",
+        "decision_kind": "deferral",
+        "rationale": "Not needed for the developer audience; revisit on demand."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "conversation",
+        "notes": "",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+          "doc:vision-and-architecture#20"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "decision:freshness-in-engine",
       "kind": "Decision",
       "label": "Evidence freshness is computed once and shared by reconcile and the evidence_required rule",
@@ -3781,6 +5276,33 @@
     {
       "annotations": [],
       "description": "",
+      "id": "decision:pyinstaller-onefile",
+      "kind": "Decision",
+      "label": "PyInstaller one-file bundles per platform, built in CI on native runners",
+      "layer": "intent",
+      "lifecycle": "superseded",
+      "properties": {
+        "alternatives": [
+          "Nuitka",
+          "shiv/zipapp (needs a Python runtime)",
+          "PEX"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Mature, no code changes needed, data files bundled via add-data; cross-compilation is not attempted."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "decision:python-networkx-pydantic",
       "kind": "Decision",
       "label": "Python package; Pydantic records; NetworkX in memory as an index only",
@@ -3800,6 +5322,31 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:response-version-field",
+      "kind": "Decision",
+      "label": "The CLI envelope carries response_version; additive changes keep it, breaking changes bump it",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Tie the envelope to the tool version"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Agents and CI parse the envelope; a version field lets them detect incompatibility without guessing."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
         ]
       }
     },
@@ -3911,6 +5458,33 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#16.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:uv-tool-install",
+      "kind": "Decision",
+      "label": "Distribute as a PyPI package; recommend uv tool install, offer pipx; defer standalone executables",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "PyInstaller one-file executables per platform (previous decision)",
+          "npm-first wrapper"
+        ],
+        "decided_by": "user",
+        "decision_kind": "choice",
+        "rationale": "uv installs CLI tools in isolated environments and obtains a Python runtime automatically; an executable or npm-first distribution would add another packaging layer to the Python core."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "conversation",
+        "notes": "",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+          "doc:vision-and-architecture#20"
         ]
       }
     },
@@ -4033,13 +5607,19 @@
       }
     },
     {
-      "annotations": [],
+      "annotations": [
+        {
+          "refs": [],
+          "role": "explanation",
+          "text": "Superseded by evidence:m5-pytest-capture after milestone 5 changed src/ and tests/."
+        }
+      ],
       "description": "",
       "id": "evidence:m4-pytest-capture",
       "kind": "Evidence",
       "label": "Package test suite captured by the tool",
       "layer": "reconciliation",
-      "lifecycle": "accepted",
+      "lifecycle": "superseded",
       "properties": {
         "artifact_digest": "sha256:f380e5cd5a0afe29c50ed4233c95ca680deb7ec2d22b64db2933b70348e520c4",
         "artifact_ref": ".intentgraph/artifacts/evidence/m4-pytest-capture/capture.json",
@@ -4115,6 +5695,103 @@
         "notes": "",
         "source_refs": [
           "workspace:m4-pytest-capture"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "evidence:m5-pytest-capture",
+      "kind": "Evidence",
+      "label": "Package test suite captured by the tool (v0.1.0)",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_digest": "sha256:ef1b970b278e8e3333867f847a52d95b3ec9093870ae9f10ea7c76c4dc2cf8c8",
+        "artifact_ref": ".intentgraph/artifacts/evidence/m5-pytest-capture/capture.json",
+        "collection_mode": "independent_capture",
+        "declared_inputs": {
+          "command": [
+            ".venv/bin/python",
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            "--ignore=tests/test_self_model.py"
+          ],
+          "paths": [
+            "src",
+            "tests",
+            "pyproject.toml",
+            "docs/worked-examples.md"
+          ],
+          "repository": "."
+        },
+        "limitations": [
+          "tests/test_self_model.py is excluded because it asserts the presence of this very evidence record; CI runs the full suite separately.",
+          "tests/test_install.py runs uv tool install against the current interpreter; a runtime download by uv is exercised only on CI.",
+          "independent_capture: the tool ran the declared command and recorded exit code and output; what the command checks remains the submitter's claim"
+        ],
+        "method": "unit_and_subprocess_tests",
+        "model_revision": 31,
+        "model_scope_digest": "sha256:b266a65b5164b8de65895e6dc2872f6ea2e392f84dded4c87ab89eba8b237716",
+        "report_format": "intentgraph-capture/0.1",
+        "result": "passed",
+        "submitted_by": "intentgraph",
+        "supports": [
+          "req:acyclic-only-where-declared",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:atomic-replace",
+          "req:canonical-digest",
+          "req:capabilities-documented",
+          "req:ci-entry-point",
+          "req:clean-install-validated",
+          "req:collection-mode-preserved",
+          "req:design-change-invalidates-readiness",
+          "req:design-digest-stable-under-approval",
+          "req:evidence-binds-inputs",
+          "req:exit-code-convention",
+          "req:fresh-process-reconstruction",
+          "req:graph-diff",
+          "req:idempotent-patch-ids",
+          "req:impact-slice",
+          "req:init-idempotent-non-destructive",
+          "req:lens-never-drops-mandatory",
+          "req:missing-artifact-downgrades",
+          "req:mixed-precision",
+          "req:no-code-execution-from-data",
+          "req:no-self-approval",
+          "req:no-universal-verified-flag",
+          "req:observation-never-overwrites-intent",
+          "req:pypi-package-primary",
+          "req:readiness-does-not-modify",
+          "req:readiness-evaluates-policy",
+          "req:reconcile-safe-conclusions",
+          "req:recovery-from-backup-or-git",
+          "req:review-diagram",
+          "req:review-packet-deterministic",
+          "req:stable-ids",
+          "req:stable-machine-responses",
+          "req:stale-base-rejected",
+          "req:uninstall-preserves-project",
+          "req:unknown-kinds-not-silently-known",
+          "req:unmapped-change-coverage",
+          "req:upgrade-preserves-project",
+          "req:waiver-requires-user",
+          "req:worked-examples-executable",
+          "req:workspace-snapshot-identity"
+        ],
+        "test_refs": [],
+        "tool": "pytest",
+        "workspace_snapshot_ref": "workspace:m5-pytest-capture"
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "independent_capture",
+        "notes": "",
+        "source_refs": [
+          "workspace:m5-pytest-capture"
         ]
       }
     },
@@ -4199,6 +5876,36 @@
     {
       "annotations": [],
       "description": "",
+      "id": "mapping:capabilities-versions",
+      "kind": "Mapping",
+      "label": "capabilities/version and the versioned envelope realize stable responses and documented capabilities",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "symbol:m5-capabilities",
+          "test:m5-envelope"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:stable-machine-responses",
+          "req:capabilities-documented",
+          "operation:capabilities"
+        ],
+        "remaining_gaps": []
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m5-installable"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "mapping:ci-entry",
       "kind": "Mapping",
       "label": "services.ci realizes the independent trigger",
@@ -4224,6 +5931,39 @@
         "notes": "",
         "source_refs": [
           "patch:close-m4-evidence"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:clean-install",
+      "kind": "Mapping",
+      "label": "tests/test_install.py realizes clean-install, upgrade and uninstall validation",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "test:m5-clean-install",
+          "test:m5-reinstall-uninstall"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:clean-install-validated",
+          "req:upgrade-preserves-project",
+          "req:uninstall-preserves-project",
+          "req:init-idempotent-non-destructive"
+        ],
+        "remaining_gaps": [
+          "uv tool install is pointed at the running interpreter; letting uv download a runtime is exercised only on CI."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m5-installable"
         ]
       }
     },
@@ -4259,6 +5999,36 @@
         "notes": "",
         "source_refs": [
           "patch:close-m2-impact-diff"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:distribution",
+      "kind": "Mapping",
+      "label": "pyproject metadata and the release workflow realize the PyPI package route",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "artifact:m5-pyproject",
+          "artifact:m5-release-workflow"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:pypi-package-primary"
+        ],
+        "remaining_gaps": [
+          "Publishing requires PyPI trusted-publisher configuration and a GitHub remote; neither was reachable from this session."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m5-installable"
         ]
       }
     },
@@ -4415,6 +6185,35 @@
     {
       "annotations": [],
       "description": "",
+      "id": "mapping:recovery",
+      "kind": "Mapping",
+      "label": "repository.recovery realizes recovery from backup or Git",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "symbol:m5-recovery",
+          "test:m5-recover"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:recovery-from-backup-or-git",
+          "operation:recover"
+        ],
+        "remaining_gaps": []
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m5-installable"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "mapping:review-and-approval",
       "kind": "Mapping",
       "label": "reports.review and services.approval_record realize review export and approval",
@@ -4444,6 +6243,64 @@
         "notes": "",
         "source_refs": [
           "patch:close-m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:review-diagram",
+      "kind": "Mapping",
+      "label": "reports.review.component_diagram realizes review diagrams",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "symbol:m5-diagram",
+          "test:m5-diagram"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:review-diagram"
+        ],
+        "remaining_gaps": [
+          "Only structural kinds and dependency edges are drawn; no sequence diagrams."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m5-installable"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:worked-examples",
+      "kind": "Mapping",
+      "label": "docs/worked-examples.md and its test realize executable worked examples",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "implementation_refs": [
+          "artifact:m5-worked-examples",
+          "test:m5-examples"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:worked-examples-executable"
+        ],
+        "remaining_gaps": []
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m5-installable"
         ]
       }
     },
@@ -4625,13 +6482,22 @@
       }
     },
     {
-      "annotations": [],
+      "annotations": [
+        {
+          "refs": [
+            "mapping:distribution",
+            "mapping:clean-install"
+          ],
+          "role": "explanation",
+          "text": "Satisfied under the revised (PyPI-first) design; evidence is the tool-captured test run evidence:m5-pytest-capture. Publishing itself remains a release-time step outside this session."
+        }
+      ],
       "description": "",
       "id": "obligation:m5-installable",
       "kind": "Obligation",
-      "label": "Milestone 5: bundled executable, explicit migrations, recovery, worked examples",
+      "label": "Milestone 5: publish and validate the installable Python CLI",
       "layer": "reconciliation",
-      "lifecycle": "proposed",
+      "lifecycle": "accepted",
       "properties": {
         "acceptable_resolution": [
           "implementation_with_tests"
@@ -4639,12 +6505,12 @@
         "blocking": true,
         "gate": "conformance",
         "obligation_kind": "milestone_capability",
-        "request": "On a clean machine without Python, initialize, patch, restart, query, evaluate readiness, import evidence, reconcile.",
+        "request": "Build and validate the wheel: clean isolated install, init, patch, readiness, evidence, reconcile, reinstall/upgrade, migration, uninstall preserving project files; recover/capabilities/version commands; response_version; review diagrams; executable worked examples; freeze v0.1.0.",
         "required_evidence": "independent executable tests plus manual review",
         "scope_refs": [
           "scope:m5-installable"
         ],
-        "state": "pending"
+        "state": "satisfied"
       },
       "provenance": {
         "author_role": "agent",
@@ -4718,6 +6584,34 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:capabilities",
+      "kind": "Operation",
+      "label": "Report supported and unsupported capabilities with versions",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [],
+        "idempotent": true,
+        "inputs": {},
+        "mode": "sync",
+        "outputs": {
+          "supported": "list",
+          "unsupported": "list with reason",
+          "versions": "tool, format, vocabulary, response"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
         ]
       }
     },
@@ -4890,6 +6784,43 @@
     {
       "annotations": [],
       "description": "",
+      "id": "operation:recover",
+      "kind": "Operation",
+      "label": "Preview or apply recovery of the snapshot from a backup or Git revision",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "no_recovery_source",
+          "corrupt_snapshot",
+          "git_unavailable"
+        ],
+        "idempotent": true,
+        "inputs": {
+          "apply": "boolean",
+          "from_backup": "path",
+          "from_git": "ref"
+        },
+        "mode": "sync",
+        "outputs": {
+          "content_digest": "sha256",
+          "damaged_copy": "path",
+          "revision": "int",
+          "source": "backup|git"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "operation:review-export",
       "kind": "Operation",
       "label": "Export a review packet for a scope",
@@ -4978,6 +6909,28 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:clean-machine-verification",
+      "kind": "Question",
+      "label": "How is 'clean machine without Python' verified in this environment?",
+      "layer": "intent",
+      "lifecycle": "superseded",
+      "properties": {
+        "answer": "Simulated: the bundled binary runs under an empty environment with a PATH that contains no Python interpreter. A true clean-machine run is a release-time step on CI runners; the limitation is recorded on the evidence.",
+        "blocking": false,
+        "status": "answered"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
         ]
       }
     },
@@ -5155,6 +7108,36 @@
       }
     },
     {
+      "annotations": [
+        {
+          "refs": [
+            "req:pypi-package-primary"
+          ],
+          "role": "explanation",
+          "text": "Superseded by req:pypi-package-primary on the user's revision of section 20 (document version 0.3)."
+        }
+      ],
+      "description": "",
+      "id": "req:bundled-executable",
+      "kind": "Requirement",
+      "label": "One executable per supported platform bundles the runtime and core dependencies",
+      "layer": "intent",
+      "lifecycle": "superseded",
+      "properties": {
+        "acceptance_notes": "Linux x86_64 is built and verified here; macOS and Windows builds run in CI on their own runners. Python users keep the standard distribution.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      }
+    },
+    {
       "annotations": [],
       "description": "Sorted records and keys, UTF-8, non-finite numbers rejected, fixed newline handling, digest field excluded.",
       "id": "req:canonical-digest",
@@ -5178,6 +7161,28 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:capabilities-documented",
+      "kind": "Requirement",
+      "label": "The tool reports what it supports and what it does not, in machine-readable form",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Unsupported capabilities produce explicit outcomes, never silent success.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:ci-entry-point",
       "kind": "Requirement",
       "label": "A CI entry point evaluates checks, readiness and reconciliation without depending on the agent remembering",
@@ -5194,6 +7199,29 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#16.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:clean-install-validated",
+      "kind": "Requirement",
+      "label": "A clean isolated install of the built wheel can initialize, persist, restart, query, patch, evaluate readiness, import evidence and reconcile",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Validated by an executable test that installs the wheel into an isolated uv tool environment with no source tree on the path.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "conversation",
+        "notes": "",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+          "doc:vision-and-architecture#20"
         ]
       }
     },
@@ -5411,6 +7439,28 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:init-idempotent-non-destructive",
+      "kind": "Requirement",
+      "label": "Initialization is idempotent and never overwrites an existing project or unrelated agent instructions",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "A second init reports the existing workspace; an incompatible project is refused, not replaced.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:lens-never-drops-mandatory",
       "kind": "Requirement",
       "label": "A lens never silently discards a mandatory constraint; it reports overflow or truncation",
@@ -5557,6 +7607,38 @@
       }
     },
     {
+      "annotations": [
+        {
+          "refs": [
+            "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+            "doc:vision-and-architecture#20"
+          ],
+          "role": "original_intent",
+          "text": "I'd make a Python package the primary installation route ... uv tool install as the recommended route; pipx as an alternative ... I'd change Milestone 5 to 'publish and validate the installable Python CLI': clean installation, initialization, upgrades, migrations, and uninstall that preserves project files. Standalone executables can come later if users need them."
+        }
+      ],
+      "description": "",
+      "id": "req:pypi-package-primary",
+      "kind": "Requirement",
+      "label": "The Python package published to PyPI is the primary installation route, with one intentgraph command",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "uv tool install recommended; pipx alternative; dependencies installed automatically; the tool is not a runtime dependency of the modeled application.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "conversation",
+        "notes": "",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+          "doc:vision-and-architecture#20"
+        ]
+      }
+    },
+    {
       "annotations": [],
       "description": "",
       "id": "req:readiness-does-not-modify",
@@ -5625,6 +7707,50 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:recovery-from-backup-or-git",
+      "kind": "Requirement",
+      "label": "A corrupt snapshot can be recovered from a tool backup or a Git revision, previewed before applied",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "The damaged file is kept aside; recovery writes atomically and verifies the digest.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:review-diagram",
+      "kind": "Requirement",
+      "label": "Review packets include a component diagram where the scope has structure to show",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Mermaid in Markdown; omitted when fewer than two structural elements are in scope.",
+        "formalization": "descriptive",
+        "priority": "should"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#14"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:review-packet-deterministic",
       "kind": "Requirement",
       "label": "The review packet is selected deterministically from the scope and carries its scope digest and coverage",
@@ -5668,6 +7794,28 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:stable-machine-responses",
+      "kind": "Requirement",
+      "label": "Machine-readable responses carry a response version and change only additively within it",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Field removals or meaning changes bump the response version.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:stale-base-rejected",
       "kind": "Requirement",
       "label": "A patch with a stale base is rejected with the changed ids, never silently rebased",
@@ -5683,6 +7831,28 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#9.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:uninstall-preserves-project",
+      "kind": "Requirement",
+      "label": "Removing the executable does not remove project models or evidence",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Project files live in the workspace, never beside the executable.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#20"
         ]
       }
     },
@@ -5732,6 +7902,28 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:upgrade-preserves-project",
+      "kind": "Requirement",
+      "label": "Reinstalling or upgrading the tool preserves project files; migrations stay explicit",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "conversation",
+        "notes": "",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+          "doc:vision-and-architecture#20"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:waiver-requires-user",
       "kind": "Requirement",
       "label": "A waiver is honoured only when it records a user authorization and a reason",
@@ -5748,6 +7940,28 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:worked-examples-executable",
+      "kind": "Requirement",
+      "label": "Worked examples cover refinement, an ambiguous requirement, stale evidence, a counterexample and an unsupported analysis, and are kept executable",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "A test runs the same steps the document shows.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#11.1"
         ]
       }
     },
@@ -5814,6 +8028,34 @@
         "notes": "",
         "source_refs": [
           "scope:m4-evidence-reconciliation"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [],
+          "role": "note",
+          "text": "Re-exported at model revision 24."
+        }
+      ],
+      "description": "",
+      "id": "review:m5-installable",
+      "kind": "ReviewArtifact",
+      "label": "Review packet for Milestone 5: installable first version",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_kind": "summary",
+        "artifact_path": ".intentgraph/artifacts/review-m5-installable.md",
+        "scope_digest": "sha256:cdf8ee1ae8691a89c2e9b55d78d9a08cf6ef121a841be4628d4a7e3d43ad4c17"
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": [
+          "scope:m5-installable"
         ]
       }
     },
@@ -5905,15 +8147,31 @@
       "description": "",
       "id": "scope:m5-installable",
       "kind": "Scope",
-      "label": "Milestone 5: installable first version",
+      "label": "Milestone 5: publish and validate the installable Python CLI",
       "layer": "reconciliation",
       "lifecycle": "accepted",
       "properties": {
         "member_refs": [
-          "system:intentgraph"
+          "system:intentgraph",
+          "component:cli",
+          "component:repository",
+          "component:playbooks",
+          "component:reports",
+          "operation:recover",
+          "operation:capabilities",
+          "req:pypi-package-primary",
+          "req:clean-install-validated",
+          "req:upgrade-preserves-project",
+          "req:init-idempotent-non-destructive",
+          "req:recovery-from-backup-or-git",
+          "req:stable-machine-responses",
+          "req:capabilities-documented",
+          "req:worked-examples-executable",
+          "req:review-diagram",
+          "req:uninstall-preserves-project"
         ],
         "policy_ref": "policy:default-readiness",
-        "status": "draft"
+        "status": "active"
       },
       "provenance": {
         "author_role": "agent",
@@ -6298,6 +8556,84 @@
         "notes": "",
         "source_refs": [
           "file:src/intentgraph/repository/workspace.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m5-capabilities",
+      "kind": "CodeSymbol",
+      "label": "capabilities",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/services.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "capabilities"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/services.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m5-diagram",
+      "kind": "CodeSymbol",
+      "label": "component_diagram",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/reports/review.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "component_diagram"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/reports/review.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:m5-recovery",
+      "kind": "CodeSymbol",
+      "label": "recover",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/repository/recovery.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "recover"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/repository/recovery.py"
         ]
       }
     },
@@ -6749,6 +9085,144 @@
     {
       "annotations": [],
       "description": "",
+      "id": "test:m5-clean-install",
+      "kind": "TestCase",
+      "label": "test_clean_install_runs_the_whole_loop",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_install.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_clean_install_runs_the_whole_loop"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_install.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m5-diagram",
+      "kind": "TestCase",
+      "label": "test_review_packet_diagram_from_fixture",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_release.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_review_packet_diagram_from_fixture"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_release.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m5-envelope",
+      "kind": "TestCase",
+      "label": "test_envelope_carries_response_version",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_release.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_envelope_carries_response_version"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_release.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m5-examples",
+      "kind": "TestCase",
+      "label": "test_example_3_stale_evidence_after_code_change",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_worked_examples.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_example_3_stale_evidence_after_code_change"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_worked_examples.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m5-recover",
+      "kind": "TestCase",
+      "label": "test_recover_from_backup_and_from_git",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_release.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_recover_from_backup_and_from_git"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_release.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:m5-reinstall-uninstall",
+      "kind": "TestCase",
+      "label": "test_reinstall_and_uninstall_preserve_project_files",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_install.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_reinstall_and_uninstall_preserve_project_files"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_install.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "test:migration-apply",
       "kind": "TestCase",
       "label": "test_migration_preview_then_apply_with_backup",
@@ -6902,53 +9376,104 @@
     {
       "annotations": [],
       "description": "",
-      "id": "workspace:root-20261018T090539Z-r19",
+      "id": "workspace:m5-pytest-capture",
       "kind": "WorkspaceSnapshot",
-      "label": ". @ 846f5d7b6067 (dirty)",
+      "label": ". @ 1e5585f0739a (dirty)",
       "layer": "observation",
       "lifecycle": "accepted",
       "properties": {
-        "captured_at": "2026-10-18T09:05:39Z",
+        "captured_at": "2026-10-18T09:25:09Z",
         "dirty": true,
         "files": {
-          "pyproject.toml": "sha256:95a22e99b4c298430b3ea2f32703ec6a4d686af30ea5caafc247ed8c7418ae59",
-          "src": "sha256:2d1ca926ab16e13f4e53561fe24c628fe3623d1cea435486cba741e99ed47932",
-          "tests": "sha256:87246c99baf38ee74c9b6230354eb13d9fb6fd9d8421022ff0cb9d7f25c52d0a"
+          "docs/worked-examples.md": "sha256:b6b519350a9cd334c1b843d9ba06eb5c1128f3fbec55017a6ed671458bfbdf60",
+          "pyproject.toml": "sha256:6ca0aed9e9780803aad74ef79db146bb8bdfc59992064f64888d591469e726b7",
+          "src": "sha256:d21e3e6edd2670fadcffffbb92bbadb03b9bb0954bb82856e3cb825600998f76",
+          "tests": "sha256:fc3490ac0dfb00e10169a9f785456303bb040572c6fd7702b06b08966d26d085"
         },
         "git_available": true,
-        "head": "846f5d7b606789920d7d629c94169a4dbef39c34",
+        "head": "1e5585f0739aef0d2f1853a7675204fd1aeff977",
         "lockfiles": {},
         "missing_paths": [],
         "repository": ".",
         "root_path": ".",
-        "tool_version": "0.0.1",
+        "tool_version": "0.1.0",
         "tracked_dirty": [
+          ".gitignore",
           "README.md",
           "docs/data-contract.md",
           "docs/milestones.md",
+          "docs/vision-and-architecture.md",
+          "pyproject.toml",
           "src/intentgraph/__init__.py",
           "src/intentgraph/cli/main.py",
-          "src/intentgraph/obligations/engine.py",
-          "src/intentgraph/obligations/scope.py",
           "src/intentgraph/playbooks/agent-guide.md",
-          "src/intentgraph/repository/manifest.py",
-          "src/intentgraph/repository/migrations.py",
+          "src/intentgraph/reports/review.py",
           "src/intentgraph/services.py",
-          "src/intentgraph/vocabulary/core/kinds.json",
-          "src/intentgraph/vocabulary/core/relations.json",
-          "tests/test_cli.py",
-          "tests/test_migrations.py",
-          "tests/test_model.py",
-          "tests/test_self_model.py",
-          "tests/test_validation.py"
+          "tests/test_self_model.py"
         ],
         "untracked": [
-          ".github/workflows/intentgraph.yml",
-          "src/intentgraph/obligations/freshness.py",
-          "src/intentgraph/obligations/reconcile.py",
-          "src/intentgraph/obligations/reports.py",
-          "src/intentgraph/repository/workspace.py",
-          "tests/test_evidence.py"
+          ".github/workflows/release.yml",
+          "docs/worked-examples.md",
+          "src/intentgraph/repository/recovery.py",
+          "tests/test_install.py",
+          "tests/test_release.py",
+          "tests/test_worked_examples.py"
+        ]
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "workspace-capture",
+        "notes": "",
+        "source_refs": [
+          "evidence:m5-pytest-capture"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "workspace:root-20261018T092552Z-r32",
+      "kind": "WorkspaceSnapshot",
+      "label": ". @ 1e5585f0739a (dirty)",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "captured_at": "2026-10-18T09:25:52Z",
+        "dirty": true,
+        "files": {
+          "docs/worked-examples.md": "sha256:b6b519350a9cd334c1b843d9ba06eb5c1128f3fbec55017a6ed671458bfbdf60",
+          "pyproject.toml": "sha256:6ca0aed9e9780803aad74ef79db146bb8bdfc59992064f64888d591469e726b7",
+          "src": "sha256:d21e3e6edd2670fadcffffbb92bbadb03b9bb0954bb82856e3cb825600998f76",
+          "tests": "sha256:fc3490ac0dfb00e10169a9f785456303bb040572c6fd7702b06b08966d26d085"
+        },
+        "git_available": true,
+        "head": "1e5585f0739aef0d2f1853a7675204fd1aeff977",
+        "lockfiles": {},
+        "missing_paths": [],
+        "repository": ".",
+        "root_path": ".",
+        "tool_version": "0.1.0",
+        "tracked_dirty": [
+          ".gitignore",
+          "README.md",
+          "docs/data-contract.md",
+          "docs/milestones.md",
+          "docs/vision-and-architecture.md",
+          "pyproject.toml",
+          "src/intentgraph/__init__.py",
+          "src/intentgraph/cli/main.py",
+          "src/intentgraph/playbooks/agent-guide.md",
+          "src/intentgraph/reports/review.py",
+          "src/intentgraph/services.py",
+          "tests/test_self_model.py"
+        ],
+        "untracked": [
+          ".github/workflows/release.yml",
+          "docs/worked-examples.md",
+          "src/intentgraph/repository/recovery.py",
+          "tests/test_install.py",
+          "tests/test_release.py",
+          "tests/test_worked_examples.py"
         ]
       },
       "provenance": {
@@ -7085,7 +9610,7 @@
     }
   ],
   "project_id": "project:intentgraph",
-  "revision": 20,
+  "revision": 33,
   "transactions": [
     {
       "added_ids": [
@@ -7768,6 +10293,383 @@
       "reason": "Capture workspace snapshot for root '.'",
       "removed_ids": [],
       "result_revision": 20,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "decision:pyinstaller-onefile",
+        "decision:response-version-field",
+        "edge:bundled-executable-refines-local",
+        "edge:capabilities-documented-refines-local",
+        "edge:capabilities-op-realizes",
+        "edge:cli-realizes-bundle",
+        "edge:cli-realizes-stable",
+        "edge:decision-pyinstaller-concerns-cli",
+        "edge:decision-response-concerns-cli",
+        "edge:init-idempotent-non-destructive-refines-local",
+        "edge:playbooks-realizes-examples",
+        "edge:question-clean-concerns-bundle",
+        "edge:recover-op-realizes",
+        "edge:recovery-from-backup-or-git-refines-local",
+        "edge:reports-realizes-diagram",
+        "edge:repository-realizes-init",
+        "edge:repository-realizes-recovery",
+        "edge:repository-realizes-uninstall",
+        "edge:review-diagram-refines-local",
+        "edge:stable-machine-responses-refines-local",
+        "edge:uninstall-preserves-project-refines-local",
+        "edge:worked-examples-executable-refines-local",
+        "operation:capabilities",
+        "operation:recover",
+        "question:clean-machine-verification",
+        "req:bundled-executable",
+        "req:capabilities-documented",
+        "req:init-idempotent-non-destructive",
+        "req:recovery-from-backup-or-git",
+        "req:review-diagram",
+        "req:stable-machine-responses",
+        "req:uninstall-preserves-project",
+        "req:worked-examples-executable"
+      ],
+      "applied_at": "2026-10-18T09:12:27Z",
+      "base_revision": 20,
+      "operations_digest": "sha256:4844ac7229a1c2357d9ed1b74e196f6045bf071cc17c4b023ca0d8296951de8b",
+      "patch_id": "patch:plan-m5-installable",
+      "reason": "Define the installable first version before building it.",
+      "removed_ids": [],
+      "result_revision": 21,
+      "updated_ids": [
+        "obligation:m5-installable",
+        "scope:m5-installable"
+      ]
+    },
+    {
+      "added_ids": [
+        "edge:m5-installable-review-depicts-scope",
+        "review:m5-installable"
+      ],
+      "applied_at": "2026-10-18T09:12:28Z",
+      "base_revision": 21,
+      "operations_digest": "sha256:4d8dd41b60ba48d7ccc03b86626a19214f10d66886e6d0f6c10f3549d0c821bb",
+      "patch_id": "patch:review-export/m5-installable/793bb46d0fa8d307",
+      "reason": "Record review packet for scope:m5-installable at design digest sha256:793bb46d0fa8d3073b48d8ba55b822c2b0745e926573a007e7d62ef09908cdc4",
+      "removed_ids": [],
+      "result_revision": 22,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "approval:m5-installable/r22",
+        "edge:m5-installable-approval-r22-concerns-scope"
+      ],
+      "applied_at": "2026-10-18T09:12:29Z",
+      "base_revision": 22,
+      "operations_digest": "sha256:fca06c9b2fafb4ff39d593b6978f13fd78a9ee549b653574d85080ab3ab1488f",
+      "patch_id": "patch:approval/m5-installable/r22",
+      "reason": "Record build_authorization for scope:m5-installable",
+      "removed_ids": [],
+      "result_revision": 23,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "decision:executables-deferred",
+        "decision:uv-tool-install",
+        "edge:clean-install-refines-local",
+        "edge:cli-realizes-pypi",
+        "edge:decision-deferred-concerns-bundle",
+        "edge:decision-uv-concerns-cli",
+        "edge:pypi-refines-local",
+        "edge:repository-realizes-clean-install",
+        "edge:repository-realizes-upgrade",
+        "edge:upgrade-refines-local",
+        "req:clean-install-validated",
+        "req:pypi-package-primary",
+        "req:upgrade-preserves-project"
+      ],
+      "applied_at": "2026-10-18T09:17:43Z",
+      "base_revision": 23,
+      "operations_digest": "sha256:04451400c2c4e85d50902ba28704c2dfbedeb74f86cbc1fd54906e18d3547741",
+      "patch_id": "patch:revise-m5-distribution",
+      "reason": "User revised section 20 and milestone 5: Python package on PyPI is primary (uv tool install / pipx); standalone executables deferred.",
+      "removed_ids": [],
+      "result_revision": 24,
+      "updated_ids": [
+        "decision:pyinstaller-onefile",
+        "obligation:m5-installable",
+        "question:clean-machine-verification",
+        "req:bundled-executable",
+        "scope:m5-installable"
+      ]
+    },
+    {
+      "added_ids": [],
+      "applied_at": "2026-10-18T09:17:44Z",
+      "base_revision": 24,
+      "operations_digest": "sha256:9538da67a4a05abe4e5e7adf2d2f0957be426bfaee854d222d00255e3c8e4c83",
+      "patch_id": "patch:review-export/m5-installable/cdf8ee1ae8691a89",
+      "reason": "Record review packet for scope:m5-installable at design digest sha256:cdf8ee1ae8691a89c2e9b55d78d9a08cf6ef121a841be4628d4a7e3d43ad4c17",
+      "removed_ids": [],
+      "result_revision": 25,
+      "updated_ids": [
+        "review:m5-installable"
+      ]
+    },
+    {
+      "added_ids": [
+        "approval:m5-installable/r25",
+        "edge:m5-installable-approval-r25-concerns-scope"
+      ],
+      "applied_at": "2026-10-18T09:17:46Z",
+      "base_revision": 25,
+      "operations_digest": "sha256:b3185249fef8dbdf47fd3b89590dfb5a01ae1c5f342ea05f115b086d91b019c4",
+      "patch_id": "patch:approval/m5-installable/r25",
+      "reason": "Record build_authorization for scope:m5-installable",
+      "removed_ids": [],
+      "result_revision": 26,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "artifact:m5-pyproject",
+        "artifact:m5-release-workflow",
+        "artifact:m5-worked-examples",
+        "mapping:capabilities-versions",
+        "mapping:clean-install",
+        "mapping:distribution",
+        "mapping:recovery",
+        "mapping:review-diagram",
+        "mapping:worked-examples",
+        "symbol:m5-capabilities",
+        "symbol:m5-diagram",
+        "symbol:m5-recovery",
+        "test:m5-clean-install",
+        "test:m5-diagram",
+        "test:m5-envelope",
+        "test:m5-examples",
+        "test:m5-recover",
+        "test:m5-reinstall-uninstall"
+      ],
+      "applied_at": "2026-10-18T09:21:34Z",
+      "base_revision": 26,
+      "operations_digest": "sha256:43a142e66ac081451581318ac4f847e9c546c3931b2785d184421231c70b1230",
+      "patch_id": "patch:close-m5-installable",
+      "reason": "Map milestone 5 code, tests and artifacts; supersede the pre-revision edges and the milestone 4 capture; mark the obligation satisfied.",
+      "removed_ids": [],
+      "result_revision": 27,
+      "updated_ids": [
+        "edge:bundled-executable-refines-local",
+        "edge:cli-realizes-bundle",
+        "edge:decision-pyinstaller-concerns-cli",
+        "edge:question-clean-concerns-bundle",
+        "evidence:m4-pytest-capture",
+        "obligation:m5-installable"
+      ]
+    },
+    {
+      "added_ids": [],
+      "applied_at": "2026-10-18T09:21:51Z",
+      "base_revision": 27,
+      "operations_digest": "sha256:17f90cba07cb357164d0a3cd63850ef71637f209330356b7e6e206c029b24955",
+      "patch_id": "patch:restore-superseded-edge-lifecycle",
+      "reason": "Keep edge:decision-pyinstaller-concerns-cli as it was when the scope was approved: superseding it changed the design digest without changing the design; the superseded decision it leaves from already records the outcome.",
+      "removed_ids": [],
+      "result_revision": 28,
+      "updated_ids": [
+        "edge:decision-pyinstaller-concerns-cli"
+      ]
+    },
+    {
+      "added_ids": [
+        "edge:m5-pytest-capture-supports-0",
+        "edge:m5-pytest-capture-supports-1",
+        "edge:m5-pytest-capture-supports-10",
+        "edge:m5-pytest-capture-supports-11",
+        "edge:m5-pytest-capture-supports-12",
+        "edge:m5-pytest-capture-supports-13",
+        "edge:m5-pytest-capture-supports-14",
+        "edge:m5-pytest-capture-supports-15",
+        "edge:m5-pytest-capture-supports-16",
+        "edge:m5-pytest-capture-supports-17",
+        "edge:m5-pytest-capture-supports-18",
+        "edge:m5-pytest-capture-supports-19",
+        "edge:m5-pytest-capture-supports-2",
+        "edge:m5-pytest-capture-supports-20",
+        "edge:m5-pytest-capture-supports-21",
+        "edge:m5-pytest-capture-supports-22",
+        "edge:m5-pytest-capture-supports-23",
+        "edge:m5-pytest-capture-supports-24",
+        "edge:m5-pytest-capture-supports-25",
+        "edge:m5-pytest-capture-supports-26",
+        "edge:m5-pytest-capture-supports-27",
+        "edge:m5-pytest-capture-supports-28",
+        "edge:m5-pytest-capture-supports-29",
+        "edge:m5-pytest-capture-supports-3",
+        "edge:m5-pytest-capture-supports-30",
+        "edge:m5-pytest-capture-supports-31",
+        "edge:m5-pytest-capture-supports-32",
+        "edge:m5-pytest-capture-supports-33",
+        "edge:m5-pytest-capture-supports-34",
+        "edge:m5-pytest-capture-supports-35",
+        "edge:m5-pytest-capture-supports-36",
+        "edge:m5-pytest-capture-supports-37",
+        "edge:m5-pytest-capture-supports-38",
+        "edge:m5-pytest-capture-supports-39",
+        "edge:m5-pytest-capture-supports-4",
+        "edge:m5-pytest-capture-supports-40",
+        "edge:m5-pytest-capture-supports-5",
+        "edge:m5-pytest-capture-supports-6",
+        "edge:m5-pytest-capture-supports-7",
+        "edge:m5-pytest-capture-supports-8",
+        "edge:m5-pytest-capture-supports-9",
+        "evidence:m5-pytest-capture",
+        "workspace:m5-pytest-capture"
+      ],
+      "applied_at": "2026-10-18T09:22:48Z",
+      "base_revision": 28,
+      "operations_digest": "sha256:b9cee8237153939541acc9b738e23758d252f4d86353f2430a02a84bcfe7441c",
+      "patch_id": "patch:evidence-capture/m5-pytest-capture/r28",
+      "reason": "Capture evidence evidence:m5-pytest-capture",
+      "removed_ids": [],
+      "result_revision": 29,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "workspace:root-20261018T092249Z-r29"
+      ],
+      "applied_at": "2026-10-18T09:22:49Z",
+      "base_revision": 29,
+      "operations_digest": "sha256:b0129b313dc3176b10e3b68b71d61c9a868731be80d2add2cbe1e1fedd3558d9",
+      "patch_id": "patch:workspace-snapshot/root-20261018T092249Z-r29",
+      "reason": "Capture workspace snapshot for root '.'",
+      "removed_ids": [],
+      "result_revision": 30,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [],
+      "applied_at": "2026-10-18T09:25:09Z",
+      "base_revision": 30,
+      "operations_digest": "sha256:40f1bb1e7e118c7cb6d487396687188d0ab8666e1dc3c3433a8ffba121761fb5",
+      "patch_id": "patch:retract-stale-m5-capture",
+      "reason": "tests/test_self_model.py changed after the capture (declared input), so the capture is stale; retract it and the baseline and re-capture against the final tree.",
+      "removed_ids": [
+        "edge:m5-pytest-capture-supports-0",
+        "edge:m5-pytest-capture-supports-1",
+        "edge:m5-pytest-capture-supports-10",
+        "edge:m5-pytest-capture-supports-11",
+        "edge:m5-pytest-capture-supports-12",
+        "edge:m5-pytest-capture-supports-13",
+        "edge:m5-pytest-capture-supports-14",
+        "edge:m5-pytest-capture-supports-15",
+        "edge:m5-pytest-capture-supports-16",
+        "edge:m5-pytest-capture-supports-17",
+        "edge:m5-pytest-capture-supports-18",
+        "edge:m5-pytest-capture-supports-19",
+        "edge:m5-pytest-capture-supports-2",
+        "edge:m5-pytest-capture-supports-20",
+        "edge:m5-pytest-capture-supports-21",
+        "edge:m5-pytest-capture-supports-22",
+        "edge:m5-pytest-capture-supports-23",
+        "edge:m5-pytest-capture-supports-24",
+        "edge:m5-pytest-capture-supports-25",
+        "edge:m5-pytest-capture-supports-26",
+        "edge:m5-pytest-capture-supports-27",
+        "edge:m5-pytest-capture-supports-28",
+        "edge:m5-pytest-capture-supports-29",
+        "edge:m5-pytest-capture-supports-3",
+        "edge:m5-pytest-capture-supports-30",
+        "edge:m5-pytest-capture-supports-31",
+        "edge:m5-pytest-capture-supports-32",
+        "edge:m5-pytest-capture-supports-33",
+        "edge:m5-pytest-capture-supports-34",
+        "edge:m5-pytest-capture-supports-35",
+        "edge:m5-pytest-capture-supports-36",
+        "edge:m5-pytest-capture-supports-37",
+        "edge:m5-pytest-capture-supports-38",
+        "edge:m5-pytest-capture-supports-39",
+        "edge:m5-pytest-capture-supports-4",
+        "edge:m5-pytest-capture-supports-40",
+        "edge:m5-pytest-capture-supports-5",
+        "edge:m5-pytest-capture-supports-6",
+        "edge:m5-pytest-capture-supports-7",
+        "edge:m5-pytest-capture-supports-8",
+        "edge:m5-pytest-capture-supports-9",
+        "evidence:m5-pytest-capture",
+        "workspace:m5-pytest-capture",
+        "workspace:root-20261018T090539Z-r19",
+        "workspace:root-20261018T092249Z-r29"
+      ],
+      "result_revision": 31,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "edge:m5-pytest-capture-supports-0",
+        "edge:m5-pytest-capture-supports-1",
+        "edge:m5-pytest-capture-supports-10",
+        "edge:m5-pytest-capture-supports-11",
+        "edge:m5-pytest-capture-supports-12",
+        "edge:m5-pytest-capture-supports-13",
+        "edge:m5-pytest-capture-supports-14",
+        "edge:m5-pytest-capture-supports-15",
+        "edge:m5-pytest-capture-supports-16",
+        "edge:m5-pytest-capture-supports-17",
+        "edge:m5-pytest-capture-supports-18",
+        "edge:m5-pytest-capture-supports-19",
+        "edge:m5-pytest-capture-supports-2",
+        "edge:m5-pytest-capture-supports-20",
+        "edge:m5-pytest-capture-supports-21",
+        "edge:m5-pytest-capture-supports-22",
+        "edge:m5-pytest-capture-supports-23",
+        "edge:m5-pytest-capture-supports-24",
+        "edge:m5-pytest-capture-supports-25",
+        "edge:m5-pytest-capture-supports-26",
+        "edge:m5-pytest-capture-supports-27",
+        "edge:m5-pytest-capture-supports-28",
+        "edge:m5-pytest-capture-supports-29",
+        "edge:m5-pytest-capture-supports-3",
+        "edge:m5-pytest-capture-supports-30",
+        "edge:m5-pytest-capture-supports-31",
+        "edge:m5-pytest-capture-supports-32",
+        "edge:m5-pytest-capture-supports-33",
+        "edge:m5-pytest-capture-supports-34",
+        "edge:m5-pytest-capture-supports-35",
+        "edge:m5-pytest-capture-supports-36",
+        "edge:m5-pytest-capture-supports-37",
+        "edge:m5-pytest-capture-supports-38",
+        "edge:m5-pytest-capture-supports-39",
+        "edge:m5-pytest-capture-supports-4",
+        "edge:m5-pytest-capture-supports-40",
+        "edge:m5-pytest-capture-supports-5",
+        "edge:m5-pytest-capture-supports-6",
+        "edge:m5-pytest-capture-supports-7",
+        "edge:m5-pytest-capture-supports-8",
+        "edge:m5-pytest-capture-supports-9",
+        "evidence:m5-pytest-capture",
+        "workspace:m5-pytest-capture"
+      ],
+      "applied_at": "2026-10-18T09:25:51Z",
+      "base_revision": 31,
+      "operations_digest": "sha256:3c809c1cda5ec2ff153385b49a304b0844a400cd2f79dedde95bf69a3f1c5094",
+      "patch_id": "patch:evidence-capture/m5-pytest-capture/r31",
+      "reason": "Capture evidence evidence:m5-pytest-capture",
+      "removed_ids": [],
+      "result_revision": 32,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "workspace:root-20261018T092552Z-r32"
+      ],
+      "applied_at": "2026-10-18T09:25:52Z",
+      "base_revision": 32,
+      "operations_digest": "sha256:0700f409ee14bbb321a6562a8d0fda98a0962d6544cd8be49a09da47c91df9a8",
+      "patch_id": "patch:workspace-snapshot/root-20261018T092552Z-r32",
+      "reason": "Capture workspace snapshot for root '.'",
+      "removed_ids": [],
+      "result_revision": 33,
       "updated_ids": []
     }
   ],

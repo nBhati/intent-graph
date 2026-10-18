@@ -1,0 +1,546 @@
+{
+  "patch_id": "patch:close-m5-installable",
+  "base_revision": 26,
+  "base_digest": "sha256:6b410a385b2ad66b4143594b984c7e326518ce519b3e8a6f8b3b251a92d48f8e",
+  "reason": "Map milestone 5 code, tests and artifacts; supersede the pre-revision edges and the milestone 4 capture; mark the obligation satisfied.",
+  "operations": [
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m5-recovery",
+        "kind": "CodeSymbol",
+        "label": "recover",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/repository/recovery.py",
+          "language": "python",
+          "symbol": "recover",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/repository/recovery.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m5-capabilities",
+        "kind": "CodeSymbol",
+        "label": "capabilities",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/services.py",
+          "language": "python",
+          "symbol": "capabilities",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/services.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:m5-diagram",
+        "kind": "CodeSymbol",
+        "label": "component_diagram",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/reports/review.py",
+          "language": "python",
+          "symbol": "component_diagram",
+          "locator_kind": "qualified_name",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/reports/review.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "artifact:m5-pyproject",
+        "kind": "CodeArtifact",
+        "label": "pyproject.toml",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "pyproject.toml",
+          "artifact_kind": "config"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:pyproject.toml"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "artifact:m5-release-workflow",
+        "kind": "CodeArtifact",
+        "label": ".github/workflows/release.yml",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": ".github/workflows/release.yml",
+          "artifact_kind": "config"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:.github/workflows/release.yml"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "artifact:m5-worked-examples",
+        "kind": "CodeArtifact",
+        "label": "docs/worked-examples.md",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "docs/worked-examples.md",
+          "artifact_kind": "file"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:docs/worked-examples.md"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m5-clean-install",
+        "kind": "TestCase",
+        "label": "test_clean_install_runs_the_whole_loop",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_install.py",
+          "test_id": "test_clean_install_runs_the_whole_loop",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_install.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m5-reinstall-uninstall",
+        "kind": "TestCase",
+        "label": "test_reinstall_and_uninstall_preserve_project_files",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_install.py",
+          "test_id": "test_reinstall_and_uninstall_preserve_project_files",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_install.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m5-recover",
+        "kind": "TestCase",
+        "label": "test_recover_from_backup_and_from_git",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_release.py",
+          "test_id": "test_recover_from_backup_and_from_git",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_release.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m5-envelope",
+        "kind": "TestCase",
+        "label": "test_envelope_carries_response_version",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_release.py",
+          "test_id": "test_envelope_carries_response_version",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_release.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m5-diagram",
+        "kind": "TestCase",
+        "label": "test_review_packet_diagram_from_fixture",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_release.py",
+          "test_id": "test_review_packet_diagram_from_fixture",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_release.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:m5-examples",
+        "kind": "TestCase",
+        "label": "test_example_3_stale_evidence_after_code_change",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_worked_examples.py",
+          "test_id": "test_example_3_stale_evidence_after_code_change",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_worked_examples.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:distribution",
+        "kind": "Mapping",
+        "label": "pyproject metadata and the release workflow realize the PyPI package route",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:pypi-package-primary"
+          ],
+          "implementation_refs": [
+            "artifact:m5-pyproject",
+            "artifact:m5-release-workflow"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": [
+            "Publishing requires PyPI trusted-publisher configuration and a GitHub remote; neither was reachable from this session."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m5-installable"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:clean-install",
+        "kind": "Mapping",
+        "label": "tests/test_install.py realizes clean-install, upgrade and uninstall validation",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:clean-install-validated",
+            "req:upgrade-preserves-project",
+            "req:uninstall-preserves-project",
+            "req:init-idempotent-non-destructive"
+          ],
+          "implementation_refs": [
+            "test:m5-clean-install",
+            "test:m5-reinstall-uninstall"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": [
+            "uv tool install is pointed at the running interpreter; letting uv download a runtime is exercised only on CI."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m5-installable"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:recovery",
+        "kind": "Mapping",
+        "label": "repository.recovery realizes recovery from backup or Git",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:recovery-from-backup-or-git",
+            "operation:recover"
+          ],
+          "implementation_refs": [
+            "symbol:m5-recovery",
+            "test:m5-recover"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": []
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m5-installable"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:capabilities-versions",
+        "kind": "Mapping",
+        "label": "capabilities/version and the versioned envelope realize stable responses and documented capabilities",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:stable-machine-responses",
+            "req:capabilities-documented",
+            "operation:capabilities"
+          ],
+          "implementation_refs": [
+            "symbol:m5-capabilities",
+            "test:m5-envelope"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": []
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m5-installable"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:review-diagram",
+        "kind": "Mapping",
+        "label": "reports.review.component_diagram realizes review diagrams",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:review-diagram"
+          ],
+          "implementation_refs": [
+            "symbol:m5-diagram",
+            "test:m5-diagram"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": [
+            "Only structural kinds and dependency edges are drawn; no sequence diagrams."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m5-installable"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:worked-examples",
+        "kind": "Mapping",
+        "label": "docs/worked-examples.md and its test realize executable worked examples",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:worked-examples-executable"
+          ],
+          "implementation_refs": [
+            "artifact:m5-worked-examples",
+            "test:m5-examples"
+          ],
+          "mapping_kind": "implements",
+          "remaining_gaps": []
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m5-installable"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "evidence:m4-pytest-capture",
+      "lifecycle": "superseded"
+    },
+    {
+      "op": "add_annotation",
+      "id": "evidence:m4-pytest-capture",
+      "annotation": {
+        "role": "explanation",
+        "text": "Superseded by evidence:m5-pytest-capture after milestone 5 changed src/ and tests/.",
+        "refs": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m5-installable",
+      "changes": {
+        "state": "satisfied"
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "obligation:m5-installable",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "add_annotation",
+      "id": "obligation:m5-installable",
+      "annotation": {
+        "role": "explanation",
+        "text": "Satisfied under the revised (PyPI-first) design; evidence is the tool-captured test run evidence:m5-pytest-capture. Publishing itself remains a release-time step outside this session.",
+        "refs": [
+          "mapping:distribution",
+          "mapping:clean-install"
+        ]
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:bundled-executable-refines-local",
+      "lifecycle": "superseded"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:cli-realizes-bundle",
+      "lifecycle": "superseded"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:decision-pyinstaller-concerns-cli",
+      "lifecycle": "superseded"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:question-clean-concerns-bundle",
+      "lifecycle": "superseded"
+    }
+  ]
+}

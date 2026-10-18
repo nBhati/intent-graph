@@ -1,0 +1,40 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv python install 3.13
+      - run: uv build
+      - name: Package tests
+        run: uv run --with pytest --with-editable . pytest -q
+      - name: Clean-install validation (architecture section 21.8)
+        # Installs the built wheel into an isolated tool environment with no source tree on the path,
+        # then runs the init/patch/readiness/evidence/reconcile sequence, reinstalls, and uninstalls.
+        run: uv run --with pytest --with-editable . pytest -q tests/test_install.py -k clean_install --override-ini addopts=
+        env:
+          INTENTGRAPH_WHEEL: dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/*
+  publish:
+    needs: build-and-validate
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write   # PyPI trusted publishing; configure the project on PyPI before the first release
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1

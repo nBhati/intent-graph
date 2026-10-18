@@ -65,7 +65,6 @@ A waiver is an Obligation node with the computed obligation id, `state: waived` 
 4. `intentgraph diff --git <last known ref> --json` to see what the model gained since you last looked.
 5. Continue from the obligation; when done, patch its `state` to `satisfied` and add Mapping/Evidence records that say how.
 
-## Current capability (milestone 4)
+## Current capability (v0.1.0)
 
-Available: init, status, vocabulary, view, search, show, impact, diff, patch validate/apply, check, rebuild, readiness, conformance, review export, approval record, policy list/show, migrate, evidence submit/capture, workspace snapshot, reconcile, ci.
-Not yet available: bundled executable, native symbol extraction (symbol claims are labelled by their `extractor`), diagrams in review packets.
+Run `intentgraph capabilities --json` for the authoritative list of commands, rule types, formats, and what is explicitly unsupported. If `intentgraph status` reports a corrupt snapshot, do not hand-edit it: `intentgraph recover` lists backups and previews a restore from a backup or Git revision. Worked examples with real command sequences are in the package documentation (`docs/worked-examples.md`).

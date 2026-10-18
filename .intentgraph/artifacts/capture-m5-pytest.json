@@ -1,0 +1,72 @@
+{
+  "id": "evidence:m5-pytest-capture",
+  "label": "Package test suite captured by the tool (v0.1.0)",
+  "method": "unit_and_subprocess_tests",
+  "tool": "pytest",
+  "repository": ".",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--ignore=tests/test_self_model.py"
+  ],
+  "supports": [
+    "req:acyclic-only-where-declared",
+    "req:assertion-cannot-satisfy-executable-evidence",
+    "req:atomic-replace",
+    "req:canonical-digest",
+    "req:capabilities-documented",
+    "req:ci-entry-point",
+    "req:clean-install-validated",
+    "req:collection-mode-preserved",
+    "req:design-change-invalidates-readiness",
+    "req:design-digest-stable-under-approval",
+    "req:evidence-binds-inputs",
+    "req:exit-code-convention",
+    "req:fresh-process-reconstruction",
+    "req:graph-diff",
+    "req:idempotent-patch-ids",
+    "req:impact-slice",
+    "req:init-idempotent-non-destructive",
+    "req:lens-never-drops-mandatory",
+    "req:missing-artifact-downgrades",
+    "req:mixed-precision",
+    "req:no-code-execution-from-data",
+    "req:no-self-approval",
+    "req:no-universal-verified-flag",
+    "req:observation-never-overwrites-intent",
+    "req:pypi-package-primary",
+    "req:readiness-does-not-modify",
+    "req:readiness-evaluates-policy",
+    "req:reconcile-safe-conclusions",
+    "req:recovery-from-backup-or-git",
+    "req:review-diagram",
+    "req:review-packet-deterministic",
+    "req:stable-ids",
+    "req:stable-machine-responses",
+    "req:stale-base-rejected",
+    "req:uninstall-preserves-project",
+    "req:unknown-kinds-not-silently-known",
+    "req:unmapped-change-coverage",
+    "req:upgrade-preserves-project",
+    "req:waiver-requires-user",
+    "req:worked-examples-executable",
+    "req:workspace-snapshot-identity"
+  ],
+  "inputs": {
+    "paths": [
+      "src",
+      "tests",
+      "pyproject.toml",
+      "docs/worked-examples.md"
+    ]
+  },
+  "timeout": 1200,
+  "limitations": [
+    "tests/test_self_model.py is excluded because it asserts the presence of this very evidence record; CI runs the full suite separately.",
+    "tests/test_install.py runs uv tool install against the current interpreter; a runtime download by uv is exercised only on CI."
+  ]
+}

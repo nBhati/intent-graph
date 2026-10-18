@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-10-18T09:25:09Z",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--ignore=tests/test_self_model.py"
+  ],
+  "cwd": "/home/user/intent-graph",
+  "duration_seconds": 41.557,
+  "exit_code": 0,
+  "stderr": "",
+  "stdout": "........................................................................ [ 80%]\n.................                                                        [100%]\n89 passed in 40.78s\n",
+  "timed_out": false
+}

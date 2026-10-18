@@ -1,0 +1,373 @@
+{
+  "patch_id": "patch:revise-m5-distribution",
+  "base_revision": 23,
+  "base_digest": "sha256:4e28b6edd3aa80052ca47302f10978ef4be2ed80fd6e3e7fd13349eb2816660b",
+  "reason": "User revised section 20 and milestone 5: Python package on PyPI is primary (uv tool install / pipx); standalone executables deferred.",
+  "operations": [
+    {
+      "op": "update_fields",
+      "id": "req:bundled-executable",
+      "lifecycle": "superseded"
+    },
+    {
+      "op": "add_annotation",
+      "id": "req:bundled-executable",
+      "annotation": {
+        "role": "explanation",
+        "text": "Superseded by req:pypi-package-primary on the user's revision of section 20 (document version 0.3).",
+        "refs": [
+          "req:pypi-package-primary"
+        ]
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "decision:pyinstaller-onefile",
+      "lifecycle": "superseded"
+    },
+    {
+      "op": "update_fields",
+      "id": "question:clean-machine-verification",
+      "lifecycle": "superseded"
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:pypi-package-primary",
+        "kind": "Requirement",
+        "label": "The Python package published to PyPI is the primary installation route, with one intentgraph command",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "uv tool install recommended; pipx alternative; dependencies installed automatically; the tool is not a runtime dependency of the modeled application."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "user",
+          "method": "conversation",
+          "source_refs": [
+            "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "original_intent",
+            "text": "I'd make a Python package the primary installation route ... uv tool install as the recommended route; pipx as an alternative ... I'd change Milestone 5 to 'publish and validate the installable Python CLI': clean installation, initialization, upgrades, migrations, and uninstall that preserves project files. Standalone executables can come later if users need them.",
+            "refs": [
+              "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+              "doc:vision-and-architecture#20"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:clean-install-validated",
+        "kind": "Requirement",
+        "label": "A clean isolated install of the built wheel can initialize, persist, restart, query, patch, evaluate readiness, import evidence and reconcile",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Validated by an executable test that installs the wheel into an isolated uv tool environment with no source tree on the path."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "user",
+          "method": "conversation",
+          "source_refs": [
+            "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:upgrade-preserves-project",
+        "kind": "Requirement",
+        "label": "Reinstalling or upgrading the tool preserves project files; migrations stay explicit",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "user",
+          "method": "conversation",
+          "source_refs": [
+            "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:uv-tool-install",
+        "kind": "Decision",
+        "label": "Distribute as a PyPI package; recommend uv tool install, offer pipx; defer standalone executables",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "user",
+          "decision_kind": "choice",
+          "rationale": "uv installs CLI tools in isolated environments and obtains a Python runtime automatically; an executable or npm-first distribution would add another packaging layer to the Python core.",
+          "alternatives": [
+            "PyInstaller one-file executables per platform (previous decision)",
+            "npm-first wrapper"
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "user",
+          "method": "conversation",
+          "source_refs": [
+            "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:executables-deferred",
+        "kind": "Decision",
+        "label": "Standalone executables are deferred until users need them",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "user",
+          "decision_kind": "deferral",
+          "rationale": "Not needed for the developer audience; revisit on demand."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "user",
+          "method": "conversation",
+          "source_refs": [
+            "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-6",
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:pypi-refines-local",
+        "kind": "refines",
+        "source": "req:pypi-package-primary",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:clean-install-refines-local",
+        "kind": "refines",
+        "source": "req:clean-install-validated",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.8"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:upgrade-refines-local",
+        "kind": "refines",
+        "source": "req:upgrade-preserves-project",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.8"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:cli-realizes-pypi",
+        "kind": "realizes",
+        "source": "component:cli",
+        "target": "req:pypi-package-primary",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:repository-realizes-clean-install",
+        "kind": "realizes",
+        "source": "component:repository",
+        "target": "req:clean-install-validated",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.8"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:repository-realizes-upgrade",
+        "kind": "realizes",
+        "source": "component:repository",
+        "target": "req:upgrade-preserves-project",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.8"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:decision-uv-concerns-cli",
+        "kind": "concerns",
+        "source": "decision:uv-tool-install",
+        "target": "component:cli",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:decision-deferred-concerns-bundle",
+        "kind": "concerns",
+        "source": "decision:executables-deferred",
+        "target": "req:bundled-executable",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "scope:m5-installable",
+      "changes": {
+        "member_refs": [
+          "system:intentgraph",
+          "component:cli",
+          "component:repository",
+          "component:playbooks",
+          "component:reports",
+          "operation:recover",
+          "operation:capabilities",
+          "req:pypi-package-primary",
+          "req:clean-install-validated",
+          "req:upgrade-preserves-project",
+          "req:init-idempotent-non-destructive",
+          "req:recovery-from-backup-or-git",
+          "req:stable-machine-responses",
+          "req:capabilities-documented",
+          "req:worked-examples-executable",
+          "req:review-diagram",
+          "req:uninstall-preserves-project"
+        ]
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "scope:m5-installable",
+      "label": "Milestone 5: publish and validate the installable Python CLI"
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m5-installable",
+      "changes": {
+        "request": "Build and validate the wheel: clean isolated install, init, patch, readiness, evidence, reconcile, reinstall/upgrade, migration, uninstall preserving project files; recover/capabilities/version commands; response_version; review diagrams; executable worked examples; freeze v0.1.0."
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "obligation:m5-installable",
+      "label": "Milestone 5: publish and validate the installable Python CLI"
+    }
+  ]
+}

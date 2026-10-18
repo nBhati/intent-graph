@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 from typing import Any, Callable
 
-from .. import TOOL_VERSION, services
+from .. import RESPONSE_VERSION, TOOL_VERSION, services
 from ..errors import IntentGraphError
 
 EXIT_OK = 0
@@ -118,6 +118,13 @@ def build_parser() -> argparse.ArgumentParser:
     s = sub.add_parser("ci", parents=[common], help="independent trigger: checks, readiness and reconciliation for every active scope")
     s.add_argument("--scope", nargs="*", default=None)
 
+    s = sub.add_parser("recover", parents=[common], help="diagnose a damaged snapshot and preview/apply recovery from a backup or Git revision")
+    s.add_argument("--from-backup", type=Path, default=None)
+    s.add_argument("--from-git", metavar="REF", default=None)
+    s.add_argument("--apply", action="store_true")
+    sub.add_parser("capabilities", parents=[common], help="what this build supports and what it does not")
+    sub.add_parser("version", parents=[common], help="tool, format, vocabulary and response versions")
+
     s = sub.add_parser("migrate", parents=[common], help="preview (default) or apply explicit model migrations")
     s.add_argument("--apply", action="store_true")
 
@@ -147,6 +154,13 @@ def run(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     cmd = args.command
     if cmd == "init":
         data = services.init_workspace(args.path, name=args.name, project_id=args.project_id, pointer=not args.no_pointer)
+        return EXIT_OK, data
+    if cmd == "version":
+        return EXIT_OK, services.tool_info()
+    if cmd == "capabilities":
+        return EXIT_OK, services.capabilities()
+    if cmd == "recover":
+        data = services.recover(start, from_backup=args.from_backup, from_git=args.from_git, apply=args.apply)
         return EXIT_OK, data
     if cmd == "rebuild":
         data = services.rebuild(start)
@@ -339,6 +353,21 @@ def _human(command: str, data: dict[str, Any]) -> str:
                 lines.append(f"  {sc['scope']}: error {sc['error']['message']}")
             else:
                 lines.append(f"  {sc['scope']}: readiness {sc['readiness']}, approval {sc['approval']}, conformance {sc['conformance']}, evidence fresh/stale {sc['evidence']['fresh']}/{sc['evidence']['stale']}, reconcile blockers {sc['reconcile_blockers'] or 'none'}{'  <- BLOCKING' if sc['blocking'] else ''}")
+    elif command == "version":
+        lines.append(f"intentgraph {data['tool_version']} (format {data['format_version']}, vocabulary {data['core_vocabulary_version']}, response {data['response_version']}; python {data['python']} on {data['platform']}{'; bundled' if data['bundled'] else ''})")
+    elif command == "capabilities":
+        lines.append(f"intentgraph {data['tool_version']}: {len(data['supported']['commands'])} commands, {len(data['supported']['policy_rule_types'])} policy rule types")
+        for u in data["unsupported"]:
+            lines.append(f"  unsupported: {u['capability']} ({u['status']}) - {u['detail']}")
+    elif command == "recover":
+        cur = data["current"]
+        lines.append(f"current snapshot: {cur['status']}" + (f" (revision {cur['revision']})" if cur.get("revision") is not None else f": {cur.get('detail', '')}"))
+        if "backups" in data:
+            for b in data["backups"]:
+                lines.append(f"  backup {b['path']}: " + (f"revision {b['revision']} ({b['vocabulary_version']})" if b["valid"] else f"invalid ({b['detail']})"))
+        else:
+            lines.append(f"source {data['source']}: revision {data['revision']} digest {data['content_digest'][:23]}...; {'APPLIED' if data['applied'] else 'preview only'}" + (f"; damaged copy kept at {data['damaged_copy']}" if data.get("damaged_copy") else ""))
+        lines.append(data["note"])
     elif command == "policy":
         return json.dumps(data, indent=2, sort_keys=True)
     elif command == "patch":
@@ -359,7 +388,7 @@ def _human(command: str, data: dict[str, Any]) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
-    envelope: dict[str, Any] = {"command": args.command, "tool_version": TOOL_VERSION}
+    envelope: dict[str, Any] = {"command": args.command, "tool_version": TOOL_VERSION, "response_version": RESPONSE_VERSION}
     try:
         code, data = run(args)
         envelope["status"] = _status_name(code)

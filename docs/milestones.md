@@ -54,6 +54,18 @@ Two corrections the tool forced on its own development: reconcile showed that th
 
 Known limits: directories declared as inputs are hashed as whole trees; symbol claims are only as good as their extractor; evidence captured by the tool proves the command ran, not what the command means; unmapped-change detection needs Git.
 
-## Milestones 5 and 6
+## Milestone 5: publish and validate the installable Python CLI (done, 2026-10-18; v0.1.0)
 
-Not started. See the architecture document, sections 21.8 and 21.9. Each has a draft scope and a pending obligation in the self-model.
+Direction change during the milestone: the plan was recorded and approved for a bundled executable (the original section 21.8). The user then revised section 20 and milestone 5: the Python package on PyPI is the primary route, `uv tool install` recommended, pipx as the alternative, standalone executables deferred. The revision was recorded in the self-model (`patch:revise-m5-distribution`: the executable requirement and decision superseded, three new requirements, the user's decision and the deferral). The tool reported the earlier approval as invalidated and named the changed records; the review packet was re-exported and a new approval recorded with the user's words. The architecture document is at version 0.3 with the revised sections 20 and 21.8. The PyInstaller build and its workflow, which had been written before the message arrived, were removed.
+
+Built: `recover` (diagnose, list backups, preview or apply restore from a migration backup or Git revision, damaged copy kept); `capabilities` and `version`; `response_version` in every JSON envelope with an additive-only stability rule; a Mermaid component diagram in review packets; `docs/worked-examples.md` with the five playbook situations, executed by `tests/test_worked_examples.py`; package metadata for PyPI; a release workflow that builds the wheel, runs the tests and the clean-install validation, and publishes on a `v*` tag through PyPI trusted publishing (to be configured on PyPI before the first release).
+
+Verified by tests: `tests/test_install.py` installs the built wheel into an isolated `uv tool` environment with its own tool and bin directories, then with no source tree on the path and a minimal environment runs init, patch, restart, search, view, readiness, review export, approval, evidence submit and reconcile, and detects a source change; reinstalling the tool and running init again changes no project file; uninstalling the tool leaves the project files intact and loadable. Recovery from backup and from Git, including the damaged copy and manifest update; capabilities and versions; the envelope on success and on error; diagrams present or omitted by structure.
+
+Self-use exit: `scope:m5-installable` approved on the revised design; mappings and tool-captured evidence recorded; `ci` green; `v0.1.0` tagged as the frozen version for the external study.
+
+Known limits: the package is not yet published (no PyPI or GitHub access from this session), so installation from a checkout is the current route; `uv tool install` in the test uses the running interpreter rather than letting uv download one; no upgrade across two published versions could be exercised, so the upgrade path is validated as reinstall plus explicit migration.
+
+## Milestone 6
+
+Not started. See the architecture document, section 21.9. Its draft scope and pending obligation are in the self-model.

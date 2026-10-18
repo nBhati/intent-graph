@@ -14,7 +14,9 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from . import CORE_VOCABULARY_VERSION, FORMAT_VERSION, TOOL_VERSION
+from . import CORE_VOCABULARY_VERSION, FORMAT_VERSION, RESPONSE_VERSION, TOOL_VERSION
+from .repository import recovery as _recovery
+from .obligations.policy import RuleType
 from .checks import Diagnostic, has_blocking, validate_snapshot
 from .errors import InvalidInput, ValidationFailed
 from .graph import build_index
@@ -34,7 +36,7 @@ from .model import Snapshot
 from .patches import Patch, apply_patch, validate_patch
 from .playbooks import POINTER_BEGIN, POINTER_END, agent_guide_text, pointer_text
 from .repository import Repository
-from .repository.store import atomic_write_text, utc_now
+from .repository.store import SUPPORTED_FORMAT_VERSIONS, atomic_write_text, utc_now
 from .vocabulary import Vocabulary
 
 AGENT_INSTRUCTION_FILES = ("CLAUDE.md", "AGENTS.md", ".cursorrules", "GEMINI.md")
@@ -664,4 +666,56 @@ def ci(repo: Repository, scopes: list[str] | None = None) -> dict[str, Any]:
 
 
 def tool_info() -> dict[str, Any]:
-    return {"tool_version": TOOL_VERSION, "format_version": FORMAT_VERSION, "core_vocabulary_version": CORE_VOCABULARY_VERSION}
+    import platform
+    import sys
+
+    return {"tool_version": TOOL_VERSION, "format_version": FORMAT_VERSION, "core_vocabulary_version": CORE_VOCABULARY_VERSION, "response_version": RESPONSE_VERSION,
+            "supported_format_versions": sorted(SUPPORTED_FORMAT_VERSIONS), "python": platform.python_version(), "platform": f"{platform.system().lower()}-{platform.machine()}",
+            "bundled": bool(getattr(sys, "frozen", False))}
+
+
+def capabilities() -> dict[str, Any]:
+    """What this build supports and, explicitly, what it does not (architecture section 20)."""
+    from typing import get_args
+
+    return {
+        **tool_info(),
+        "supported": {
+            "commands": ["init", "status", "check", "rebuild", "vocabulary", "view", "search", "show", "impact", "diff", "patch", "readiness", "conformance", "review", "approval", "policy", "migrate",
+                         "evidence", "workspace", "reconcile", "ci", "recover", "capabilities", "version"],
+            "policy_rule_types": list(get_args(RuleType)),
+            "evidence_collection_modes": ["agent_assertion", "agent_submitted_report", "validated_report", "independent_capture"],
+            "validated_report_formats": ["junit-xml", "intentgraph-test-report/0.1"],
+            "expression_languages": ["intent-expr/0.1 (shape validation only)"],
+            "diff_baselines": ["transactions", "snapshot file", "git ref"],
+            "migrations": [m.id for m in migrations.MIGRATIONS],
+            "review_packet": ["markdown", "json", "mermaid component diagram"],
+            "workspace_roots": "multiple named roots; Git optional (reported when absent)",
+            "installation": ["uv tool install intentgraph (recommended)", "pipx install intentgraph", "pip install intentgraph"],
+        },
+        "unsupported": [
+            {"capability": "formal analysis (Alloy, TLA+)", "status": "recording only", "detail": "AnalysisRun records with distinct outcomes (pass, counterexample, unknown, unsupported, execution_failure) are stored and reviewed; the tool does not invoke analyzers or translate prose to models."},
+            {"capability": "native symbol extraction", "status": "not implemented", "detail": "CodeSymbol claims carry their extractor and resolution_status; file existence is checked generically, symbol resolution is not."},
+            {"capability": "expression evaluation", "status": "not implemented", "detail": "intent-expr/0.1 expressions are validated for shape and reference integrity, never evaluated or proved."},
+            {"capability": "MCP server", "status": "not implemented", "detail": "All commands call intentgraph.services; an MCP interface can expose the same functions later."},
+            {"capability": "authenticated approvals", "status": "not implemented", "detail": "Approvals and waivers are traceability (recorded_by, source_statement, source_ref), not cryptographic proof of identity."},
+            {"capability": "sharded snapshots", "status": "not implemented", "detail": "One canonical snapshot per workspace (v0 decision); sharding needs a defined transaction model first."},
+            {"capability": "background file watching", "status": "not implemented", "detail": "Drift is detected at invocation (reconcile, ci), not continuously."},
+            {"capability": "standalone executables", "status": "deferred", "detail": "The Python package is the installation route (`uv tool install intentgraph`, or pipx). Bundled executables can come later if users need them."},
+        ],
+    }
+
+
+def recover(repo_root: Path | None, *, from_backup: Path | None, from_git: str | None, apply: bool) -> dict[str, Any]:
+    """Recovery must work when the snapshot is unreadable, so it resolves the workspace by project.json alone."""
+    from .repository.layout import WorkspacePaths
+
+    start = Path(repo_root) if repo_root is not None else Path.cwd()
+    paths = WorkspacePaths.find(start)
+    if paths is None:
+        from .errors import WorkspaceNotFound
+
+        raise WorkspaceNotFound(f"no .intentgraph workspace found at or above {start}")
+    if from_backup is None and from_git is None:
+        return {"current": _recovery.diagnose(paths), "backups": _recovery.list_backups(paths), "applied": False, "note": "Pass --from-backup PATH or --from-git REF to preview a recovery; add --apply to perform it."}
+    return _recovery.recover(paths, from_backup=from_backup, from_git=from_git, apply=apply)

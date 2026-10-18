@@ -6,8 +6,10 @@ the storage format, the core vocabulary, and the tool are versioned
 independently so migrations can be explicit.
 """
 
-TOOL_VERSION = "0.0.1"
+TOOL_VERSION = "0.1.0"
 FORMAT_VERSION = "0.1"
 CORE_VOCABULARY_VERSION = "core/0.3"
+# Machine-readable CLI envelope contract: additive changes keep it, breaking changes bump it.
+RESPONSE_VERSION = "1"
 
-__all__ = ["TOOL_VERSION", "FORMAT_VERSION", "CORE_VOCABULARY_VERSION"]
+__all__ = ["TOOL_VERSION", "FORMAT_VERSION", "CORE_VOCABULARY_VERSION", "RESPONSE_VERSION"]

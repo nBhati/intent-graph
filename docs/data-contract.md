@@ -79,7 +79,7 @@ Design digest: SHA-256 over the policy reference plus the intent-layer closure r
 
 Waiver: an Obligation node with the computed id, `state: waived`, `waiver: {authorized_by: "user", reason, ...}`. Without a user authorization and reason the waiver is reported as `invalid_waiver` and not honoured.
 
-`review export --scope S [--record] [--out PATH]`: writes `artifacts/review-<slug>.md` and `.json` (sections, coverage ids, exclusions/deferrals, design digest, readiness status) and with `--record` applies an internal patch `patch:review-export/<slug>/<digest16>` creating or updating `review:<slug>` (ReviewArtifact, `scope_digest`) and its `depicts` edge.
+`review export --scope S [--record] [--out PATH]`: writes `artifacts/review-<slug>.md` and `.json` (sections, coverage ids, exclusions/deferrals, design digest, readiness status, and a Mermaid component `diagram` with the ids it `depicts`, or `null` when fewer than two structural elements are in scope) and with `--record` applies an internal patch `patch:review-export/<slug>/<digest16>` creating or updating `review:<slug>` (ReviewArtifact, `scope_digest`) and its `depicts` edge.
 
 `approval record --file F`: `{scope_ref, recorded_by: user|agent, source_statement, [approval_kind=build_authorization], [source_ref]}`. Refused with `scope_not_ready` unless readiness is `ready`. Creates `approval:<slug>/r<revision>` carrying `design_digest`, `policy_ref`, `model_revision`, and a `concerns` edge to the scope. Agent-recorded approvals are labelled as traceability, not authenticated identity.
 
@@ -106,15 +106,19 @@ Obligation `gate` (`readiness` | `conformance` | `any`, default any): a manual o
 ## CLI response envelope
 
 ```json
-{"command": "status", "tool_version": "0.0.1", "status": "ok|blocked|invalid|error", "data": {...}}
-{"command": "patch", "tool_version": "0.0.1", "status": "invalid", "error": {"code": "stale_base", "message": "...", "details": {...}}}
+{"command": "status", "tool_version": "0.1.0", "response_version": "1", "status": "ok|blocked|invalid|error", "data": {...}}
+{"command": "patch", "tool_version": "0.1.0", "response_version": "1", "status": "invalid", "error": {"code": "stale_base", "message": "...", "details": {...}}}
 ```
+
+Stability: within a `response_version`, fields are only added, never removed or changed in meaning; a breaking change bumps it. `intentgraph version --json` reports tool, format, vocabulary and response versions; `intentgraph capabilities --json` lists supported commands, rule types, formats and the explicitly unsupported capabilities.
+
+`recover [--from-backup PATH | --from-git REF] [--apply]`: with no source, diagnoses the snapshot (`healthy`, `corrupt`, `missing`, `unreadable`) and lists migration backups; with a source, previews the revision and digest to restore and, with `--apply`, keeps the damaged file as `artifacts/damaged-model-<timestamp>.json`, writes atomically and verifies the digest.
 
 Exit codes: 0 ok, 2 completed with blockers (check/validate found errors, lens overflow), 3 invalid input or stale revision, 4 unavailable dependency or internal failure.
 
 Diagnostics are `{code, severity: error|warning, message, record_ids}`. Stable codes so far: `duplicate_id`, `duplicate_patch_id`, `vocabulary_version_mismatch`, `unknown_kind`, `unknown_relation`, `invalid_layer`, `invalid_property`, `invalid_expression`, `unsupported_expression_language`, `missing_endpoint`, `illegal_endpoint_kind`, `dangling_reference`, `containment_cycle`, `acyclic_relation_cycle`, `accepted_edge_to_superseded`, `id_exists`, `unknown_record`, `removed_accepted_record`, `invalid_policy`, `duplicate_policy`, `invalid_waiver`.
 
-Error codes: `invalid_input`, `workspace_not_found`, `incompatible_workspace`, `stale_base`, `validation_failed`, `patch_id_conflict`, `invalid_patch`, `invalid_lens_request`, `unknown_record`, `unknown_kind`, `corrupt_snapshot`, `lock_timeout`, `not_supported`, `git_unavailable`, `git_failed`, `invalid_impact_request`, `unknown_scope`, `unknown_policy`, `scope_not_ready`, `invalid_approval`, `no_migration_path`, `invalid_evidence`, `report_validation_failed`, `command_not_found`, `unknown_root`, `invalid_path`, `internal_error`.
+Error codes: `invalid_input`, `workspace_not_found`, `incompatible_workspace`, `stale_base`, `validation_failed`, `patch_id_conflict`, `invalid_patch`, `invalid_lens_request`, `unknown_record`, `unknown_kind`, `corrupt_snapshot`, `lock_timeout`, `not_supported`, `git_unavailable`, `git_failed`, `invalid_impact_request`, `unknown_scope`, `unknown_policy`, `scope_not_ready`, `invalid_approval`, `no_migration_path`, `invalid_evidence`, `report_validation_failed`, `command_not_found`, `unknown_root`, `invalid_path`, `no_recovery_source`, `internal_error`.
 
 ## Workspace layout
 

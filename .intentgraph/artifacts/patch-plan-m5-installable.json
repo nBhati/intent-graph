@@ -1,0 +1,780 @@
+{
+  "patch_id": "patch:plan-m5-installable",
+  "base_revision": 20,
+  "base_digest": "sha256:9437657815e860ebf9d2b7845a27c98224b8c2601652a43e90fb50f5d659d9f5",
+  "reason": "Define the installable first version before building it.",
+  "operations": [
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:bundled-executable",
+        "kind": "Requirement",
+        "label": "One executable per supported platform bundles the runtime and core dependencies",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Linux x86_64 is built and verified here; macOS and Windows builds run in CI on their own runners. Python users keep the standard distribution."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:init-idempotent-non-destructive",
+        "kind": "Requirement",
+        "label": "Initialization is idempotent and never overwrites an existing project or unrelated agent instructions",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "A second init reports the existing workspace; an incompatible project is refused, not replaced."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:recovery-from-backup-or-git",
+        "kind": "Requirement",
+        "label": "A corrupt snapshot can be recovered from a tool backup or a Git revision, previewed before applied",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "The damaged file is kept aside; recovery writes atomically and verifies the digest."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#9.3"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:stable-machine-responses",
+        "kind": "Requirement",
+        "label": "Machine-readable responses carry a response version and change only additively within it",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Field removals or meaning changes bump the response version."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#12"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:capabilities-documented",
+        "kind": "Requirement",
+        "label": "The tool reports what it supports and what it does not, in machine-readable form",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Unsupported capabilities produce explicit outcomes, never silent success."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:worked-examples-executable",
+        "kind": "Requirement",
+        "label": "Worked examples cover refinement, an ambiguous requirement, stale evidence, a counterexample and an unsupported analysis, and are kept executable",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "A test runs the same steps the document shows."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#11.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:review-diagram",
+        "kind": "Requirement",
+        "label": "Review packets include a component diagram where the scope has structure to show",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "should",
+          "formalization": "descriptive",
+          "acceptance_notes": "Mermaid in Markdown; omitted when fewer than two structural elements are in scope."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#14"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:uninstall-preserves-project",
+        "kind": "Requirement",
+        "label": "Removing the executable does not remove project models or evidence",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Project files live in the workspace, never beside the executable."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:recover",
+        "kind": "Operation",
+        "label": "Preview or apply recovery of the snapshot from a backup or Git revision",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "from_backup": "path",
+            "from_git": "ref",
+            "apply": "boolean"
+          },
+          "outputs": {
+            "source": "backup|git",
+            "revision": "int",
+            "content_digest": "sha256",
+            "damaged_copy": "path"
+          },
+          "failures": [
+            "no_recovery_source",
+            "corrupt_snapshot",
+            "git_unavailable"
+          ],
+          "idempotent": true,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#9.3"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:capabilities",
+        "kind": "Operation",
+        "label": "Report supported and unsupported capabilities with versions",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {},
+          "outputs": {
+            "versions": "tool, format, vocabulary, response",
+            "supported": "list",
+            "unsupported": "list with reason"
+          },
+          "failures": [],
+          "idempotent": true,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:pyinstaller-onefile",
+        "kind": "Decision",
+        "label": "PyInstaller one-file bundles per platform, built in CI on native runners",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "agent",
+          "decision_kind": "choice",
+          "rationale": "Mature, no code changes needed, data files bundled via add-data; cross-compilation is not attempted.",
+          "alternatives": [
+            "Nuitka",
+            "shiv/zipapp (needs a Python runtime)",
+            "PEX"
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:response-version-field",
+        "kind": "Decision",
+        "label": "The CLI envelope carries response_version; additive changes keep it, breaking changes bump it",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "agent",
+          "decision_kind": "choice",
+          "rationale": "Agents and CI parse the envelope; a version field lets them detect incompatibility without guessing.",
+          "alternatives": [
+            "Tie the envelope to the tool version"
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#12"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "question:clean-machine-verification",
+        "kind": "Question",
+        "label": "How is 'clean machine without Python' verified in this environment?",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "status": "answered",
+          "blocking": false,
+          "answer": "Simulated: the bundled binary runs under an empty environment with a PATH that contains no Python interpreter. A true clean-machine run is a release-time step on CI runners; the limitation is recorded on the evidence."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.8"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "scope:m5-installable",
+      "changes": {
+        "status": "active",
+        "member_refs": [
+          "system:intentgraph",
+          "component:cli",
+          "component:repository",
+          "component:playbooks",
+          "component:reports",
+          "operation:recover",
+          "operation:capabilities",
+          "req:bundled-executable",
+          "req:init-idempotent-non-destructive",
+          "req:recovery-from-backup-or-git",
+          "req:stable-machine-responses",
+          "req:capabilities-documented",
+          "req:worked-examples-executable",
+          "req:review-diagram",
+          "req:uninstall-preserves-project"
+        ]
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:bundled-executable-refines-local",
+        "kind": "refines",
+        "source": "req:bundled-executable",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:init-idempotent-non-destructive-refines-local",
+        "kind": "refines",
+        "source": "req:init-idempotent-non-destructive",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:recovery-from-backup-or-git-refines-local",
+        "kind": "refines",
+        "source": "req:recovery-from-backup-or-git",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#9.3"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:stable-machine-responses-refines-local",
+        "kind": "refines",
+        "source": "req:stable-machine-responses",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#12"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:capabilities-documented-refines-local",
+        "kind": "refines",
+        "source": "req:capabilities-documented",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:worked-examples-executable-refines-local",
+        "kind": "refines",
+        "source": "req:worked-examples-executable",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#11.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:review-diagram-refines-local",
+        "kind": "refines",
+        "source": "req:review-diagram",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#14"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:uninstall-preserves-project-refines-local",
+        "kind": "refines",
+        "source": "req:uninstall-preserves-project",
+        "target": "goal:agent-operated-local-tool",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:cli-realizes-bundle",
+        "kind": "realizes",
+        "source": "component:cli",
+        "target": "req:bundled-executable",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:repository-realizes-init",
+        "kind": "realizes",
+        "source": "component:repository",
+        "target": "req:init-idempotent-non-destructive",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:repository-realizes-recovery",
+        "kind": "realizes",
+        "source": "component:repository",
+        "target": "req:recovery-from-backup-or-git",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#9.3"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:recover-op-realizes",
+        "kind": "realizes",
+        "source": "operation:recover",
+        "target": "req:recovery-from-backup-or-git",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#9.3"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:cli-realizes-stable",
+        "kind": "realizes",
+        "source": "component:cli",
+        "target": "req:stable-machine-responses",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#12"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:capabilities-op-realizes",
+        "kind": "realizes",
+        "source": "operation:capabilities",
+        "target": "req:capabilities-documented",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:playbooks-realizes-examples",
+        "kind": "realizes",
+        "source": "component:playbooks",
+        "target": "req:worked-examples-executable",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#11.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:reports-realizes-diagram",
+        "kind": "realizes",
+        "source": "component:reports",
+        "target": "req:review-diagram",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#14"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:repository-realizes-uninstall",
+        "kind": "realizes",
+        "source": "component:repository",
+        "target": "req:uninstall-preserves-project",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#20"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:decision-pyinstaller-concerns-cli",
+        "kind": "concerns",
+        "source": "decision:pyinstaller-onefile",
+        "target": "component:cli",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.2"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:decision-response-concerns-cli",
+        "kind": "concerns",
+        "source": "decision:response-version-field",
+        "target": "component:cli",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#12"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:question-clean-concerns-bundle",
+        "kind": "concerns",
+        "source": "question:clean-machine-verification",
+        "target": "req:bundled-executable",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.8"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m5-installable",
+      "changes": {
+        "request": "Build the executable and release workflow, add recover/capabilities/version commands, response_version, review diagrams, executable worked examples; verify the clean-machine scenario with the binary; freeze v0.1.0."
+      }
+    }
+  ]
+}

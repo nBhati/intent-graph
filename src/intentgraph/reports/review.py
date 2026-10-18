@@ -44,12 +44,39 @@ def build_review_packet(index: GraphIndex, scope: NodeRecord, closure: dict[str,
         sections.append({"title": title, "blurb": blurb, "entries": entries})
     exclusions = [{"id": n.id, "label": n.label, "concerns": [e.target for e in index.out_edges(n.id, {"concerns"})]}
                   for n in sorted(by_kind.get("Decision", []), key=lambda n: n.id) if n.properties.get("decision_kind") in ("deferral", "exclusion")]
+    diagram = component_diagram(index, closure)
     return {
+        "diagram": diagram,
         "scope": scope.id, "scope_label": scope.label, "policy": policy_ref, "design_digest": design_digest, "model_revision": index.snapshot.revision,
         "readiness_status": readiness_status, "coverage": {"ids": sorted(covered), "closure_count": len(closure), "intent_count": len(covered)},
         "exclusions_and_deferrals": exclusions, "sections": sections,
         "explanation": {"author": None, "text": "", "note": "Optional agent-written explanation. Structural coverage above is checkable; prose faithfulness still needs human review."},
     }
+
+
+DIAGRAM_KINDS = {"System", "Component", "ExternalSystem", "Interface", "Store", "Actor"}
+DIAGRAM_EDGES = {"contains", "exposes", "depends_on", "invokes", "connects_to", "reads", "modifies"}
+
+
+def component_diagram(index: GraphIndex, closure: dict[str, ClosureMember]) -> dict[str, Any] | None:
+    """A modest Mermaid component diagram, or None when there is too little structure to show (section 14)."""
+    ids = sorted(i for i in closure if index.nodes[i].kind in DIAGRAM_KINDS and index.nodes[i].lifecycle != "superseded")
+    if len(ids) < 2:
+        return None
+    alias = {i: f"n{k}" for k, i in enumerate(ids)}
+    lines = ["flowchart LR"]
+    for i in ids:
+        n = index.nodes[i]
+        label = n.label.replace('"', "'")
+        shape = {"Actor": f'(["{label}"])', "Interface": f'{{{{"{label}"}}}}', "Store": f'[("{label}")]', "ExternalSystem": f'[["{label}"]]'}.get(n.kind, f'["{label}"]')
+        lines.append(f"    {alias[i]}{shape}")
+    edge_ids = []
+    for e in sorted(index.snapshot.edges, key=lambda e: e.id):
+        if e.kind in DIAGRAM_EDGES and e.source in alias and e.target in alias and e.lifecycle != "superseded":
+            lab = e.kind + (f" ({e.properties['dependency_kind']})" if e.kind == "depends_on" and e.properties.get("dependency_kind") else "")
+            lines.append(f"    {alias[e.source]} -->|{lab}| {alias[e.target]}")
+            edge_ids.append(e.id)
+    return {"format": "mermaid", "text": "\n".join(lines), "depicts": ids + edge_ids}
 
 
 def _public_props(n: NodeRecord) -> dict[str, Any]:
@@ -79,6 +106,8 @@ def render_markdown(packet: dict[str, Any]) -> str:
             if e.get("deferral_of"):
                 lines.append(f"  - deferral/exclusion of: {', '.join(e['deferral_of'])}")
         lines.append("")
+    if packet.get("diagram"):
+        lines += ["## Component diagram", "", "_Structure and dependencies among in-scope parts; derived from the model, not drawn by hand._", "", "```mermaid", packet["diagram"]["text"], "```", ""]
     lines += ["## Exclusions and deferrals", ""]
     if packet["exclusions_and_deferrals"]:
         lines += [f"- {x['label']} (`{x['id']}`) concerning {', '.join(x['concerns'])}" for x in packet["exclusions_and_deferrals"]]

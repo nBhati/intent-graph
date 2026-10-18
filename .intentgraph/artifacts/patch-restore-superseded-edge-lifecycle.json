@@ -1,0 +1,13 @@
+{
+  "patch_id": "patch:restore-superseded-edge-lifecycle",
+  "base_revision": 27,
+  "base_digest": "sha256:23518c86d5e4a62bab9b3a55938b87e602308ab58813b28ca7fa1a9511c20ae1",
+  "reason": "Keep edge:decision-pyinstaller-concerns-cli as it was when the scope was approved: superseding it changed the design digest without changing the design; the superseded decision it leaves from already records the outcome.",
+  "operations": [
+    {
+      "op": "update_fields",
+      "id": "edge:decision-pyinstaller-concerns-cli",
+      "lifecycle": "accepted"
+    }
+  ]
+}

@@ -1,0 +1,755 @@
+{
+  "coverage": {
+    "closure_count": 43,
+    "ids": [
+      "component:checks",
+      "component:cli",
+      "component:graph",
+      "component:lenses",
+      "component:model",
+      "component:obligations",
+      "component:patches",
+      "component:playbooks",
+      "component:reports",
+      "component:repository",
+      "component:services",
+      "component:vocabulary",
+      "constraint:no-hidden-state-between-calls",
+      "constraint:records-are-data",
+      "decision:agent-runs-language-tools",
+      "decision:cli-first",
+      "decision:freshness-in-engine",
+      "decision:impact-direction-per-relation",
+      "decision:policy-rules-declarative",
+      "decision:pyinstaller-onefile",
+      "decision:python-networkx-pydantic",
+      "decision:response-version-field",
+      "decision:scope-closure-rule",
+      "decision:self-use-development",
+      "decision:single-snapshot-v0",
+      "decision:snapshot-as-node",
+      "decision:uv-tool-install",
+      "operation:capabilities",
+      "operation:recover",
+      "question:default-mandatory-rules",
+      "question:readiness-default-obligations",
+      "question:single-snapshot-scale",
+      "req:capabilities-documented",
+      "req:clean-install-validated",
+      "req:init-idempotent-non-destructive",
+      "req:pypi-package-primary",
+      "req:recovery-from-backup-or-git",
+      "req:review-diagram",
+      "req:stable-machine-responses",
+      "req:uninstall-preserves-project",
+      "req:upgrade-preserves-project",
+      "req:worked-examples-executable",
+      "system:intentgraph"
+    ],
+    "intent_count": 43
+  },
+  "design_digest": "sha256:cdf8ee1ae8691a89c2e9b55d78d9a08cf6ef121a841be4628d4a7e3d43ad4c17",
+  "diagram": {
+    "depicts": [
+      "component:checks",
+      "component:cli",
+      "component:graph",
+      "component:lenses",
+      "component:model",
+      "component:obligations",
+      "component:patches",
+      "component:playbooks",
+      "component:reports",
+      "component:repository",
+      "component:services",
+      "component:vocabulary",
+      "system:intentgraph",
+      "edge:checks-depends-graph",
+      "edge:checks-depends-vocabulary",
+      "edge:cli-depends-services",
+      "edge:graph-depends-model",
+      "edge:lenses-depends-graph",
+      "edge:obligations-depends-checks",
+      "edge:patches-depends-checks",
+      "edge:reports-depends-lenses",
+      "edge:repository-depends-model",
+      "edge:repository-depends-vocabulary",
+      "edge:services-depends-checks",
+      "edge:services-depends-lenses",
+      "edge:services-depends-patches",
+      "edge:services-depends-repository",
+      "edge:system-contains-checks",
+      "edge:system-contains-cli",
+      "edge:system-contains-graph",
+      "edge:system-contains-lenses",
+      "edge:system-contains-model",
+      "edge:system-contains-obligations",
+      "edge:system-contains-patches",
+      "edge:system-contains-playbooks",
+      "edge:system-contains-reports",
+      "edge:system-contains-repository",
+      "edge:system-contains-services",
+      "edge:system-contains-vocabulary"
+    ],
+    "format": "mermaid",
+    "text": "flowchart LR\n    n0[\"checks\"]\n    n1[\"cli\"]\n    n2[\"graph\"]\n    n3[\"lenses\"]\n    n4[\"model\"]\n    n5[\"obligations\"]\n    n6[\"patches\"]\n    n7[\"playbooks\"]\n    n8[\"reports\"]\n    n9[\"repository\"]\n    n10[\"services\"]\n    n11[\"vocabulary\"]\n    n12[\"Intent Graph package\"]\n    n0 -->|depends_on (build)| n2\n    n0 -->|depends_on (build)| n11\n    n1 -->|depends_on (build)| n10\n    n2 -->|depends_on (build)| n4\n    n3 -->|depends_on (build)| n2\n    n5 -->|depends_on (build)| n0\n    n6 -->|depends_on (build)| n0\n    n8 -->|depends_on (build)| n3\n    n9 -->|depends_on (build)| n4\n    n9 -->|depends_on (build)| n11\n    n10 -->|depends_on (build)| n0\n    n10 -->|depends_on (build)| n3\n    n10 -->|depends_on (build)| n6\n    n10 -->|depends_on (build)| n9\n    n12 -->|contains| n0\n    n12 -->|contains| n1\n    n12 -->|contains| n2\n    n12 -->|contains| n3\n    n12 -->|contains| n4\n    n12 -->|contains| n5\n    n12 -->|contains| n6\n    n12 -->|contains| n7\n    n12 -->|contains| n8\n    n12 -->|contains| n9\n    n12 -->|contains| n10\n    n12 -->|contains| n11"
+  },
+  "exclusions_and_deferrals": [],
+  "explanation": {
+    "author": null,
+    "note": "Optional agent-written explanation. Structural coverage above is checkable; prose faithfulness still needs human review.",
+    "text": ""
+  },
+  "model_revision": 24,
+  "policy": "policy:default-readiness@0.1",
+  "readiness_status": "needs_work",
+  "scope": "scope:m5-installable",
+  "scope_label": "Milestone 5: publish and validate the installable Python CLI",
+  "sections": [
+    {
+      "blurb": "Goals and the requirements in scope.",
+      "entries": [
+        {
+          "description": "",
+          "id": "req:capabilities-documented",
+          "kind": "Requirement",
+          "label": "The tool reports what it supports and what it does not, in machine-readable form",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Unsupported capabilities produce explicit outcomes, never silent success.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:clean-install-validated",
+          "kind": "Requirement",
+          "label": "A clean isolated install of the built wheel can initialize, persist, restart, query, patch, evaluate readiness, import evidence and reconcile",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Validated by an executable test that installs the wheel into an isolated uv tool environment with no source tree on the path.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:init-idempotent-non-destructive",
+          "kind": "Requirement",
+          "label": "Initialization is idempotent and never overwrites an existing project or unrelated agent instructions",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "A second init reports the existing workspace; an incompatible project is refused, not replaced.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:pypi-package-primary",
+          "kind": "Requirement",
+          "label": "The Python package published to PyPI is the primary installation route, with one intentgraph command",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "uv tool install recommended; pipx alternative; dependencies installed automatically; the tool is not a runtime dependency of the modeled application.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:recovery-from-backup-or-git",
+          "kind": "Requirement",
+          "label": "A corrupt snapshot can be recovered from a tool backup or a Git revision, previewed before applied",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "The damaged file is kept aside; recovery writes atomically and verifies the digest.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:review-diagram",
+          "kind": "Requirement",
+          "label": "Review packets include a component diagram where the scope has structure to show",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Mermaid in Markdown; omitted when fewer than two structural elements are in scope.",
+            "formalization": "descriptive",
+            "priority": "should"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:stable-machine-responses",
+          "kind": "Requirement",
+          "label": "Machine-readable responses carry a response version and change only additively within it",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Field removals or meaning changes bump the response version.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:uninstall-preserves-project",
+          "kind": "Requirement",
+          "label": "Removing the executable does not remove project models or evidence",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Project files live in the workspace, never beside the executable.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:upgrade-preserves-project",
+          "kind": "Requirement",
+          "label": "Reinstalling or upgrading the tool preserves project files; migrations stay explicit",
+          "lifecycle": "accepted",
+          "properties": {
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:worked-examples-executable",
+          "kind": "Requirement",
+          "label": "Worked examples cover refinement, an ambiguous requirement, stale evidence, a counterexample and an unsupported analysis, and are kept executable",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "A test runs the same steps the document shows.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        }
+      ],
+      "title": "What are we trying to achieve?"
+    },
+    {
+      "blurb": "Scenarios and experience elements.",
+      "entries": [],
+      "title": "What will the user experience?"
+    },
+    {
+      "blurb": "Structure, contracts and behavior.",
+      "entries": [
+        {
+          "description": "",
+          "id": "system:intentgraph",
+          "kind": "System",
+          "label": "Intent Graph package",
+          "lifecycle": "accepted",
+          "properties": {},
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:checks",
+          "kind": "Component",
+          "label": "checks",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Structural validation and computable findings",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "component:cli",
+          "kind": "Component",
+          "label": "cli",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Stable machine interface and human-readable output",
+            "role": "other",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:graph",
+          "kind": "Component",
+          "label": "graph",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "NetworkX construction and reverse-reference indexes",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "component:lenses",
+          "kind": "Component",
+          "label": "lenses",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Filtering, dependency slicing, abstraction, context assembly",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "component:model",
+          "kind": "Component",
+          "label": "model",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Record types, ids, enums, expression shapes, snapshot model",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "component:obligations",
+          "kind": "Component",
+          "label": "obligations",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Policy applicability, evidence freshness, readiness evaluation",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "component:patches",
+          "kind": "Component",
+          "label": "patches",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Transaction validation, optimistic concurrency, atomic application",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "component:playbooks",
+          "kind": "Component",
+          "label": "playbooks",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Agent instructions, examples, external-tool recipes",
+            "role": "other",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:reports",
+          "kind": "Component",
+          "label": "reports",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Structured review packets and renderable exports",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:repository",
+          "kind": "Component",
+          "label": "repository",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Read/write, canonical serialization, revisions, locking, migrations",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:services",
+          "kind": "Component",
+          "label": "services",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Application services shared by every interface; one invocation loads everything fresh",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "component:vocabulary",
+          "kind": "Component",
+          "label": "vocabulary",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Kind schemas, relation endpoint rules, extension resolution",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "structural child via contains"
+        },
+        {
+          "description": "",
+          "id": "operation:capabilities",
+          "kind": "Operation",
+          "label": "Report supported and unsupported capabilities with versions",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [],
+            "idempotent": true,
+            "inputs": {},
+            "mode": "sync",
+            "outputs": {
+              "supported": "list",
+              "unsupported": "list with reason",
+              "versions": "tool, format, vocabulary, response"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:recover",
+          "kind": "Operation",
+          "label": "Preview or apply recovery of the snapshot from a backup or Git revision",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "no_recovery_source",
+              "corrupt_snapshot",
+              "git_unavailable"
+            ],
+            "idempotent": true,
+            "inputs": {
+              "apply": "boolean",
+              "from_backup": "path",
+              "from_git": "ref"
+            },
+            "mode": "sync",
+            "outputs": {
+              "content_digest": "sha256",
+              "damaged_copy": "path",
+              "revision": "int",
+              "source": "backup|git"
+            }
+          },
+          "reason": "explicit member"
+        }
+      ],
+      "title": "How will the main parts cooperate?"
+    },
+    {
+      "blurb": "Cross-cutting rules, dependencies on uncertain facts, and chosen alternatives (including deferrals).",
+      "entries": [
+        {
+          "description": "Optional caches are keyed by snapshot digest, vocabulary version and tool version; a cache miss affects performance only.",
+          "id": "constraint:no-hidden-state-between-calls",
+          "kind": "Constraint",
+          "label": "No memory from a previous CLI call is required for correctness",
+          "lifecycle": "accepted",
+          "properties": {
+            "constraint_kind": "invariant",
+            "scope": "global"
+          },
+          "reason": "constraint on member"
+        },
+        {
+          "description": "",
+          "id": "constraint:records-are-data",
+          "kind": "Constraint",
+          "label": "Records and tool output are data, never executed",
+          "lifecycle": "accepted",
+          "properties": {
+            "constraint_kind": "permission",
+            "scope": "global"
+          },
+          "reason": "constraint on member"
+        },
+        {
+          "description": "",
+          "id": "decision:agent-runs-language-tools",
+          "kind": "Decision",
+          "label": "The existing agent runs language-specific analyzers; the core stays small",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Native adapters for every language"
+            ],
+            "decided_by": "user",
+            "rationale": "Avoids building a large analyzer platform before proving value."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:cli-first",
+          "kind": "Decision",
+          "label": "CLI first; MCP optional and later",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "MCP server first"
+            ],
+            "decided_by": "user",
+            "rationale": "Existing coding agents can invoke terminal commands; both interfaces must share application services."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:freshness-in-engine",
+          "kind": "Decision",
+          "label": "Evidence freshness is computed once and shared by reconcile and the evidence_required rule",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Freshness only in reconcile"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Conformance must not count stale evidence; one implementation avoids two answers."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:impact-direction-per-relation",
+          "kind": "Decision",
+          "label": "Each relation declares its impact direction in the vocabulary",
+          "lifecycle": "proposed",
+          "properties": {
+            "alternatives": [
+              "Hard-code a traversal table in the lens module",
+              "Treat every edge as bidirectional impact"
+            ],
+            "decided_by": "agent",
+            "rationale": "Keeps impact semantics in the versioned registry (data), not in Python branches; extensions can declare their own."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:policy-rules-declarative",
+          "kind": "Decision",
+          "label": "Policies are declarative rule records in the snapshot, evaluated by built-in rule types",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Python plug-in policies",
+              "Policy expressed in intent-expr"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Keeps policy as versioned data that cannot execute code; new rule types are tool changes, not policy edits."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:pyinstaller-onefile",
+          "kind": "Decision",
+          "label": "PyInstaller one-file bundles per platform, built in CI on native runners",
+          "lifecycle": "superseded",
+          "properties": {
+            "alternatives": [
+              "Nuitka",
+              "shiv/zipapp (needs a Python runtime)",
+              "PEX"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Mature, no code changes needed, data files bundled via add-data; cross-compilation is not attempted."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:python-networkx-pydantic",
+          "kind": "Decision",
+          "label": "Python package; Pydantic records; NetworkX in memory as an index only",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Graph database",
+              "Pickled NetworkX objects"
+            ],
+            "decided_by": "user",
+            "rationale": "Simple local implementation; typed records stay independent of the graph library so storage details do not define semantics."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:response-version-field",
+          "kind": "Decision",
+          "label": "The CLI envelope carries response_version; additive changes keep it, breaking changes bump it",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Tie the envelope to the tool version"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Agents and CI parse the envelope; a version field lets them detect incompatibility without guessing."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:scope-closure-rule",
+          "kind": "Decision",
+          "label": "Scope closure = explicit members, their structural children, realized requirements, applicable constraints, global constraints, and concerning questions, decisions and assumptions",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Explicit members only",
+              "Full reachability"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Deterministic and explainable; every closure member records why it is included. Shared containers do not propagate realized requirements, so one component serving two features does not merge their scopes."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:self-use-development",
+          "kind": "Decision",
+          "label": "Seed, progressive self-use, then external A/B evaluation",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Full build before any use",
+              "Evaluate before end-to-end loop exists"
+            ],
+            "decided_by": "user",
+            "rationale": "A capability cannot be mandatory for building its first implementation; record limitations rather than fabricate checks."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:single-snapshot-v0",
+          "kind": "Decision",
+          "label": "One canonical snapshot with transactions inside it; no daemon",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Sharded files",
+              "Event-sourced log",
+              "Always-running process"
+            ],
+            "decided_by": "user",
+            "rationale": "Atomic writes and straightforward recovery before sharding; graph state and transaction accounting cannot diverge."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:snapshot-as-node",
+          "kind": "Decision",
+          "label": "Workspace snapshots are WorkspaceSnapshot nodes in the observation layer holding digests for declared paths only",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Side files under artifacts/",
+              "Hash every tracked file"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Keeps evidence inputs inspectable and versioned with the model without hashing the whole repository."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:uv-tool-install",
+          "kind": "Decision",
+          "label": "Distribute as a PyPI package; recommend uv tool install, offer pipx; defer standalone executables",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "PyInstaller one-file executables per platform (previous decision)",
+              "npm-first wrapper"
+            ],
+            "decided_by": "user",
+            "decision_kind": "choice",
+            "rationale": "uv installs CLI tools in isolated environments and obtains a Python runtime automatically; an executable or npm-first distribution would add another packaging layer to the Python core."
+          },
+          "reason": "decision concerning member"
+        }
+      ],
+      "title": "Which rules, assumptions and decisions matter?"
+    },
+    {
+      "blurb": "Unresolved intent.",
+      "entries": [
+        {
+          "description": "",
+          "id": "question:default-mandatory-rules",
+          "kind": "Question",
+          "label": "Which readiness rules are mandatory by default?",
+          "lifecycle": "accepted",
+          "properties": {
+            "answer": "v0 default policy: structural checks pass; blocking questions resolved; accepted requirements realized or deliberately deferred; operations define inputs, outputs and failures; concurrency-sensitive processes reviewed; no refuted assumptions; review packet current. Projects override by setting their own policy.",
+            "blocking": false,
+            "status": "answered"
+          },
+          "reason": "question concerning member"
+        },
+        {
+          "description": "",
+          "id": "question:readiness-default-obligations",
+          "kind": "Question",
+          "label": "Which readiness obligations are mandatory by default versus project-specific?",
+          "lifecycle": "proposed",
+          "properties": {
+            "answer": "See question:default-mandatory-rules; answered for v0 by the default policy.",
+            "blocking": false,
+            "status": "answered"
+          },
+          "reason": "question concerning member"
+        },
+        {
+          "description": "",
+          "id": "question:single-snapshot-scale",
+          "kind": "Question",
+          "label": "Does a single snapshot remain practical at the first target project size?",
+          "lifecycle": "accepted",
+          "properties": {
+            "blocking": false,
+            "status": "open"
+          },
+          "reason": "question concerning member"
+        }
+      ],
+      "title": "What is still open?"
+    }
+  ]
+}
