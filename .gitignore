@@ -8,3 +8,4 @@ build/
 .intentgraph/cache/
 .intentgraph/locks/
 build/
+*.bundle
