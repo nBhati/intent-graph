@@ -48,6 +48,18 @@ class AddAnnotation(_Op):
     annotation: Annotation
 
 
+class SetPolicy(_Op):
+    """Create or replace a policy record (by its ``id``). Policy changes are deliberate design changes."""
+
+    op: Literal["set_policy"]
+    policy: dict[str, Any]
+
+
+class RemovePolicy(_Op):
+    op: Literal["remove_policy"]
+    id: str
+
+
 class Remove(_Op):
     """Remove a record. Prefer ``lifecycle: superseded`` for accepted records."""
 
@@ -56,7 +68,7 @@ class Remove(_Op):
 
 
 PatchOperation = Annotated[
-    Union[AddNode, AddEdge, UpdateProperties, UpdateFields, AddAnnotation, Remove],
+    Union[AddNode, AddEdge, UpdateProperties, UpdateFields, AddAnnotation, Remove, SetPolicy, RemovePolicy],
     Field(discriminator="op"),
 ]
 

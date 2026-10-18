@@ -1,5 +1,5 @@
 {
-  "content_digest": "sha256:631574edd41a98d27dbc5192e5da071d2df7526730adb3b9112a7811541f6e64",
+  "content_digest": "sha256:8743849f39232fafb7c71a33328d3180850fa3e1fe57af249b03b6e181bb957c",
   "edges": [
     {
       "annotations": [],
@@ -19,6 +19,46 @@
         ]
       },
       "source": "req:acyclic-only-where-declared",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:approval-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:approval-record",
+      "target": "req:design-digest-stable-under-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:assertion-cannot-satisfy-executable-evidence-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:assertion-cannot-satisfy-executable-evidence",
       "target": "goal:intent-to-implementation-loop"
     },
     {
@@ -250,6 +290,46 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:decision-closure-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "decision:scope-closure-rule",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-declarative-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      },
+      "source": "decision:policy-rules-declarative",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:decision-graph-concerns-loop",
       "kind": "concerns",
       "label": "",
@@ -346,6 +426,46 @@
       },
       "source": "decision:agent-runs-language-tools",
       "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:design-change-invalidates-readiness-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:design-change-invalidates-readiness",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:design-digest-stable-under-approval-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:design-digest-stable-under-approval",
+      "target": "goal:intent-to-implementation-loop"
     },
     {
       "annotations": [],
@@ -634,6 +754,72 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:loop-invokes-approval",
+      "kind": "invokes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "mode": "sync"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      },
+      "source": "process:readiness-loop",
+      "target": "operation:approval-record"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:loop-invokes-readiness",
+      "kind": "invokes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "mode": "sync"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      },
+      "source": "process:readiness-loop",
+      "target": "operation:readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:loop-invokes-review",
+      "kind": "invokes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "mode": "sync"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      },
+      "source": "process:readiness-loop",
+      "target": "operation:review-export"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:m1-evidence-supports-atomic-replace",
       "kind": "supports",
       "label": "",
@@ -824,6 +1010,62 @@
       },
       "source": "obligation:m3-readiness",
       "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-readiness-approval-r8-concerns-scope",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "approval-record",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "approval:m3-readiness/r8",
+      "target": "scope:m3-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-readiness-review-depicts-scope",
+      "kind": "depicts",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": []
+      },
+      "source": "review:m3-readiness",
+      "target": "scope:m3-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-scope-concerns-obligation",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      },
+      "source": "obligation:m3-readiness",
+      "target": "scope:m3-readiness"
     },
     {
       "annotations": [],
@@ -1050,6 +1292,126 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:obligations-realizes-assertion",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:assertion-cannot-satisfy-executable-evidence"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-digest",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:design-digest-stable-under-approval"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-invalidate",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:design-change-invalidates-readiness"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-no-modify",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:readiness-does-not-modify"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-readiness",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:readiness-evaluates-policy"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-realizes-waiver",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "req:waiver-requires-user"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:observation-never-overwrites-intent-refines-loop",
       "kind": "refines",
       "label": "",
@@ -1152,6 +1514,26 @@
     {
       "annotations": [],
       "description": "",
+      "id": "edge:question-rules-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:default-mandatory-rules",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "edge:question-scale-concerns-repo",
       "kind": "concerns",
       "label": "",
@@ -1168,6 +1550,66 @@
       },
       "source": "question:single-snapshot-scale",
       "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:readiness-does-not-modify-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:readiness-does-not-modify",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:readiness-evaluates-policy-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:readiness-evaluates-policy",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:readiness-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:readiness",
+      "target": "req:readiness-evaluates-policy"
     },
     {
       "annotations": [],
@@ -1190,6 +1632,26 @@
       },
       "source": "component:reports",
       "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reports-realizes-packet",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:reports",
+      "target": "req:review-packet-deterministic"
     },
     {
       "annotations": [],
@@ -1274,6 +1736,46 @@
       },
       "source": "component:repository",
       "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:review-op-realizes",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      },
+      "source": "operation:review-export",
+      "target": "req:review-packet-deterministic"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:review-packet-deterministic-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:review-packet-deterministic",
+      "target": "goal:intent-to-implementation-loop"
     },
     {
       "annotations": [],
@@ -1682,10 +2184,57 @@
       },
       "source": "component:vocabulary",
       "target": "req:unknown-kinds-not-silently-known"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:waiver-requires-user-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      },
+      "source": "req:waiver-requires-user",
+      "target": "goal:intent-to-implementation-loop"
     }
   ],
   "format_version": "0.1",
   "nodes": [
+    {
+      "annotations": [],
+      "description": "",
+      "id": "approval:m3-readiness/r8",
+      "kind": "Approval",
+      "label": "build authorization for Milestone 3: readiness, review packets and approvals",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "approval_kind": "build_authorization",
+        "design_digest": "sha256:e3e866981d7c9f0de5ef31448e53c91cb931c498f852c4ae9f15f4e2ed6c6138",
+        "model_revision": 8,
+        "policy_ref": "policy:default-readiness@0.1",
+        "recorded_by": "agent",
+        "scope_ref": "scope:m3-readiness",
+        "source_ref": "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-3",
+        "source_statement": "continue with milestone 3"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "approval-record",
+        "notes": "agent-recorded from conversation; traceability, not authenticated identity",
+        "source_refs": [
+          "chat:session_01M4vsonRLYhnY4LApbNHJo2#user-turn-3"
+        ]
+      }
+    },
     {
       "annotations": [],
       "description": "",
@@ -2120,6 +2669,32 @@
     {
       "annotations": [],
       "description": "",
+      "id": "decision:policy-rules-declarative",
+      "kind": "Decision",
+      "label": "Policies are declarative rule records in the snapshot, evaluated by built-in rule types",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Python plug-in policies",
+          "Policy expressed in intent-expr"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Keeps policy as versioned data that cannot execute code; new rule types are tool changes, not policy edits."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "decision:python-networkx-pydantic",
       "kind": "Decision",
       "label": "Python package; Pydantic records; NetworkX in memory as an index only",
@@ -2139,6 +2714,32 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:scope-closure-rule",
+      "kind": "Decision",
+      "label": "Scope closure = explicit members, their structural children, realized requirements, applicable constraints, global constraints, and concerning questions, decisions and assumptions",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Explicit members only",
+          "Full reachability"
+        ],
+        "decided_by": "agent",
+        "decision_kind": "choice",
+        "rationale": "Deterministic and explainable; every closure member records why it is included."
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
         ]
       }
     },
@@ -2271,20 +2872,63 @@
     {
       "annotations": [],
       "description": "",
+      "id": "evidence:m3-test-suite",
+      "kind": "Evidence",
+      "label": "Milestone 3 test run: 68 passed",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "collection_mode": "agent_submitted_report",
+        "limitations": [
+          "Agent-reported run; not independently captured by the tool (milestone 4)."
+        ],
+        "method": "unit_and_subprocess_tests",
+        "result": "passed",
+        "submitted_by": "coding-agent",
+        "supports": [
+          "req:readiness-evaluates-policy",
+          "req:readiness-does-not-modify",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:design-digest-stable-under-approval",
+          "req:design-change-invalidates-readiness",
+          "req:waiver-requires-user",
+          "req:review-packet-deterministic",
+          "obligation:m3-readiness"
+        ],
+        "test_refs": [
+          "test:readiness-digest-stability",
+          "test:readiness-assertion",
+          "test:readiness-waiver",
+          "test:migration-apply"
+        ],
+        "tool": "pytest"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "test-run-report",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "finding:gates-unsupported",
       "kind": "Finding",
       "label": "status reports gates as unsupported until milestone 3",
       "layer": "reconciliation",
       "lifecycle": "accepted",
       "properties": {
-        "detail": "Recorded temporary manual step: outstanding work is reviewed by hand; do not represent an unavailable check as passed.",
+        "detail": "Resolved in milestone 3: status evaluates every active scope under its readiness policy.",
         "finding_kind": "capability_gap",
         "related_refs": [
           "component:obligations",
           "obligation:m3-readiness"
         ],
         "severity": "info",
-        "state": "open"
+        "state": "resolved"
       },
       "provenance": {
         "author_role": "agent",
@@ -2415,6 +3059,86 @@
       }
     },
     {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:readiness-engine",
+      "kind": "Mapping",
+      "label": "obligations package realizes readiness",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "evidence_refs": [
+          "evidence:m3-test-suite"
+        ],
+        "implementation_refs": [
+          "symbol:obligations-engine",
+          "symbol:obligations-scope",
+          "symbol:obligations-policy",
+          "test:readiness-digest-stability",
+          "test:readiness-assertion",
+          "test:readiness-waiver"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "req:readiness-evaluates-policy",
+          "req:readiness-does-not-modify",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:design-digest-stable-under-approval",
+          "req:design-change-invalidates-readiness",
+          "req:waiver-requires-user",
+          "req:review-packet-deterministic",
+          "operation:readiness",
+          "process:readiness-loop"
+        ],
+        "remaining_gaps": [
+          "Evidence freshness against workspace snapshots is not evaluated until milestone 4."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "mapping:review-and-approval",
+      "kind": "Mapping",
+      "label": "reports.review and services.approval_record realize review export and approval",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "evidence_refs": [
+          "evidence:m3-test-suite"
+        ],
+        "implementation_refs": [
+          "symbol:reports-review",
+          "symbol:services-approval"
+        ],
+        "mapping_kind": "implements",
+        "model_refs": [
+          "operation:review-export",
+          "operation:approval-record",
+          "req:review-packet-deterministic"
+        ],
+        "remaining_gaps": [
+          "Diagrams are not generated; the packet is Markdown plus JSON."
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "reconciliation",
+        "notes": "",
+        "source_refs": [
+          "patch:close-m3-readiness"
+        ]
+      }
+    },
+    {
       "annotations": [
         {
           "refs": [
@@ -2482,13 +3206,21 @@
       }
     },
     {
-      "annotations": [],
+      "annotations": [
+        {
+          "refs": [
+            "mapping:readiness-engine"
+          ],
+          "role": "explanation",
+          "text": "Implemented with tests (evidence:m3-test-suite). Per section 21.6 the first release of readiness relied on the independent test suite and manual review; it then passed its own loop retrospectively."
+        }
+      ],
       "description": "",
       "id": "obligation:m3-readiness",
       "kind": "Obligation",
       "label": "Milestone 3: scopes, versioned readiness policies, obligations engine, review packets, approvals",
       "layer": "reconciliation",
-      "lifecycle": "proposed",
+      "lifecycle": "accepted",
       "properties": {
         "acceptable_resolution": [
           "implementation_with_tests"
@@ -2497,7 +3229,10 @@
         "obligation_kind": "milestone_capability",
         "request": "Implement the internal check/refine/check loop before user confirmation; approval must not invalidate its own design digest.",
         "required_evidence": "independent executable tests plus manual review",
-        "state": "pending"
+        "scope_refs": [
+          "scope:m3-readiness"
+        ],
+        "state": "satisfied"
       },
       "provenance": {
         "author_role": "agent",
@@ -2524,6 +3259,9 @@
         "obligation_kind": "milestone_capability",
         "request": "Modify code without touching the model and confirm stale or unresolved evidence appears after a fresh process starts.",
         "required_evidence": "independent executable tests plus manual review",
+        "scope_refs": [
+          "scope:m4-evidence-reconciliation"
+        ],
         "state": "pending"
       },
       "provenance": {
@@ -2551,6 +3289,9 @@
         "obligation_kind": "milestone_capability",
         "request": "On a clean machine without Python, initialize, patch, restart, query, evaluate readiness, import evidence, reconcile.",
         "required_evidence": "independent executable tests plus manual review",
+        "scope_refs": [
+          "scope:m5-installable"
+        ],
         "state": "pending"
       },
       "provenance": {
@@ -2578,6 +3319,9 @@
         "obligation_kind": "milestone_capability",
         "request": "Measure requirement misses, regressions, reviewer corrections, drift-finding usefulness, time, cost, maintenance effort.",
         "required_evidence": "independent executable tests plus manual review",
+        "scope_refs": [
+          "scope:m6-ab-evaluation"
+        ],
         "state": "pending"
       },
       "provenance": {
@@ -2586,6 +3330,158 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#21.9"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:approval-record",
+      "kind": "Operation",
+      "label": "Record a source-backed user approval for a ready scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "scope_not_ready",
+          "unknown_scope",
+          "stale_base"
+        ],
+        "idempotent": false,
+        "inputs": {
+          "recorded_by": "user|agent",
+          "scope": "Scope id",
+          "statement": "exact user statement"
+        },
+        "mode": "sync",
+        "outputs": {
+          "approval_id": "id",
+          "design_digest": "sha256"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:readiness",
+      "kind": "Operation",
+      "label": "Evaluate readiness of a scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_scope",
+          "unknown_policy",
+          "invalid_policy"
+        ],
+        "idempotent": true,
+        "inputs": {
+          "policy": "optional policy id",
+          "scope": "Scope id"
+        },
+        "mode": "sync",
+        "outputs": {
+          "design_digest": "sha256",
+          "obligations": "list",
+          "status": "ready|needs_work|blocked"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "operation:review-export",
+      "kind": "Operation",
+      "label": "Export a review packet for a scope",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "failures": [
+          "unknown_scope"
+        ],
+        "idempotent": true,
+        "inputs": {
+          "record": "boolean",
+          "scope": "Scope id"
+        },
+        "mode": "sync",
+        "outputs": {
+          "packet": "markdown + json",
+          "scope_digest": "sha256"
+        }
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "process:readiness-loop",
+      "kind": "Process",
+      "label": "Internal check/refine/check loop before user confirmation",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "concurrency_sensitive": false,
+        "steps": [
+          "readiness",
+          "resolve obligations by patch or assessment",
+          "readiness",
+          "review export",
+          "readiness (packet current)",
+          "approval record"
+        ]
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:default-mandatory-rules",
+      "kind": "Question",
+      "label": "Which readiness rules are mandatory by default?",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "answer": "v0 default policy: structural checks pass; blocking questions resolved; accepted requirements realized or deliberately deferred; operations define inputs, outputs and failures; concurrency-sensitive processes reviewed; no refuted assumptions; review packet current. Projects override by setting their own policy.",
+        "blocking": false,
+        "status": "answered"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
         ]
       }
     },
@@ -2620,8 +3516,9 @@
       "layer": "intent",
       "lifecycle": "proposed",
       "properties": {
+        "answer": "See question:default-mandatory-rules; answered for v0 by the default policy.",
         "blocking": false,
-        "status": "open"
+        "status": "answered"
       },
       "provenance": {
         "author_role": "agent",
@@ -2677,6 +3574,28 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:assertion-cannot-satisfy-executable-evidence",
+      "kind": "Requirement",
+      "label": "An agent assertion cannot satisfy a rule that requires executable evidence",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Evidence collection modes are ordered: agent_assertion < agent_submitted_report < validated_report < independent_capture.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:atomic-replace",
       "kind": "Requirement",
       "label": "Snapshot writes are atomic and interrupted writes leave a readable snapshot",
@@ -2713,6 +3632,50 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#9.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:design-change-invalidates-readiness",
+      "kind": "Requirement",
+      "label": "A semantic change inside the approved scope invalidates the prior approval and names the affected approval",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Unrelated additions outside the closure leave the approval current.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:design-digest-stable-under-approval",
+      "kind": "Requirement",
+      "label": "Recording an approval or adding evidence does not change the approved design digest",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "The design digest covers intent-layer records in the scope closure and the policy version; reconciliation records are excluded.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.3"
         ]
       }
     },
@@ -2968,6 +3931,72 @@
     {
       "annotations": [],
       "description": "",
+      "id": "req:readiness-does-not-modify",
+      "kind": "Requirement",
+      "label": "A readiness check never modifies the model or its own policy",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Policy changes are explicit patch operations with a recorded reason.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Inputs: a Scope record (explicit members, closure rule, policy ref) and the current snapshot. Output: status, design digest, obligations, warnings, approval state.",
+      "id": "req:readiness-evaluates-policy",
+      "kind": "Requirement",
+      "label": "Readiness evaluates a versioned policy against a scope and returns actionable obligations",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Each obligation names the rule, the related ids, the request and the acceptable resolutions. Status is ready, needs_work or blocked.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:review-packet-deterministic",
+      "kind": "Requirement",
+      "label": "The review packet is selected deterministically from the scope and carries its scope digest and coverage",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "Prose faithfulness still needs human review; the packet proves which records it covers, not that the explanation is right.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#14"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "req:stable-ids",
       "kind": "Requirement",
       "label": "Record identity is stable and never derived from labels or paths",
@@ -3025,6 +4054,217 @@
         "notes": "",
         "source_refs": [
           "doc:vision-and-architecture#5.6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:waiver-requires-user",
+      "kind": "Requirement",
+      "label": "A waiver is honoured only when it records a user authorization and a reason",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "acceptance_notes": "An agent must not invent user approval to clear a blocker.",
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "review:m3-readiness",
+      "kind": "ReviewArtifact",
+      "label": "Review packet for Milestone 3: readiness, review packets and approvals",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "artifact_kind": "summary",
+        "artifact_path": ".intentgraph/artifacts/review-m3-readiness.md",
+        "scope_digest": "sha256:e3e866981d7c9f0de5ef31448e53c91cb931c498f852c4ae9f15f4e2ed6c6138"
+      },
+      "provenance": {
+        "author_role": "tool",
+        "method": "review-export",
+        "notes": "",
+        "source_refs": [
+          "scope:m3-readiness"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m3-readiness",
+      "kind": "Scope",
+      "label": "Milestone 3: readiness, review packets and approvals",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "component:obligations",
+          "component:reports",
+          "operation:readiness",
+          "operation:review-export",
+          "operation:approval-record",
+          "process:readiness-loop",
+          "req:readiness-evaluates-policy",
+          "req:readiness-does-not-modify",
+          "req:assertion-cannot-satisfy-executable-evidence",
+          "req:design-digest-stable-under-approval",
+          "req:design-change-invalidates-readiness",
+          "req:waiver-requires-user",
+          "req:review-packet-deterministic"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "active"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m4-evidence-reconciliation",
+      "kind": "Scope",
+      "label": "Milestone 4: evidence, mappings and drift reconciliation",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "component:obligations",
+          "component:repository"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "draft"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.7"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m5-installable",
+      "kind": "Scope",
+      "label": "Milestone 5: installable first version",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "system:intentgraph"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "draft"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "scope:m6-ab-evaluation",
+      "kind": "Scope",
+      "label": "Milestone 6: external A/B evaluation",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "member_refs": [
+          "system:intentgraph"
+        ],
+        "policy_ref": "policy:default-readiness",
+        "status": "draft"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.9"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "state:readiness-blocked",
+      "kind": "State",
+      "label": "blocked",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "state:readiness-needs-work",
+      "kind": "State",
+      "label": "needs_work",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "initial": true
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "state:readiness-ready",
+      "kind": "State",
+      "label": "ready",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "initial": false
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.2"
         ]
       }
     },
@@ -3112,6 +4352,114 @@
     {
       "annotations": [],
       "description": "",
+      "id": "symbol:obligations-engine",
+      "kind": "CodeSymbol",
+      "label": "evaluate",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/engine.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "evaluate",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/engine.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:obligations-policy",
+      "kind": "CodeSymbol",
+      "label": "Policy",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/policy.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "Policy",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/policy.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:obligations-scope",
+      "kind": "CodeSymbol",
+      "label": "design_digest",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/obligations/scope.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "design_digest",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/obligations/scope.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:reports-review",
+      "kind": "CodeSymbol",
+      "label": "build_review_packet",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/reports/review.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "build_review_packet",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/reports/review.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
       "id": "symbol:repository-gitio",
       "kind": "CodeSymbol",
       "label": "snapshot_at_ref",
@@ -3133,6 +4481,60 @@
         "notes": "",
         "source_refs": [
           "file:src/intentgraph/repository/gitio.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:repository-migrations",
+      "kind": "CodeSymbol",
+      "label": "run",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/repository/migrations.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "run",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/repository/migrations.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "symbol:services-approval",
+      "kind": "CodeSymbol",
+      "label": "approval_record",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "extractor": "agent-review",
+        "language": "python",
+        "locator_kind": "qualified_name",
+        "path": "src/intentgraph/services.py",
+        "repository": ".",
+        "resolution_status": "resolved",
+        "symbol": "approval_record",
+        "workspace_snapshot_ref": "git:working-tree-2026-10-18"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:src/intentgraph/services.py"
         ]
       }
     },
@@ -3199,11 +4601,225 @@
           "file:tests/test_impact.py"
         ]
       }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:migration-apply",
+      "kind": "TestCase",
+      "label": "test_migration_preview_then_apply_with_backup",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_migrations.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_migration_preview_then_apply_with_backup"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_migrations.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:readiness-assertion",
+      "kind": "TestCase",
+      "label": "test_agent_assertion_cannot_satisfy_executable_evidence",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_readiness.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_agent_assertion_cannot_satisfy_executable_evidence"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_readiness.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:readiness-digest-stability",
+      "kind": "TestCase",
+      "label": "test_review_packet_then_approval_digest_stability_and_invalidation",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_readiness.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_review_packet_then_approval_digest_stability_and_invalidation"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_readiness.py"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "test:readiness-waiver",
+      "kind": "TestCase",
+      "label": "test_waiver_requires_user_authorization",
+      "layer": "observation",
+      "lifecycle": "accepted",
+      "properties": {
+        "path": "tests/test_readiness.py",
+        "repository": ".",
+        "runner": "pytest",
+        "test_id": "test_waiver_requires_user_authorization"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "agent-review",
+        "notes": "",
+        "source_refs": [
+          "file:tests/test_readiness.py"
+        ]
+      }
     }
   ],
-  "policies": [],
+  "policies": [
+    {
+      "description": "Default post-build conformance policy (v0): must-requirements have mappings and passing evidence at least at report level.",
+      "id": "policy:default-conformance",
+      "kind": "conformance",
+      "rules": [
+        {
+          "blocking": true,
+          "description": "",
+          "id": "structural",
+          "params": {},
+          "rule": "structural_checks_pass"
+        },
+        {
+          "blocking": true,
+          "description": "",
+          "id": "mapped",
+          "params": {
+            "kinds": [
+              "Requirement"
+            ],
+            "where": {
+              "priority": [
+                "must",
+                "should"
+              ]
+            }
+          },
+          "rule": "mappings_present"
+        },
+        {
+          "blocking": true,
+          "description": "An agent assertion is not executable evidence.",
+          "id": "tested",
+          "params": {
+            "kinds": [
+              "Requirement"
+            ],
+            "min_collection_mode": "agent_submitted_report",
+            "result": "passed",
+            "where": {
+              "priority": [
+                "must"
+              ]
+            }
+          },
+          "rule": "evidence_required"
+        }
+      ],
+      "version": "0.1"
+    },
+    {
+      "description": "Default pre-build readiness policy (v0). Projects may replace it with set_policy; the change is recorded.",
+      "id": "policy:default-readiness",
+      "kind": "readiness",
+      "rules": [
+        {
+          "blocking": true,
+          "description": "Mandatory structural checks pass.",
+          "id": "structural",
+          "params": {},
+          "rule": "structural_checks_pass"
+        },
+        {
+          "blocking": true,
+          "description": "Blocking intent questions are resolved.",
+          "id": "questions",
+          "params": {},
+          "rule": "blocking_questions_resolved"
+        },
+        {
+          "blocking": true,
+          "description": "Every in-scope accepted requirement has a proposed realization or a documented deliberate deferral.",
+          "id": "realized",
+          "params": {},
+          "rule": "requirements_realized"
+        },
+        {
+          "blocking": true,
+          "description": "Required interface input, output and failure behavior is defined.",
+          "id": "operations",
+          "params": {},
+          "rule": "operations_defined"
+        },
+        {
+          "blocking": true,
+          "description": "A concurrency-sensitive process has its review obligation addressed.",
+          "id": "concurrency",
+          "params": {},
+          "rule": "concurrency_sensitive_reviewed"
+        },
+        {
+          "blocking": true,
+          "description": "No in-scope assumption is refuted.",
+          "id": "refuted",
+          "params": {},
+          "rule": "assumptions_not_refuted"
+        },
+        {
+          "blocking": false,
+          "description": "Unverified assumptions are listed for the reviewer.",
+          "id": "assumptions",
+          "params": {},
+          "rule": "assumptions_acknowledged"
+        },
+        {
+          "blocking": false,
+          "description": "Proposed records in scope are listed for acceptance.",
+          "id": "proposed",
+          "params": {},
+          "rule": "proposed_records_accepted"
+        },
+        {
+          "blocking": true,
+          "description": "The intent review packet covers the current design digest.",
+          "id": "packet",
+          "params": {},
+          "rule": "review_packet_current"
+        }
+      ],
+      "version": "0.1"
+    }
+  ],
   "project_id": "project:intentgraph",
-  "revision": 3,
+  "revision": 9,
   "transactions": [
     {
       "added_ids": [
@@ -3396,7 +5012,192 @@
         "req:graph-diff",
         "req:impact-slice"
       ]
+    },
+    {
+      "added_ids": [],
+      "applied_at": "2026-10-18T08:31:01Z",
+      "base_revision": 3,
+      "operations_digest": "sha256:09580ceecc8e00055f03ff7b32390e7f088847f0247cf624c263c911a008d134",
+      "patch_id": "patch:migrate-vocabulary-core-0.1-to-0.2",
+      "reason": "migration vocabulary-core-0.1-to-0.2: Additive: adds the Scope kind, Decision.decision_kind, Obligation.rule, Approval.policy_ref/model_revision, and Approval as a 'concerns' source. No record rewrites.",
+      "removed_ids": [],
+      "result_revision": 4,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "policy:default-conformance",
+        "policy:default-readiness"
+      ],
+      "applied_at": "2026-10-18T08:31:16Z",
+      "base_revision": 4,
+      "operations_digest": "sha256:567b7a5505bdb45e527050faabeb15ce4dcf87f0de7d664ad16b3c63d4cb6a02",
+      "patch_id": "patch:install-default-policies",
+      "reason": "Install the default readiness and conformance policies (v0.1) into the self-model.",
+      "removed_ids": [],
+      "result_revision": 5,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "decision:policy-rules-declarative",
+        "decision:scope-closure-rule",
+        "edge:approval-op-realizes",
+        "edge:assertion-cannot-satisfy-executable-evidence-refines-loop",
+        "edge:decision-closure-concerns-obligations",
+        "edge:decision-declarative-concerns-obligations",
+        "edge:design-change-invalidates-readiness-refines-loop",
+        "edge:design-digest-stable-under-approval-refines-loop",
+        "edge:loop-invokes-approval",
+        "edge:loop-invokes-readiness",
+        "edge:loop-invokes-review",
+        "edge:m3-scope-concerns-obligation",
+        "edge:obligations-realizes-assertion",
+        "edge:obligations-realizes-digest",
+        "edge:obligations-realizes-invalidate",
+        "edge:obligations-realizes-no-modify",
+        "edge:obligations-realizes-readiness",
+        "edge:obligations-realizes-waiver",
+        "edge:question-rules-concerns-obligations",
+        "edge:readiness-does-not-modify-refines-loop",
+        "edge:readiness-evaluates-policy-refines-loop",
+        "edge:readiness-op-realizes",
+        "edge:reports-realizes-packet",
+        "edge:review-op-realizes",
+        "edge:review-packet-deterministic-refines-loop",
+        "edge:waiver-requires-user-refines-loop",
+        "operation:approval-record",
+        "operation:readiness",
+        "operation:review-export",
+        "process:readiness-loop",
+        "question:default-mandatory-rules",
+        "req:assertion-cannot-satisfy-executable-evidence",
+        "req:design-change-invalidates-readiness",
+        "req:design-digest-stable-under-approval",
+        "req:readiness-does-not-modify",
+        "req:readiness-evaluates-policy",
+        "req:review-packet-deterministic",
+        "req:waiver-requires-user",
+        "scope:m3-readiness",
+        "state:readiness-blocked",
+        "state:readiness-needs-work",
+        "state:readiness-ready"
+      ],
+      "applied_at": "2026-10-18T08:31:17Z",
+      "base_revision": 5,
+      "operations_digest": "sha256:b68de73b32ce04f836e7617981f27d93f7ef94c76492ace323afed4c237d45d0",
+      "patch_id": "patch:plan-m3-readiness",
+      "reason": "Define readiness (inputs, states, errors, policy behaviour, completion criteria) in the self-model before implementing it.",
+      "removed_ids": [],
+      "result_revision": 6,
+      "updated_ids": [
+        "obligation:m3-readiness",
+        "question:readiness-default-obligations"
+      ]
+    },
+    {
+      "added_ids": [
+        "evidence:m3-test-suite",
+        "mapping:readiness-engine",
+        "mapping:review-and-approval",
+        "scope:m4-evidence-reconciliation",
+        "scope:m5-installable",
+        "scope:m6-ab-evaluation",
+        "symbol:obligations-engine",
+        "symbol:obligations-policy",
+        "symbol:obligations-scope",
+        "symbol:reports-review",
+        "symbol:repository-migrations",
+        "symbol:services-approval",
+        "test:migration-apply",
+        "test:readiness-assertion",
+        "test:readiness-digest-stability",
+        "test:readiness-waiver"
+      ],
+      "applied_at": "2026-10-18T08:35:12Z",
+      "base_revision": 6,
+      "operations_digest": "sha256:07053e05d48a2b2e7a67641c2b0f4215b2e7debb6c395aa193f33d74e315490d",
+      "patch_id": "patch:close-m3-readiness",
+      "reason": "Accept the milestone 3 design, give future milestones their own scopes, map readiness code and tests, record evidence.",
+      "removed_ids": [],
+      "result_revision": 7,
+      "updated_ids": [
+        "decision:policy-rules-declarative",
+        "decision:scope-closure-rule",
+        "edge:approval-op-realizes",
+        "edge:assertion-cannot-satisfy-executable-evidence-refines-loop",
+        "edge:decision-closure-concerns-obligations",
+        "edge:decision-declarative-concerns-obligations",
+        "edge:design-change-invalidates-readiness-refines-loop",
+        "edge:design-digest-stable-under-approval-refines-loop",
+        "edge:loop-invokes-approval",
+        "edge:loop-invokes-readiness",
+        "edge:loop-invokes-review",
+        "edge:m3-scope-concerns-obligation",
+        "edge:obligations-realizes-assertion",
+        "edge:obligations-realizes-digest",
+        "edge:obligations-realizes-invalidate",
+        "edge:obligations-realizes-no-modify",
+        "edge:obligations-realizes-readiness",
+        "edge:obligations-realizes-waiver",
+        "edge:question-rules-concerns-obligations",
+        "edge:readiness-does-not-modify-refines-loop",
+        "edge:readiness-evaluates-policy-refines-loop",
+        "edge:readiness-op-realizes",
+        "edge:reports-realizes-packet",
+        "edge:review-op-realizes",
+        "edge:review-packet-deterministic-refines-loop",
+        "edge:waiver-requires-user-refines-loop",
+        "finding:gates-unsupported",
+        "obligation:m3-readiness",
+        "obligation:m4-evidence-reconciliation",
+        "obligation:m5-installable",
+        "obligation:m6-ab-evaluation",
+        "operation:approval-record",
+        "operation:readiness",
+        "operation:review-export",
+        "process:readiness-loop",
+        "question:default-mandatory-rules",
+        "req:assertion-cannot-satisfy-executable-evidence",
+        "req:design-change-invalidates-readiness",
+        "req:design-digest-stable-under-approval",
+        "req:readiness-does-not-modify",
+        "req:readiness-evaluates-policy",
+        "req:review-packet-deterministic",
+        "req:waiver-requires-user",
+        "state:readiness-blocked",
+        "state:readiness-needs-work",
+        "state:readiness-ready"
+      ]
+    },
+    {
+      "added_ids": [
+        "edge:m3-readiness-review-depicts-scope",
+        "review:m3-readiness"
+      ],
+      "applied_at": "2026-10-18T08:35:13Z",
+      "base_revision": 7,
+      "operations_digest": "sha256:d45ef61dfd2ec7ca736bceeafbbd72a02f67f40cfdede6b6a676e0930c837fc6",
+      "patch_id": "patch:review-export/m3-readiness/e3e866981d7c9f0d",
+      "reason": "Record review packet for scope:m3-readiness at design digest sha256:e3e866981d7c9f0de5ef31448e53c91cb931c498f852c4ae9f15f4e2ed6c6138",
+      "removed_ids": [],
+      "result_revision": 8,
+      "updated_ids": []
+    },
+    {
+      "added_ids": [
+        "approval:m3-readiness/r8",
+        "edge:m3-readiness-approval-r8-concerns-scope"
+      ],
+      "applied_at": "2026-10-18T08:35:14Z",
+      "base_revision": 8,
+      "operations_digest": "sha256:49b1b727b73ff3edaa65e61cfec333b1d142930533b0138ce5f95831f0414923",
+      "patch_id": "patch:approval/m3-readiness/r8",
+      "reason": "Record build_authorization for scope:m3-readiness",
+      "removed_ids": [],
+      "result_revision": 9,
+      "updated_ids": []
     }
   ],
-  "vocabulary_version": "core/0.1"
+  "vocabulary_version": "core/0.2"
 }

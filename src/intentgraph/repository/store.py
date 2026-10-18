@@ -122,7 +122,10 @@ class Repository:
             created_at=utc_now(),
             created_by_tool_version=TOOL_VERSION,
         )
-        snapshot = Snapshot(vocabulary_version=CORE_VOCABULARY_VERSION, project_id=pid, revision=0)
+        from ..obligations.policy import default_conformance_policy, default_readiness_policy
+
+        snapshot = Snapshot(vocabulary_version=CORE_VOCABULARY_VERSION, project_id=pid, revision=0,
+                            policies=[default_readiness_policy(), default_conformance_policy()])
         # Write the model first, then the manifest: the manifest's presence marks a complete workspace.
         repo.write_snapshot(snapshot)
         atomic_write_text(paths.project, json.dumps(manifest.model_dump(mode="json"), indent=2, sort_keys=True) + "\n")

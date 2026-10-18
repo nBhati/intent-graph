@@ -17,7 +17,7 @@ def edge(i, kind, s, t, layer="intent", **props):
 
 
 def snap(nodes, edges=()):
-    return Snapshot(vocabulary_version="core/0.1", project_id="project:t", revision=0, nodes=list(nodes), edges=list(edges))
+    return Snapshot(vocabulary_version="core/0.2", project_id="project:t", revision=0, nodes=list(nodes), edges=list(edges))
 
 
 def codes(s):

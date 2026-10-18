@@ -21,6 +21,11 @@ from .graph import build_index
 from .lenses import LensRequest, compute_lens, search_records
 from .lenses.impact import ImpactRequest, compute_impact
 from .model.diff import changes_since, diff_snapshots
+from .obligations import evaluate, scope_closure, design_digest
+from .obligations.engine import find_policy
+from .obligations.policy import parse_policy
+from .reports import build_review_packet, render_markdown
+from .repository import migrations
 from .model import Snapshot
 from .patches import Patch, apply_patch, validate_patch
 from .playbooks import POINTER_BEGIN, POINTER_END, agent_guide_text, pointer_text
@@ -125,11 +130,26 @@ def status(ctx: Context) -> dict[str, Any]:
             "open_findings": open_findings,
             "proposed_records": sum(1 for r in list(snap.nodes) + list(snap.edges) if r.lifecycle == "proposed"),
         },
-        "gates": {"status": "unsupported", "reason": "readiness policies and scoped gates are not implemented yet (milestone 3); review outstanding work manually"},
+        "gates": _gates(ctx, diags),
         "last_transaction": last,
         "structural": {"errors": sum(1 for d in diags if d.severity == "error"), "warnings": sum(1 for d in diags if d.severity == "warning")},
         "diagnostics": _diag_list(diags),
     }
+
+
+def _gates(ctx: Context, diags: list[Diagnostic]) -> dict[str, Any]:
+    scopes = [n for n in ctx.snapshot.nodes if n.kind == "Scope" and n.properties.get("status") == "active"]
+    if not scopes:
+        return {"status": "no_active_scope", "scopes": []}
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    out = []
+    for sc in sorted(scopes, key=lambda n: n.id):
+        try:
+            r = evaluate(index, ctx.vocabulary, diags, sc.id)
+            out.append({"scope": sc.id, "label": sc.label, "readiness": r.status, "blocking_obligations": len(r.obligations), "warnings": len(r.warnings), "approval": r.approval.get("status"), "design_digest": r.design_digest})
+        except InvalidInput as exc:
+            out.append({"scope": sc.id, "label": sc.label, "readiness": "error", "error": exc.to_dict()})
+    return {"status": "evaluated", "scopes": out, "conformance": "implemented as a policy kind; evidence freshness arrives in milestone 4"}
 
 
 def check(ctx: Context) -> dict[str, Any]:
@@ -292,6 +312,134 @@ def patch_apply(repo: Repository, patch: Patch) -> dict[str, Any]:
         "revision": result.snapshot.revision, "content_digest": result.snapshot.content_digest,
         "effects": result.effects(), "diagnostics": _diag_list(result.diagnostics),
     }
+
+
+# ---------------------------------------------------------------------------
+# readiness, review packets, approvals, policies, migrations
+# ---------------------------------------------------------------------------
+
+def readiness(ctx: Context, scope_id: str, *, policy_id: str | None = None, kind: str = "readiness") -> dict[str, Any]:
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    return evaluate(index, ctx.vocabulary, ctx.diagnostics(), scope_id, policy_id=policy_id, kind=kind).model_dump(mode="json")
+
+
+def _internal_patch(repo: Repository, patch_id: str, reason: str, operations: list[dict[str, Any]]) -> dict[str, Any]:
+    """Apply a tool-generated patch through the ordinary transaction path."""
+    ctx = Context(repo)
+    patch = load_patch({"patch_id": patch_id, "base_revision": ctx.snapshot.revision, "base_digest": ctx.snapshot.content_digest, "reason": reason, "operations": operations})
+    return patch_apply(repo, patch)
+
+
+def review_export(repo: Repository, scope_id: str, *, record: bool = False, out_path: Path | None = None) -> dict[str, Any]:
+    ctx = Context(repo)
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    result = evaluate(index, ctx.vocabulary, ctx.diagnostics(), scope_id)
+    scope = index.nodes[scope_id]
+    closure = scope_closure(index, ctx.vocabulary, scope)
+    packet = build_review_packet(index, scope, closure, result.design_digest, result.policy, result.status)
+    slug = scope_id.split(":", 1)[1].replace("/", "-")
+    md_path = out_path or (repo.paths.artifacts / f"review-{slug}.md")
+    json_path = md_path.with_suffix(".json")
+    atomic_write_text(md_path, render_markdown(packet))
+    atomic_write_text(json_path, json.dumps(packet, indent=2, sort_keys=True) + "\n")
+    out: dict[str, Any] = {"scope": scope_id, "design_digest": result.design_digest, "readiness_status": result.status, "markdown": str(md_path), "json": str(json_path),
+                           "coverage": packet["coverage"], "recorded": None}
+    if record:
+        art_id = f"review:{slug}"
+        rel = md_path.relative_to(repo.paths.root).as_posix() if md_path.is_relative_to(repo.paths.root) else str(md_path)
+        ops: list[dict[str, Any]]
+        if art_id in index.nodes:
+            ops = [{"op": "update_properties", "id": art_id, "changes": {"scope_digest": result.design_digest, "artifact_path": rel}},
+                   {"op": "add_annotation", "id": art_id, "annotation": {"role": "note", "text": f"Re-exported at model revision {ctx.snapshot.revision}.", "refs": []}}]
+        else:
+            ops = [{"op": "add_node", "record": {"id": art_id, "kind": "ReviewArtifact", "label": f"Review packet for {scope.label}", "layer": "reconciliation", "lifecycle": "accepted",
+                                                 "properties": {"artifact_kind": "summary", "artifact_path": rel, "scope_digest": result.design_digest},
+                                                 "provenance": {"author_role": "tool", "method": "review-export", "source_refs": [scope_id]}, "annotations": []}},
+                   {"op": "add_edge", "record": {"id": f"edge:{slug}-review-depicts-scope", "kind": "depicts", "source": art_id, "target": scope_id, "layer": "reconciliation", "lifecycle": "accepted",
+                                                 "provenance": {"author_role": "tool", "method": "review-export", "source_refs": []}, "annotations": []}}]
+        out["recorded"] = _internal_patch(repo, f"patch:review-export/{slug}/{result.design_digest.split(':')[1][:16]}", f"Record review packet for {scope_id} at design digest {result.design_digest}", ops)
+    return out
+
+
+def approval_record(repo: Repository, data: dict[str, Any]) -> dict[str, Any]:
+    """Record a source-backed user decision for a *ready* scope. The approval
+    carries the design digest and model revision it binds to."""
+    scope_id = data.get("scope_ref")
+    kind = data.get("approval_kind", "build_authorization")
+    recorded_by = data.get("recorded_by")
+    statement = data.get("source_statement", "")
+    if not isinstance(scope_id, str) or recorded_by not in ("user", "agent") or not isinstance(statement, str) or not statement.strip():
+        raise InvalidInput("approval needs scope_ref, recorded_by (user|agent) and a non-empty source_statement (the user's exact words)", code="invalid_approval")
+    ctx = Context(repo)
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    result = evaluate(index, ctx.vocabulary, ctx.diagnostics(), scope_id)
+    if kind == "build_authorization" and result.status != "ready":
+        raise InvalidInput(
+            f"scope {scope_id!r} is {result.status}; resolve its obligations before recording build authorization",
+            code="scope_not_ready", details={"status": result.status, "obligations": [o.model_dump(mode="json") for o in result.obligations]},
+        )
+    slug = scope_id.split(":", 1)[1].replace("/", "-")
+    approval_id = f"approval:{slug}/r{ctx.snapshot.revision}"
+    props = {"approval_kind": kind, "recorded_by": recorded_by, "scope_ref": scope_id, "design_digest": result.design_digest, "policy_ref": result.policy,
+             "model_revision": ctx.snapshot.revision, "source_statement": statement}
+    if data.get("source_ref"):
+        props["source_ref"] = str(data["source_ref"])
+    ops = [{"op": "add_node", "record": {"id": approval_id, "kind": "Approval", "label": f"{kind.replace('_', ' ')} for {index.nodes[scope_id].label}", "layer": "reconciliation", "lifecycle": "accepted",
+                                         "properties": props, "provenance": {"author_role": recorded_by, "method": "approval-record", "source_refs": [str(data.get("source_ref") or "conversation")],
+                                                                              "notes": "agent-recorded from conversation; traceability, not authenticated identity" if recorded_by == "agent" else ""}, "annotations": []}},
+           {"op": "add_edge", "record": {"id": f"edge:{slug}-approval-r{ctx.snapshot.revision}-concerns-scope", "kind": "concerns", "source": approval_id, "target": scope_id, "layer": "reconciliation", "lifecycle": "accepted",
+                                         "provenance": {"author_role": "tool", "method": "approval-record", "source_refs": []}, "annotations": []}}]
+    applied = _internal_patch(repo, f"patch:approval/{slug}/r{ctx.snapshot.revision}", f"Record {kind} for {scope_id}", ops)
+    # The digest must be unchanged by recording the approval itself.
+    after = Context(repo)
+    index2 = build_index(after.snapshot, after.vocabulary)
+    check = evaluate(index2, after.vocabulary, after.diagnostics(), scope_id)
+    return {"approval_id": approval_id, "scope": scope_id, "design_digest": result.design_digest, "design_digest_after": check.design_digest,
+            "approval_status_after": check.approval, "revision": applied["revision"]}
+
+
+def policy_list(ctx: Context) -> dict[str, Any]:
+    return {"policies": [{"id": p["id"], "version": p.get("version"), "kind": p.get("kind"), "rules": [r.get("id") for r in p.get("rules", [])], "description": p.get("description", "")} for p in ctx.snapshot.policies]}
+
+
+def policy_show(ctx: Context, policy_id: str) -> dict[str, Any]:
+    return {"policy": find_policy(ctx.snapshot.policies, policy_id, "readiness").model_dump(mode="json")}
+
+
+def migrate(repo: Repository, *, apply: bool) -> dict[str, Any]:
+    """Preview or apply vocabulary migrations. Apply writes a backup copy first."""
+    from . import CORE_VOCABULARY_VERSION as TARGET
+
+    manifest = repo.load_manifest()
+    vocabulary = repo.load_vocabulary()
+    snapshot = repo.load_snapshot()
+    try:
+        steps = migrations.plan(snapshot, TARGET)
+    except LookupError as exc:
+        raise InvalidInput(str(exc), code="no_migration_path") from exc
+    migrated = migrations.run(snapshot, steps, applied_at=utc_now()) if steps else snapshot
+    diags = validate_snapshot(migrated, vocabulary, compat_unknown_kinds=manifest.compat_unknown_kinds)
+    out: dict[str, Any] = {
+        "current_vocabulary": snapshot.vocabulary_version, "target_vocabulary": TARGET,
+        "steps": [{"id": m.id, "from": m.from_version, "to": m.to_version, "description": m.description} for m in steps],
+        "would_be_revision": migrated.revision, "diagnostics_after": _diag_list(diags), "blocking_after": has_blocking(diags), "applied": False, "backup": None,
+    }
+    if not steps or not apply:
+        return out
+    if has_blocking(diags):
+        raise ValidationFailed("migration would leave the model with structural errors; not applied", details={"diagnostics": _diag_list(diags)})
+    with repo.write_lock():
+        current = repo.load_snapshot()
+        if current.content_digest != snapshot.content_digest:
+            raise InvalidInput("model changed while planning the migration; retry", code="stale_base")
+        backup = repo.paths.artifacts / f"backup-model-rev{current.revision}-{current.vocabulary_version.replace('/', '-')}.json"
+        atomic_write_text(backup, repo.paths.model.read_text(encoding="utf-8"))
+        repo.write_snapshot(migrated)
+        data = json.loads(repo.paths.project.read_text(encoding="utf-8"))
+        data["vocabulary_version"] = TARGET
+        atomic_write_text(repo.paths.project, json.dumps(data, indent=2, sort_keys=True) + "\n")
+    out.update({"applied": True, "backup": str(backup), "revision": migrated.revision, "content_digest": migrated.content_digest})
+    return out
 
 
 def tool_info() -> dict[str, Any]:

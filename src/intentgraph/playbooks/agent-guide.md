@@ -41,6 +41,17 @@ Patch ids are `patch:<slug>`. Re-applying the same patch id with the same conten
 - Evidence records keep their `collection_mode` (`agent_assertion`, `agent_submitted_report`, `validated_report`, `independent_capture`). An assertion is not a test result.
 - Never clear a blocking obligation by inventing a user approval.
 
+## Readiness loop (before asking the user to authorize a build)
+
+1. Create a `Scope` node (`member_refs`: the components, operations and requirements of the change; `status: active`; `policy_ref`). The closure adds structural children, realized requirements, applicable and global constraints, and concerning questions, decisions and assumptions.
+2. `intentgraph readiness --scope <id> --json`. Status `ready`, `needs_work` or `blocked`. Each obligation names the rule, the related ids, the request and the acceptable resolutions.
+3. Resolve obligations by patching the model (realize a requirement, define an operation's inputs/outputs/failures, record a deferral Decision, answer a Question) or by recording an Assessment/Obligation record. Only the user can resolve a `blocked` item; ask a product-level question.
+4. `intentgraph review export --scope <id> --record`: writes the packet (Markdown + JSON) and records a ReviewArtifact at the current design digest. Show the user the packet in product language; you may add an explanation, which is a judgment.
+5. When `ready`, and only after the user has said so in their own words, run `intentgraph approval record --file approval.json` with `recorded_by`, the exact `source_statement` and a `source_ref`. The approval binds to the design digest; later evidence does not invalidate it, a design change inside the scope does.
+6. After implementation, `intentgraph conformance --scope <id> --json` checks mappings and evidence. An `agent_assertion` never satisfies an evidence rule.
+
+A waiver is an Obligation node with the computed obligation id, `state: waived` and `waiver: {authorized_by: "user", reason, source_statement}`. Never write one without the user's authorization. Policies change only through `set_policy` patch operations with a reason.
+
 ## Resuming work in a fresh conversation
 
 1. `intentgraph status --json`: read `outstanding` (open questions, pending obligations, open findings).
@@ -49,7 +60,7 @@ Patch ids are `patch:<slug>`. Re-applying the same patch id with the same conten
 4. `intentgraph diff --git <last known ref> --json` to see what the model gained since you last looked.
 5. Continue from the obligation; when done, patch its `state` to `satisfied` and add Mapping/Evidence records that say how.
 
-## Current capability (milestone 2)
+## Current capability (milestone 3)
 
-Available: init, status, vocabulary, view, search, show, impact, diff, patch validate/apply, check, rebuild.
-Not yet available: readiness policies, obligations engine, evidence ingestion, reconciliation, review export, approvals. Record such work manually as Obligation / Finding / Evidence nodes and note the manual step in provenance.
+Available: init, status, vocabulary, view, search, show, impact, diff, patch validate/apply, check, rebuild, readiness, conformance, review export, approval record, policy list/show, migrate.
+Not yet available: evidence ingestion with workspace snapshots and freshness, drift reconciliation, CI entry point, bundled executable. Evidence you record now is `agent_submitted_report` at best; say so in `limitations`.

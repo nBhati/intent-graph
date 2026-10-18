@@ -21,7 +21,7 @@ from ..checks import Diagnostic, has_blocking, validate_snapshot
 from ..errors import InvalidInput, StaleBase
 from ..model import Snapshot, TransactionRecord, digest_of
 from ..vocabulary import Vocabulary
-from .model import AddAnnotation, AddEdge, AddNode, Patch, Remove, UpdateFields, UpdateProperties
+from .model import AddAnnotation, AddEdge, AddNode, Patch, Remove, RemovePolicy, SetPolicy, UpdateFields, UpdateProperties
 
 
 @dataclass
@@ -137,6 +137,20 @@ def _apply_operations(snapshot: Snapshot, patch: Patch) -> PatchResult:
             rec.annotations.append(op.annotation)
             if op.id not in added:
                 updated.add(op.id)
+        elif isinstance(op, SetPolicy):
+            pid = op.policy.get("id")
+            if not isinstance(pid, str) or not pid:
+                diags.append(Diagnostic(code="invalid_policy", severity="error", message=f"{where}: policy needs a string 'id'"))
+                continue
+            existed = any(pol.get("id") == pid for pol in candidate.policies)
+            candidate.policies = [pol for pol in candidate.policies if pol.get("id") != pid] + [op.policy]
+            (updated if existed else added).add(pid)
+        elif isinstance(op, RemovePolicy):
+            if not any(pol.get("id") == op.id for pol in candidate.policies):
+                diags.append(Diagnostic(code="unknown_record", severity="error", message=f"{where}: policy {op.id!r} does not exist", record_ids=[op.id]))
+                continue
+            candidate.policies = [pol for pol in candidate.policies if pol.get("id") != op.id]
+            removed.add(op.id)
         elif isinstance(op, Remove):
             rec = record(op.id)
             if rec is None:

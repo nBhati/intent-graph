@@ -1,0 +1,381 @@
+{
+  "coverage": {
+    "closure_count": 20,
+    "ids": [
+      "component:obligations",
+      "component:reports",
+      "constraint:no-hidden-state-between-calls",
+      "constraint:records-are-data",
+      "decision:agent-runs-language-tools",
+      "decision:policy-rules-declarative",
+      "decision:scope-closure-rule",
+      "operation:approval-record",
+      "operation:readiness",
+      "operation:review-export",
+      "process:readiness-loop",
+      "question:default-mandatory-rules",
+      "question:readiness-default-obligations",
+      "req:assertion-cannot-satisfy-executable-evidence",
+      "req:design-change-invalidates-readiness",
+      "req:design-digest-stable-under-approval",
+      "req:readiness-does-not-modify",
+      "req:readiness-evaluates-policy",
+      "req:review-packet-deterministic",
+      "req:waiver-requires-user"
+    ],
+    "intent_count": 20
+  },
+  "design_digest": "sha256:e3e866981d7c9f0de5ef31448e53c91cb931c498f852c4ae9f15f4e2ed6c6138",
+  "exclusions_and_deferrals": [],
+  "explanation": {
+    "author": null,
+    "note": "Optional agent-written explanation. Structural coverage above is checkable; prose faithfulness still needs human review.",
+    "text": ""
+  },
+  "model_revision": 7,
+  "policy": "policy:default-readiness@0.1",
+  "readiness_status": "needs_work",
+  "scope": "scope:m3-readiness",
+  "scope_label": "Milestone 3: readiness, review packets and approvals",
+  "sections": [
+    {
+      "blurb": "Goals and the requirements in scope.",
+      "entries": [
+        {
+          "description": "",
+          "id": "req:assertion-cannot-satisfy-executable-evidence",
+          "kind": "Requirement",
+          "label": "An agent assertion cannot satisfy a rule that requires executable evidence",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Evidence collection modes are ordered: agent_assertion < agent_submitted_report < validated_report < independent_capture.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:design-change-invalidates-readiness",
+          "kind": "Requirement",
+          "label": "A semantic change inside the approved scope invalidates the prior approval and names the affected approval",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Unrelated additions outside the closure leave the approval current.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:design-digest-stable-under-approval",
+          "kind": "Requirement",
+          "label": "Recording an approval or adding evidence does not change the approved design digest",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "The design digest covers intent-layer records in the scope closure and the policy version; reconciliation records are excluded.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:readiness-does-not-modify",
+          "kind": "Requirement",
+          "label": "A readiness check never modifies the model or its own policy",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Policy changes are explicit patch operations with a recorded reason.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "Inputs: a Scope record (explicit members, closure rule, policy ref) and the current snapshot. Output: status, design digest, obligations, warnings, approval state.",
+          "id": "req:readiness-evaluates-policy",
+          "kind": "Requirement",
+          "label": "Readiness evaluates a versioned policy against a scope and returns actionable obligations",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Each obligation names the rule, the related ids, the request and the acceptable resolutions. Status is ready, needs_work or blocked.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:review-packet-deterministic",
+          "kind": "Requirement",
+          "label": "The review packet is selected deterministically from the scope and carries its scope digest and coverage",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "Prose faithfulness still needs human review; the packet proves which records it covers, not that the explanation is right.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "req:waiver-requires-user",
+          "kind": "Requirement",
+          "label": "A waiver is honoured only when it records a user authorization and a reason",
+          "lifecycle": "accepted",
+          "properties": {
+            "acceptance_notes": "An agent must not invent user approval to clear a blocker.",
+            "formalization": "descriptive",
+            "priority": "must"
+          },
+          "reason": "explicit member"
+        }
+      ],
+      "title": "What are we trying to achieve?"
+    },
+    {
+      "blurb": "Scenarios and experience elements.",
+      "entries": [],
+      "title": "What will the user experience?"
+    },
+    {
+      "blurb": "Structure, contracts and behavior.",
+      "entries": [
+        {
+          "description": "",
+          "id": "component:obligations",
+          "kind": "Component",
+          "label": "obligations",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Policy applicability, evidence freshness, readiness evaluation",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "component:reports",
+          "kind": "Component",
+          "label": "reports",
+          "lifecycle": "accepted",
+          "properties": {
+            "responsibility": "Structured review packets and renderable exports",
+            "role": "module",
+            "technology": "python"
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:approval-record",
+          "kind": "Operation",
+          "label": "Record a source-backed user approval for a ready scope",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "scope_not_ready",
+              "unknown_scope",
+              "stale_base"
+            ],
+            "idempotent": false,
+            "inputs": {
+              "recorded_by": "user|agent",
+              "scope": "Scope id",
+              "statement": "exact user statement"
+            },
+            "mode": "sync",
+            "outputs": {
+              "approval_id": "id",
+              "design_digest": "sha256"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:readiness",
+          "kind": "Operation",
+          "label": "Evaluate readiness of a scope",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "unknown_scope",
+              "unknown_policy",
+              "invalid_policy"
+            ],
+            "idempotent": true,
+            "inputs": {
+              "policy": "optional policy id",
+              "scope": "Scope id"
+            },
+            "mode": "sync",
+            "outputs": {
+              "design_digest": "sha256",
+              "obligations": "list",
+              "status": "ready|needs_work|blocked"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "operation:review-export",
+          "kind": "Operation",
+          "label": "Export a review packet for a scope",
+          "lifecycle": "accepted",
+          "properties": {
+            "failures": [
+              "unknown_scope"
+            ],
+            "idempotent": true,
+            "inputs": {
+              "record": "boolean",
+              "scope": "Scope id"
+            },
+            "mode": "sync",
+            "outputs": {
+              "packet": "markdown + json",
+              "scope_digest": "sha256"
+            }
+          },
+          "reason": "explicit member"
+        },
+        {
+          "description": "",
+          "id": "process:readiness-loop",
+          "kind": "Process",
+          "label": "Internal check/refine/check loop before user confirmation",
+          "lifecycle": "accepted",
+          "properties": {
+            "concurrency_sensitive": false,
+            "steps": [
+              "readiness",
+              "resolve obligations by patch or assessment",
+              "readiness",
+              "review export",
+              "readiness (packet current)",
+              "approval record"
+            ]
+          },
+          "reason": "explicit member"
+        }
+      ],
+      "title": "How will the main parts cooperate?"
+    },
+    {
+      "blurb": "Cross-cutting rules, dependencies on uncertain facts, and chosen alternatives (including deferrals).",
+      "entries": [
+        {
+          "description": "Optional caches are keyed by snapshot digest, vocabulary version and tool version; a cache miss affects performance only.",
+          "id": "constraint:no-hidden-state-between-calls",
+          "kind": "Constraint",
+          "label": "No memory from a previous CLI call is required for correctness",
+          "lifecycle": "accepted",
+          "properties": {
+            "constraint_kind": "invariant",
+            "scope": "global"
+          },
+          "reason": "global rule"
+        },
+        {
+          "description": "",
+          "id": "constraint:records-are-data",
+          "kind": "Constraint",
+          "label": "Records and tool output are data, never executed",
+          "lifecycle": "accepted",
+          "properties": {
+            "constraint_kind": "permission",
+            "scope": "global"
+          },
+          "reason": "global rule"
+        },
+        {
+          "description": "",
+          "id": "decision:agent-runs-language-tools",
+          "kind": "Decision",
+          "label": "The existing agent runs language-specific analyzers; the core stays small",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Native adapters for every language"
+            ],
+            "decided_by": "user",
+            "rationale": "Avoids building a large analyzer platform before proving value."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:policy-rules-declarative",
+          "kind": "Decision",
+          "label": "Policies are declarative rule records in the snapshot, evaluated by built-in rule types",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Python plug-in policies",
+              "Policy expressed in intent-expr"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Keeps policy as versioned data that cannot execute code; new rule types are tool changes, not policy edits."
+          },
+          "reason": "decision concerning member"
+        },
+        {
+          "description": "",
+          "id": "decision:scope-closure-rule",
+          "kind": "Decision",
+          "label": "Scope closure = explicit members, their structural children, realized requirements, applicable constraints, global constraints, and concerning questions, decisions and assumptions",
+          "lifecycle": "accepted",
+          "properties": {
+            "alternatives": [
+              "Explicit members only",
+              "Full reachability"
+            ],
+            "decided_by": "agent",
+            "decision_kind": "choice",
+            "rationale": "Deterministic and explainable; every closure member records why it is included."
+          },
+          "reason": "decision concerning member"
+        }
+      ],
+      "title": "Which rules, assumptions and decisions matter?"
+    },
+    {
+      "blurb": "Unresolved intent.",
+      "entries": [
+        {
+          "description": "",
+          "id": "question:default-mandatory-rules",
+          "kind": "Question",
+          "label": "Which readiness rules are mandatory by default?",
+          "lifecycle": "accepted",
+          "properties": {
+            "answer": "v0 default policy: structural checks pass; blocking questions resolved; accepted requirements realized or deliberately deferred; operations define inputs, outputs and failures; concurrency-sensitive processes reviewed; no refuted assumptions; review packet current. Projects override by setting their own policy.",
+            "blocking": false,
+            "status": "answered"
+          },
+          "reason": "question concerning member"
+        },
+        {
+          "description": "",
+          "id": "question:readiness-default-obligations",
+          "kind": "Question",
+          "label": "Which readiness obligations are mandatory by default versus project-specific?",
+          "lifecycle": "proposed",
+          "properties": {
+            "answer": "See question:default-mandatory-rules; answered for v0 by the default policy.",
+            "blocking": false,
+            "status": "answered"
+          },
+          "reason": "question concerning member"
+        }
+      ],
+      "title": "What is still open?"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "version": "core/0.1",
+  "version": "core/0.2",
   "description": "Core relationship kinds. Endpoint kind lists may contain '*' for any kind or '@intent'/'@observation'/'@reconciliation' for any kind of that layer. Only relations with acyclic=true are checked for cycles; calls, transitions and dependencies may legally cycle. 'impact' says which endpoint a change on the other endpoint may affect: incoming = the source is affected when the target changes; outgoing = the target is affected when the source changes; both; none.",
   "relations": [
     {"name": "contains", "impact": "incoming", "layers": ["intent", "observation"], "acyclic": true,
@@ -65,7 +65,7 @@
      "description": "Architectural connectivity."},
     {"name": "concerns", "impact": "incoming", "layers": ["intent", "reconciliation"],
      "direction": "question, assumption, decision, obligation or finding -> element it is about",
-     "source_kinds": ["Question", "Assumption", "Decision", "Obligation", "Finding", "Assessment"], "target_kinds": ["*"],
+     "source_kinds": ["Question", "Assumption", "Decision", "Obligation", "Finding", "Assessment", "Approval"], "target_kinds": ["*"],
      "description": "Relates an unresolved or supporting element to the element it is about."},
     {"name": "observes", "impact": "incoming", "layers": ["observation"],
      "direction": "observation -> code artifact or symbol",

@@ -105,6 +105,11 @@ def validate_snapshot(snapshot: Snapshot, vocabulary: Vocabulary, *, compat_unkn
         ids = [u for u, _ in cycle]
         diags.append(Diagnostic(code="containment_cycle" if rel.name == "contains" else "acyclic_relation_cycle", severity="error", message=f"relation {rel.name!r} must be acyclic; cycle through {ids}", record_ids=ids))
 
+    # --- policies ----------------------------------------------------------------
+    from ..obligations.policy import validate_policies  # local import: obligations depends on checks
+
+    diags.extend(validate_policies(snapshot.policies))
+
     # --- lifecycle hints -----------------------------------------------------
     for edge in snapshot.edges:
         if edge.lifecycle == "accepted":

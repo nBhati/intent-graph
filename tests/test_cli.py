@@ -46,7 +46,7 @@ def test_full_cli_round_trip(tmp_path: Path):
     assert status["revision"] == 1 and status["counts"]["nodes"] == 31
     assert status["outstanding"]["blocking_questions"] == ["question:cancel-scope"]
     assert status["outstanding"]["pending_obligations"] == ["obligation:cancel-late-arrival"]
-    assert status["gates"]["status"] == "unsupported"
+    assert status["gates"]["status"] == "no_active_scope"
 
     # Stale base -> exit 3 with changed ids.
     out = run("patch", "apply", "--file", str(pfile), cwd=ws, expect=0)  # idempotent replay
@@ -88,10 +88,34 @@ def test_full_cli_round_trip(tmp_path: Path):
     out = run("diff", "--git", "HEAD", cwd=ws, expect=4)
     assert out["status"] == "error" and out["error"]["code"] == "git_failed"
 
+    # Readiness loop through the CLI: scope -> needs_work -> resolve -> review export -> ready -> approval.
+    status = run("status", cwd=ws, expect=0)["data"]
+    scope_patch = {"patch_id": "patch:scope", "base_revision": status["revision"], "base_digest": status["content_digest"], "operations": [
+        {"op": "add_node", "record": {"id": "scope:cancel", "kind": "Scope", "label": "Cancellation", "layer": "reconciliation", "lifecycle": "accepted",
+                                      "properties": {"member_refs": ["component:response-coordinator"], "status": "active"}, "provenance": {"author_role": "agent", "method": "t"}}},
+        {"op": "update_properties", "id": "obligation:cancel-late-arrival", "changes": {"state": "satisfied"}}]}
+    pfile.write_text(json.dumps(scope_patch))
+    run("patch", "apply", "--file", str(pfile), cwd=ws, expect=0)
+    out = run("readiness", "--scope", "scope:cancel", cwd=ws, expect=2)["data"]
+    assert out["status"] == "needs_work" and [o["id"] for o in out["obligations"]] == ["obligation:cancel/packet/scope"]
+    assert run("status", cwd=ws, expect=0)["data"]["gates"]["scopes"][0]["readiness"] == "needs_work"
+    out = run("review", "export", "--scope", "scope:cancel", "--record", cwd=ws, expect=0)["data"]
+    assert out["recorded"]["revision"] == 3 and Path(out["markdown"]).is_file()
+    out = run("readiness", "--scope", "scope:cancel", cwd=ws, expect=0)["data"]
+    assert out["status"] == "ready"
+    afile = tmp_path / "approval.json"
+    afile.write_text(json.dumps({"scope_ref": "scope:cancel", "recorded_by": "agent", "source_statement": "Build it."}))
+    out = run("approval", "record", "--file", str(afile), cwd=ws, expect=0)["data"]
+    assert out["approval_status_after"]["status"] == "current"
+    out = run("conformance", "--scope", "scope:cancel", cwd=ws, expect=0)["data"]
+    assert out["status"] == "ready" and out["policy_kind"] == "conformance"
+    assert {p["id"] for p in run("policy", "list", cwd=ws, expect=0)["data"]["policies"]} == {"policy:default-readiness", "policy:default-conformance"}
+    assert run("migrate", cwd=ws, expect=0)["data"]["steps"] == []
+
     out = run("check", cwd=ws, expect=0)["data"]
     assert not out["blocking"]
     out = run("rebuild", cwd=ws, expect=0)["data"]
-    assert out["graph"] == {"nodes": 31, "edges": 20} and out["unresolved_references"] == []
+    assert out["graph"] == {"nodes": 34, "edges": 22} and out["unresolved_references"] == []
 
 
 def test_no_workspace_is_invalid_input(tmp_path: Path):

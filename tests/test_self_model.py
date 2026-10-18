@@ -29,16 +29,24 @@ def test_fresh_process_can_resume_milestone_work():
     status = run("status")
     assert status["project_id"] == "project:intentgraph"
     pending = status["outstanding"]["pending_obligations"]
-    assert "obligation:m3-readiness" in pending and "obligation:m2-self-model-and-lenses" not in pending
-    # The next piece of work and what it concerns.
-    rec = run("show", "obligation:m3-readiness")
+    assert "obligation:m4-evidence-reconciliation" in pending
+    assert not {"obligation:m2-self-model-and-lenses", "obligation:m3-readiness"} & set(pending)
+    # The next piece of work, its scope, and what it concerns.
+    rec = run("show", "obligation:m4-evidence-reconciliation")
     assert rec["record"]["properties"]["state"] == "pending" and rec["record"]["properties"]["request"]
-    assert {e["target"] for e in rec["outgoing"]} == {"component:obligations"}
+    assert rec["record"]["properties"]["scope_refs"] == ["scope:m4-evidence-reconciliation"]
+    assert {e["target"] for e in rec["outgoing"]} >= {"component:obligations"}
+    # The completed milestone 3 scope is ready and approved; the future scope is not leaked into it.
+    gates = {g["scope"]: g for g in status["gates"]["scopes"]}
+    assert gates["scope:m3-readiness"]["readiness"] == "ready" and gates["scope:m3-readiness"]["approval"] == "current"
+    ready = run("readiness", "--scope", "scope:m3-readiness")
+    assert "obligation:m4-evidence-reconciliation" not in {o["id"] for o in ready["obligations"]}
+    assert ready["design_digest"] == ready["approval"]["design_digest"]
     # Its surrounding intent and the cross-cutting rules, without loading the whole model.
     lens = run("view", "--focus", "component:obligations", "--include", "parent_intent", "constraints", "findings")
     assert lens["status"] == "ok" and len(lens["selected_ids"]) < status["counts"]["nodes"]
     assert set(lens["project_rule_ids"]) == {"constraint:no-hidden-state-between-calls", "constraint:records-are-data"}
-    assert "obligation:m3-readiness" in lens["selected_ids"]
+    assert "obligation:m4-evidence-reconciliation" in lens["selected_ids"]
     # The completed milestone 2 work is traceable: requirement -> mapping -> symbols and evidence.
     mapping = run("show", "mapping:impact-command")["record"]["properties"]
     assert mapping["model_refs"] == ["req:impact-slice"] and "symbol:lenses-impact" in mapping["implementation_refs"]

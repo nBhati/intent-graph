@@ -1,0 +1,737 @@
+{
+  "patch_id": "patch:close-m3-readiness",
+  "base_revision": 6,
+  "base_digest": "sha256:5e0b0d2b62eafd4eefe0f07e68769cc4fc9933787cfc9a735c24e808f4b11c85",
+  "reason": "Accept the milestone 3 design, give future milestones their own scopes, map readiness code and tests, record evidence.",
+  "operations": [
+    {
+      "op": "update_fields",
+      "id": "req:readiness-evaluates-policy",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:readiness-does-not-modify",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:assertion-cannot-satisfy-executable-evidence",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:design-digest-stable-under-approval",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:design-change-invalidates-readiness",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:waiver-requires-user",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:review-packet-deterministic",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "question:default-mandatory-rules",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "decision:policy-rules-declarative",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "decision:scope-closure-rule",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "state:readiness-ready",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "state:readiness-needs-work",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "state:readiness-blocked",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "operation:readiness",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "operation:review-export",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "operation:approval-record",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "process:readiness-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:m3-scope-concerns-obligation",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:obligations-realizes-readiness",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:obligations-realizes-no-modify",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:obligations-realizes-assertion",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:obligations-realizes-digest",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:obligations-realizes-invalidate",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:obligations-realizes-waiver",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:reports-realizes-packet",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:readiness-op-realizes",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:review-op-realizes",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:approval-op-realizes",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:loop-invokes-readiness",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:loop-invokes-review",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:loop-invokes-approval",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:question-rules-concerns-obligations",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:decision-declarative-concerns-obligations",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:decision-closure-concerns-obligations",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "obligation:m3-readiness",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:readiness-evaluates-policy-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:readiness-does-not-modify-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:assertion-cannot-satisfy-executable-evidence-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:design-digest-stable-under-approval-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:design-change-invalidates-readiness-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:waiver-requires-user-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:review-packet-deterministic-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "scope:m4-evidence-reconciliation",
+        "kind": "Scope",
+        "label": "Milestone 4: evidence, mappings and drift reconciliation",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "member_refs": [
+            "component:obligations",
+            "component:repository"
+          ],
+          "status": "draft",
+          "policy_ref": "policy:default-readiness"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "scope:m5-installable",
+        "kind": "Scope",
+        "label": "Milestone 5: installable first version",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "member_refs": [
+            "system:intentgraph"
+          ],
+          "status": "draft",
+          "policy_ref": "policy:default-readiness"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.8"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "scope:m6-ab-evaluation",
+        "kind": "Scope",
+        "label": "Milestone 6: external A/B evaluation",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "member_refs": [
+            "system:intentgraph"
+          ],
+          "status": "draft",
+          "policy_ref": "policy:default-readiness"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.9"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m4-evidence-reconciliation",
+      "changes": {
+        "scope_refs": [
+          "scope:m4-evidence-reconciliation"
+        ]
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m5-installable",
+      "changes": {
+        "scope_refs": [
+          "scope:m5-installable"
+        ]
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m6-ab-evaluation",
+      "changes": {
+        "scope_refs": [
+          "scope:m6-ab-evaluation"
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:obligations-engine",
+        "kind": "CodeSymbol",
+        "label": "evaluate",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/obligations/engine.py",
+          "language": "python",
+          "symbol": "evaluate",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/obligations/engine.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:obligations-scope",
+        "kind": "CodeSymbol",
+        "label": "design_digest",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/obligations/scope.py",
+          "language": "python",
+          "symbol": "design_digest",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/obligations/scope.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:obligations-policy",
+        "kind": "CodeSymbol",
+        "label": "Policy",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/obligations/policy.py",
+          "language": "python",
+          "symbol": "Policy",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/obligations/policy.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:reports-review",
+        "kind": "CodeSymbol",
+        "label": "build_review_packet",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/reports/review.py",
+          "language": "python",
+          "symbol": "build_review_packet",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/reports/review.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:services-approval",
+        "kind": "CodeSymbol",
+        "label": "approval_record",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/services.py",
+          "language": "python",
+          "symbol": "approval_record",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/services.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:repository-migrations",
+        "kind": "CodeSymbol",
+        "label": "run",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/repository/migrations.py",
+          "language": "python",
+          "symbol": "run",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/repository/migrations.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:readiness-digest-stability",
+        "kind": "TestCase",
+        "label": "test_review_packet_then_approval_digest_stability_and_invalidation",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_readiness.py",
+          "test_id": "test_review_packet_then_approval_digest_stability_and_invalidation",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_readiness.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:readiness-assertion",
+        "kind": "TestCase",
+        "label": "test_agent_assertion_cannot_satisfy_executable_evidence",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_readiness.py",
+          "test_id": "test_agent_assertion_cannot_satisfy_executable_evidence",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_readiness.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:readiness-waiver",
+        "kind": "TestCase",
+        "label": "test_waiver_requires_user_authorization",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_readiness.py",
+          "test_id": "test_waiver_requires_user_authorization",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_readiness.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:migration-apply",
+        "kind": "TestCase",
+        "label": "test_migration_preview_then_apply_with_backup",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_migrations.py",
+          "test_id": "test_migration_preview_then_apply_with_backup",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_migrations.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:readiness-engine",
+        "kind": "Mapping",
+        "label": "obligations package realizes readiness",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:readiness-evaluates-policy",
+            "req:readiness-does-not-modify",
+            "req:assertion-cannot-satisfy-executable-evidence",
+            "req:design-digest-stable-under-approval",
+            "req:design-change-invalidates-readiness",
+            "req:waiver-requires-user",
+            "req:review-packet-deterministic",
+            "operation:readiness",
+            "process:readiness-loop"
+          ],
+          "implementation_refs": [
+            "symbol:obligations-engine",
+            "symbol:obligations-scope",
+            "symbol:obligations-policy",
+            "test:readiness-digest-stability",
+            "test:readiness-assertion",
+            "test:readiness-waiver"
+          ],
+          "mapping_kind": "implements",
+          "evidence_refs": [
+            "evidence:m3-test-suite"
+          ],
+          "remaining_gaps": [
+            "Evidence freshness against workspace snapshots is not evaluated until milestone 4."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m3-readiness"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:review-and-approval",
+        "kind": "Mapping",
+        "label": "reports.review and services.approval_record realize review export and approval",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "operation:review-export",
+            "operation:approval-record",
+            "req:review-packet-deterministic"
+          ],
+          "implementation_refs": [
+            "symbol:reports-review",
+            "symbol:services-approval"
+          ],
+          "mapping_kind": "implements",
+          "evidence_refs": [
+            "evidence:m3-test-suite"
+          ],
+          "remaining_gaps": [
+            "Diagrams are not generated; the packet is Markdown plus JSON."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m3-readiness"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "evidence:m3-test-suite",
+        "kind": "Evidence",
+        "label": "Milestone 3 test run: 68 passed",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "method": "unit_and_subprocess_tests",
+          "result": "passed",
+          "collection_mode": "agent_submitted_report",
+          "tool": "pytest",
+          "supports": [
+            "req:readiness-evaluates-policy",
+            "req:readiness-does-not-modify",
+            "req:assertion-cannot-satisfy-executable-evidence",
+            "req:design-digest-stable-under-approval",
+            "req:design-change-invalidates-readiness",
+            "req:waiver-requires-user",
+            "req:review-packet-deterministic",
+            "obligation:m3-readiness"
+          ],
+          "test_refs": [
+            "test:readiness-digest-stability",
+            "test:readiness-assertion",
+            "test:readiness-waiver",
+            "test:migration-apply"
+          ],
+          "submitted_by": "coding-agent",
+          "limitations": [
+            "Agent-reported run; not independently captured by the tool (milestone 4)."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "test-run-report",
+          "source_refs": [
+            "patch:close-m3-readiness"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m3-readiness",
+      "changes": {
+        "state": "satisfied"
+      }
+    },
+    {
+      "op": "add_annotation",
+      "id": "obligation:m3-readiness",
+      "annotation": {
+        "role": "explanation",
+        "text": "Implemented with tests (evidence:m3-test-suite). Per section 21.6 the first release of readiness relied on the independent test suite and manual review; it then passed its own loop retrospectively.",
+        "refs": [
+          "mapping:readiness-engine"
+        ]
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "finding:gates-unsupported",
+      "changes": {
+        "state": "resolved",
+        "detail": "Resolved in milestone 3: status evaluates every active scope under its readiness policy."
+      }
+    }
+  ]
+}

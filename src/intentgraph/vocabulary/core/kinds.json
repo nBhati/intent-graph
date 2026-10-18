@@ -1,5 +1,5 @@
 {
-  "version": "core/0.1",
+  "version": "core/0.2",
   "description": "Core node kinds. Property specs use a small JSON-Schema-like subset: type (string|integer|number|boolean|array|object|ref|ref_list), enum, required, items, description. 'ref' and 'ref_list' values must name existing records; reference integrity is checked by graph validation.",
   "kinds": [
     {"name": "Goal", "family": "Purpose", "layers": ["intent"],
@@ -110,8 +110,9 @@
        "assumption_refs": {"type": "ref_list"}}},
 
     {"name": "Decision", "family": "Decisions", "layers": ["intent"],
-     "description": "A chosen alternative with rationale.",
+     "description": "A chosen alternative with rationale. A 'deferral' or 'exclusion' decision concerning a requirement documents that it is deliberately not realized in scope.",
      "properties": {
+       "decision_kind": {"type": "string", "enum": ["choice", "deferral", "exclusion"]},
        "alternatives": {"type": "array", "items": {"type": "string"}},
        "rationale": {"type": "string"},
        "decided_by": {"type": "string", "enum": ["user", "agent"]}}},
@@ -148,6 +149,12 @@
        "value": {"type": "object"},
        "limitations": {"type": "array", "items": {"type": "string"}}}},
 
+    {"name": "Scope", "family": "Reconciliation", "layers": ["reconciliation"],
+     "description": "The set of work and relevant constraints being reviewed or implemented. Explicit members plus a deterministic closure.",
+     "properties": {
+       "member_refs": {"type": "ref_list", "required": true},
+       "status": {"type": "string", "enum": ["draft", "active", "closed"], "required": true},
+       "policy_ref": {"type": "string"}}},
     {"name": "Mapping", "family": "Reconciliation", "layers": ["reconciliation"],
      "description": "A claim connecting model elements to implementation elements, with assessment and gaps.",
      "properties": {
@@ -161,6 +168,7 @@
      "description": "Required definition, review or evidence under a policy. A waiver records who authorized it and why.",
      "properties": {
        "obligation_kind": {"type": "string", "required": true},
+       "rule": {"type": "string"},
        "blocking": {"type": "boolean", "required": true},
        "state": {"type": "string", "enum": ["pending", "satisfied", "failed", "blocked", "waived"], "required": true},
        "scope_refs": {"type": "ref_list"},
@@ -221,6 +229,8 @@
        "recorded_by": {"type": "string", "enum": ["user", "agent"], "required": true},
        "scope_ref": {"type": "ref"},
        "design_digest": {"type": "string"},
+       "policy_ref": {"type": "string"},
+       "model_revision": {"type": "integer"},
        "source_statement": {"type": "string"},
        "source_ref": {"type": "string"}}},
     {"name": "ReviewArtifact", "family": "Evidence", "layers": ["reconciliation"],

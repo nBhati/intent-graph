@@ -1,0 +1,135 @@
+{
+  "patch_id": "patch:install-default-policies",
+  "base_revision": 4,
+  "base_digest": "sha256:825527de98f93845d1ba7948c33851693bb96d1e2bd0015d10935fe7156d4496",
+  "reason": "Install the default readiness and conformance policies (v0.1) into the self-model.",
+  "operations": [
+    {
+      "op": "set_policy",
+      "policy": {
+        "id": "policy:default-readiness",
+        "version": "0.1",
+        "kind": "readiness",
+        "description": "Default pre-build readiness policy (v0). Projects may replace it with set_policy; the change is recorded.",
+        "rules": [
+          {
+            "id": "structural",
+            "rule": "structural_checks_pass",
+            "blocking": true,
+            "params": {},
+            "description": "Mandatory structural checks pass."
+          },
+          {
+            "id": "questions",
+            "rule": "blocking_questions_resolved",
+            "blocking": true,
+            "params": {},
+            "description": "Blocking intent questions are resolved."
+          },
+          {
+            "id": "realized",
+            "rule": "requirements_realized",
+            "blocking": true,
+            "params": {},
+            "description": "Every in-scope accepted requirement has a proposed realization or a documented deliberate deferral."
+          },
+          {
+            "id": "operations",
+            "rule": "operations_defined",
+            "blocking": true,
+            "params": {},
+            "description": "Required interface input, output and failure behavior is defined."
+          },
+          {
+            "id": "concurrency",
+            "rule": "concurrency_sensitive_reviewed",
+            "blocking": true,
+            "params": {},
+            "description": "A concurrency-sensitive process has its review obligation addressed."
+          },
+          {
+            "id": "refuted",
+            "rule": "assumptions_not_refuted",
+            "blocking": true,
+            "params": {},
+            "description": "No in-scope assumption is refuted."
+          },
+          {
+            "id": "assumptions",
+            "rule": "assumptions_acknowledged",
+            "blocking": false,
+            "params": {},
+            "description": "Unverified assumptions are listed for the reviewer."
+          },
+          {
+            "id": "proposed",
+            "rule": "proposed_records_accepted",
+            "blocking": false,
+            "params": {},
+            "description": "Proposed records in scope are listed for acceptance."
+          },
+          {
+            "id": "packet",
+            "rule": "review_packet_current",
+            "blocking": true,
+            "params": {},
+            "description": "The intent review packet covers the current design digest."
+          }
+        ]
+      }
+    },
+    {
+      "op": "set_policy",
+      "policy": {
+        "id": "policy:default-conformance",
+        "version": "0.1",
+        "kind": "conformance",
+        "description": "Default post-build conformance policy (v0): must-requirements have mappings and passing evidence at least at report level.",
+        "rules": [
+          {
+            "id": "structural",
+            "rule": "structural_checks_pass",
+            "blocking": true,
+            "params": {},
+            "description": ""
+          },
+          {
+            "id": "mapped",
+            "rule": "mappings_present",
+            "blocking": true,
+            "params": {
+              "kinds": [
+                "Requirement"
+              ],
+              "where": {
+                "priority": [
+                  "must",
+                  "should"
+                ]
+              }
+            },
+            "description": ""
+          },
+          {
+            "id": "tested",
+            "rule": "evidence_required",
+            "blocking": true,
+            "params": {
+              "kinds": [
+                "Requirement"
+              ],
+              "where": {
+                "priority": [
+                  "must"
+                ]
+              },
+              "result": "passed",
+              "min_collection_mode": "agent_submitted_report"
+            },
+            "description": "An agent assertion is not executable evidence."
+          }
+        ]
+      }
+    }
+  ]
+}
