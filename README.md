@@ -2,7 +2,7 @@
 
 A local, agent-operated system that maintains an annotated model of software intent, design, implementation mappings, and evidence. It closes the loop from human intent to implementation and back through explicit refinement, computable checks, and scoped review.
 
-The full vision and architecture is in [docs/vision-and-architecture.md](docs/vision-and-architecture.md). This repository is its implementation, built in the milestone order that document prescribes (section 21). Current state: **milestone 1 seed complete** (see [docs/milestones.md](docs/milestones.md)).
+The full vision and architecture is in [docs/vision-and-architecture.md](docs/vision-and-architecture.md). This repository is its implementation, built in the milestone order that document prescribes (section 21). Current state: **milestone 2 complete** (see [docs/milestones.md](docs/milestones.md)).
 
 ## What exists today
 
@@ -13,6 +13,8 @@ The full vision and architecture is in [docs/vision-and-architecture.md](docs/vi
 - Revision-bound patches: stale bases are rejected with the IDs changed since the base; a repeated patch ID with identical content replays idempotently; the same ID with different content is an error; invalid candidates are never written.
 - Structural checks: identity, kind, layer, property schema, endpoint existence and kind, reference integrity across properties and expressions, containment cycles, `intent-expr/0.1` expression shape.
 - A basic lens (focus plus explicit traversal, mandatory global rules, boundary reporting, honest truncation/overflow), search, and record inspection.
+- An impact slice: from changed ids, traverse each relation in its declared impact direction plus property references, returning candidates with the path that reached them and an explicit "recorded reachability only" note.
+- Graph diffs: exact ids changed since a revision (from transaction summaries), or record-level differences against another snapshot file or a Git revision.
 - A CLI with stable JSON responses and the exit-code convention from section 12 (0 ok, 2 blockers, 3 invalid input or stale base, 4 execution failure).
 - An agent guide and an idempotent pointer installed into the workspace's existing `CLAUDE.md`/`AGENTS.md`.
 
@@ -38,6 +40,9 @@ intentgraph patch validate --file patch.json --json
 intentgraph patch apply --file patch.json --json
 intentgraph view --focus operation:cancel-response --include parent_intent constraints --json
 intentgraph search --text cancellation --json
+intentgraph impact --changed interface:response-events --json
+intentgraph diff --since 12 --json
+intentgraph diff --git HEAD~1 --json
 intentgraph check --json
 intentgraph rebuild --json
 ```
@@ -68,13 +73,13 @@ A complete worked example lives in `tests/fixtures/coaching-patch.json` (the int
 
 ```
 src/intentgraph/
-  model/        record envelope, canonical serialization, intent-expr validation
+  model/        record envelope, canonical serialization, intent-expr validation, snapshot diff
   vocabulary/   core kinds/relations (JSON) and the registry with extension loading
-  repository/   workspace layout, manifest, lock, atomic store
+  repository/   workspace layout, manifest, lock, atomic store, Git baselines
   graph/        NetworkX MultiDiGraph construction and reverse-reference index
   checks/       structural validation -> diagnostics
   patches/      patch model, validation, application, idempotency
-  lenses/       basic lens and search
+  lenses/       basic lens, impact slice, search
   services.py   application services shared by CLI (and a later MCP server)
   cli/          argparse front end, JSON envelope, exit codes
   playbooks/    agent guide and workspace pointer

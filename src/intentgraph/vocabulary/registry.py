@@ -57,6 +57,8 @@ class RelationDef(BaseModel):
     required_properties: list[str] = Field(default_factory=list)
     property_schema: dict[str, PropertySpec] = Field(default_factory=dict)
     acyclic: bool = False
+    # Which endpoint a change on the other endpoint may affect (see core/relations.json).
+    impact: Literal["incoming", "outgoing", "both", "none"] = "none"
     impact_rule: str = ""
     description: str = ""
     namespace: str | None = None

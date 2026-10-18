@@ -18,11 +18,15 @@ Exit criterion met: a fresh CLI process reconstructs and edits a small complete 
 
 Known limits: no caches yet (the cache directory exists and `rebuild` clears it); `status` reports gates as unsupported; evidence trust levels are recorded but not evaluated.
 
-## Milestone 2: self-model and agent views (in progress)
+## Milestone 2: self-model and agent views (done, 2026-10-18)
 
-Started: `.intentgraph/` in this repository models Intent Graph itself (goals, key decisions, persistence requirements, and the obligations that the later milestones must discharge), each with source references into the architecture document.
+Built: the self-model in `.intentgraph/` (goals, decisions, requirements, the twelve modules and their dependencies, global constraints, open questions, one obligation per remaining milestone, all with source references into the architecture document); the agent playbook with a resume procedure; `impact` (dependency slice driven by per-relation `impact` directions declared in the vocabulary, plus property references); `diff` (transaction-based ids since a revision; record-level diff against a snapshot file or a Git ref); explicit truncation, boundary and coverage reporting.
 
-Remaining: dependency slices beyond one explicit traversal, graph diffs between revisions, and a first real improvement planned and implemented with the seed's help, resumable from a fresh conversation.
+Self-use: the impact and diff commands were the "one real improvement" of section 21.5. The plan was recorded first (`patch:plan-m2-impact-diff`: two requirements, a design decision, a deferred question, a blocking obligation), the code was written against it, and the closing patch (`patch:close-m2-impact-diff`) added CodeSymbol records, a Mapping, an Evidence record from the test run, and marked the obligation satisfied. `tests/test_self_model.py` proves a fresh process can recover that context from the persisted files alone.
+
+Verified: the agent can find the intent behind persistence behavior (`view --focus component:repository --include parent_intent`), determine which elements depend on a changed interface (`impact --changed interface:response-events`), and update the model through targeted patches without loading every record; global constraints appear in every lens regardless of focus.
+
+Known limits: impact reports recorded reachability only; upward propagation from a refinement to its parent is deferred to readiness policy; diffs show which fields changed, not textual hunks.
 
 ## Milestones 3 to 6
 

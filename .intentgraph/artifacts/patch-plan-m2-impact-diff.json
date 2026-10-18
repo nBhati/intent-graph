@@ -1,0 +1,310 @@
+{
+  "patch_id": "patch:plan-m2-impact-diff",
+  "base_revision": 1,
+  "base_digest": "sha256:76dcdf9fa163e71c5e0bae0e44aea8158de8cd3e7808b04c0b7a7a3ef127174b",
+  "reason": "Plan the milestone 2 improvement (impact slice and graph diff) before implementing it.",
+  "operations": [
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:impact-slice",
+        "kind": "Requirement",
+        "label": "A dependency slice reports which recorded elements a change may affect",
+        "layer": "intent",
+        "description": "Starting from changed ids, traverse relations in their declared impact direction plus property references, and return candidates with the path that reached them.",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Reports recorded reachability only and says so; never claims exhaustive impact."
+        },
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#10"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "original_intent",
+            "text": "Impact analysis reports recorded reachability and plausible affected elements. It must not claim exhaustive impact when dependencies or mappings are incomplete.",
+            "refs": [
+              "doc:vision-and-architecture#10"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:graph-diff",
+        "kind": "Requirement",
+        "label": "Differences between two model revisions are reported at record level",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "Transaction summaries give ids since a revision; a second snapshot (file or Git ref) gives field-level changes."
+        },
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.5"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "original_intent",
+            "text": "Milestone 2 build list: graph diffs, and explicit truncation/boundary reporting.",
+            "refs": [
+              "doc:vision-and-architecture#21.5"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:impact-direction-per-relation",
+        "kind": "Decision",
+        "label": "Each relation declares its impact direction in the vocabulary",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "agent",
+          "rationale": "Keeps impact semantics in the versioned registry (data), not in Python branches; extensions can declare their own.",
+          "alternatives": [
+            "Hard-code a traversal table in the lens module",
+            "Treat every edge as bidirectional impact"
+          ]
+        },
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#5.5"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "assumption",
+            "text": "Agent-made design decision pending user review; recorded as proposed.",
+            "refs": []
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "question:impact-refines-upward",
+        "kind": "Question",
+        "label": "Should a refinement change propagate impact upward to its parent intent?",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "status": "deferred",
+          "blocking": false,
+          "answer": "Deferred: v0 propagates parent -> refinement only; upward coverage effects belong to readiness policy (milestone 3)."
+        },
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#6"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "obligation:impl-impact-and-diff",
+        "kind": "Obligation",
+        "label": "Implement impact and diff commands with tests, then map them to code",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {
+          "obligation_kind": "implementation",
+          "blocking": true,
+          "state": "pending",
+          "scope_refs": [
+            "req:impact-slice",
+            "req:graph-diff"
+          ],
+          "request": "Add `intentgraph impact` and `intentgraph diff`; cover with executable tests; record CodeSymbol mappings and an Evidence record from the test run.",
+          "required_evidence": "pytest run report",
+          "acceptable_resolution": [
+            "implementation_with_tests"
+          ]
+        },
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.5"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:impact-refines-loop",
+        "kind": "refines",
+        "source": "req:impact-slice",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#10"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:diff-refines-loop",
+        "kind": "refines",
+        "source": "req:graph-diff",
+        "target": "goal:intent-to-implementation-loop",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.5"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:impact-decision-concerns-vocab",
+        "kind": "concerns",
+        "source": "decision:impact-direction-per-relation",
+        "target": "component:vocabulary",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#5.5"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:impact-question-concerns-req",
+        "kind": "concerns",
+        "source": "question:impact-refines-upward",
+        "target": "req:impact-slice",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#6"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:lenses-realizes-impact",
+        "kind": "realizes",
+        "source": "component:lenses",
+        "target": "req:impact-slice",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:model-realizes-diff",
+        "kind": "realizes",
+        "source": "component:model",
+        "target": "req:graph-diff",
+        "layer": "intent",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#8.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:impl-obligation-concerns-lenses",
+        "kind": "concerns",
+        "source": "obligation:impl-impact-and-diff",
+        "target": "component:lenses",
+        "layer": "reconciliation",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "planning",
+          "source_refs": [
+            "doc:vision-and-architecture#21.5"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m2-self-model-and-lenses",
+      "changes": {
+        "state": "blocked",
+        "request": "Blocked on obligation:impl-impact-and-diff; then verify resumability from a fresh process."
+      }
+    }
+  ]
+}

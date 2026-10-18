@@ -81,6 +81,13 @@ def test_full_cli_round_trip(tmp_path: Path):
     out = run("show", "req:cancel-response", cwd=ws, expect=0)["data"]
     assert {r["id"] for r in out["referenced_by"]} >= {"mapping:cancel-controller", "evidence:late-response-test"}
 
+    out = run("impact", "--changed", "interface:response-events", "--depth", "1", cwd=ws, expect=0)["data"]
+    assert {c["id"] for c in out["candidates"]} >= {"component:playback-controller", "component:response-coordinator"}
+    out = run("diff", "--since", "0", cwd=ws, expect=0)["data"]
+    assert out["summary"]["added"] == 51
+    out = run("diff", "--git", "HEAD", cwd=ws, expect=4)
+    assert out["status"] == "error" and out["error"]["code"] == "git_failed"
+
     out = run("check", cwd=ws, expect=0)["data"]
     assert not out["blocking"]
     out = run("rebuild", cwd=ws, expect=0)["data"]

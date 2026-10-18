@@ -19,6 +19,8 @@ from .checks import Diagnostic, has_blocking, validate_snapshot
 from .errors import InvalidInput, ValidationFailed
 from .graph import build_index
 from .lenses import LensRequest, compute_lens, search_records
+from .lenses.impact import ImpactRequest, compute_impact
+from .model.diff import changes_since, diff_snapshots
 from .model import Snapshot
 from .patches import Patch, apply_patch, validate_patch
 from .playbooks import POINTER_BEGIN, POINTER_END, agent_guide_text, pointer_text
@@ -198,6 +200,37 @@ def view(ctx: Context, request: dict[str, Any]) -> dict[str, Any]:
 def search(ctx: Context, **filters: Any) -> dict[str, Any]:
     hits = search_records(ctx.snapshot, **filters)
     return {"revision": ctx.snapshot.revision, "count": len(hits), "records": hits}
+
+
+def impact(ctx: Context, request: dict[str, Any]) -> dict[str, Any]:
+    try:
+        req = ImpactRequest.model_validate(request)
+    except ValidationError as exc:
+        raise InvalidInput(f"invalid impact request: {exc.error_count()} error(s)", code="invalid_impact_request", details={"errors": json.loads(exc.json())}) from exc
+    index = build_index(ctx.snapshot, ctx.vocabulary)
+    return compute_impact(index, ctx.vocabulary, req).model_dump(mode="json")
+
+
+def diff(ctx: Context, *, since: int | None = None, file: Path | None = None, git_ref: str | None = None) -> dict[str, Any]:
+    """Exactly one of ``since`` (transaction-based), ``file`` (another snapshot) or ``git_ref`` (historical model)."""
+    chosen = [x for x in (since, file, git_ref) if x is not None]
+    if len(chosen) != 1:
+        raise InvalidInput("diff needs exactly one of --since REVISION, --file SNAPSHOT or --git REF", code="invalid_input")
+    if since is not None:
+        try:
+            data = changes_since(ctx.snapshot, since)
+        except ValueError as exc:
+            raise InvalidInput(str(exc), code="invalid_input") from exc
+        return {"mode": "transactions", **data}
+    if file is not None:
+        from .repository.store import load_snapshot_file
+
+        old = load_snapshot_file(Path(file))
+        return {"mode": "file", "baseline": str(file), **diff_snapshots(old, ctx.snapshot).model_dump(mode="json")}
+    from .repository.gitio import snapshot_at_ref
+
+    old = snapshot_at_ref(ctx.repo.paths, git_ref)  # type: ignore[arg-type]
+    return {"mode": "git", "baseline": git_ref, **diff_snapshots(old, ctx.snapshot).model_dump(mode="json")}
 
 
 def show_record(ctx: Context, record_id: str) -> dict[str, Any]:

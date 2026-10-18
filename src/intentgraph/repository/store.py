@@ -149,31 +149,7 @@ class Repository:
 
     # ---- snapshot ------------------------------------------------------------
     def load_snapshot(self, *, verify_digest: bool = True) -> Snapshot:
-        try:
-            raw = self.paths.model.read_text(encoding="utf-8")
-        except OSError as exc:
-            raise CorruptSnapshot(f"cannot read snapshot {self.paths.model}: {exc}") from exc
-        try:
-            data = json.loads(raw)
-        except ValueError as exc:
-            raise CorruptSnapshot(f"snapshot {self.paths.model} is not valid JSON: {exc}") from exc
-        if not isinstance(data, dict):
-            raise CorruptSnapshot("snapshot must be a JSON object")
-        fmt = data.get("format_version")
-        if fmt not in SUPPORTED_FORMAT_VERSIONS:
-            raise IncompatibleWorkspace(f"snapshot format {fmt!r} is not supported by tool {TOOL_VERSION}; an explicit migration is required", details={"format_version": fmt})
-        try:
-            snapshot = Snapshot.model_validate(data)
-        except ValidationError as exc:
-            raise CorruptSnapshot(f"snapshot records do not match the record envelope: {exc.error_count()} error(s)", details={"errors": json.loads(exc.json())[:20]}) from exc
-        if verify_digest:
-            expected = compute_digest(snapshot)
-            if snapshot.content_digest != expected:
-                raise CorruptSnapshot(
-                    "snapshot content digest does not match its content; the file was edited outside the tool or is partially written",
-                    details={"stored": snapshot.content_digest, "computed": expected},
-                )
-        return snapshot
+        return load_snapshot_file(self.paths.model, verify_digest=verify_digest)
 
     def write_snapshot(self, snapshot: Snapshot) -> Snapshot:
         """Serialize canonically (recomputing the digest) and atomically replace the file."""
@@ -199,6 +175,35 @@ class Repository:
                 child.unlink()
             removed += 1
         return removed
+
+
+def load_snapshot_file(path: Path, *, verify_digest: bool = True) -> Snapshot:
+    """Load and validate a snapshot file. Digest mismatches are reported, never repaired."""
+    try:
+        raw = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise CorruptSnapshot(f"cannot read snapshot {path}: {exc}") from exc
+    try:
+        data = json.loads(raw)
+    except ValueError as exc:
+        raise CorruptSnapshot(f"snapshot {path} is not valid JSON: {exc}") from exc
+    if not isinstance(data, dict):
+        raise CorruptSnapshot("snapshot must be a JSON object")
+    fmt = data.get("format_version")
+    if fmt not in SUPPORTED_FORMAT_VERSIONS:
+        raise IncompatibleWorkspace(f"snapshot format {fmt!r} is not supported by tool {TOOL_VERSION}; an explicit migration is required", details={"format_version": fmt})
+    try:
+        snapshot = Snapshot.model_validate(data)
+    except ValidationError as exc:
+        raise CorruptSnapshot(f"snapshot records do not match the record envelope: {exc.error_count()} error(s)", details={"errors": json.loads(exc.json())[:20]}) from exc
+    if verify_digest:
+        expected = compute_digest(snapshot)
+        if snapshot.content_digest != expected:
+            raise CorruptSnapshot(
+                "snapshot content digest does not match its content; the file was edited outside the tool or is partially written",
+                details={"stored": snapshot.content_digest, "computed": expected},
+            )
+    return snapshot
 
 
 def _slug(text: str) -> str:

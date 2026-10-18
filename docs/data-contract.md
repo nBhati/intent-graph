@@ -59,6 +59,12 @@ Canonical form: records sorted by id, keys sorted, UTF-8, non-finite numbers rej
 
 Rules: base revision and digest must match the current snapshot, else `stale_base` with `changed_ids`. A repeated `patch_id` with identical operations is an idempotent replay. The same id with different operations is `patch_id_conflict`. The candidate must pass structural validation or nothing is written. Application happens under the exclusive write lock after re-reading the snapshot.
 
+## Impact and diff
+
+`impact` request: `{"changed": [ids], "max_depth": 3, "relations": null | [kinds], "include_references": true, "max_candidates": 200}`. Each relation declares `impact` in the vocabulary: `incoming` (the source is affected when the target changes), `outgoing`, `both`, or `none`. Property references (`ref`/`ref_list`, expression `domain_ref`) always propagate from referent to referrer. The response lists candidates with `distance`, the `path` of steps (`via` is a relation kind or `property:<name>`), `reasons`, a `by_category` count, truncation, and a fixed `coverage_note` stating that only recorded reachability is reported.
+
+`diff` modes: `--since N` (exact ids from transaction summaries, with the patches responsible), `--file PATH` or `--git REF` (record-level: `added`, `removed`, `changed` with `fields_changed`, `properties_changed`, and `lifecycle: [old, new]`). A baseline snapshot is digest-verified like the live one. Git absence or a bad ref is reported with exit code 4 (`git_unavailable`, `git_failed`).
+
 ## CLI response envelope
 
 ```json
@@ -70,7 +76,7 @@ Exit codes: 0 ok, 2 completed with blockers (check/validate found errors, lens o
 
 Diagnostics are `{code, severity: error|warning, message, record_ids}`. Stable codes so far: `duplicate_id`, `duplicate_patch_id`, `vocabulary_version_mismatch`, `unknown_kind`, `unknown_relation`, `invalid_layer`, `invalid_property`, `invalid_expression`, `unsupported_expression_language`, `missing_endpoint`, `illegal_endpoint_kind`, `dangling_reference`, `containment_cycle`, `acyclic_relation_cycle`, `accepted_edge_to_superseded`, `id_exists`, `unknown_record`, `removed_accepted_record`.
 
-Error codes: `invalid_input`, `workspace_not_found`, `incompatible_workspace`, `stale_base`, `validation_failed`, `patch_id_conflict`, `invalid_patch`, `invalid_lens_request`, `unknown_record`, `unknown_kind`, `corrupt_snapshot`, `lock_timeout`, `not_supported`, `internal_error`.
+Error codes: `invalid_input`, `workspace_not_found`, `incompatible_workspace`, `stale_base`, `validation_failed`, `patch_id_conflict`, `invalid_patch`, `invalid_lens_request`, `unknown_record`, `unknown_kind`, `corrupt_snapshot`, `lock_timeout`, `not_supported`, `git_unavailable`, `git_failed`, `invalid_impact_request`, `internal_error`.
 
 ## Workspace layout
 

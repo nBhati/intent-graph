@@ -22,6 +22,8 @@ Relationships are edges with a direction (see `intentgraph vocabulary show <rela
 
 1. `intentgraph status --json`: current revision, digest, counts, open questions, outstanding work.
 2. Retrieve context with `intentgraph view --request lens.json --json` (focus ids plus traversal) or `intentgraph search --text ... --json`. Do not try to read the whole model.
+   - Before changing an element, run `intentgraph impact --changed <id> --json`: it lists the recorded elements the change may affect, with the path that reached each one. Absence means unknown, not unaffected.
+   - To see what changed since a revision or a Git ref: `intentgraph diff --since N --json`, `intentgraph diff --git HEAD~1 --json`, or `intentgraph diff --file old-model.json --json`.
 3. Write a patch file (see `intentgraph vocabulary show Requirement --json` for property schemas) with `base_revision` and `base_digest` from `status`.
 4. `intentgraph patch validate --file patch.json --json`, fix diagnostics, then `intentgraph patch apply --file patch.json --json`.
 5. On `stale_base`, re-read the changed ids the response lists and decide again; never force.
@@ -39,7 +41,15 @@ Patch ids are `patch:<slug>`. Re-applying the same patch id with the same conten
 - Evidence records keep their `collection_mode` (`agent_assertion`, `agent_submitted_report`, `validated_report`, `independent_capture`). An assertion is not a test result.
 - Never clear a blocking obligation by inventing a user approval.
 
-## Current capability (milestone 1 seed)
+## Resuming work in a fresh conversation
 
-Available: init, status, vocabulary, view, search, patch validate/apply, check, rebuild.
+1. `intentgraph status --json`: read `outstanding` (open questions, pending obligations, open findings).
+2. `intentgraph search --kind Obligation --lifecycle proposed --json`, then `intentgraph show <obligation id> --json` for its `request`, `scope_refs` and what it `concerns`.
+3. `intentgraph view --focus <scope ids> --include parent_intent constraints findings --json` for the surrounding intent and rules.
+4. `intentgraph diff --git <last known ref> --json` to see what the model gained since you last looked.
+5. Continue from the obligation; when done, patch its `state` to `satisfied` and add Mapping/Evidence records that say how.
+
+## Current capability (milestone 2)
+
+Available: init, status, vocabulary, view, search, show, impact, diff, patch validate/apply, check, rebuild.
 Not yet available: readiness policies, obligations engine, evidence ingestion, reconciliation, review export, approvals. Record such work manually as Obligation / Finding / Evidence nodes and note the manual step in provenance.

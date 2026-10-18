@@ -61,6 +61,19 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--lifecycle", default=None)
     s.add_argument("--limit", type=int, default=50)
 
+    s = sub.add_parser("impact", parents=[common], help="dependency slice: recorded elements a change may affect")
+    s.add_argument("--changed", nargs="+", required=True, help="changed record ids (nodes or edges)")
+    s.add_argument("--depth", type=int, default=3)
+    s.add_argument("--relations", nargs="*", default=None, help="restrict traversal to these relation kinds")
+    s.add_argument("--no-references", action="store_true", help="do not follow property references")
+    s.add_argument("--max-candidates", type=int, default=200)
+
+    s = sub.add_parser("diff", parents=[common], help="changes between model revisions")
+    g = s.add_mutually_exclusive_group(required=True)
+    g.add_argument("--since", type=int, help="ids changed after this revision (from transaction summaries)")
+    g.add_argument("--file", type=Path, help="another snapshot file as the baseline")
+    g.add_argument("--git", metavar="REF", help="the model at this Git revision as the baseline")
+
     s = sub.add_parser("show", parents=[common], help="one record with its edges and referrers")
     s.add_argument("id")
 
@@ -124,6 +137,13 @@ def run(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
         return EXIT_OK, services.search(ctx, text=args.text, kind=args.kind, layer=args.layer, lifecycle=args.lifecycle, limit=args.limit)
     if cmd == "show":
         return EXIT_OK, services.show_record(ctx, args.id)
+    if cmd == "impact":
+        request: dict[str, Any] = {"changed": args.changed, "max_depth": args.depth, "include_references": not args.no_references, "max_candidates": args.max_candidates}
+        if args.relations is not None:
+            request["relations"] = args.relations
+        return EXIT_OK, services.impact(ctx, request)
+    if cmd == "diff":
+        return EXIT_OK, services.diff(ctx, since=args.since, file=args.file, git_ref=args.git)
     if cmd == "patch" and args.patch_command == "validate":
         patch = services.load_patch(_read_json_file(args.file))
         data = services.patch_validate(ctx, patch)
@@ -164,6 +184,28 @@ def _human(command: str, data: dict[str, Any]) -> str:
             lines.append(f"  {e['source']} -{e['kind']}-> {e['target']}")
         if data["message"]:
             lines.append(data["message"])
+    elif command == "impact":
+        lines.append(f"impact of {data['changed']} at revision {data['source_revision']}: {len(data['candidates'])} candidate(s) {data['by_category']}")
+        for c in data["candidates"]:
+            via = " <- ".join(f"{s['via']}" for s in reversed(c["path"]))
+            lines.append(f"  d{c['distance']} {c['id']}  [{c['kind']}/{c['lifecycle']}]  {c['label']}   via {via}")
+        if data["truncated"]:
+            lines.append(f"truncated: {data['omitted_count']} more reachable record(s) omitted")
+        lines.append(data["coverage_note"])
+    elif command == "diff":
+        if data["mode"] == "transactions":
+            lines.append(f"revisions {data['from_revision']} -> {data['to_revision']}: {data['summary']} across {len(data['transactions'])} transaction(s)")
+            for name in ("added_ids", "updated_ids", "removed_ids"):
+                for i in data[name]:
+                    lines.append(f"  {name[0]} {i}")
+        else:
+            lines.append(f"{data['mode']} baseline {data['baseline']} (rev {data['from_revision']}) -> rev {data['to_revision']}: {data['summary']}")
+            for r in data["added"]:
+                lines.append(f"  + {r['id']}  [{r['kind']}]  {r['label']}")
+            for r in data["removed"]:
+                lines.append(f"  - {r['id']}  [{r['kind']}]  {r['label']}")
+            for r in data["changed"]:
+                lines.append(f"  ~ {r['id']}  [{r['kind']}]  fields {r['fields_changed']} properties {r['properties_changed']}" + (f" lifecycle {r['lifecycle'][0]}->{r['lifecycle'][1]}" if r["lifecycle"] else ""))
     elif command == "patch":
         if "applied" in data:
             lines.append(f"applied {data['patch_id']} -> revision {data['revision']}{' (idempotent replay)' if data['idempotent_replay'] else ''}")

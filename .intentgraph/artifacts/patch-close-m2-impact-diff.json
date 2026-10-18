@@ -1,0 +1,393 @@
+{
+  "patch_id": "patch:close-m2-impact-diff",
+  "base_revision": 2,
+  "base_digest": "sha256:a40fec2bbc129cf3e14a8734fc52045f50169bf9ea07ca0c00cd234c12f4bbbd",
+  "reason": "Close the milestone 2 improvement: map impact/diff to code, record test evidence, satisfy the obligations.",
+  "operations": [
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:lenses-impact",
+        "kind": "CodeSymbol",
+        "label": "compute_impact",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/lenses/impact.py",
+          "language": "python",
+          "symbol": "compute_impact",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/lenses/impact.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:model-diff",
+        "kind": "CodeSymbol",
+        "label": "diff_snapshots",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/model/diff.py",
+          "language": "python",
+          "symbol": "diff_snapshots",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/model/diff.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:model-changes-since",
+        "kind": "CodeSymbol",
+        "label": "changes_since",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/model/diff.py",
+          "language": "python",
+          "symbol": "changes_since",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/model/diff.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:repository-gitio",
+        "kind": "CodeSymbol",
+        "label": "snapshot_at_ref",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "src/intentgraph/repository/gitio.py",
+          "language": "python",
+          "symbol": "snapshot_at_ref",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "git:working-tree-2026-10-18",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:src/intentgraph/repository/gitio.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:impact-changed-interface",
+        "kind": "TestCase",
+        "label": "test_changed_interface_reaches_dependents_and_exposer",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_impact.py",
+          "test_id": "test_changed_interface_reaches_dependents_and_exposer",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_impact.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:diff-git-ref",
+        "kind": "TestCase",
+        "label": "test_diff_against_git_ref",
+        "layer": "observation",
+        "lifecycle": "accepted",
+        "properties": {
+          "repository": ".",
+          "path": "tests/test_diff.py",
+          "test_id": "test_diff_against_git_ref",
+          "runner": "pytest"
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-review",
+          "source_refs": [
+            "file:tests/test_diff.py"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:impact-command",
+        "kind": "Mapping",
+        "label": "lenses.impact realizes the impact slice",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:impact-slice"
+          ],
+          "implementation_refs": [
+            "symbol:lenses-impact",
+            "test:impact-changed-interface"
+          ],
+          "mapping_kind": "implements",
+          "evidence_refs": [
+            "evidence:m2-test-suite"
+          ],
+          "remaining_gaps": [
+            "Impact directions for extension relations default to none unless declared."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m2-impact-diff"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:diff-command",
+        "kind": "Mapping",
+        "label": "model.diff and repository.gitio realize graph diffs",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "model_refs": [
+            "req:graph-diff"
+          ],
+          "implementation_refs": [
+            "symbol:model-diff",
+            "symbol:model-changes-since",
+            "symbol:repository-gitio",
+            "test:diff-git-ref"
+          ],
+          "mapping_kind": "implements",
+          "evidence_refs": [
+            "evidence:m2-test-suite"
+          ],
+          "remaining_gaps": [
+            "Field-level diff names changed fields; it does not render textual hunks."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "patch:close-m2-impact-diff"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "evidence:m2-test-suite",
+        "kind": "Evidence",
+        "label": "Milestone 2 test run: 53 passed",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "properties": {
+          "method": "unit_and_subprocess_tests",
+          "result": "passed",
+          "collection_mode": "agent_submitted_report",
+          "tool": "pytest",
+          "supports": [
+            "req:impact-slice",
+            "req:graph-diff",
+            "obligation:impl-impact-and-diff"
+          ],
+          "test_refs": [
+            "test:impact-changed-interface",
+            "test:diff-git-ref"
+          ],
+          "submitted_by": "coding-agent",
+          "limitations": [
+            "Agent-reported run; not independently captured by the tool (evidence ingestion arrives in milestone 4)."
+          ]
+        },
+        "provenance": {
+          "author_role": "agent",
+          "method": "test-run-report",
+          "source_refs": [
+            "patch:close-m2-impact-diff"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:m2-evidence-supports-impact",
+        "kind": "supports",
+        "source": "evidence:m2-test-suite",
+        "target": "req:impact-slice",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": []
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:m2-evidence-supports-diff",
+        "kind": "supports",
+        "source": "evidence:m2-test-suite",
+        "target": "req:graph-diff",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": []
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:m2-evidence-supports-obligation",
+        "kind": "supports",
+        "source": "evidence:m2-test-suite",
+        "target": "obligation:impl-impact-and-diff",
+        "layer": "reconciliation",
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": []
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:impl-impact-and-diff",
+      "changes": {
+        "state": "satisfied"
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "obligation:impl-impact-and-diff",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "add_annotation",
+      "id": "obligation:impl-impact-and-diff",
+      "annotation": {
+        "role": "explanation",
+        "text": "Satisfied by mapping:impact-command and mapping:diff-command with evidence:m2-test-suite. Readiness was reviewed manually; the obligation engine does not exist yet.",
+        "refs": [
+          "mapping:impact-command",
+          "mapping:diff-command"
+        ]
+      }
+    },
+    {
+      "op": "update_properties",
+      "id": "obligation:m2-self-model-and-lenses",
+      "changes": {
+        "state": "satisfied",
+        "request": "Satisfied: self-model, playbook, search, impact slice, diffs, truncation/boundary reporting; resumability proven by tests/test_self_model.py."
+      }
+    },
+    {
+      "op": "update_fields",
+      "id": "obligation:m2-self-model-and-lenses",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:impact-slice",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "req:graph-diff",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:impact-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:diff-refines-loop",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:lenses-realizes-impact",
+      "lifecycle": "accepted"
+    },
+    {
+      "op": "update_fields",
+      "id": "edge:model-realizes-diff",
+      "lifecycle": "accepted"
+    }
+  ]
+}
