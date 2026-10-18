@@ -1,0 +1,28 @@
+[project]
+name = "intentgraph"
+version = "0.0.1"
+description = "A local, agent-operated annotated graph of software intent, design, implementation mappings, and evidence."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Narayan Singh Bhati", email = "narayansinghbhati@gmail.com" }]
+dependencies = [
+    "pydantic>=2.7,<3",
+    "networkx>=3.2,<4",
+]
+
+[project.scripts]
+intentgraph = "intentgraph.cli.main:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/intentgraph"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

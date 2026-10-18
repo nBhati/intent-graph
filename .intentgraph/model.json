@@ -1,0 +1,2738 @@
+{
+  "content_digest": "sha256:76dcdf9fa163e71c5e0bae0e44aea8158de8cd3e7808b04c0b7a7a3ef127174b",
+  "edges": [
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:acyclic-only-where-declared-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:acyclic-only-where-declared",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:assumption-concerns-snapshot-decision",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "assumption:single-snapshot-sufficient-v0",
+      "target": "decision:single-snapshot-v0"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:atomic-replace-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:atomic-replace",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:canonical-digest-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:canonical-digest",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:checks-depends-graph",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:checks",
+      "target": "component:graph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:checks-depends-vocabulary",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:checks",
+      "target": "component:vocabulary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:checks-realizes-acyclic-only-where-declared",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:checks",
+      "target": "req:acyclic-only-where-declared"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-depends-services",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:cli",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:cli-realizes-exit-code-convention",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:cli",
+      "target": "req:exit-code-convention"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:constraint-data-targets-model",
+      "kind": "constrains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#23"
+        ]
+      },
+      "source": "constraint:records-are-data",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:constraint-no-state-targets-services",
+      "kind": "constrains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.4"
+        ]
+      },
+      "source": "constraint:no-hidden-state-between-calls",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-cli-concerns-cli",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:cli-first",
+      "target": "component:cli"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-graph-concerns-loop",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:annotated-graph-central",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-selfuse-concerns-system",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      },
+      "source": "decision:self-use-development",
+      "target": "system:intentgraph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-snapshot-concerns-repo",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:single-snapshot-v0",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-stack-concerns-model",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:python-networkx-pydantic",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:decision-tools-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      },
+      "source": "decision:agent-runs-language-tools",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:exit-code-convention-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:exit-code-convention",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:finding-challenges-status",
+      "kind": "challenges",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      },
+      "source": "finding:gates-unsupported",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:fresh-process-reconstruction-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:fresh-process-reconstruction",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:graph-depends-model",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:graph",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:idempotent-patch-ids-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:idempotent-patch-ids",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:lens-never-drops-mandatory-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:lens-never-drops-mandatory",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:lenses-depends-graph",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:lenses",
+      "target": "component:graph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:lenses-realizes-lens-never-drops-mandatory",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:lenses",
+      "target": "req:lens-never-drops-mandatory"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-atomic-replace",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:atomic-replace"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-canonical-digest",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:canonical-digest"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-fresh-process-reconstruction",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-idempotent-patch-ids",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:idempotent-patch-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m1-evidence-supports-stale-base-rejected",
+      "kind": "supports",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      },
+      "source": "evidence:m1-test-suite",
+      "target": "req:stale-base-rejected"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m2-concerns-lenses",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      },
+      "source": "obligation:m2-self-model-and-lenses",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m3-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      },
+      "source": "obligation:m3-readiness",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m4-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.7"
+        ]
+      },
+      "source": "obligation:m4-evidence-reconciliation",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:m5-concerns-system",
+      "kind": "concerns",
+      "label": "",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      },
+      "source": "obligation:m5-installable",
+      "target": "system:intentgraph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:mixed-precision-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:mixed-precision",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:model-realizes-canonical-digest",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:model",
+      "target": "req:canonical-digest"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:model-realizes-no-code-execution-from-data",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:model",
+      "target": "req:no-code-execution-from-data"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:model-realizes-stable-ids",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:model",
+      "target": "req:stable-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:no-code-execution-from-data-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:no-code-execution-from-data",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:no-self-approval-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:no-self-approval",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:no-universal-verified-flag-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:no-universal-verified-flag",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:obligations-depends-checks",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:obligations",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:observation-never-overwrites-intent-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:observation-never-overwrites-intent",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:patches-depends-checks",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:patches",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:patches-realizes-idempotent-patch-ids",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:patches",
+      "target": "req:idempotent-patch-ids"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:patches-realizes-stale-base-rejected",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:patches",
+      "target": "req:stale-base-rejected"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:question-readiness-concerns-obligations",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:readiness-default-obligations",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:question-scale-concerns-repo",
+      "kind": "concerns",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      },
+      "source": "question:single-snapshot-scale",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:reports-depends-lenses",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:reports",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-depends-model",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-depends-vocabulary",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "component:vocabulary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-atomic-replace",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:atomic-replace"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:repository-realizes-fresh-process-reconstruction",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:repository",
+      "target": "req:fresh-process-reconstruction"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-checks",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-lenses",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-patches",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:patches"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:services-depends-repository",
+      "kind": "depends_on",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "dependency_kind": "build"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:services",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:stable-ids-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:stable-ids",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:stale-base-rejected-refines-local",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      },
+      "source": "req:stale-base-rejected",
+      "target": "goal:agent-operated-local-tool"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-checks",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:checks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-cli",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:cli"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-graph",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:graph"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-lenses",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:lenses"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-model",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:model"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-obligations",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:obligations"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-patches",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:patches"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-playbooks",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:playbooks"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-reports",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:reports"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-repository",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:repository"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-services",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:services"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:system-contains-vocabulary",
+      "kind": "contains",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "system:intentgraph",
+      "target": "component:vocabulary"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:unknown-kinds-not-silently-known-refines-loop",
+      "kind": "refines",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      },
+      "source": "req:unknown-kinds-not-silently-known",
+      "target": "goal:intent-to-implementation-loop"
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "edge:vocabulary-realizes-unknown-kinds-not-silently-known",
+      "kind": "realizes",
+      "label": "",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      },
+      "source": "component:vocabulary",
+      "target": "req:unknown-kinds-not-silently-known"
+    }
+  ],
+  "format_version": "0.1",
+  "nodes": [
+    {
+      "annotations": [],
+      "description": "",
+      "id": "assumption:single-snapshot-sufficient-v0",
+      "kind": "Assumption",
+      "label": "One canonical JSON snapshot is sufficient for v0 project sizes",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "impact": "Sharding needs a defined transaction model before introduction.",
+        "status": "unverified"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:checks",
+      "kind": "Component",
+      "label": "checks",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Structural validation and computable findings",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:cli",
+      "kind": "Component",
+      "label": "cli",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Stable machine interface and human-readable output",
+        "role": "other",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:graph",
+      "kind": "Component",
+      "label": "graph",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "NetworkX construction and reverse-reference indexes",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:lenses",
+      "kind": "Component",
+      "label": "lenses",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Filtering, dependency slicing, abstraction, context assembly",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:model",
+      "kind": "Component",
+      "label": "model",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Record types, ids, enums, expression shapes, snapshot model",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:obligations",
+      "kind": "Component",
+      "label": "obligations",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Policy applicability, evidence freshness, readiness evaluation",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:patches",
+      "kind": "Component",
+      "label": "patches",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Transaction validation, optimistic concurrency, atomic application",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:playbooks",
+      "kind": "Component",
+      "label": "playbooks",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Agent instructions, examples, external-tool recipes",
+        "role": "other",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:reports",
+      "kind": "Component",
+      "label": "reports",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Structured review packets and renderable exports",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:repository",
+      "kind": "Component",
+      "label": "repository",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Read/write, canonical serialization, revisions, locking, migrations",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:services",
+      "kind": "Component",
+      "label": "services",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Application services shared by every interface; one invocation loads everything fresh",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "component:vocabulary",
+      "kind": "Component",
+      "label": "vocabulary",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "responsibility": "Kind schemas, relation endpoint rules, extension resolution",
+        "role": "module",
+        "technology": "python"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Optional caches are keyed by snapshot digest, vocabulary version and tool version; a cache miss affects performance only.",
+      "id": "constraint:no-hidden-state-between-calls",
+      "kind": "Constraint",
+      "label": "No memory from a previous CLI call is required for correctness",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "constraint_kind": "invariant",
+        "scope": "global"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "constraint:records-are-data",
+      "kind": "Constraint",
+      "label": "Records and tool output are data, never executed",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "constraint_kind": "permission",
+        "scope": "global"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#23"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:agent-runs-language-tools",
+      "kind": "Decision",
+      "label": "The existing agent runs language-specific analyzers; the core stays small",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Native adapters for every language"
+        ],
+        "decided_by": "user",
+        "rationale": "Avoids building a large analyzer platform before proving value."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:annotated-graph-central",
+      "kind": "Decision",
+      "label": "Annotated graph is the central model",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Flat documents",
+          "Relational tables"
+        ],
+        "decided_by": "user",
+        "rationale": "Supports decomposition, cross-links, queries and mixed precision."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:cli-first",
+      "kind": "Decision",
+      "label": "CLI first; MCP optional and later",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "MCP server first"
+        ],
+        "decided_by": "user",
+        "rationale": "Existing coding agents can invoke terminal commands; both interfaces must share application services."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:python-networkx-pydantic",
+      "kind": "Decision",
+      "label": "Python package; Pydantic records; NetworkX in memory as an index only",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Graph database",
+          "Pickled NetworkX objects"
+        ],
+        "decided_by": "user",
+        "rationale": "Simple local implementation; typed records stay independent of the graph library so storage details do not define semantics."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:self-use-development",
+      "kind": "Decision",
+      "label": "Seed, progressive self-use, then external A/B evaluation",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Full build before any use",
+          "Evaluate before end-to-end loop exists"
+        ],
+        "decided_by": "user",
+        "rationale": "A capability cannot be mandatory for building its first implementation; record limitations rather than fabricate checks."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "decision:single-snapshot-v0",
+      "kind": "Decision",
+      "label": "One canonical snapshot with transactions inside it; no daemon",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "alternatives": [
+          "Sharded files",
+          "Event-sourced log",
+          "Always-running process"
+        ],
+        "decided_by": "user",
+        "rationale": "Atomic writes and straightforward recovery before sharding; graph state and transaction accounting cannot diverge."
+      },
+      "provenance": {
+        "author_role": "user",
+        "method": "design-discussion",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "evidence:m1-test-suite",
+      "kind": "Evidence",
+      "label": "Milestone 1 guarantees covered by tests/ (43 tests passing)",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "collection_mode": "agent_submitted_report",
+        "limitations": [
+          "Agent-reported run, not independently captured by the tool.",
+          "Windows lock path not exercised."
+        ],
+        "method": "unit_and_subprocess_tests",
+        "result": "passed",
+        "submitted_by": "coding-agent",
+        "supports": [
+          "req:canonical-digest",
+          "req:atomic-replace",
+          "req:stale-base-rejected",
+          "req:idempotent-patch-ids",
+          "req:fresh-process-reconstruction",
+          "req:acyclic-only-where-declared",
+          "req:lens-never-drops-mandatory",
+          "req:exit-code-convention",
+          "req:no-code-execution-from-data"
+        ],
+        "tool": "pytest"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "test-run-report",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "finding:gates-unsupported",
+      "kind": "Finding",
+      "label": "status reports gates as unsupported until milestone 3",
+      "layer": "reconciliation",
+      "lifecycle": "accepted",
+      "properties": {
+        "detail": "Recorded temporary manual step: outstanding work is reviewed by hand; do not represent an unavailable check as passed.",
+        "finding_kind": "capability_gap",
+        "related_refs": [
+          "component:obligations",
+          "obligation:m3-readiness"
+        ],
+        "severity": "info",
+        "state": "open"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "No owned LLM, no chat service, no daemon, no graph database, no account for the base workflow.",
+      "id": "goal:agent-operated-local-tool",
+      "kind": "Goal",
+      "label": "Operate as a lightweight local package used by an existing coding assistant",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "user",
+        "method": "authored-document",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      }
+    },
+    {
+      "annotations": [
+        {
+          "refs": [
+            "doc:vision-and-architecture#1.1"
+          ],
+          "role": "original_intent",
+          "text": "The purpose is to preserve the connection between what a person wants and what software actually does as both evolve."
+        },
+        {
+          "refs": [
+            "doc:vision-and-architecture#1.3"
+          ],
+          "role": "assumption",
+          "text": "Token savings, reduced defects and faster development are hypotheses to evaluate, not established claims."
+        }
+      ],
+      "description": "Make intent, interpretation, design choices and implementation evidence explicit and connected, as both evolve.",
+      "id": "goal:intent-to-implementation-loop",
+      "kind": "Goal",
+      "label": "Preserve the connection between what a person wants and what software does",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "user",
+        "method": "authored-document",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m2-self-model-and-lenses",
+      "kind": "Obligation",
+      "label": "Milestone 2: self-model, search, dependency slices, graph diffs, truncation reporting",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "Plan and implement one real package improvement with the seed's help; resume it from a fresh conversation using persisted context.",
+        "required_evidence": "independent executable tests plus manual review",
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.5"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m3-readiness",
+      "kind": "Obligation",
+      "label": "Milestone 3: scopes, versioned readiness policies, obligations engine, review packets, approvals",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "Implement the internal check/refine/check loop before user confirmation; approval must not invalidate its own design digest.",
+        "required_evidence": "independent executable tests plus manual review",
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m4-evidence-reconciliation",
+      "kind": "Obligation",
+      "label": "Milestone 4: evidence ingestion, workspace snapshots, freshness rules, reconciliation command, CI entry point",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "Modify code without touching the model and confirm stale or unresolved evidence appears after a fresh process starts.",
+        "required_evidence": "independent executable tests plus manual review",
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.7"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m5-installable",
+      "kind": "Obligation",
+      "label": "Milestone 5: bundled executable, explicit migrations, recovery, worked examples",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": true,
+        "obligation_kind": "milestone_capability",
+        "request": "On a clean machine without Python, initialize, patch, restart, query, evaluate readiness, import evidence, reconcile.",
+        "required_evidence": "independent executable tests plus manual review",
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.8"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "obligation:m6-ab-evaluation",
+      "kind": "Obligation",
+      "label": "Milestone 6: external A/B evaluation on bounded real tasks",
+      "layer": "reconciliation",
+      "lifecycle": "proposed",
+      "properties": {
+        "acceptable_resolution": [
+          "implementation_with_tests"
+        ],
+        "blocking": false,
+        "obligation_kind": "milestone_capability",
+        "request": "Measure requirement misses, regressions, reviewer corrections, drift-finding usefulness, time, cost, maintenance effort.",
+        "required_evidence": "independent executable tests plus manual review",
+        "state": "pending"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "manual-planning",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#21.9"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:readiness-default-obligations",
+      "kind": "Question",
+      "label": "Which readiness obligations are mandatory by default versus project-specific?",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {
+        "blocking": false,
+        "status": "open"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "question:single-snapshot-scale",
+      "kind": "Question",
+      "label": "Does a single snapshot remain practical at the first target project size?",
+      "layer": "intent",
+      "lifecycle": "proposed",
+      "properties": {
+        "blocking": false,
+        "status": "open"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#24"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Calls, transitions and dependencies may legally cycle.",
+      "id": "req:acyclic-only-where-declared",
+      "kind": "Requirement",
+      "label": "Only relations with explicit acyclicity semantics are checked for cycles",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:atomic-replace",
+      "kind": "Requirement",
+      "label": "Snapshot writes are atomic and interrupted writes leave a readable snapshot",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Sorted records and keys, UTF-8, non-finite numbers rejected, fixed newline handling, digest field excluded.",
+      "id": "req:canonical-digest",
+      "kind": "Requirement",
+      "label": "A single routine computes the content digest over the canonical payload",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "0 ok, 2 blockers, 3 invalid input or stale revision, 4 unavailable dependency or internal failure; JSON carries the precise status.",
+      "id": "req:exit-code-convention",
+      "kind": "Requirement",
+      "label": "Execution failure is distinguished from a completed check that found problems",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Caches are disposable and affect performance only.",
+      "id": "req:fresh-process-reconstruction",
+      "kind": "Requirement",
+      "label": "A fresh process reconstructs the complete working graph from persisted files",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:idempotent-patch-ids",
+      "kind": "Requirement",
+      "label": "Repeated patch ids with identical content replay safely; different content is an error",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#12.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:lens-never-drops-mandatory",
+      "kind": "Requirement",
+      "label": "A lens never silently discards a mandatory constraint; it reports overflow or truncation",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#10"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "A goal may be a paragraph; a rule may gain a formal expression; links say how one interprets or supports another.",
+      "id": "req:mixed-precision",
+      "kind": "Requirement",
+      "label": "Representations of different precision coexist with explicit links",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:no-code-execution-from-data",
+      "kind": "Requirement",
+      "label": "Graph text and expressions are data; no eval, source or shell is accepted as an expression",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#7.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:no-self-approval",
+      "kind": "Requirement",
+      "label": "An agent must not invent user approval to clear a blocker; readiness must not modify its own policy",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#13.1"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Avoid a universal verified property; evidence is scoped, with method and freshness.",
+      "id": "req:no-universal-verified-flag",
+      "kind": "Requirement",
+      "label": "Acceptance, formalization and verification are separate dimensions",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "Conflicting intended and observed behavior both remain represented until resolved.",
+      "id": "req:observation-never-overwrites-intent",
+      "kind": "Requirement",
+      "label": "An observation must not silently overwrite a requirement",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#4.3"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:stable-ids",
+      "kind": "Requirement",
+      "label": "Record identity is stable and never derived from labels or paths",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.2"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "req:stale-base-rejected",
+      "kind": "Requirement",
+      "label": "A patch with a stale base is rejected with the changed ids, never silently rebased",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#9.4"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "A compatibility mode may preserve them, but readiness cannot assume their semantics were validated.",
+      "id": "req:unknown-kinds-not-silently-known",
+      "kind": "Requirement",
+      "label": "Unknown kinds are never silently interpreted as known ones",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {
+        "formalization": "descriptive",
+        "priority": "must"
+      },
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#5.6"
+        ]
+      }
+    },
+    {
+      "annotations": [],
+      "description": "",
+      "id": "system:intentgraph",
+      "kind": "System",
+      "label": "Intent Graph package",
+      "layer": "intent",
+      "lifecycle": "accepted",
+      "properties": {},
+      "provenance": {
+        "author_role": "agent",
+        "method": "document-interpretation",
+        "notes": "",
+        "source_refs": [
+          "doc:vision-and-architecture#8"
+        ]
+      }
+    }
+  ],
+  "policies": [],
+  "project_id": "project:intentgraph",
+  "revision": 1,
+  "transactions": [
+    {
+      "added_ids": [
+        "assumption:single-snapshot-sufficient-v0",
+        "component:checks",
+        "component:cli",
+        "component:graph",
+        "component:lenses",
+        "component:model",
+        "component:obligations",
+        "component:patches",
+        "component:playbooks",
+        "component:reports",
+        "component:repository",
+        "component:services",
+        "component:vocabulary",
+        "constraint:no-hidden-state-between-calls",
+        "constraint:records-are-data",
+        "decision:agent-runs-language-tools",
+        "decision:annotated-graph-central",
+        "decision:cli-first",
+        "decision:python-networkx-pydantic",
+        "decision:self-use-development",
+        "decision:single-snapshot-v0",
+        "edge:acyclic-only-where-declared-refines-loop",
+        "edge:assumption-concerns-snapshot-decision",
+        "edge:atomic-replace-refines-local",
+        "edge:canonical-digest-refines-local",
+        "edge:checks-depends-graph",
+        "edge:checks-depends-vocabulary",
+        "edge:checks-realizes-acyclic-only-where-declared",
+        "edge:cli-depends-services",
+        "edge:cli-realizes-exit-code-convention",
+        "edge:constraint-data-targets-model",
+        "edge:constraint-no-state-targets-services",
+        "edge:decision-cli-concerns-cli",
+        "edge:decision-graph-concerns-loop",
+        "edge:decision-selfuse-concerns-system",
+        "edge:decision-snapshot-concerns-repo",
+        "edge:decision-stack-concerns-model",
+        "edge:decision-tools-concerns-obligations",
+        "edge:exit-code-convention-refines-local",
+        "edge:finding-challenges-status",
+        "edge:fresh-process-reconstruction-refines-local",
+        "edge:graph-depends-model",
+        "edge:idempotent-patch-ids-refines-local",
+        "edge:lens-never-drops-mandatory-refines-loop",
+        "edge:lenses-depends-graph",
+        "edge:lenses-realizes-lens-never-drops-mandatory",
+        "edge:m1-evidence-supports-atomic-replace",
+        "edge:m1-evidence-supports-canonical-digest",
+        "edge:m1-evidence-supports-fresh-process-reconstruction",
+        "edge:m1-evidence-supports-idempotent-patch-ids",
+        "edge:m1-evidence-supports-stale-base-rejected",
+        "edge:m2-concerns-lenses",
+        "edge:m3-concerns-obligations",
+        "edge:m4-concerns-obligations",
+        "edge:m5-concerns-system",
+        "edge:mixed-precision-refines-loop",
+        "edge:model-realizes-canonical-digest",
+        "edge:model-realizes-no-code-execution-from-data",
+        "edge:model-realizes-stable-ids",
+        "edge:no-code-execution-from-data-refines-local",
+        "edge:no-self-approval-refines-loop",
+        "edge:no-universal-verified-flag-refines-loop",
+        "edge:obligations-depends-checks",
+        "edge:observation-never-overwrites-intent-refines-loop",
+        "edge:patches-depends-checks",
+        "edge:patches-realizes-idempotent-patch-ids",
+        "edge:patches-realizes-stale-base-rejected",
+        "edge:question-readiness-concerns-obligations",
+        "edge:question-scale-concerns-repo",
+        "edge:reports-depends-lenses",
+        "edge:repository-depends-model",
+        "edge:repository-depends-vocabulary",
+        "edge:repository-realizes-atomic-replace",
+        "edge:repository-realizes-fresh-process-reconstruction",
+        "edge:services-depends-checks",
+        "edge:services-depends-lenses",
+        "edge:services-depends-patches",
+        "edge:services-depends-repository",
+        "edge:stable-ids-refines-loop",
+        "edge:stale-base-rejected-refines-local",
+        "edge:system-contains-checks",
+        "edge:system-contains-cli",
+        "edge:system-contains-graph",
+        "edge:system-contains-lenses",
+        "edge:system-contains-model",
+        "edge:system-contains-obligations",
+        "edge:system-contains-patches",
+        "edge:system-contains-playbooks",
+        "edge:system-contains-reports",
+        "edge:system-contains-repository",
+        "edge:system-contains-services",
+        "edge:system-contains-vocabulary",
+        "edge:unknown-kinds-not-silently-known-refines-loop",
+        "edge:vocabulary-realizes-unknown-kinds-not-silently-known",
+        "evidence:m1-test-suite",
+        "finding:gates-unsupported",
+        "goal:agent-operated-local-tool",
+        "goal:intent-to-implementation-loop",
+        "obligation:m2-self-model-and-lenses",
+        "obligation:m3-readiness",
+        "obligation:m4-evidence-reconciliation",
+        "obligation:m5-installable",
+        "obligation:m6-ab-evaluation",
+        "question:readiness-default-obligations",
+        "question:single-snapshot-scale",
+        "req:acyclic-only-where-declared",
+        "req:atomic-replace",
+        "req:canonical-digest",
+        "req:exit-code-convention",
+        "req:fresh-process-reconstruction",
+        "req:idempotent-patch-ids",
+        "req:lens-never-drops-mandatory",
+        "req:mixed-precision",
+        "req:no-code-execution-from-data",
+        "req:no-self-approval",
+        "req:no-universal-verified-flag",
+        "req:observation-never-overwrites-intent",
+        "req:stable-ids",
+        "req:stale-base-rejected",
+        "req:unknown-kinds-not-silently-known",
+        "system:intentgraph"
+      ],
+      "applied_at": "2026-10-18T08:01:09Z",
+      "base_revision": 0,
+      "operations_digest": "sha256:6a5421a4631ddc9c099bb1e932b9ada4a44437ff5bc0c066f7f82fea8ce06986",
+      "patch_id": "patch:self-model-01",
+      "reason": "Milestone 2 start: record Intent Graph's own goals, decisions, requirements, components and milestone obligations from the architecture document.",
+      "removed_ids": [],
+      "result_revision": 1,
+      "updated_ids": []
+    }
+  ],
+  "vocabulary_version": "core/0.1"
+}

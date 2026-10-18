@@ -1,0 +1,12 @@
+{
+  "compat_unknown_kinds": false,
+  "created_at": "2026-10-18T07:59:15Z",
+  "created_by_tool_version": "0.0.1",
+  "format_version": "0.1",
+  "name": "Intent Graph",
+  "project_id": "project:intentgraph",
+  "roots": [
+    "."
+  ],
+  "vocabulary_version": "core/0.1"
+}

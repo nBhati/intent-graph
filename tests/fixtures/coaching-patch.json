@@ -1,0 +1,1288 @@
+{
+  "patch_id": "patch:coaching-fixture",
+  "base_revision": 0,
+  "base_digest": "<<EMPTY>>",
+  "reason": "Hand-authored fixture: interruptible coaching example (architecture sections 6.1, 7, 19).",
+  "operations": [
+    {
+      "op": "add_node",
+      "record": {
+        "id": "goal:interrupt-coach",
+        "kind": "Goal",
+        "label": "Learner can interrupt the coach",
+        "layer": "intent",
+        "description": "The learner must be able to interrupt the coach.",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "user",
+          "method": "conversation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "original_intent",
+            "text": "The learner must be able to interrupt the coach.",
+            "refs": []
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:stop-active-response",
+        "kind": "Requirement",
+        "label": "Learner can stop an active coaching response",
+        "layer": "intent",
+        "description": "The learner can stop an active coaching response. Whether this also cancels pending generation is unresolved.",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive"
+        },
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "interpretation",
+            "text": "Interpreted from the original goal; scope of 'stop' is still open.",
+            "refs": [
+              "question:cancel-scope"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "question:cancel-scope",
+        "kind": "Question",
+        "label": "Does interrupting cancel pending generation or only local playback?",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "status": "open",
+          "blocking": true
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": [
+          {
+            "role": "open_question",
+            "text": "Interrupting may mean stop playback only, or also cancel backend generation.",
+            "refs": []
+          }
+        ]
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "req:cancel-response",
+        "kind": "Requirement",
+        "label": "Cancelled responses do not restart speech",
+        "layer": "intent",
+        "description": "After cancellation is acknowledged, the same response must not begin or resume playback, even if its content arrives later.",
+        "properties": {
+          "priority": "must",
+          "formalization": "descriptive",
+          "acceptance_notes": "A newly requested response is a different response."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "scenario:interrupt-while-pending",
+        "kind": "Scenario",
+        "label": "Learner interrupts while a backend response is still pending",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "preconditions": [
+            "A coaching response has been requested and is pending"
+          ],
+          "steps": [
+            "Learner presses the interrupt control",
+            "Cancellation is acknowledged",
+            "Backend content for the cancelled response arrives late"
+          ],
+          "expected_outcome": "No playback starts for the cancelled response. A new, explicitly requested response may still play."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "decision:cancel-semantics",
+        "kind": "Decision",
+        "label": "Cancelled response must not restart speech when it arrives late",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "decided_by": "user",
+          "alternatives": [
+            "Allow late content to play if no newer response exists"
+          ],
+          "rationale": "Late speech after an interruption feels like the coach ignoring the learner."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "user",
+          "method": "conversation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "assumption:cancellation-is-monotonic",
+        "kind": "Assumption",
+        "label": "Once cancelled, a response stays cancelled",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "status": "unverified",
+          "impact": "If a response could be un-cancelled, the silence constraint would need a re-arm rule."
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "actor:learner",
+        "kind": "Actor",
+        "label": "Learner",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "actor_kind": "human"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "system:coaching-app",
+        "kind": "System",
+        "label": "Coaching application",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "component:playback-controller",
+        "kind": "Component",
+        "label": "Flutter playback controller",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "role": "frontend",
+          "technology": "flutter",
+          "responsibility": "Owns audio playback and the interrupt control"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "component:response-coordinator",
+        "kind": "Component",
+        "label": "Backend response coordinator",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "role": "backend",
+          "technology": "python",
+          "responsibility": "Tracks response identity and lifecycle"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "interface:response-events",
+        "kind": "Interface",
+        "label": "Response lifecycle events",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "protocol": "websocket"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:cancel-response",
+        "kind": "Operation",
+        "label": "Cancel a response by stable response identity",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "response_id": "ResponseId"
+          },
+          "outputs": {
+            "acknowledged": "boolean"
+          },
+          "failures": [
+            "unknown_response"
+          ],
+          "idempotent": true,
+          "mode": "sync"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:generate-response",
+        "kind": "Operation",
+        "label": "Generate a coaching response",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "prompt": "text"
+          },
+          "outputs": {
+            "response_id": "ResponseId"
+          },
+          "failures": [
+            "provider_unavailable"
+          ],
+          "mode": "async"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "operation:retry-generation",
+        "kind": "Operation",
+        "label": "Retry a failed generation",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "inputs": {
+            "response_id": "ResponseId"
+          },
+          "mode": "async"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "event:cancel-requested",
+        "kind": "Event",
+        "label": "Cancel requested",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "entity:response",
+        "kind": "Entity",
+        "label": "Response",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "fields": {
+            "id": "ResponseId",
+            "cancelled": "boolean",
+            "playing": "boolean"
+          }
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "state:response-pending",
+        "kind": "State",
+        "label": "Pending",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "entity_ref": "entity:response",
+          "initial": true
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "state:response-playing",
+        "kind": "State",
+        "label": "Playing",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "entity_ref": "entity:response"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "state:response-cancelled",
+        "kind": "State",
+        "label": "Cancelled",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "entity_ref": "entity:response",
+          "terminal": true
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "transition:cancel-pending",
+        "kind": "Transition",
+        "label": "Cancel a pending response",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "from_state": "state:response-pending",
+          "to_state": "state:response-cancelled",
+          "trigger_ref": "event:cancel-requested"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "transition:late-arrival-rejected",
+        "kind": "Transition",
+        "label": "Late content for a cancelled response is rejected",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "from_state": "state:response-cancelled",
+          "to_state": "state:response-cancelled",
+          "guard": "content arrives for a cancelled response id"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "constraint:cancelled-response-silent",
+        "kind": "Constraint",
+        "label": "Cancelled response remains silent",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "constraint_kind": "temporal_safety",
+          "scope": "global",
+          "expression_language": "intent-expr/0.1",
+          "expression": {
+            "op": "always",
+            "arg": {
+              "op": "forall",
+              "variable": "r",
+              "domain_ref": "entity:response",
+              "body": {
+                "op": "implies",
+                "left": {
+                  "op": "field_eq",
+                  "variable": "r",
+                  "field": "cancelled",
+                  "value": true
+                },
+                "right": {
+                  "op": "field_eq",
+                  "variable": "r",
+                  "field": "playing",
+                  "value": false
+                }
+              }
+            }
+          },
+          "assumption_refs": [
+            "assumption:cancellation-is-monotonic"
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "user-discussion-interpretation",
+          "source_refs": [
+            "doc:vision-and-architecture#6.1"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:flutter-cancel",
+        "kind": "CodeSymbol",
+        "label": "PlaybackController.cancelResponse",
+        "layer": "observation",
+        "description": "",
+        "properties": {
+          "repository": "app",
+          "path": "lib/coaching/playback_controller.dart",
+          "language": "dart",
+          "symbol": "PlaybackController.cancelResponse",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "snapshot:app-example",
+          "extractor": "agent-with-dart-analysis",
+          "resolution_status": "resolved"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-with-dart-analysis",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "symbol:python-cancel",
+        "kind": "CodeSymbol",
+        "label": "ResponseCoordinator.cancel",
+        "layer": "observation",
+        "description": "",
+        "properties": {
+          "repository": "app",
+          "path": "backend/coaching/coordinator.py",
+          "language": "python",
+          "symbol": "ResponseCoordinator.cancel",
+          "locator_kind": "qualified_name",
+          "workspace_snapshot_ref": "snapshot:app-example",
+          "extractor": "agent-review",
+          "resolution_status": "resolved"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-with-dart-analysis",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "test:cancel-then-late-response",
+        "kind": "TestCase",
+        "label": "cancel then late response does not play",
+        "layer": "observation",
+        "description": "",
+        "properties": {
+          "repository": "app",
+          "path": "test/coaching/cancel_test.dart",
+          "test_id": "cancel_then_late_response",
+          "runner": "flutter-test",
+          "scenario_refs": [
+            "scenario:interrupt-while-pending"
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "agent-with-dart-analysis",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "evidence:late-response-test",
+        "kind": "Evidence",
+        "label": "Late response does not restart playback",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {
+          "method": "integration_test",
+          "result": "passed",
+          "collection_mode": "agent_submitted_report",
+          "supports": [
+            "req:cancel-response"
+          ],
+          "workspace_snapshot_ref": "snapshot:app-example",
+          "tool": "flutter-test-runner",
+          "test_refs": [
+            "test:cancel-then-late-response"
+          ],
+          "submitted_by": "coding-agent",
+          "limitations": [
+            "Backend transport is simulated in this test."
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "assessment:cancel-mapping-review",
+        "kind": "Assessment",
+        "label": "Cancellation mapping reviewed",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {
+          "verdict": "satisfied",
+          "basis": "Both symbols reject playback for cancelled ids; test exercises late arrival.",
+          "assessor": "agent",
+          "subject_refs": [
+            "mapping:cancel-controller"
+          ],
+          "limitations": [
+            "Physical audio-device buffering not measured."
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:cancel-controller",
+        "kind": "Mapping",
+        "label": "Playback controller realizes cancellation",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {
+          "model_refs": [
+            "req:cancel-response",
+            "operation:cancel-response"
+          ],
+          "implementation_refs": [
+            "symbol:flutter-cancel",
+            "symbol:python-cancel"
+          ],
+          "mapping_kind": "implements",
+          "assessment_ref": "assessment:cancel-mapping-review",
+          "evidence_refs": [
+            "evidence:late-response-test"
+          ],
+          "remaining_gaps": [
+            "Physical audio-device buffering has not been measured."
+          ]
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "mapping:cancel-test",
+        "kind": "Mapping",
+        "label": "Cancellation requirement is tested",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {
+          "model_refs": [
+            "req:cancel-response"
+          ],
+          "implementation_refs": [
+            "test:cancel-then-late-response"
+          ],
+          "mapping_kind": "tests"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_node",
+      "record": {
+        "id": "obligation:cancel-late-arrival",
+        "kind": "Obligation",
+        "label": "Define behavior when response content arrives after cancellation",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {
+          "obligation_kind": "behavior_review",
+          "blocking": true,
+          "state": "pending",
+          "scope_refs": [
+            "req:cancel-response",
+            "operation:cancel-response"
+          ],
+          "request": "Define behavior when response content arrives after cancellation.",
+          "acceptable_resolution": [
+            "scenario_and_design",
+            "user_clarification"
+          ]
+        },
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:req-stop-refines-goal",
+        "kind": "refines",
+        "source": "req:stop-active-response",
+        "target": "goal:interrupt-coach",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:req-cancel-refines-goal",
+        "kind": "refines",
+        "source": "req:cancel-response",
+        "target": "goal:interrupt-coach",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:scenario-refines-req",
+        "kind": "refines",
+        "source": "scenario:interrupt-while-pending",
+        "target": "req:cancel-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:question-concerns-req",
+        "kind": "concerns",
+        "source": "question:cancel-scope",
+        "target": "req:stop-active-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:decision-concerns-req",
+        "kind": "concerns",
+        "source": "decision:cancel-semantics",
+        "target": "req:cancel-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:system-contains-playback",
+        "kind": "contains",
+        "source": "system:coaching-app",
+        "target": "component:playback-controller",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:system-contains-coordinator",
+        "kind": "contains",
+        "source": "system:coaching-app",
+        "target": "component:response-coordinator",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:coordinator-exposes-events",
+        "kind": "exposes",
+        "source": "component:response-coordinator",
+        "target": "interface:response-events",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:events-declares-cancel",
+        "kind": "declares",
+        "source": "interface:response-events",
+        "target": "operation:cancel-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:events-declares-generate",
+        "kind": "declares",
+        "source": "interface:response-events",
+        "target": "operation:generate-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:controller-dependency",
+        "kind": "depends_on",
+        "source": "component:playback-controller",
+        "target": "interface:response-events",
+        "layer": "intent",
+        "description": "Consumes response lifecycle events to control playback.",
+        "properties": {
+          "dependency_kind": "runtime"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:controller-build-dependency",
+        "kind": "depends_on",
+        "source": "component:playback-controller",
+        "target": "interface:response-events",
+        "layer": "intent",
+        "description": "Generated client stubs are built from the interface definition.",
+        "properties": {
+          "dependency_kind": "build"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:controller-realizes-cancel",
+        "kind": "realizes",
+        "source": "component:playback-controller",
+        "target": "req:cancel-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:cancel-op-realizes-req",
+        "kind": "realizes",
+        "source": "operation:cancel-response",
+        "target": "req:cancel-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:generate-invokes-retry",
+        "kind": "invokes",
+        "source": "operation:generate-response",
+        "target": "operation:retry-generation",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "mode": "async",
+          "on_error": "provider_unavailable"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:retry-invokes-generate",
+        "kind": "invokes",
+        "source": "operation:retry-generation",
+        "target": "operation:generate-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {
+          "mode": "async"
+        },
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:cancel-modifies-response",
+        "kind": "modifies",
+        "source": "operation:cancel-response",
+        "target": "entity:response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:constraint-targets-cancel",
+        "kind": "constrains",
+        "source": "constraint:cancelled-response-silent",
+        "target": "operation:cancel-response",
+        "layer": "intent",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "design",
+          "source_refs": [
+            "doc:vision-and-architecture#7"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:evidence-supports-req",
+        "kind": "supports",
+        "source": "evidence:late-response-test",
+        "target": "req:cancel-response",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {},
+        "lifecycle": "accepted",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    },
+    {
+      "op": "add_edge",
+      "record": {
+        "id": "edge:obligation-concerns-op",
+        "kind": "concerns",
+        "source": "obligation:cancel-late-arrival",
+        "target": "operation:cancel-response",
+        "layer": "reconciliation",
+        "description": "",
+        "properties": {},
+        "lifecycle": "proposed",
+        "provenance": {
+          "author_role": "agent",
+          "method": "reconciliation",
+          "source_refs": [
+            "snapshot:app-example"
+          ]
+        },
+        "annotations": []
+      }
+    }
+  ]
+}
